@@ -33,7 +33,7 @@ class PeopleController extends Controller
                          $actionBtn = "     
                                     <a class='view btn btn-alt-primary mr-5 mb-5' onclick='show_people($row->user_id)'><i class='si si-eye mr-5'></i>View</button></a>
                                     <a class='update btn btn-alt-success mr-5 mb-5' onclick='show_update_details($row->user_id)'><i class='si si-pencil mr-5'></i>Update</a>
-                                    <a class='delete btn btn-sm btn-outline-danger btn-rounded mr-5 my-5' onclick='delete_people($row->user_id)'><i class='si si-trash mr-5'></i>Delete</a>
+                                    <a class='delete delete btn btn-alt-danger mr-5 mb-5' onclick='delete_people($row->user_id)'><i class='si si-trash mr-5'></i>Delete</a>
                         ";
                     }else {
                         $actionBtn = "
@@ -81,21 +81,8 @@ class PeopleController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $actionBtn = "";
-               
-                    if($row->user_status == null){
-                         $actionBtn = "     
-                                    <a class='view btn btn-alt-primary mr-5 mb-5' onclick='show_people($row->user_id)'><i class='si si-eye mr-5'></i>View</button></a>
-                                    <a href='".route('update_people', $row->user_id)."' class='update btn btn-alt-success mr-5 mb-5'><i class='si si-pencil mr-5'></i>Update</a>
-                                    <a class='delete btn btn-alt-danger mr-5 mb-5' onclick='delete_people($row->user_id)'><i class='si si-trash mr-5'></i>Delete</a>
-                        ";
-                    }else {
-                        $actionBtn = "
-                                     <a class='view btn btn-alt-primary mr-5 mb-5' onclick='show_people($row->user_id)'><i class='si si-eye mr-5'></i>View</button></a>
-                                    <a href='".route('update_people', $row->user_id)."' class='update btn btn-alt-success mr-5 mb-5'><i class='si si-pencil mr-5'></i>Update</a>
-                                    <a class='delete btn btn-alt-warning mr-5 mb-5' onclick='restore_people($row->user_id)'><i class='si si-settings mr-5'></i>Restore</a>
-                        ";
-                    }
-                   
+
+                        $actionBtn = "<a class='delete btn btn-alt-danger mr-5 mb-5' onclick='delete_people($row->user_id)'><i class='si si-trash mr-5'></i>Delete</a>";
                     
                     return $actionBtn;
                 })
@@ -122,19 +109,19 @@ class PeopleController extends Controller
    
     public function store(Request $request)
     {
-        $request -> validate([
-            'first_name' => 'required|regex:/^[a-zA-Z\s]*$/',
-            'last_name' => 'required|regex:/^[a-zA-Z\s]*$/',
-            'birth_date' => 'required|date',
-            'email' => 'required|email|unique:users',
-            'sex' => 'required |regex:/^[a-zA-Z\s]*$/',
-            'contact_number' => 'required|digits:11|regex:/^([0-9\s\-\+\(\)]*)$/',
-            'region' => 'required',
-            'province' => 'required',
-            'city' => 'required',
-            'barangay' => 'required',
-            'home_address' => 'required', 
-        ]);
+        // $request -> validate([
+        //     'first_name' => 'required|regex:/^[a-zA-Z\s]*$/',
+        //     'last_name' => 'required|regex:/^[a-zA-Z\s]*$/',
+        //     'birth_date' => 'required|date',
+        //     'email' => 'required|email|unique:users',
+        //     'sex' => 'required |regex:/^[a-zA-Z\s]*$/',
+        //     'contact_number' => 'required|digits:11|regex:/^([0-9\s\-\+\(\)]*)$/',
+        //     'region' => 'required',
+        //     'province' => 'required',
+        //     'city' => 'required',
+        //     'barangay' => 'required',
+        //     'home_address' => 'required', 
+        // ]);
 
         $user = new User();
         $user->email = $request->email;
@@ -142,20 +129,10 @@ class PeopleController extends Controller
         $user->save();
 
         $person = new Person();
-        $person->first_name = $request->first_name;
-        if($request->middle_name == null){
-            $person->middle_name = "";
-        }
-        else{
-            $person->middle_name = $request->middle_name;
-        }
-        $person->last_name = $request->last_name;
-        if($request->suffix == null){
-            $person->suffix = "";
-        }
-        else{
-            $person->suffix = $request->suffix;
-        }
+        $person->first_name = formatString($request->first_name);
+        $person->middle_name = formatString($request->middle_name);
+        $person->last_name = formatString($request->last_name);
+        $person->suffix = formatString($request->suffix);
         $person->birth_date = $request->birth_date;
         $person->sex = $request->sex;
         $person->contact_number = $request->contact_number;
@@ -163,7 +140,7 @@ class PeopleController extends Controller
         $person->province = $request->province;
         $person->city = $request->city;
         $person->barangay = $request->barangay;
-        $person->home_address = $request->home_address;
+        $person->home_address = formatString($request->home_address);
 
         $user->save();
         $user->person()->save($person);
@@ -188,28 +165,28 @@ class PeopleController extends Controller
    
     public function update(Request $request, $id)
     {
-        $request -> validate([
-            'first_name' => 'required|regex:/^[a-zA-Z\s]*$/',
-            'last_name' => 'required|regex:/^[a-zA-Z\s]*$/',
-            'birth_date' => 'required|date',
-            'email' => 'required|email|unique:users,email,'.$id,
-            'sex' => 'required |regex:/^[a-zA-Z\s]*$/',
-            'contact_number' => 'required|digits:11|regex:/^([0-9\s\-\+\(\)]*)$/',
-            'region' => 'required',
-            'province' => 'required',
-            'city' => 'required',
-            'barangay' => 'required',
-            'home_address' => 'required', 
-        ]);
+        // $request -> validate([
+        //     'first_name' => 'required|regex:/^[a-zA-Z\s]*$/',
+        //     'last_name' => 'required|regex:/^[a-zA-Z\s]*$/',
+        //     'birth_date' => 'required|date',
+        //     'email' => 'required|email|unique:users,email,'.$id,
+        //     'sex' => 'required |regex:/^[a-zA-Z\s]*$/',
+        //     'contact_number' => 'required|digits:11|regex:/^([0-9\s\-\+\(\)]*)$/',
+        //     'region' => 'required',
+        //     'province' => 'required',
+        //     'city' => 'required',
+        //     'barangay' => 'required',
+        //     'home_address' => 'required', 
+        // ]);
 
         $person = User::find($id);
 
         $person = $person->person()
             ->update([
-                'first_name'=> $request->first_name,
-                'middle_name'=> $request->middle_name,
-                'last_name'=> $request->last_name,
-                'suffix'=> $request->suffix,
+                'first_name'=> formatString($request->first_name),
+                'middle_name'=> formatString($request->middle_name),
+                'last_name'=> formatString($request->last_name),
+                'suffix'=> formatString($request->suffix),
                 'sex'=> $request->sex,
                 'birth_date'=> $request->birth_date,
                 'contact_number'=> $request->contact_number,
@@ -217,7 +194,7 @@ class PeopleController extends Controller
                 'province'=> $request->province,
                 'city'=> $request->city,
                 'barangay'=> $request->barangay,
-                'home_address'=> $request->home_address,
+                'home_address'=> formatString($request->home_address),
             ]);
         $user = User::where('id', $id)
             ->update([
@@ -235,7 +212,7 @@ class PeopleController extends Controller
     {
         $user = User::where('id', $id)
             ->update([
-                'reason'=> $request->reason,
+                'reason'=> $request->reason1,
             ]);
         User::find($id)->delete();
         

@@ -106,110 +106,9 @@
                   </div>
                 </div>
                 <div class="block-content">
-                  <form action="be_pages_dashboard.html" method="post" onsubmit="return false;">
-                    
-                    <div class="form-group mb-15">
-                      <label for="side-overlay-profile-name">Firstname</label>
-                      <div class="input-group">
-                        <input type="text" class="form-control" id="side-overlay-profile-name" name="side-overlay-profile-name" placeholder="Your name.." value="{{ strtoupper(session()->get('LoggedUser')->person->first_name) }}">
-                        <div class="input-group-append">
-                          <span class="input-group-text">
-                            <i class="fa fa-user"></i>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group mb-15">
-                      <label for="side-overlay-profile-name">Middlename</label>
-                      <div class="input-group">
-                        <input type="text" class="form-control" id="side-overlay-profile-name" name="side-overlay-profile-name" placeholder="Your name.." value="{{ strtoupper(session()->get('LoggedUser')->person->middle_name) }}">
-                        <div class="input-group-append">
-                          <span class="input-group-text">
-                            <i class="fa fa-user"></i>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group mb-15">
-                      <label for="side-overlay-profile-name">Lastname</label>
-                      <div class="input-group">
-                        <input type="text" class="form-control" id="side-overlay-profile-name" name="side-overlay-profile-name" placeholder="Your name.." value="{{ strtoupper(session()->get('LoggedUser')->person->last_name) }}">
-                        <div class="input-group-append">
-                          <span class="input-group-text">
-                            <i class="fa fa-user"></i>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="form-group mb-15">
-                      <label for="side-overlay-profile-name">Suffix</label>
-                      <div class="input-group">
-                        <input type="text" class="form-control" id="side-overlay-profile-name" name="side-overlay-profile-name" placeholder="Your name.." value="{{ strtoupper(session()->get('LoggedUser')->person->suffix) }}">
-                        <div class="input-group-append">
-                          <span class="input-group-text">
-                            <i class="fa fa-user"></i>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="form-group mb-15">
-                      <label for="side-overlay-profile-name">Contact Number</label>
-                      <div class="input-group">
-                        <input type="text" class="form-control" id="side-overlay-profile-name" name="side-overlay-profile-name" placeholder="Your name.." value="{{ strtoupper(session()->get('LoggedUser')->person->contact_number) }}">
-                        <div class="input-group-append">
-                          <span class="input-group-text">
-                            <i class="fa fa-user"></i>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label" for="val-select2">Region <span class="text-danger">*</span></label>
-                      <div class="col-lg-8">
-                        <select class="js-select2 form-control region1" id="val-select2 region" name="val-select2" style="width: 100%;" data-placeholder="Choose one..">
-                        </select>
-                        <span class="text-danger errorMessage fs--2" id="error_region"></span>
-                      </div>
-                    </div>
-
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label" for="val-select2">Province <span class="text-danger">*</span></label>
-                      <div class="col-lg-8">
-                        <select class="js-select2 form-control province1" id="val-select2 province" name="val-select2" style="width: 100%;" data-placeholder="Choose one..">
-                        </select>
-                        <span class="text-danger errorMessage fs--2" id="error_province"></span>
-                      </div>
-                    </div>
-
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label" for="val-select2">City <span class="text-danger">*</span></label>
-                      <div class="col-lg-8">
-                        <select class="js-select2 form-control city1" id="val-select2 city" name="val-select2" style="width: 100%;" data-placeholder="Choose one..">
-                        </select>
-                        <span class="text-danger errorMessage fs--2" id="error_city"></span>
-                      </div>
-                    </div>
-
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label" for="val-select2">Barangay <span class="text-danger">*</span></label>
-                      <div class="col-lg-8">
-                        <select class="js-select2 form-control barangay1" id="val-select2 barangay" name="val-select2" style="width: 100%;" data-placeholder="Choose one..">
-                        </select>
-                        <span class="text-danger errorMessage fs--2" id="error_barangay"></span>
-                      </div>
-                    </div>
-                   
-                    <div class="form-group row">
-                      <div class="col-6">
-                        <button type="submit" class="btn btn-block btn-alt-primary">
-                          <i class="fa fa-refresh mr-5"></i> Update
-                        </button>
-                      </div>
-                    </div>
-                  </form>
+                  <button type="submit" class="btn btn-block btn-alt-primary">
+                    <i class="fa fa-refresh mr-5"></i> Update Profile
+                  </button>
                 </div>
               </div>
               <!-- END Profile -->
@@ -235,6 +134,17 @@
                     <div class="input-group-append">
                       <span class="input-group-text">
                         <i class="fa fa-envelope"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group mb-15">
+                  <label for="side-overlay-profile-password">Old Password</label>
+                  <div class="input-group">
+                    <input type="password" class="form-control" id="side-overlay-profile-password" name="side-overlay-profile-password" placeholder="Old Password..">
+                    <div class="input-group-append">
+                      <span class="input-group-text">
+                        <i class="fa fa-asterisk"></i>
                       </span>
                     </div>
                   </div>
@@ -544,7 +454,7 @@
     {{--Script--}}
     <script src="{{ asset('js/user/script.js') }}"></script>
     <script  src="{{ asset('js/admin/script.js') }}" ></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/@emretulek/jbvalidator"></script>
 
 
     

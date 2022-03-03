@@ -84,13 +84,13 @@
             <div class="col-sm-11 p-0">
               <center>
                 <div class="form-material form-material-success floating ">
-                  <input type="text" class="form-control" id="search_bar" name="material-color-success2">
+                  <input type="text" class="form-control" id="search_bar2" name="material-color-success2">
                   <label for="material-color-success2">Search here...</label>
                 </div>
               </center>
             </div>
           <div class="block-options pr-10">
-            <button type="button" class="view btn-block-option" id="search_btn">
+            <button type="button" class="view btn-block-option" id="search_btn2">
               <i class="si si-magnifier"></i>
             </button>
           </div>
@@ -122,13 +122,13 @@
             <div class="col-sm-11 p-0">
               <center>
                 <div class="form-material form-material-success floating ">
-                  <input type="text" class="form-control" id="search_bar" name="material-color-success2">
+                  <input type="text" class="form-control" id="search_bar3" name="material-color-success2">
                   <label for="material-color-success2">Search here...</label>
                 </div>
               </center>
             </div>
           <div class="block-options pr-10">
-            <button type="button" class="view btn-block-option" id="search_btn">
+            <button type="button" class="view btn-block-option" id="search_btn3">
               <i class="si si-magnifier"></i>
             </button>
           </div>
@@ -242,7 +242,7 @@
           });
 
 
-          var table1 = $('#people_restored_dt').DataTable({
+          var table2 = $('#people_restored_dt').DataTable({
               processing: true,
               serverSide: true,
               ajax: "/show/restored_people",
@@ -274,40 +274,7 @@
               ]  
           });
 
-          $('#create_user').click(function (e) {
-            e.preventDefault();
-
-            var form = document.getElementById("formAddUser");
-            var formData = new FormData(form);
-
-            $.ajax({
-                url: "/create/people",
-                data: formData,
-                cache: false,
-                processData: false,
-                contentType: false,
-                type: 'POST',
-                success: function (response) {
-                    Swal.fire({
-                        title: 'Success!',
-                        icon: 'success',
-                        text: "A new record has been created",
-                        confirmButtonText: 'Ok',
-                    }).then((result) => {
-                        /* Read more about isConfirmed, isDenied below */
-                        if (result.isConfirmed) {
-                        window.location.href = "/manage/user";
-                        }
-                    })
-                },
-                error: function(response){
-                    $('.errorMessage').text("");
-                    $.each(response.responseJSON.errors,function(field_name,error){            
-                        $(document).find('[id=error_'+field_name+']').text("*"+error)
-                    })
-                }
-            });
-          });
+          
 
 
           $('#showUser').click(function (e) {
@@ -318,6 +285,12 @@
           $('#search_btn').on('click', function(){
               table.search($('#search_bar').val()).draw();
             })
+          $('#search_btn2').on('click', function(){
+            table1.search($('#search_bar2').val()).draw();
+          })
+          $('#search_btn3').on('click', function(){
+            table2.search($('#search_bar3').val()).draw();
+          })
 
           $(".dataTables_filter").hide(); 
         });
@@ -372,14 +345,14 @@
                   Swal.fire({
                       title: 'Please indicate your reason',
                       icon: 'info',
-                      html: ' <form role="form" id="formAddUser"><input type="text" id="reason" name="reason" class="swal2-input fs--2" placeholder="reason"></form>',
+                      html: ' <form role="form" id="formAddUser1"><input type="text" id="reason1" name="reason1" class="swal2-input fs--2" placeholder="reason"></form>',
                       inputPlaceholder: "Write something",
                       showCancelButton: true,
                       confirmButtonText: 'Submit',
                   }).then((result) => {
                     
 
-                      var form = document.getElementById("formAddUser");
+                      var form = document.getElementById("formAddUser1");
                       var formData = new FormData(form);
                       
                       if (result.isConfirmed) {
