@@ -91,6 +91,14 @@ class PeopleController extends Controller
         }
     }
 
+    public function getDashboardData(Request $request){
+
+        DB::statement("SET SQL_MODE=''"); // set the strict to false
+
+        $total_user = User::count();
+
+        return view('Vaxtracing.admin.index', compact('total_user'));
+    }
 
     
     public function create()

@@ -5,6 +5,7 @@
 @section('content')
 
 
+
 <!-- Content Header (Page header) -->
 <div class="row mt-5 mt-lg-0 mt-xl-5 mt-xxl-0">
     <div class="col-lg-6 col-xl-12 col-xxl-6 h-100">
@@ -38,10 +39,10 @@
                   </div>
                   
                   <div class="col-2">
-                    <div class="form-floating">
-                      <select class="form-select" id="floatingSelect" name="suffix" aria-label="Floating label select example">
+                    <div class="form-material form-material-success floating">
+                      <select class="form-control" id="material-select2" name="suffix" aria-label="Floating label select example">
                         <option value="" selected></option>
-                        <option value="Jr">Jr</option>
+                        <option value="Jr"><center>Jr</center></option>
                         <option value="Sr"><center>Sr</center></option>
                         <option value="II"><center>II</center></option>
                         <option value="III"><center>III</center></option>
@@ -49,16 +50,16 @@
                         <option value="III"><center>V</center></option>
                         
                       </select>
-                      <label for="floatingSelect">Suffix</label>
-                      <span class="text-danger errorMessage fs--2" id="error_suffix"></span>
+                      <label for="material-color-select2"  style="font-size: 13px;">Suffix</label>
+                      <span class="text-danger errorMessage" id="error_suffix"></span>
                     </div>
 
                   </div>
                 </div>
                 <div class="mb-3">
-                  <div class="form-floating mb-3">
-                    <input class="form-control" id="floatingInput" type="email" name="email" placeholder="name@example.com" pattern="^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$" required="required" data-wizard-validate-email="true" />
-                    <label for="floatingInput">Email</label>
+                  <div class="form-material form-material-success floating">
+                    <input class="form-control" id="material-select2" type="email" name="email"  pattern="^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$" required="required" data-wizard-validate-email="true" />
+                    <label for="material-color-success2" style="font-size: 13px;">Email</label>
                     <span class="text-danger errorMessage fs--2" id="error_email"></span>
                   </div>
                 </div>

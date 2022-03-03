@@ -4,6 +4,8 @@ use App\Http\Controllers\Vaxtracing\Auth\AuthController;
 use App\Http\Controllers\Vaxtracing\AddressController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Vaxtracing\PeopleController;
+use App\Http\Controllers\Vaxtracing\DashboardController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +27,14 @@ Route::view('/user-login', 'Vaxtracing.auth.Login.index')->name('view-login');
 
 Route::get('/logout', [AuthController::class, "logout"])->name('logout');
 
+
+//MIDDLEWARE
 Route::group(['middleware' => ['AuthCheck']],function(){
+
+    //DASHBOARD
+    Route::get('/dashboard', [PeopleController::class, 'getDashboardData'])->name('get_admin_dashboard');
+
+    //MANAGER USER
     Route::view('/manage/user', 'Vaxtracing.admin.ManageUser.index')->name('get_manage_user');
 
     Route::resource('people', PeopleController::class);
