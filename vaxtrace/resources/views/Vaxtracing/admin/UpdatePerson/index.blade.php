@@ -42,21 +42,21 @@
                 <div class="row g-2">
                   <div class="col-4">
                     <div class="form-floating mb-3">
-                      <input class="form-control" id="floatingInput1 first_name" type="text" name="first_name" value="{{ $users->person->first_name }}"/>
+                      <input class="form-control" id="floatingInput1 first_name" type="text" name="first_name" value="{{ $users->person->first_name }}" pattern="[a-zA-Z\s]+" title="Input letters only" required/>
                       <label for="floatingInput1">First Name</label>
                       <span class="text-danger errorMessage fs--2" id="error_first_name"></span>
                     </div>
                   </div>
                   <div class="col-3">
                     <div class="form-floating mb-3">
-                      <input class="form-control" id="floatingInput2 middle_name" type="text" name="middle_name" value="{{ $users->person->middle_name }}"/>
+                      <input class="form-control" id="floatingInput2 middle_name" type="text" name="middle_name" value="{{ $users->person->middle_name }}" pattern="[a-zA-Z\s]+" title="Input letters only" required/>
                       <label for="floatingInput2">Middle Name</label>
                       <span class="text-danger errorMessage fs--2" id="error_middle_name"></span>
                     </div>
                   </div>
                   <div class="col-3">
                     <div class="form-floating mb-3">
-                      <input class="form-control" id="floatingInput last_name" type="text" name="last_name" value="{{ $users->person->last_name }}"/>
+                      <input class="form-control" id="floatingInput last_name" type="text" name="last_name" value="{{ $users->person->last_name }}" pattern="[a-zA-Z\s]+" title="Input letters only" required/>
                       <label for="floatingInput">Last Name</label>
                       <span class="text-danger errorMessage fs--2" id="error_last_name"></span>
                     </div>
@@ -105,7 +105,7 @@
                     <div class="mb-3">
                       <div class="form-floating">
                         <label for="floatingDate" style="line-height: 0rem; opacity:.65;" class="fs--2">Birth Date</label>
-                        <input class="form-control datetimepicker" id="floatingDate birth_date" name="birth_date" value="{{ $users->person->birth_date }}" type="date" placeholder="dd/mm/yyyy" data-options='{"dateFormat":"d/m/y","disableMobile":true}' id="form-wizard-progress-wizard-datepicker" />
+                        <input class="form-control datetimepicker" id="floatingDate birth_date" name="birth_date" value="{{ $users->person->birth_date }}" type="date" placeholder="dd/mm/yyyy" data-options='{"dateFormat":"d/m/y","disableMobile":true}' id="form-wizard-progress-wizard-datepicker"  min="1900-10-20" max="2030-10-20" required/>
                         <span class="text-danger errorMessage fs--2" id="error_birth_date"></span>
                       </div>
                     </div>

@@ -32,7 +32,7 @@ class PeopleController extends Controller
                     if($row->user_status == null){
                          $actionBtn = "     
                                     <a class='view btn btn-alt-primary mr-5 mb-5' onclick='show_people($row->user_id)'><i class='si si-eye mr-5'></i>View</button></a>
-                                    <a class='update btn btn-alt-success mr-5 mb-5' onclick='show_update_details($row->user_id)'><i class='si si-pencil mr-5'></i>Update</a>
+                                    <a href='".route('update_people', $row->user_id)."' class='update btn btn-alt-success mr-5 mb-5'><i class='si si-pencil mr-5'></i>Update</a>
                                     <a class='delete delete btn btn-alt-danger mr-5 mb-5' onclick='delete_people($row->user_id)'><i class='si si-trash mr-5'></i>Delete</a>
                         ";
                     }else {

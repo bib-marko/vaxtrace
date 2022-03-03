@@ -274,7 +274,53 @@
               ]  
           });
 
-          
+          let validator = $('#formAddUser').jbvalidator({
+                    errorMessage: true,
+                    successClass: false,
+                });
+
+          $('#create_user').click(function (e) {
+            e.preventDefault();
+
+            var form = document.getElementById("formAddUser");
+            var formData = new FormData(form);
+            if(validator.checkAll() == 0){
+              $.ajax({
+                url: "/create/people",
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false,
+                type: 'POST',
+                beforeSend: function () {
+                      $("#pre_loader").modal("show");
+                    },
+                    complete: function () {
+                      $("#pre_loader").modal("hide");
+                    },
+                success: function (response) {
+                    Swal.fire({
+                        title: 'Success!',
+                        icon: 'success',
+                        text: "A new record has been created",
+                        confirmButtonText: 'Ok',
+                    }).then((result) => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {
+                        window.location.href = "/manage/user";
+                        }
+                    })
+                },
+                error: function(response){
+                    $('.errorMessage').text("");
+                    $.each(response.responseJSON.errors,function(field_name,error){            
+                        $(document).find('[id=error_'+field_name+']').text("*"+error)
+                    })
+                }
+              });
+            }
+            
+          });
 
 
           $('#showUser').click(function (e) {
