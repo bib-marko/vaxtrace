@@ -5,6 +5,7 @@
 @section('content')
 
 
+
 <!-- Content Header (Page header) -->
 <div class="row mt-5 mt-lg-0 mt-xl-5 mt-xxl-0">
     <div class="col-lg-6 col-xl-12 col-xxl-6 h-100">
@@ -12,36 +13,36 @@
         <div class="card-body py-4">
           <div class="tab-content">
             <div class="tab-pane active px-sm-3 px-md-5" role="tabpanel" aria-labelledby="form-wizard-progress-tab1" id="form-wizard-progress-tab1">
-              <form role="form" id="formAddUser" >
+              <form role="form" id="formAddUser">
                 @csrf
                 <div class="row g-2">
                   <div class="col-4">
-                    <div class="form-floating mb-3">
-                      <input class="form-control" id="floatingInput1 first_name" type="text" name="first_name"/>
-                      <label for="floatingInput1">First Name</label>
+                    <div class="form-material form-material-success floating">
+                      <input class="form-control" id="material-text2 first_name" type="text" name="first_name"/>
+                      <label for="material-color-success2" style="font-size: 13px;">First Name</label>
                       <span class="text-danger errorMessage fs--2" id="error_first_name"></span>
                     </div>
                   </div>
                   <div class="col-3">
-                    <div class="form-floating mb-3">
-                      <input class="form-control" id="floatingInput2 middle_name" type="text" name="middle_name"/>
-                      <label for="floatingInput2">Middle Name</label>
+                    <div class="form-material form-material-success floating">
+                      <input class="form-control" id="material-text2 middle_name" type="text" name="middle_name"/>
+                      <label for="material-color-success2" style="font-size: 13px;">Middle Name</label>
                       <span class="text-danger errorMessage fs--2" id="error_middle_name"></span>
                     </div>
                   </div>
                   <div class="col-3">
-                    <div class="form-floating mb-3">
-                      <input class="form-control" id="floatingInput" type="text" name="last_name"/>
-                      <label for="floatingInput">Last Name</label>
+                    <div class="form-material form-material-success floating">
+                      <input class="form-control" id="material-text2" type="text" name="last_name"/>
+                      <label for="material-color-success2" style="font-size: 13px;">Last Name</label>
                       <span class="text-danger errorMessage fs--2" id="error_last_name"></span>
                     </div>
                   </div>
                   
                   <div class="col-2">
-                    <div class="form-floating">
-                      <select class="form-select" id="floatingSelect" name="suffix" aria-label="Floating label select example">
+                    <div class="form-material form-material-success floating">
+                      <select class="form-control" id="material-select2" name="suffix" aria-label="Floating label select example">
                         <option value="" selected></option>
-                        <option value="Jr">Jr</option>
+                        <option value="Jr"><center>Jr</center></option>
                         <option value="Sr"><center>Sr</center></option>
                         <option value="II"><center>II</center></option>
                         <option value="III"><center>III</center></option>
@@ -49,16 +50,16 @@
                         <option value="III"><center>V</center></option>
                         
                       </select>
-                      <label for="floatingSelect">Suffix</label>
-                      <span class="text-danger errorMessage fs--2" id="error_suffix"></span>
+                      <label for="material-color-select2"  style="font-size: 13px;">Suffix</label>
+                      <span class="text-danger errorMessage" id="error_suffix"></span>
                     </div>
 
                   </div>
                 </div>
                 <div class="mb-3">
-                  <div class="form-floating mb-3">
-                    <input class="form-control" id="floatingInput" type="email" name="email" placeholder="name@example.com" pattern="^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$" required="required" data-wizard-validate-email="true" />
-                    <label for="floatingInput">Email</label>
+                  <div class="form-material form-material-success floating">
+                    <input class="form-control" id="material-select2" type="email" name="email"  pattern="^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$" required="required" data-wizard-validate-email="true" />
+                    <label for="material-color-success2" style="font-size: 13px;">Email</label>
                     <span class="text-danger errorMessage fs--2" id="error_email"></span>
                   </div>
                 </div>

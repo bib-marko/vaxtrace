@@ -28,7 +28,7 @@ class AuthController extends Controller
             if(Hash::check($request->password, $user ->password)){
                 $request->session()->put('LoggedUser', $user);
                 
-                return redirect(route('get_manage_user'));
+                return redirect(route('get_admin_dashboard'));
             
             }
             else{
