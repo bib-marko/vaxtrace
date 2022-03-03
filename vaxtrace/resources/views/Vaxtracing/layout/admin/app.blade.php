@@ -447,16 +447,20 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 
-    <!-- Page JS Helpers (Select2 plugin) -->
-    <script>jQuery(function(){Codebase.helpers('select2');});</script>
-    <script src="{{ asset('assets/vaxtrace_assets/assets/js/plugins/select2/js/select2.full.min.js') }}"></script>
-    
+   
     {{--Script--}}
     <script src="{{ asset('js/user/script.js') }}"></script>
     <script  src="{{ asset('js/admin/script.js') }}" ></script>
     <script src="https://cdn.jsdelivr.net/npm/@emretulek/jbvalidator"></script>
 
-
+    <!-- Page JS Helpers (Select2 plugin) -->
+    <script src="{{ asset('assets/vaxtrace_assets/assets/js/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
+    <script src="{{ asset('assets/vaxtrace_assets/assets/js/plugins/masked-inputs/jquery.maskedinput.min.js') }}"></script>
+    <script src="{{ asset('assets/vaxtrace_assets/assets/js/plugins/select2/js/select2.full.min.js') }}"></script>
+    <script>jQuery(function(){Codebase.helpers('select2');});</script>
+    
+    <!-- Page JS Helpers (Flatpickr + BS Datepicker + BS Colorpicker + BS Maxlength + Select2 + Masked Input + Range Sliders + Tags Inputs plugins) -->
+    <script>jQuery(function(){Codebase.helpers(['flatpickr', 'datepicker', 'colorpicker', 'maxlength', 'select2', 'masked-inputs', 'rangeslider', 'tags-inputs']);});</script>
     
     @yield('scripts')
   </body>

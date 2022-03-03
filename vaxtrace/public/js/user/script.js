@@ -12,52 +12,52 @@ $(function(){
                     regionOptions+="<option value='"+key+"'>"+region[key].region_name+"</option>";
                 })
             });
-            $('.region1').html(regionOptions);
+            $('.region').html(regionOptions);
         });
 
-        $(".region1").change(function(){
+        $(".region").change(function(){
             provinceOptions = "<option value='' seleted></option>";
             $.getJSON(getAddressUrl,function(result){
                 $.each(result, function(i,province) {
-                    var region = $('.region1').val();
+                    var region = $('.region').val();
                     Object.keys(province[region].province_list).forEach(key => {   
                         provinceOptions+="<option value='"+key+"'>"+key+"</option>";
                     })
                 });
-                $('.province1').html(provinceOptions);
+                $('.province').html(provinceOptions);
                 provinceOptions = "";
             });
         });
 
-        $(".province1").change(function(){
+        $(".province").change(function(){
             cityOptions = "<option value='' seleted></option>";
             $.getJSON(getAddressUrl,function(result){
                 $.each(result, function(i,region) {
-                    var region1 = $('.region1').val();
-                    var province = $('.province1').val();
+                    var region1 = $('.region').val();
+                    var province = $('.province').val();
                     Object.keys(region[region1].province_list[province].municipality_list).forEach(key => {   
                         cityOptions+="<option value='"+key+"'>"+key+"</option>";
                     })
                 });
-                $('.city1').html(cityOptions);
+                $('.city').html(cityOptions);
                 cityOptions = "";
             });
         });
 
         
-        $(".city1").change(function(){
+        $(".city").change(function(){
             barangayOption = "<option value='' seleted></option>";
             $.getJSON(getAddressUrl,function(result){
                 $.each(result, function(i,region) {
-                    var region1 = $('.region1').val();
-                    var province = $('.province1').val();
-                    var city = $('.city1').val();
+                    var region1 = $('.region').val();
+                    var province = $('.province').val();
+                    var city = $('.city').val();
                     var location = region[region1].province_list[province].municipality_list[city].barangay_list;
                     Object.keys(location).forEach(key => {   
                         barangayOption+="<option value='"+location[key]+"'>"+location[key]+"</option>";
                     })
                 });
-                $('.barangay1').html(barangayOption);
+                $('.barangay').html(barangayOption);
                 barangayOption = "";
             });
         });
