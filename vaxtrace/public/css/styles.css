@@ -1,0 +1,190 @@
+html {
+    --scrollbarBG: #d2dccf;
+    --thumbBG: #F2F7FF;
+}
+body::-webkit-scrollbar {
+    width: 15px;
+}
+body {
+    scrollbar-width: thin;
+    scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+body::-webkit-scrollbar-track {
+    background: var(--scrollbarBG);
+}
+body::-webkit-scrollbar-thumb {
+    background-color: var(--thumbBG);
+    border-radius: 6px;
+    border: 3px solid var(--scrollbarBG);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/*Admin Dashboard Side Bar*/
+
+.main-sidebar {
+    background: #16a085 !important;
+}
+
+.nav-item > .nav-link > p,
+.nav-item > .nav-link > .nav-icon {
+    color: #fff !important;
+}
+
+/* .chart-sm {
+    width: 50%;
+    height: 50%;
+} */
+
+/*End */
+
+#main {
+    background-color: rgb(149, 217, 230);
+}
+.navbar-brand {
+    letter-spacing: 5px;
+}
+#section_1 .about {
+    margin-left: 40%;
+}
+
+.services {
+    list-style: square;
+    color: #fff;
+    font-size: 1rem;
+}
+.navbar-light {
+    color: rgb(36, 180, 126) !important;
+}
+.text_default {
+    color: rgb(36, 180, 126) !important;
+}
+.default {
+    color: rgb(0, 19, 1) !important;
+}
+.default_bg {
+    background: #388f48 !important;
+}
+.default_bg2 {
+    background: rgb(247, 183, 49) !important;
+}
+.btn_default_bg {
+    background: rgb(36, 180, 126) !important;
+    color: #fff !important;
+}
+.btn_secondary_bg {
+    background: rgb(247, 183, 49) !important;
+    color: #fff !important;
+}
+.secondary_bg {
+    background: rgb(133, 204, 171) !important;
+    color: #fff;
+}
+/*Datatable*/
+#DataTables_Table_0_next > a,
+#DataTables_Table_0_previous > a {
+    color: rgb(36, 180, 126) !important;
+}
+#DataTables_Table_0_paginate > ul > li.paginate_button.page-item.active > a {
+    background-color: rgb(36, 180, 126) !important;
+    border-color: rgb(36, 180, 126) !important;
+}
+
+/* Boostrap paginator*/
+
+.page-item.active .page-link {
+    background: rgb(36, 180, 126) !important;
+    border-color: rgb(36, 180, 126) !important;
+}
+#top
+    > div.container-fluid.px-5.py-5
+    > div
+    > div.col-md-10
+    > div.d-flex.justify-content-center
+    > nav
+    > ul
+    > li
+    > a {
+    color: rgb(36, 180, 126) !important;
+}
+
+/*Boostrap Table*/
+.table-responsive {
+    width: 100% !important;
+}
+/* .dataTables_length {
+    padding-bottom: 1.5rem !important;
+} */
+
+/*FP*/
+.filepond--credits {
+    display: none !important;
+}
+th,
+label {
+    font-weight: normal !important;
+}
+
+.course_desc:hover {
+    font-weight: 500 !important;
+    cursor: pointer !important;
+}
+
+.btn-fab {
+    width: 64px;
+    height: 64px;
+    text-align: center;
+    position: fixed;
+    bottom: 64px;
+    right: 64px;
+    border-radius: 50%;
+    color: white;
+    background-color: #28272b;
+    cursor: pointer;
+    display: none;
+}
+
+/* remove offered item button */
+.rm_offered_item {
+    position: absolute;
+    top: 0;
+    right: 5px;
+}
+.rm_offered_item:hover,
+.rm_offered_item_icon:hover {
+    cursor: pointer;
+    color: rgb(236, 74, 107) !important;
+}
+
+/* Ratings (Star) */
+.rating:hover {
+    color: rgb(36, 180, 126) !important;
+}
+
+/* customize Select2 element */
+
+.select2-results__option--highlighted {
+    /* background-color: rgb(162, 218, 171) !important; */
+    height: 100% !important;
+}
+
+/* #m_post
+    > div
+    > div
+    > div.modal-body
+    > form
+    > div:nth-child(7)
+    > span
+    > span.selection
+    > span
+    > span
+    > textarea {
+    border: none !important;
+} */
+
+.select2-selection__choice__display {
+    color: black !important;
+    margin-left: 0.5rem;
+}
