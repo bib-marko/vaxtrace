@@ -108,6 +108,7 @@
                   <th scope="col">Fullname</th>
                   <th scope="col">Status</th>
                   <th scope="col">Reason for deactivating</th>
+                  <th scope="col">Deactivated by</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -148,6 +149,7 @@
                 <tr>
                   <th scope="col">Fullname</th>
                   <th scope="col">Reason for restoring</th>
+                  <th scope="col">Recovered by</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -240,6 +242,12 @@
                     },
                   },
 
+                //DELETED BY
+                { data: 'user_deleted_by', 
+            
+                },
+
+
                 //ACTION
                 {data: 'action', name: 'action', orderable: false, searchable: false},
                 
@@ -272,6 +280,11 @@
                           `;
                     },
                   },
+
+                //DELETED BY
+                { data: 'user_restored_by', 
+                    
+                },
 
                 //ACTION
                 {data: 'action', name: 'action', orderable: false, searchable: false},

@@ -55,7 +55,7 @@ class PeopleController extends Controller
     {
         if ($request->ajax()) {
             $data = User::join('people', 'users.id', '=', 'people.user_id')->where('users.deleted_at', '!=',NULL)
-            ->select('*','users.id as user_id','users.deleted_at as user_status',DB::raw("CONCAT(first_name , ' ' , middle_name , ' ' , last_name, ' ' , suffix) as full_name"))->withTrashed()->get();
+            ->select('*','users.id as user_id','users.deleted_at as user_status','users.modified_by as user_deleted_by',DB::raw("CONCAT(first_name , ' ' , middle_name , ' ' , last_name, ' ' , suffix) as full_name"))->withTrashed()->get();
             
             return Datatables::of($data)
                 ->addIndexColumn()
@@ -75,7 +75,7 @@ class PeopleController extends Controller
     {
         if ($request->ajax()) {
             $data = User::join('people', 'users.id', '=', 'people.user_id')->where('users.reason', '!=',NULL)
-            ->select('*','users.id as user_id','users.deleted_at as user_status',DB::raw("CONCAT(first_name , ' ' , middle_name , ' ' , last_name, ' ' , suffix) as full_name"))->get();
+            ->select('*','users.id as user_id','users.modified_by as user_restored_by',DB::raw("CONCAT(first_name , ' ' , middle_name , ' ' , last_name, ' ' , suffix) as full_name"))->get();
             
             return Datatables::of($data)
                 ->addIndexColumn()
