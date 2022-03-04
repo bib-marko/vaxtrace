@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Storage;
+
 if (! function_exists('formatString')) {
     function formatString($string)
     {
@@ -36,5 +38,24 @@ if (! function_exists('generateFullName')) {
         }
         
         return($fullname);
+    }
+}
+
+if(! function_exists('saveActivityLog')){
+    function saveActivityLog($fullname, $activity) {
+ 
+        try {
+            // my data storage location is project_root/storage/app/data.json file.
+            $activitylogs = Storage::disk('local')->exists('activitylogs.json') ? json_decode(Storage::disk('local')->get('activitylogs.json')) : [];
+            $inputData['full_name'] = $fullname;
+            $inputData['activity'] = $activity;
+            $inputData['datetime'] = date('Y-m-d H:i:s');
+            array_push($activitylogs,$inputData);
+            Storage::disk('local')->put('activitylogs.json', json_encode($activitylogs));
+
+            return $inputData;
+        } catch(Exception $e) {
+            return ['error' => true, 'message' => $e->getMessage()];
+        }
     }
 }

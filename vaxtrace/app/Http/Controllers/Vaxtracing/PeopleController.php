@@ -144,13 +144,14 @@ class PeopleController extends Controller
 
         $user->save();
         $user->person()->save($person);
+        saveActivityLog(generateFullName(session('LoggedUser')), "Created user with ID#: ".$user->id);
     }
 
  
     public function show($id)
     {
         $users = User::with('person')->where('id', $id)->first();
-
+        saveActivityLog(generateFullName(session('LoggedUser')), "View user with ID#: ".$id);
         return response()->json($users);
     }
 
@@ -201,7 +202,7 @@ class PeopleController extends Controller
             ->update([
                 'email'=> $request->email,
             ]);
-        
+        saveActivityLog(generateFullName(session('LoggedUser')), "Update user with ID#: ".$id);
     }
 
     public function changePassword(Request $request)
@@ -220,7 +221,7 @@ class PeopleController extends Controller
         else{
             return response()->json(['error'=>'You entered an incorrect password'],422); 
         }
-
+        saveActivityLog(generateFullName(session('LoggedUser')), "Own password was changed");
     }
     
     public function destroy(Request $request, $id)
@@ -234,7 +235,7 @@ class PeopleController extends Controller
                 'modified_by' => generateFullName(session('LoggedUser'))
             ]);
         User::find($id)->delete();
-        
+        saveActivityLog(generateFullName(session('LoggedUser')), "Deleted user with ID#: ".$id);
         return response()->json(['success'=>'User account deleted successfully.']);
     }
 
@@ -249,7 +250,7 @@ class PeopleController extends Controller
                 'modified_by' => generateFullName(session('LoggedUser'))
             ]);
         User::withTrashed()->find($id)->restore();
-        
+        saveActivityLog(generateFullName(session('LoggedUser')), "Restored user with ID#: ".$id);
         return response()->json(['success'=>'User account restored successfully.']);
     }
 }
