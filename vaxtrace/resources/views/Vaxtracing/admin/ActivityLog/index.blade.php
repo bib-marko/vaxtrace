@@ -10,13 +10,13 @@
                 <div class="form-group row">
                     <div class="col-10">
                         <div class="form-material form-material-success floating">
-                            <input class="form-control" id="floatingDate" name="birth_date" type="date" placeholder="dd/mm/yyyy" data-options='{"dateFormat":"d/m/y","disableMobile":true}' id="form-wizard-progress-wizard-datepicker" min="1900-10-20" max="2030-10-20" required/>
+                            <input class="form-control" id="floatingDate" name="date_filter" type="date" placeholder="dd/mm/yyyy" data-options='{"dateFormat":"m-d-y,"disableMobile":true}' id="form-wizard-progress-wizard-datepicker" min="1900-10-20" max="2030-10-20" required/>
                             <span class="text-danger errorMessage" id="error_birth_date"></span>
                         </div>
                     </div>
                     <div class="col-2">
                         <div class="form-material form-material-success floating ">
-                            <button type="button" class="btn btn-alt-success mr-5 mb-5 btn-block">Filter by date</button>
+                            <button type="button" class="btn btn-alt-success mr-5 mb-5 btn-block" id="date_filter_btn">Filter by date</button>
                         </div>
                         
                     </div>
@@ -42,7 +42,7 @@
     </div>
     <div class="block-content block-content-full">
         <div class="table-responsive scrollbar">
-            <table class="table table-striped table-center js-dataTable-full-pagination" id="people_deactivated_dt" width="100%">
+            <table class="table table-striped table-center js-dataTable-full-pagination" id="activity_logs_dt" width="100%">
                 <thead>
                 <tr>
                     <th scope="col">FULLNAME</th>
@@ -55,5 +55,53 @@
     </div>
  </div>
   <!-- end table for activity log -->
+  @section('scripts')
+        <script type="text/javascript">
+           
+            $(function () {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                //MASTER LIST
+                var table = $('#activity_logs_dt').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: "{{ route('get_activity') }}",
+                    columns: [
 
+                    //FULLNAME
+                    {data: 'full_name'},
+                    //ACTIVITY
+                    {data: 'activity'},
+                    //DATE & TIME
+                    {data: 'datetime'},
+
+                    
+                    ]  
+                });
+                var day, month, year,full_Date;
+                $('#date_filter_btn').on('click', function(){
+                    var date = new Date($('#floatingDate').val());
+                    if(date != "Invalid Date"){
+                        day = ''+date.getDate();
+                        month = ''+(date.getMonth() + 1);
+                        year = date.getFullYear();
+                        if (month.length < 2) 
+                            month = '0' + month;
+                        if (day.length < 2) 
+                            day = '0' + day;
+                        full_Date = [year,month,day].join('-');
+                        table.column(2).search(full_Date).draw(); 
+                    }
+                    else{
+                        table.column(2).search("").draw(); 
+                    }
+                    
+                   
+                })
+            });
+      </script>
+    @endsection
 @endsection

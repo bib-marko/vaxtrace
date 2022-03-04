@@ -299,7 +299,9 @@
 
           $('#search_btn').on('click', function(){
               table.search($('#search_bar').val()).draw();
+              
             })
+
           $('#search_btn2').on('click', function(){
             table1.search($('#search_bar2').val()).draw();
           })

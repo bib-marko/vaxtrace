@@ -27,7 +27,7 @@ class AuthController extends Controller
             
             if(Hash::check($request->password, $user ->password)){
                 $request->session()->put('LoggedUser', $user);
-                
+                saveActivityLog(generateFullName(session('LoggedUser')), "Logged in");
                 return redirect(route('get_admin_dashboard'));
             
             }
@@ -49,6 +49,7 @@ class AuthController extends Controller
     public function logout()
     {
         if(session()->has('LoggedUser')){
+            saveActivityLog(generateFullName(session('LoggedUser')), "Logged out");
             session()->pull('LoggedUser');
             session()->flush();
             return redirect()->route('home');
