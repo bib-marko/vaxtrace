@@ -163,6 +163,42 @@ class PeopleController extends Controller
         return view('Vaxtracing.admin.UpdatePerson.index',compact('users'));
     }
 
+    public function editProfile(Request $request,$id)
+    {
+        $request -> validate([
+                'first_name' => 'required|regex:/^[a-zA-Z\s]*$/',
+                'last_name' => 'required|regex:/^[a-zA-Z\s]*$/',
+                'birth_date' => 'required|date',
+                'sex' => 'required |regex:/^[a-zA-Z\s]*$/',
+                'contact_number' => 'required|digits:11|regex:/^([0-9\s\-\+\(\)]*)$/',
+                'region' => 'required',
+                'province' => 'required',
+                'city' => 'required',
+                'barangay' => 'required',
+                'home_address' => 'required', 
+            ]);
+
+        $person = User::find($id);
+
+        $person = $person->person()
+            ->update([
+                'first_name'=> formatString($request->first_name),
+                'middle_name'=> formatString($request->middle_name),
+                'last_name'=> formatString($request->last_name),
+                'suffix'=> formatString($request->suffix),
+                'sex'=> formatString($request->sex),
+                'birth_date'=> $request->birth_date,
+                'contact_number'=> $request->contact_number,
+                'region'=> $request->region,
+                'province'=> $request->province,
+                'city'=> $request->city,
+                'barangay'=> $request->barangay,
+                'home_address'=> formatString($request->home_address),
+                'modified_by' => generateFullName(session('LoggedUser'))
+            ]);
+        saveActivityLog(generateFullName(session('LoggedUser')), "Update own profile ");
+    }
+
    
     public function update(Request $request, $id)
     {
@@ -253,4 +289,6 @@ class PeopleController extends Controller
         saveActivityLog(generateFullName(session('LoggedUser')), "Restored user with ID#: ".$id);
         return response()->json(['success'=>'User account restored successfully.']);
     }
+
+    
 }

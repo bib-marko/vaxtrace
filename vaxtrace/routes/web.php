@@ -78,6 +78,9 @@ Route::group(['middleware' => ['AuthCheck']],function(){
 
 
     Route::view('/edit/profile', 'Vaxtracing.admin.EditProfile.index')->name('edit_profile');
+
+    Route::post('/edit/profile/save/{user_id?}', [PeopleController::class, 'editProfile'])->name('save_edit_profile');
+
     Route::view('/view/activity_log', 'Vaxtracing.admin.ActivityLog.index')->name('view_activity_log');
 
 });
