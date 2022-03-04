@@ -3,9 +3,10 @@
 use App\Http\Controllers\Vaxtracing\Auth\AuthController;
 use App\Http\Controllers\Vaxtracing\AddressController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Vaxtracing\PeopleController;
 use App\Http\Controllers\Vaxtracing\DashboardController;
-
+use App\Http\Middleware\AuthCheck;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,18 +19,22 @@ use App\Http\Controllers\Vaxtracing\DashboardController;
 |
 */
 
-Route::get('/', function () { return view('index'); });
+Route::get('/', function () { 
+    if(session()->has('LoggedUser')){
+        return redirect('/dashboard');
+    }
+    return view('index'); 
+})->name('home');
 
 // Auth
 Route::post("/check", [AuthController::class, "login"])->name('submit-login');
 
-Route::view('/user-login', 'Vaxtracing.auth.Login.index')->name('view-login');
-
 Route::get('/logout', [AuthController::class, "logout"])->name('logout');
 
-
+Route::get('/user-login', [AuthController::class, "view_login"])->name('view-login');
 //MIDDLEWARE
 Route::group(['middleware' => ['AuthCheck']],function(){
+    
 
     //DASHBOARD
     Route::get('/dashboard', [PeopleController::class, 'getDashboardData'])->name('get_admin_dashboard');

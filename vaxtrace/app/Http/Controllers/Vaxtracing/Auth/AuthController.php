@@ -37,12 +37,21 @@ class AuthController extends Controller
         }
     }
 
+    public function view_login()
+    {
+        if(session()->has('LoggedUser')){
+            return back();
+        }
+
+        return view('Vaxtracing.auth.Login.index');
+    }
+
     public function logout()
     {
         if(session()->has('LoggedUser')){
             session()->pull('LoggedUser');
             session()->flush();
-            return redirect()->route('view-login');
+            return redirect()->route('home');
         }
     }
 

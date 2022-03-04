@@ -204,10 +204,10 @@
                 contentType: false,
                 type: 'POST',
                 beforeSend: function () {
-                  $("#pre_loader").modal("show");
+                  showLoader();
                 },
                 complete: function () {
-                  $("#pre_loader").modal("hide");
+                  hideLoader();
                 },
                 success: function (response) {
                     Swal.fire({

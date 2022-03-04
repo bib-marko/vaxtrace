@@ -206,10 +206,10 @@ class PeopleController extends Controller
     public function changePassword(Request $request)
     {
         $request -> validate([
-                'old_password' => 'required',
-                'new_password' => 'required',
-                'confirm_new_password' => 'required', 
-            ]);
+            'old_password' => 'required',
+            'new_password' => 'required',
+            'confirm_new_password' => 'required', 
+        ]);
         if (Hash::check($request->old_password, session('LoggedUser')->password)) {
             User::where('id', session('LoggedUser')->id)
             ->update([
@@ -224,6 +224,9 @@ class PeopleController extends Controller
     
     public function destroy(Request $request, $id)
     {
+        $request -> validate([
+            'reason1' => 'required',
+        ]);
         $user = User::where('id', $id)
             ->update([
                 'reason'=> $request->reason1,
@@ -235,6 +238,9 @@ class PeopleController extends Controller
 
     public function restore(Request $request, $id)
     {
+        $request -> validate([
+            'restore_reason' => 'required',
+        ]);
         $user = User::withTrashed()->where('id', $id)
             ->update([
                 'reason'=> $request->restore_reason,

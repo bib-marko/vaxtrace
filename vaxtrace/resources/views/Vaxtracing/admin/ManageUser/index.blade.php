@@ -273,55 +273,6 @@
               ]  
           });
 
-          let validator = $('#formAddUser').jbvalidator({
-                    errorMessage: true,
-                    successClass: false,
-                });
-
-          $('#create_user').click(function (e) {
-            e.preventDefault();
-
-            var form = document.getElementById("formAddUser");
-            var formData = new FormData(form);
-            if(validator.checkAll() == 0){
-              $.ajax({
-                url: "/create/people",
-                data: formData,
-                cache: false,
-                processData: false,
-                contentType: false,
-                type: 'POST',
-                beforeSend: function () {
-                      $("#pre_loader").modal("show");
-                    },
-                    complete: function () {
-                      $("#pre_loader").modal("hide");
-                    },
-                success: function (response) {
-                    Swal.fire({
-                        title: 'Success!',
-                        icon: 'success',
-                        text: "A new record has been created",
-                        confirmButtonText: 'Ok',
-                    }).then((result) => {
-                        /* Read more about isConfirmed, isDenied below */
-                        if (result.isConfirmed) {
-                        window.location.href = "/manage/user";
-                        }
-                    })
-                },
-                error: function(response){
-                    $('.errorMessage').text("");
-                    $.each(response.responseJSON.errors,function(field_name,error){            
-                        $(document).find('[id=error_'+field_name+']').text("*"+error)
-                    })
-                }
-              });
-            }
-            
-          });
-
-
           $('#showUser').click(function (e) {
             console.log("123");
            
@@ -338,16 +289,17 @@
           })
 
           $(".dataTables_filter").hide(); 
+
+          let validatorDelete = $('#formAddUser1').jbvalidator({
+                    errorMessage: true,
+                    successClass: false,
+                });
+          let validatorRestore = $('#formRestoreUser').jbvalidator({
+              errorMessage: true,
+              successClass: false,
+          });
         });
 
-        // View Account Details
-        function show_update_details(id) {
-          $('#create').modal('show');
-          $.get("/show/people" +'/' + id, function (data) {
-              $('#txt_user_id').text(data.id);
-          })
-
-        }
         
         // View Account Details
         function show_people(id) {
@@ -370,14 +322,7 @@
 
           $("#m_user").modal("show");
         }
-        
-
-        // PRE LOADER
-        function show_loading() {
-          $("#pre_loader").modal("show");
-        }
-
-
+      
         function delete_people(id){
           Swal.fire({
               title: 'Do you want to delete this user?',
@@ -390,13 +335,12 @@
                   Swal.fire({
                       title: 'Please indicate your reason',
                       icon: 'info',
-                      html: ' <form role="form" id="formAddUser1"><input type="text" id="reason1" name="reason1" class="swal2-input fs--2" placeholder="reason"></form>',
+                      html: ' <form role="form" id="formAddUser1" novalidate><input type="text" id="reason1" name="reason1" class="swal2-input fs--2" placeholder="reason"></form>',
                       inputPlaceholder: "Write something",
                       showCancelButton: true,
                       confirmButtonText: 'Submit',
                   }).then((result) => {
                     
-
                       var form = document.getElementById("formAddUser1");
                       var formData = new FormData(form);
                       
@@ -407,6 +351,12 @@
                               url: deletePeopleUrl+'/'+id,
                               processData: false,
                               contentType: false,
+                              beforeSend: function () {
+                                showLoader();
+                              },
+                              complete: function () {
+                                hideLoader();
+                              },
                               success: function (response) {
                                   
                                   Swal.fire({
@@ -421,8 +371,14 @@
                                       }
                                   })
                               },
-                              error: function (response) {+
-                                  console.log('Error:', data);
+                              error: function (response) {
+                                hideLoader();
+                                Swal.fire({
+                                      title: 'Warning!',
+                                      icon: 'warning',
+                                      text: "The reason field is required",
+                                      confirmButtonText: 'Ok',
+                                  })
                               }
                           });
                       } else{
@@ -445,7 +401,7 @@
                   Swal.fire({
                       title: 'Please indicate your reason',
                       icon: 'info',
-                      html: ' <form role="form" id="formRestoreUser"><input type="text" id="restore_reason" name="restore_reason" class="swal2-input fs--2" placeholder="reason"></form>',
+                      html: ' <form role="form" id="formRestoreUser" novalidate><input type="text" id="restore_reason" name="restore_reason" class="swal2-input fs--2" placeholder="reason" required></form>',
                       inputPlaceholder: "Write something",
                       showCancelButton: true,
                       confirmButtonText: 'Submit',
@@ -460,8 +416,13 @@
                               url: '{{ route("restore_people") }}/'+id,
                               processData: false,
                               contentType: false,
-                              success: function (response) {
-                                  
+                              beforeSend: function () {
+                                showLoader();
+                              },
+                              complete: function () {
+                                hideLoader();
+                              },
+                              success: function (response) {                                
                                   Swal.fire({
                                       title: 'Success!',
                                       icon: 'success',
@@ -474,8 +435,14 @@
                                       }
                                   })
                               },
-                              error: function (response) {+
-                                  console.log('Error:', response);
+                              error: function (response) {
+                                  hideLoader();
+                                  Swal.fire({
+                                        title: 'Warning!',
+                                        icon: 'warning',
+                                        text: "The reason field is required",
+                                        confirmButtonText: 'Ok',
+                                    })
                               }
                           });
                       } else{

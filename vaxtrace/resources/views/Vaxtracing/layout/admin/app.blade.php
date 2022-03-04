@@ -474,8 +474,10 @@
               errorMessage: true,
               successClass: false,
           });
+          showLoader();
+         
       $(function () {
-        
+        hideLoader();
         $('#change_pass').click(function (e) {
           e.preventDefault();
           
@@ -509,7 +511,7 @@
                   })
               },
               error: function(response){
-                  $("#pre_loader").modal('hide');
+                  hideLoader();
                   Swal.fire({
                       title: 'Warning!',
                       icon: 'warning',
