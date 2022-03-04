@@ -1,4 +1,5 @@
- @extends('Vaxtracing.layout.admin.app')
+
+@extends('Vaxtracing.layout.admin.app')
 
 @section('title', 'User Management')
 
@@ -54,8 +55,8 @@
                         <div class="form-material form-material-success floating">
                           <select class="form-control" id="material-select2" name="suffix" aria-label="Floating label select example">
                             <option value="" selected></option>
-                            <option value="Jr"><center>Jr</center></option>
-                            <option value="Sr"><center>Sr</center></option>
+                            <option value="JR"><center>Jr</center></option>
+                            <option value="SR"><center>Sr</center></option>
                             <option value="II"><center>II</center></option>
                             <option value="III"><center>III</center></option>
                             <option value="III"><center>IV</center></option>
@@ -77,13 +78,13 @@
                     <div class="row g-2">
                       <div class="col-6">
                         <div class="form-material form-material-success floating">
-                          <select class="form-control" id="material-select2" name="suffix" aria-label="Floating label select example">
+                          <select class="form-control" id="material-select2" name="sex" aria-label="Floating label select example">
                             <option value="" selected></option>
                             <option value="FEMALE"><center>FEMALE</center></option>
                             <option value="MALE"><center>MALE</center></option>
                           </select>
                           <label for="material-color-select2"  style="font-size: 13px;">Sex</label>
-                          <span class="text-danger errorMessage" id="error_suffix"></span>
+                          <span class="text-danger errorMessage" id="error_sex"></span>
                         </div>
 
                       </div>
@@ -203,11 +204,11 @@
                 contentType: false,
                 type: 'POST',
                 beforeSend: function () {
-                      $("#pre_loader").modal("show");
-                    },
-                    complete: function () {
-                      $("#pre_loader").modal("hide");
-                    },
+                  $("#pre_loader").modal("show");
+                },
+                complete: function () {
+                  $("#pre_loader").modal("hide");
+                },
                 success: function (response) {
                     Swal.fire({
                         title: 'Success!',

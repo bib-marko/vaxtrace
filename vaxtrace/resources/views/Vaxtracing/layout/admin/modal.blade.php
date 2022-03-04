@@ -119,7 +119,7 @@
 
 
  <!-- PRE LOADER Modal -->
- <div class="modal fade" id="pre_loader" tabindex="-1" role="dialog" aria-labelledby="modal-popout" aria-hidden="true" >
+ <div class="modal fade" id="pre_loader" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="modal-popout" aria-hidden="true" >
   <div class="modal-dialog modal-dialog-popout" role="document">
     <div class="modal-content" style="background: transparent">
       <div class="load-wrapp" style="margin-top: 50%">

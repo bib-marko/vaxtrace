@@ -46,6 +46,9 @@ Route::group(['middleware' => ['AuthCheck']],function(){
     //Generate address
     Route::get("/create/get_address", [AddressController::class, "index"])->name('get_address');
 
+    //Change Password
+    Route::post('/change/password/', [PeopleController::class, 'changePassword'])->name('change_password');
+
     // List of user
     Route::post("/create/people", [PeopleController::class, "store"]);
 
@@ -65,6 +68,5 @@ Route::group(['middleware' => ['AuthCheck']],function(){
 
     Route::post('/restore/people/{user_id?}', [PeopleController::class, 'restore'])->name('restore_people');
 
-    Route::resource('people', PeopleController::class);
 });
 

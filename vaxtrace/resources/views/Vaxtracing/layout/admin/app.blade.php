@@ -125,8 +125,8 @@
               </div>
             </div>
             <div class="block-content">
-              <form action="be_pages_dashboard.html" method="post" onsubmit="return false;">
-            
+              <form role="form" id="formChangePassword" novalidate>
+                @csrf
                 <div class="form-group mb-15">
                   <label for="side-overlay-profile-email">Email</label>
                   <div class="input-group">
@@ -141,39 +141,44 @@
                 <div class="form-group mb-15">
                   <label for="side-overlay-profile-password">Old Password</label>
                   <div class="input-group">
-                    <input type="password" class="form-control" id="side-overlay-profile-password" name="side-overlay-profile-password" placeholder="Old Password..">
+                    <input type="password" class="form-control" id="side-overlay-profile-password" name="old_password" placeholder="Old Password.." required>
                     <div class="input-group-append">
                       <span class="input-group-text">
                         <i class="fa fa-asterisk"></i>
                       </span>
                     </div>
+                    <span class="text-danger errorMessage fs--2" id="error_old_password"></span>
                   </div>
                 </div>
                 <div class="form-group mb-15">
                   <label for="side-overlay-profile-password">New Password</label>
                   <div class="input-group">
-                    <input type="password" class="form-control" id="side-overlay-profile-password" name="side-overlay-profile-password" placeholder="New Password..">
+                    <input type="password" class="form-control" id="password" name="new_password" data-v-min-length="8" data-v-max-length="16" title="password" placeholder="New Password.." required>
+                    {{-- <input type="password" class="form-control" id="side-overlay-profile-password new_password" name="side-overlay-profile-password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" placeholder="New Password.." required> --}}
                     <div class="input-group-append">
                       <span class="input-group-text">
                         <i class="fa fa-asterisk"></i>
                       </span>
                     </div>
+                    <span class="text-danger errorMessage fs--2" id="error_new_password"></span>
                   </div>
                 </div>
                 <div class="form-group mb-15">
                   <label for="side-overlay-profile-password-confirm">Confirm New Password</label>
                   <div class="input-group">
-                    <input type="password" class="form-control" id="side-overlay-profile-password-confirm" name="side-overlay-profile-password-confirm" placeholder="Confirm New Password..">
+                    <input name="confirm_new_password" type="password" class="form-control" data-v-equal="#password" placeholder="Confirm New Password.." required>
+                    {{-- <input type="password" class="form-control" id="side-overlay-profile-password-confirm confirm_new_password" name="side-overlay-profile-password-confirm" placeholder="Confirm New Password.." data-v-equal="#new_password"> --}}
                     <div class="input-group-append">
                       <span class="input-group-text">
                         <i class="fa fa-asterisk"></i>
                       </span>
                     </div>
+                    <span class="text-danger errorMessage fs--2" id="error_confirm_new_password"></span>
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-6">
-                    <button type="submit" class="btn btn-block btn-alt-primary">
+                    <button class="btn btn-block btn-alt-primary" id="change_pass">
                       <i class="fa fa-refresh mr-5"></i> Update
                     </button>
                   </div>
@@ -281,7 +286,7 @@
                   <a href="{{ route('get_admin_dashboard') }}"><i class="si si-cup"></i><span class="sidebar-mini-hide">Dashboard</span></a>
                 </li>
                 <li>
-                  <a href="{{ route('get_manage_user') }}"><i class="si si-users"></i><span class="sidebar-mini-hide">Uset Management</span></a>
+                  <a href="{{ route('get_manage_user') }}"><i class="si si-users"></i><span class="sidebar-mini-hide">User Management</span></a>
                 </li>
               </ul>
             </div>
@@ -436,6 +441,7 @@
     <script src="{{ asset('assets/vaxtrace_assets/assets/js/pages/be_pages_dashboard.min.js') }}"></script>
 
      {{--DT--}}
+     
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.1/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
@@ -444,7 +450,7 @@
     <script src="{{ asset('assets/vendors/bootstrap/bootstrap.min.js') }}"></script>
 
     {{-- SWAL --}}
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
    
@@ -463,5 +469,66 @@
     <script>jQuery(function(){Codebase.helpers(['flatpickr', 'datepicker', 'colorpicker', 'maxlength', 'select2', 'masked-inputs', 'rangeslider', 'tags-inputs']);});</script>
     
     @yield('scripts')
+    <script type="text/javascript">
+      var validatorPassword = $('#formChangePassword').jbvalidator({
+              errorMessage: true,
+              successClass: false,
+          });
+      $(function () {
+        
+        $('#change_pass').click(function (e) {
+          e.preventDefault();
+          
+          var form = document.getElementById("formChangePassword");
+          var formData = new FormData(form);
+          if(validatorPassword.checkAll() == 0){
+            $.ajax({
+              url: '{{ route("change_password") }}',
+              data: formData,
+              cache: false,
+              processData: false,
+              contentType: false,
+              type: 'POST',
+              beforeSend: function () {
+                showLoader();
+              },
+              complete: function () {
+                hideLoader();
+              },
+              success: function (response) {
+                  Swal.fire({
+                      title: 'Success!',
+                      icon: 'success',
+                      text: "The record has been updated",
+                      confirmButtonText: 'Ok',
+                  }).then((result) => {
+                      // /* Read more about isConfirmed, isDenied below */
+                      // if (result.isConfirmed) {
+                      // window.location.href = "/manage/user";
+                      // }
+                  })
+              },
+              error: function(response){
+                  $("#pre_loader").modal('hide');
+                  Swal.fire({
+                      title: 'Warning!',
+                      icon: 'warning',
+                      text: "You entered an incorrect password",
+                      confirmButtonText: 'Ok',
+                  }).then((result) => {
+                      // /* Read more about isConfirmed, isDenied below */
+                      // if (result.isConfirmed) {
+                      // window.location.href = "/manage/user";
+                      // }
+                  })
+              
+              }
+            });
+          }
+          
+        });
+      });
+      
+  </script>
   </body>
 </html>

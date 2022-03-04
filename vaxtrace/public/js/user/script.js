@@ -98,15 +98,20 @@ $(function(){
   }
 
   // STATUS OF ACOUNT
-  function isApproved(data) {
-      if(data == null){
-        return `<span class="btn btn-alt-success min-width-125 rounded-pill p-0">ACTIVATED</span>`;
-      }else {
-        return `<span class="btn btn-alt-danger min-width-125 rounded-pill p-0">DEACTIVATED</span>`;
-      }
-      
-  }
+    function isApproved(data) {
+        if(data == null){
+            return `<span class="btn btn-alt-success min-width-125 rounded-pill p-0">ACTIVATED</span>`;
+        }else {
+            return `<span class="btn btn-alt-danger min-width-125 rounded-pill p-0">DEACTIVATED</span>`;
+        }
+        
+    }
 
+    function showLoader(){
+        $("#pre_loader").modal("show");
+    }
 
-   
+    function hideLoader(){
+        $("#pre_loader").modal("hide");
+    }
 

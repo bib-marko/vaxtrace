@@ -163,7 +163,6 @@
         var getAddressUrl = '{{ route("get_address") }}';
         var deletePeopleUrl = '{{ route("delete_people") }}';
         $(function () {
-          
           $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
