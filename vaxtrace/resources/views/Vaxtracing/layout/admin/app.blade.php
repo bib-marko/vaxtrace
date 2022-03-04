@@ -106,9 +106,9 @@
                   </div>
                 </div>
                 <div class="block-content">
-                  <button type="submit" class="btn btn-block btn-alt-primary">
+                  <a type="submit" class="btn btn-block btn-alt-primary" href="{{ route('edit_profile') }}">
                     <i class="fa fa-refresh mr-5"></i> Update Profile
-                  </button>
+                  </a>
                 </div>
               </div>
               <!-- END Profile -->
@@ -127,55 +127,49 @@
             <div class="block-content">
               <form role="form" id="formChangePassword" novalidate>
                 @csrf
-                <div class="form-group mb-15">
-                  <label for="side-overlay-profile-email">Email</label>
-                  <div class="input-group">
-                    <input type="email" class="form-control" id="side-overlay-profile-email" name="side-overlay-profile-email" value="{{ session()->get('LoggedUser')->email }}" disabled>
-                    <div class="input-group-append">
-                      <span class="input-group-text">
-                        <i class="fa fa-envelope"></i>
-                      </span>
-                    </div>
+
+                <div class="mb-3">
+                  <div class="form-material form-material-success floating">
+                    <input class="form-control" id="material-select2" type="email" name="email"  pattern="^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$" value="{{ session()->get('LoggedUser')->email }}" data-wizard-validate-email="true" disabled/>
+                    <label for="material-color-success2" style="font-size: 13px;">Email</label>
+                    <span class="text-danger errorMessage fs--2" id="error_email"></span>
                   </div>
                 </div>
-                <div class="form-group mb-15">
-                  <label for="side-overlay-profile-password">Old Password</label>
-                  <div class="input-group">
-                    <input type="password" class="form-control" id="side-overlay-profile-password" name="old_password" placeholder="Old Password.." required>
-                    <div class="input-group-append">
-                      <span class="input-group-text">
-                        <i class="fa fa-asterisk"></i>
-                      </span>
-                    </div>
+
+                <div class="mb-3">
+                  <div class="form-material form-material-success floating">
+                    <input type="password" class="form-control" id="material-select2" type="email" name="old_password"  required/>
+                    <label for="material-color-success2" style="font-size: 13px;">Old Password</label>
                     <span class="text-danger errorMessage fs--2" id="error_old_password"></span>
                   </div>
                 </div>
-                <div class="form-group mb-15">
-                  <label for="side-overlay-profile-password">New Password</label>
-                  <div class="input-group">
-                    <input type="password" class="form-control" id="password" name="new_password" data-v-min-length="8" data-v-max-length="16" title="password" placeholder="New Password.." required>
-                    {{-- <input type="password" class="form-control" id="side-overlay-profile-password new_password" name="side-overlay-profile-password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" placeholder="New Password.." required> --}}
-                    <div class="input-group-append">
-                      <span class="input-group-text">
-                        <i class="fa fa-asterisk"></i>
-                      </span>
-                    </div>
+
+                {{-- <div class="mb-3">
+                  <div class="form-material form-material-success floating">
+                    <input type="password" class="form-control" id="material-select2 password" type="email" name="new_password" data-v-min-length="8" data-v-max-length="16" title="password" required/>
+                    <label for="material-color-success2" style="font-size: 13px;">New Password</label>
+                    <span class="text-danger errorMessage fs--2" id="error_new_password"></span>
+                  </div>
+                </div> --}}
+               
+                <div class="mb-3">
+                  <div class="form-material form-material-success floating">
+                    <input type="password" class="form-control" id="password" name="new_password" data-v-min-length="8" data-v-max-length="16" title="password" required>
+                    <label for="material-color-success2" style="font-size: 13px;">New Password</label>
                     <span class="text-danger errorMessage fs--2" id="error_new_password"></span>
                   </div>
                 </div>
-                <div class="form-group mb-15">
-                  <label for="side-overlay-profile-password-confirm">Confirm New Password</label>
-                  <div class="input-group">
-                    <input name="confirm_new_password" type="password" class="form-control" data-v-equal="#password" placeholder="Confirm New Password.." required>
-                    {{-- <input type="password" class="form-control" id="side-overlay-profile-password-confirm confirm_new_password" name="side-overlay-profile-password-confirm" placeholder="Confirm New Password.." data-v-equal="#new_password"> --}}
-                    <div class="input-group-append">
-                      <span class="input-group-text">
-                        <i class="fa fa-asterisk"></i>
-                      </span>
-                    </div>
+
+                <div class="mb-3">
+                  <div class="form-material form-material-success floating">
+                    <input  name="confirm_new_password" type="password" class="form-control" data-v-equal="#password" required>
+                    <label for="material-color-success2" style="font-size: 13px;">Confirm New Password</label>
                     <span class="text-danger errorMessage fs--2" id="error_confirm_new_password"></span>
                   </div>
                 </div>
+
+               
+
                 <div class="form-group row">
                   <div class="col-6">
                     <button class="btn btn-block btn-alt-primary" id="change_pass">
@@ -253,23 +247,23 @@
 
               <!-- Visible only in normal mode -->
               <div class="sidebar-mini-hidden-b text-center">
-                <a class="img-link" href="be_pages_generic_profile.html">
+                <a class="img-link" href="{{ route('edit_profile') }}">
                   <div class="avatar avatar-xl me-2 text-white" style="background-color: #5755d9;">
                     <div class="avatar-name rounded-circle pt-10 pr-10"><span>{{ strtoupper(substr(session()->get('LoggedUser')->person->first_name, 0, 1) ."". substr(session()->get('LoggedUser')->person->last_name, 0, 1)) }}</span></div>
                   </div>
                 </a>
                 <ul class="list-inline mt-10">
                   <li class="list-inline-item">
-                    <a class="link-effect text-dual-primary-dark font-size-sm font-w600 text-uppercase" href="be_pages_generic_profile.html">{{ strtoupper(substr(session()->get('LoggedUser')->person->first_name, 0, 1).". ".session()->get('LoggedUser')->person->last_name) }}</a>
+                    <a class="link-effect text-dual-primary-dark font-size-sm font-w600 text-uppercase" href="{{ route('edit_profile') }}">{{ strtoupper(substr(session()->get('LoggedUser')->person->first_name, 0, 1).". ".session()->get('LoggedUser')->person->last_name) }}</a>
                   </li>
                   <li class="list-inline-item">
                     <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
                     <a class="link-effect text-dual-primary-dark" data-toggle="layout" data-action="sidebar_style_inverse_toggle" href="javascript:void(0)">
-                      <i class="si si-pencil"></i>
+                      <i class="fa fa-sun-o"></i>
                     </a>
                   </li>
                   <li class="list-inline-item">
-                    <a class="link-effect text-dual-primary-dark" href="op_auth_signin.html">
+                    <a class="link-effect text-dual-primary-dark" href="{{ route('logout') }}">
                       <i class="si si-logout"></i>
                     </a>
                   </li>
@@ -360,7 +354,9 @@
               </button>
               <div class="dropdown-menu dropdown-menu-right min-width-200" aria-labelledby="page-header-user-dropdown">
                 <h5 class="h6 text-center py-10 mb-5 border-b text-uppercase">User</h5>
-               
+                <a class="dropdown-item" href="{{ route('edit_profile') }}" data-toggle="layout" data-action="side_overlay_toggle">
+                  <i class="si si-wrench mr-5"></i> Edit Profile
+                </a>
                 <a class="dropdown-item" href="{{ route('logout') }}">
                   <i class="si si-logout mr-5"></i> Sign Out
                 </a>

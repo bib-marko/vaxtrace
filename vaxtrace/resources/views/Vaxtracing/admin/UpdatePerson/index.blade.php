@@ -22,7 +22,7 @@
           </div>
         </div>
         
-        <div class="block-content bg-white">
+        <div class="block-content">
            
               
                 <form role="form" id="formUpdateUser" novalidate>
@@ -90,8 +90,8 @@
                     <div class="col-6">
                       <div class="mb-3">
                         <div class="form-material form-material-success floating">
-                          <label for="floatingDate" style="margin-top: -1.5em; font-size: 13px;" class="fs--2">Birth Date</label>
-                          <input class="form-control datetimepicker" id="floatingDate" name="birth_date" value="{{ $users->person->birth_date }}" type="date" placeholder="dd/mm/yyyy" data-options='{"dateFormat":"d/m/y","disableMobile":true}' id="form-wizard-progress-wizard-datepicker" min="1900-10-20" max="2030-10-20" required/>
+                          <p for="floatingDate" style="margin-top: -1.5em; font-size: 13px;" class="fs--2">Birth Date</p>
+                          <input class="form-control datetimepicker" id="floatingDate" name="birth_date" value="{{ $users->person->birth_date }}" type="date" placeholder="dd/mm/yyyy" data-options='{"dateFormat":"d/m/y","disableMobile":true}' id="form-wizard-progress-wizard-datepicker" min="1900-10-20" max="2030-10-20" style="margin-top: -1.5em" required/>
                           <span class="text-danger errorMessage fs--2" id="error_birth_date"></span>
                         </div>
                       </div>
@@ -157,7 +157,7 @@
                       <div class="col-12">
                         <br>
                         <div class="form-material form-material-success floating">
-                          <input class="form-control" id="material-color-success2 home_address" type="text" name="home_address" value="{{ $users->person->home_address }}" required/>
+                          <input class="js-maxlength form-control" id="example-material-maxlength7 home_address" type="text" name="home_address" value="{{ $users->person->home_address }}" rows="3" maxlength="100" data-always-show="true" required/>
                           <label for="example-material-maxlength7" style="font-size: 13px;">Home Address (e.g., street, block, lot, unit)</label>
                           <span class="text-danger errorMessage" id="error_home_address"></span>
                         </div>
@@ -172,7 +172,7 @@
         <div class="px-sm-3 px-md-5">
           <ul class="list-inline mb-0">
             <li class="next" style="text-align: right">
-              <button class="btn btn-square btn-alt-success min-width-125" id="update_user" type="submit">Submit <span class="si si-arrow-right ms-2"> </span></button>
+              <button class="btn btn-square btn-alt-success min-width-125" id="update_user" type="submit">Update <span class="si si-arrow-right ms-2"> </span></button>
             </li>
           </ul>
         </div>

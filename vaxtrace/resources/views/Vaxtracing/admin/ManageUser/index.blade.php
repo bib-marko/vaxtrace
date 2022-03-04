@@ -12,10 +12,10 @@
       <a class="nav-link active" href="#btabs-animated-slideleft-master-list">Master List</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#btabs-animated-slideleft-deactivated-account">Deactivated Account</a>
+      <a class="nav-link" href="#btabs-animated-slideleft-deactivated-account">Inactive Account</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#btabs-animated-slideleft-restored-account">Restored Account</a>
+      <a class="nav-link" href="#btabs-animated-slideleft-restored-account">Recovered Account</a>
     </li>
     <li class="nav-item ml-auto">
       <div class="block-options mr-15 mt-10">
@@ -80,19 +80,22 @@
     <div class="tab-pane fade fade-left" id="btabs-animated-slideleft-deactivated-account" role="tabpanel">
       <!-- Dynamic Table Full -->
       <div class="block">
-        <div class="block-header block-header-default">
-            <div class="col-sm-11 p-0">
-              <center>
-                <div class="form-material form-material-success floating ">
-                  <input type="text" class="form-control" id="search_bar2" name="material-color-success2">
-                  <label for="material-color-success2">Search here...</label>
+        <div class="row text-center">
+          <div class="col-md-3">
+            
+          </div>
+          <div class="col-md-6 justify-content-center ml-auto">
+            <div class="block mr-15 ml-15">
+              <div class="form-material floating input-group form-material-primary">
+                <input type="text" class="form-control" id="search_bar2" name="material-color-success2">
+                <label for="material-color-success2">Search here...</label>
+                <div class="input-group-append">
+                  <button type="button" class="view" id="search_btn2" style="background: none; border:none">
+                    <i class="si si-magnifier"></i>     
+                  </button>
                 </div>
-              </center>
+              </div>
             </div>
-          <div class="block-options pr-10">
-            <button type="button" class="view btn-block-option" id="search_btn2">
-              <i class="si si-magnifier"></i>
-            </button>
           </div>
         </div>
 
@@ -118,19 +121,22 @@
     <div class="tab-pane fade fade-left" id="btabs-animated-slideleft-restored-account" role="tabpanel">
        <!-- Dynamic Table Full -->
       <div class="block">
-        <div class="block-header block-header-default">
-            <div class="col-sm-11 p-0">
-              <center>
-                <div class="form-material form-material-success floating ">
-                  <input type="text" class="form-control" id="search_bar3" name="material-color-success2">
-                  <label for="material-color-success2">Search here...</label>
+        <div class="row text-center">
+          <div class="col-md-3">
+            
+          </div>
+          <div class="col-md-6 justify-content-center ml-auto">
+            <div class="block mr-15 ml-15">
+              <div class="form-material floating input-group form-material-primary">
+                <input type="text" class="form-control" id="search_bar3" name="material-color-success2">
+                <label for="material-color-success2">Search here...</label>
+                <div class="input-group-append">
+                  <button type="button" class="view" id="search_btn3  " style="background: none; border:none">
+                    <i class="si si-magnifier"></i>     
+                  </button>
                 </div>
-              </center>
+              </div>
             </div>
-          <div class="block-options pr-10">
-            <button type="button" class="view btn-block-option" id="search_btn3">
-              <i class="si si-magnifier"></i>
-            </button>
           </div>
         </div>
 
@@ -380,7 +386,7 @@
 
         function delete_people(id){
           Swal.fire({
-              title: 'Do you want to delete this user?',
+              title: 'Do you want to deactivate this user?',
               icon: 'warning',
               showCancelButton: true,
               confirmButtonText: 'Yes',

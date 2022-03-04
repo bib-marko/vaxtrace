@@ -9,6 +9,7 @@
 
 <!-- Content Header (Page header) -->
 <div class="row mt-5 mt-lg-0 mt-xl-5 mt-xxl-0">
+  {{-- <h5 class="content-heading"><a href=""> <i class="si si-arrow-left"></i> Back to User Management</a></h5> --}}
     <div class="col-lg-6 col-xl-12 col-xxl-6 h-100">
       <div class="card theme-wizard mb-5 mb-lg-0 mb-xl-5 mb-xxl-0 h-100">
         <div class="block">
