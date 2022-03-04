@@ -282,6 +282,9 @@
                 <li>
                   <a href="{{ route('get_manage_user') }}"><i class="si si-users"></i><span class="sidebar-mini-hide">User Management</span></a>
                 </li>
+                <li>
+                  <a href="{{ route('view_activity_log') }}"><i class="fa fa-history"></i><span class="sidebar-mini-hide">Activity Log</span></a>
+                </li>
               </ul>
             </div>
             <!-- END Side Navigation -->
