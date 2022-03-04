@@ -104,7 +104,7 @@
                         <span class="text-danger errorMessage fs--2" id="error_contact_number"></span>
                       </div>
                     </div> 
-                    <div class="row g-3">
+                    <div class="row g-2">
 
                       <div class="col">
                         <div class="form-material form-material-success floating">
