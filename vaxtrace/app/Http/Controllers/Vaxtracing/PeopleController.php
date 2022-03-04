@@ -32,7 +32,7 @@ class PeopleController extends Controller
                     if($row->user_status == null){
                          $actionBtn = "     
                                     <a class='view btn btn-alt-primary mr-5 mb-5' onclick='show_people($row->user_id)'><i class='si si-eye mr-5'></i>View</button></a>
-                                    <a class='update btn btn-alt-success mr-5 mb-5' onclick='show_update_details($row->user_id)'><i class='si si-pencil mr-5'></i>Update</a>
+                                    <a href='".route('update_people', $row->user_id)."' class='update btn btn-alt-success mr-5 mb-5'><i class='si si-pencil mr-5'></i>Update</a>
                                     <a class='delete delete btn btn-alt-danger mr-5 mb-5' onclick='delete_people($row->user_id)'><i class='si si-trash mr-5'></i>Delete</a>
                         ";
                     }else {
@@ -109,19 +109,19 @@ class PeopleController extends Controller
    
     public function store(Request $request)
     {
-        // $request -> validate([
-        //     'first_name' => 'required|regex:/^[a-zA-Z\s]*$/',
-        //     'last_name' => 'required|regex:/^[a-zA-Z\s]*$/',
-        //     'birth_date' => 'required|date',
-        //     'email' => 'required|email|unique:users',
-        //     'sex' => 'required |regex:/^[a-zA-Z\s]*$/',
-        //     'contact_number' => 'required|digits:11|regex:/^([0-9\s\-\+\(\)]*)$/',
-        //     'region' => 'required',
-        //     'province' => 'required',
-        //     'city' => 'required',
-        //     'barangay' => 'required',
-        //     'home_address' => 'required', 
-        // ]);
+        $request -> validate([
+            'first_name' => 'required|regex:/^[a-zA-Z\s]*$/',
+            'last_name' => 'required|regex:/^[a-zA-Z\s]*$/',
+            'birth_date' => 'required|date',
+            'email' => 'required|email|unique:users',
+            'sex' => 'required |regex:/^[a-zA-Z\s]*$/',
+            'contact_number' => 'required|digits:11|regex:/^([0-9\s\-\+\(\)]*)$/',
+            'region' => 'required',
+            'province' => 'required',
+            'city' => 'required',
+            'barangay' => 'required',
+            'home_address' => 'required', 
+        ]);
 
         $user = new User();
         $user->email = $request->email;
@@ -134,7 +134,7 @@ class PeopleController extends Controller
         $person->last_name = formatString($request->last_name);
         $person->suffix = formatString($request->suffix);
         $person->birth_date = $request->birth_date;
-        $person->sex = $request->sex;
+        $person->sex = formatString($request->sex);
         $person->contact_number = $request->contact_number;
         $person->region = $request->region;
         $person->province = $request->province;
@@ -187,7 +187,7 @@ class PeopleController extends Controller
                 'middle_name'=> formatString($request->middle_name),
                 'last_name'=> formatString($request->last_name),
                 'suffix'=> formatString($request->suffix),
-                'sex'=> $request->sex,
+                'sex'=> formatString($request->sex),
                 'birth_date'=> $request->birth_date,
                 'contact_number'=> $request->contact_number,
                 'region'=> $request->region,
@@ -203,9 +203,23 @@ class PeopleController extends Controller
         
     }
 
-    public function validateInput(Request $request)
+    public function changePassword(Request $request)
     {
-        //
+        $request -> validate([
+                'old_password' => 'required',
+                'new_password' => 'required',
+                'confirm_new_password' => 'required', 
+            ]);
+        if (Hash::check($request->old_password, session('LoggedUser')->password)) {
+            User::where('id', session('LoggedUser')->id)
+            ->update([
+                'password'=> Hash::make($request->new_password)
+            ]);
+        }
+        else{
+            return response()->json(['error'=>'You entered an incorrect password'],422); 
+        }
+
     }
     
     public function destroy(Request $request, $id)
