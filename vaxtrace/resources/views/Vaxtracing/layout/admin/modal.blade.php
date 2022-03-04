@@ -8,7 +8,7 @@
 
  <!-- Pop Out Modal -->
  <div class="modal fade" id="m_user" tabindex="-1" role="dialog" aria-labelledby="modal-popout" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-popout" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="block block-themed block-transparent mb-0">
         <div class="block-header bg-primary-dark">
@@ -20,89 +20,56 @@
           </div>
         </div>
         <div class="block-content">
-          <div class="row ">
-            <div class="col-5 col-sm-4">
-              <p class="fw-semi-bold mb-1 fs--2">ID</p>
-            </div>
-            <div class="col fs--2" id="user_id"></div>
-          </div>
-          <div class="row">
-            <div class="col-5 col-sm-4">
-              <p class="fw-semi-bold mb-1 fs--2">Created</p>
-            </div>
-            <div class="col fs--2" id="created_at"></div>
-          </div>
-          <div class="row">
-            <div class="col-5 col-sm-4">
-              <p class="fw-semi-bold mb-1 fs--2">Email</p>
-            </div>
-            <div class="col fs--2"><a id="email"></a></div>
-          </div>
-          <div class="row">
-            <div class="col-5 col-sm-4">
-              <p class="fw-semi-bold mb-1 fs--2">Phone number</p>
-            </div>
-            <div class="col fs--2"><a id="contact_number"></a></div>
-          </div>
-          <div class="row">
-            <div class="col-5 col-sm-4">
-              <p class="fw-semi-bold mb-1 fs--2">Birth Date</p>
-            </div>
-            <div class="col fs--2" id="birth_date"></div>
-          </div>
-          <div class="row">
-            <div class="col-5 col-sm-4">
-              <p class="fw-semi-bold mb-0 fs--2">Sex</p>
-            </div>
-            <div class="col fs--2" id="sex"></div>
-          </div>
-        </div>
-        <div class="col-lg col-xxl-5 mt-4 mt-lg-0 offset-xxl-1">
-          <div class="row">
-            <div class="col-5 col-sm-4">
-              <p class="fw-semi-bold mb-0 fs--2">Status</p>
-            </div>
-            <div class="col fs--2" id="status"></div>
-          </div>
-          <div class="row">
-            <div class="col-5 col-sm-4">
-              <p class="fw-semi-bold mb-1 fs--2">Region</p>
-            </div>
-            <div class="col fs--2"><a id="region"></a></div>
-          </div>
-          <div class="row">
-            <div class="col-5 col-sm-4">
-              <p class="fw-semi-bold mb-1 fs--2">Province</p>
-            </div>
-            <div class="col fs--2"><a id="province"></a></div>
-          </div>
-          <div class="row">
-            <div class="col-5 col-sm-4">
-              <p class="fw-semi-bold mb-1 fs--2">City</p>
-            </div>
-            <div class="col fs--2"><a id="city"></a></div>
-          </div>
-          <div class="row">
-            <div class="col-5 col-sm-4">
-              <p class="fw-semi-bold mb-1 fs--2">Barangay</p>
-            </div>
-            <div class="col fs--2"><a id="barangay"></a></div>
-          </div>
-          <div class="row">
-            <div class="col-5 col-sm-4">
-              <p class="fw-semi-bold mb-1 fs--2">Address</p>
-            </div>
-            <div class="col fs--2">
-              <p class="mb-1" id="home_address"></p>
-            </div>
-          </div>
+          <!-- Project Info -->
+          <table class="table table-striped table-borderless mt-20">
+            <tbody>
+              <tr>
+                <td class="font-w600">Account Status</td>
+                <td colspan="3" id="status"></td>
+              </tr>
+              <tr>
+                <td class="font-w600">Account ID</td>
+                <td id="user_id"></td>
+                <td class="font-w600">Created At</td>
+                <td id="created_at"></td>
+              </tr>
+              <tr>
+                <td class="font-w600">Email</td>
+                <td id="email"></td>
+                <td class="font-w600">Phone number</td>
+                <td id="contact_number"></td>
+              </tr>
+              <tr>
+                <td class="font-w600">Birth Date</td>
+                <td id="birth_date"></td>
+                <td class="font-w600">Sex</td>
+                <td id="sex"></td>
+              </tr>
+              
+              <tr>
+                <td class="font-w600">Region</td>
+                <td id="region"></td>
+                <td class="font-w600">Province</td>
+                <td id="province"></td>
+              </tr>
+              <tr>
+                <td class="font-w600">City</td>
+                <td id="city"></td>
+                <td class="font-w600">Barangay</td>
+                <td id="barangay"></td>
+              </tr>
+              <tr>
+                <td class="font-w600">Home Address</td>
+                <td colspan="3" id="home_address"></td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- END Project Info -->
+         
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-alt-success" data-dismiss="modal">
-          <i class="fa fa-check"></i> Perfect
-        </button>
       </div>
     </div>
   </div>
