@@ -73,5 +73,9 @@ Route::group(['middleware' => ['AuthCheck']],function(){
 
     Route::post('/restore/people/{user_id?}', [PeopleController::class, 'restore'])->name('restore_people');
 
+
+
+    Route::view('/edit/profile', 'Vaxtracing.admin.EditProfile.index')->name('edit_profile');
+
 });
 
