@@ -195,6 +195,7 @@ class PeopleController extends Controller
                 'city'=> $request->city,
                 'barangay'=> $request->barangay,
                 'home_address'=> formatString($request->home_address),
+                'modified_by' => generateFullName(session('LoggedUser'))
             ]);
         $user = User::where('id', $id)
             ->update([
@@ -230,6 +231,7 @@ class PeopleController extends Controller
         $user = User::where('id', $id)
             ->update([
                 'reason'=> $request->reason1,
+                'modified_by' => generateFullName(session('LoggedUser'))
             ]);
         User::find($id)->delete();
         
@@ -244,6 +246,7 @@ class PeopleController extends Controller
         $user = User::withTrashed()->where('id', $id)
             ->update([
                 'reason'=> $request->restore_reason,
+                'modified_by' => generateFullName(session('LoggedUser'))
             ]);
         User::withTrashed()->find($id)->restore();
         
