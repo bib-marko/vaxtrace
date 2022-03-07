@@ -6,69 +6,81 @@
 
  <!-- Page Content -->
  <div class="content">
-    <div class="row invisible" data-toggle="appear">
-      <!-- Row #1 -->
-      <div class="col-6 col-xl-3">
-        <a class="block block-link-pop text-right bg-gd-lake" href="javascript:void(0)">
-          <div class="block-content block-content-full clearfix border-black-op-b border-3x">
-            <div class="float-left mt-10 d-none d-sm-block">
-              <i class="si si-users fa-3x text-white"></i>
+
+  <div class="row gutters-tiny">
+      <!-- Pending -->
+      <div class="col-md-6 col-xl-3">
+        <a class="block block-rounded block-transparent bg-gd-sun" href="javascript:void(0)">
+          <div class="block-content block-content-full block-sticky-options">
+            <div class="block-options">
+              <div class="block-options-item">
+                <i class="si si-users text-white-op"></i>
+              </div>
             </div>
-            <div class="font-size-h3 font-w600 text-white" data-toggle="countTo" data-speed="1000" data-to="{{ $total_user }}">0</div>
-            <div class="font-size-sm font-w600 text-uppercase text-white-op">Total account</div>
+            <div class="py-20 text-center">
+              <div class="font-size-h2 font-w700 mb-0 text-white" data-toggle="countTo" data-to="{{ $total_user }}">0</div>
+              <div class="font-size-sm font-w600 text-uppercase text-white-op">Total Accounts</div>
+            </div>
           </div>
         </a>
       </div>
+      <!-- END Pending -->
 
-      {{-- <div class="col-6 col-md-4 col-xl-2">
-        <a class="block text-center" href="javascript:void(0)">
-          <div class="block-content ribbon ribbon-bookmark ribbon-crystal ribbon-left bg-gd-dusk">
-            <div class="ribbon-box">750</div>
-            <p class="mt-5">
-              <i class="si si-book-open fa-3x text-white-op"></i>
-            </p>
-            <p class="font-w600 text-white">Articles</p>
-          </div>
-        </a>
-      </div> --}}
-
-      {{-- <div class="col-6 col-xl-3">
-        <a class="block block-link-pop text-right bg-earth" href="javascript:void(0)">
-          <div class="block-content block-content-full clearfix border-black-op-b border-3x">
-            <div class="float-left mt-10 d-none d-sm-block">
-              <i class="si si-trophy fa-3x text-earth-light"></i>
+      <!-- Canceled -->
+      <div class="col-md-6 col-xl-3">
+        <a class="block block-rounded block-transparent bg-gd-cherry" href="javascript:void(0)">
+          <div class="block-content block-content-full block-sticky-options">
+            <div class="block-options">
+              <div class="block-options-item">
+                <i class="fa fa-times text-white-op"></i>
+              </div>
             </div>
-            <div class="font-size-h3 font-w600 text-white">$<span data-toggle="countTo" data-speed="1000" data-to="2600">0</span></div>
-            <div class="font-size-sm font-w600 text-uppercase text-white-op">Earnings</div>
+            <div class="py-20 text-center">
+              <div class="font-size-h2 font-w700 mb-0 text-white" data-toggle="countTo" data-to="2">0</div>
+              <div class="font-size-sm font-w600 text-uppercase text-white-op">Canceled</div>
+            </div>
           </div>
         </a>
       </div>
+      <!-- END Canceled -->
 
-      <div class="col-6 col-xl-3">
-        <a class="block block-link-pop text-right bg-elegance" href="javascript:void(0)">
-          <div class="block-content block-content-full clearfix border-black-op-b border-3x">
-            <div class="float-left mt-10 d-none d-sm-block">
-              <i class="si si-envelope-letter fa-3x text-elegance-light"></i>
+      <!-- Completed -->
+      <div class="col-md-6 col-xl-3">
+        <a class="block block-rounded block-transparent bg-gd-lake" href="javascript:void(0)">
+          <div class="block-content block-content-full block-sticky-options">
+            <div class="block-options">
+              <div class="block-options-item">
+                <i class="fa fa-check text-white-op"></i>
+              </div>
             </div>
-            <div class="font-size-h3 font-w600 text-white" data-toggle="countTo" data-speed="1000" data-to="260">0</div>
-            <div class="font-size-sm font-w600 text-uppercase text-white-op">Messages</div>
+            <div class="py-20 text-center">
+              <div class="font-size-h2 font-w700 mb-0 text-white" data-toggle="countTo" data-to="21">0</div>
+              <div class="font-size-sm font-w600 text-uppercase text-white-op">Completed</div>
+            </div>
           </div>
         </a>
       </div>
-      
-      <div class="col-6 col-xl-3">
-        <a class="block block-link-pop text-right bg-corporate" href="javascript:void(0)">
-          <div class="block-content block-content-full clearfix border-black-op-b border-3x">
-            <div class="float-left mt-10 d-none d-sm-block">
-              <i class="si si-fire fa-3x text-corporate-light"></i>
+      <!-- END Completed -->
+
+      <!-- All -->
+      <div class="col-md-6 col-xl-3">
+        <a class="block block-rounded block-transparent bg-gd-dusk" href="javascript:void(0)">
+          <div class="block-content block-content-full block-sticky-options">
+            <div class="block-options">
+              <div class="block-options-item">
+                <i class="fa fa-archive text-white-op"></i>
+              </div>
             </div>
-            <div class="font-size-h3 font-w600 text-white" data-toggle="countTo" data-speed="1000" data-to="4252">0</div>
-            <div class="font-size-sm font-w600 text-uppercase text-white-op">Online</div>
+            <div class="py-20 text-center">
+              <div class="font-size-h2 font-w700 mb-0 text-white" data-toggle="countTo" data-to="35">0</div>
+              <div class="font-size-sm font-w600 text-uppercase text-white-op">All</div>
+            </div>
           </div>
         </a>
-      </div> --}}
-      <!-- END Row #1 -->
-
+      </div>
+      <!-- END All -->
+    </div>
+    <!-- END Statistics -->
     </div>
  </div>
 

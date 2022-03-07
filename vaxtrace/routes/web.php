@@ -83,5 +83,14 @@ Route::group(['middleware' => ['AuthCheck']],function(){
 
     Route::view('/view/activity_log', 'Vaxtracing.admin.ActivityLog.index')->name('view_activity_log');
 
+    Route::view('/view/department', 'Vaxtracing.admin.Department.index')->name('view_department');
+    
+    Route::view('/view/permission', 'Vaxtracing.admin.Permission.index')->name('view_permission');
+
+    Route::view('/create/department', 'Vaxtracing.admin.CreateDepartment.index')->name('get_create_department');
+
+    Route::view('/create/permission', 'Vaxtracing.admin.CreatePermission.index')->name('get_create_permission');
+    
+
 });
 

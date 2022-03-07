@@ -20,6 +20,7 @@
 
     <!-- Page JS Plugins CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vaxtrace_assets/assets/js/plugins/select2/css/select2.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vaxtrace_assets/assets/js/plugins/jquery-tags-input/jquery.tagsinput.min.css') }}">
 
     <!-- Icons -->
     <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
@@ -280,7 +281,21 @@
                   <a href="{{ route('get_admin_dashboard') }}"><i class="si si-cup"></i><span class="sidebar-mini-hide">Dashboard</span></a>
                 </li>
                 <li>
-                  <a href="{{ route('get_manage_user') }}"><i class="si si-users"></i><span class="sidebar-mini-hide">User Management</span></a>
+                  <li>
+                  <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-users"></i><span class="sidebar-mini-hide">User Management</span></a>
+                  <ul>
+                    <li>
+                      <a href="{{ route('get_manage_user') }}"><i class="si si-user"></i><span class="sidebar-mini-hide"> User</a>
+                    </li>
+                    <li>
+                      <a href="{{ route('view_department') }}"><i class="si si-puzzle"></i><span class="sidebar-mini-hide">  Department</a>
+                    </li>
+                    <li>
+                      <a href="{{ route('view_permission') }}"><i class="si si-key"></i><span class="sidebar-mini-hide">  Permission</a>
+                    </li>
+                  </ul>
+                </li>
+                
                 </li>
                 <li>
                   <a href="{{ route('view_activity_log') }}"><i class="fa fa-history"></i><span class="sidebar-mini-hide">Activity Log</span></a>
@@ -457,12 +472,18 @@
     <script src="{{ asset('js/user/script.js') }}"></script>
     <script  src="{{ asset('js/admin/script.js') }}" ></script>
     <script src="https://cdn.jsdelivr.net/npm/@emretulek/jbvalidator"></script>
+    
 
     <!-- Page JS Helpers (Select2 plugin) -->
     <script src="{{ asset('assets/vaxtrace_assets/assets/js/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
     <script src="{{ asset('assets/vaxtrace_assets/assets/js/plugins/masked-inputs/jquery.maskedinput.min.js') }}"></script>
     <script src="{{ asset('assets/vaxtrace_assets/assets/js/plugins/select2/js/select2.full.min.js') }}"></script>
     <script>jQuery(function(){Codebase.helpers('select2');});</script>
+
+    <!-- Page JS Code -->
+    <script src="{{ asset('assets/vaxtrace_assets/assets/js/pages/be_forms_plugins.min.js') }}"></script>
+
+    <script>jQuery(function(){Codebase.helpers('table-tools');});</script>
     
     <!-- Page JS Helpers (Flatpickr + BS Datepicker + BS Colorpicker + BS Maxlength + Select2 + Masked Input + Range Sliders + Tags Inputs plugins) -->
     <script>jQuery(function(){Codebase.helpers(['flatpickr', 'datepicker', 'colorpicker', 'maxlength', 'select2', 'masked-inputs', 'rangeslider', 'tags-inputs']);});</script>
