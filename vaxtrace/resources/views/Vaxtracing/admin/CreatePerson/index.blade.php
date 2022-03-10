@@ -30,6 +30,25 @@
                   <form role="form" id="formAddUser">
                     @csrf
                     <div class="row g-2">
+                      <div class="col-12">
+                        <div class="form-material form-material-success floating">
+                          <select class="js-select2 form-control" id="material-select2" name="role" aria-label="Floating label select example" required>
+                                @if(session()->get('LoggedUser')->role->short_code != 'ADMIN')
+                                  <option value="{{ session()->get('LoggedUser')->role->id }}">{{ session()->get('LoggedUser')->role->title }}</option>
+                                @else
+                                  @foreach ($total_role as $role)
+                                    <option value="{{ $role->id }}">{{ $role->short_code .' - '. $role->title }}</option>
+                             
+                                  @endforeach
+                                @endif
+                              
+                               
+                          </select>
+                          <label for="material-color-select2" style="font-size: 13px;">Role / Department</label>
+                          <span class="text-danger errorMessage fs--2" id="error_region"></span>
+                        </div>
+                      </div>
+
                       <div class="col-4">
                         <div class="form-material form-material-success floating">
                           <input class="form-control" id="material-color-success2 first_name" type="text" name="first_name" pattern="[a-zA-Z\s]+" title="Input letters only" required/>
@@ -99,6 +118,7 @@
                         </div>
                       </div>
                     </div>
+                    
                     <div class="mb-3">
                       <div class="form-material form-material-success floating">
                         <input class="form-control" id="floatingInput" type="text" name="contact_number" pattern="[0-9]+" title="Input numbers only" required/>
@@ -106,6 +126,7 @@
                         <span class="text-danger errorMessage fs--2" id="error_contact_number"></span>
                       </div>
                     </div> 
+
                     <div class="row g-2">
 
                       <div class="col">
@@ -159,7 +180,7 @@
                         <div class="col-12">
                           <br>
                           <div class="form-material form-material-success floating">
-                            <textarea class="js-maxlength form-control" id="example-material-maxlength7" name="home_address" rows="3" maxlength="100" data-always-show="true" required></textarea>
+                            <input class="js-maxlength form-control" id="example-material-maxlength7" name="home_address" rows="3" maxlength="100" data-always-show="true" required></textarea>
                             <label for="example-material-maxlength7" style="font-size: 13px;">Home Address (e.g., street, block, lot, unit)</label>
                             <span class="text-danger errorMessage" id="error_home_address"></span>
                           </div>

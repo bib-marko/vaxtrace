@@ -41,7 +41,7 @@ Route::group(['middleware' => ['AuthCheck']],function(){
     
 
     //DASHBOARD
-    Route::get('/dashboard', [PeopleController::class, 'getDashboardData'])->name('get_admin_dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('get_admin_dashboard');
 
     //MANAGER USER
     Route::get('/manage/user',function () {
@@ -54,7 +54,8 @@ Route::group(['middleware' => ['AuthCheck']],function(){
 
     Route::get('/create/user', function () {
         abort_if(! session('LoggedUser')->hasPermission('USER_CREATE'), 403);
-        return view('Vaxtracing.admin.CreatePerson.index');
+        $total_role = Role::get();
+        return view('Vaxtracing.admin.CreatePerson.index', compact('total_role'));
     })->name('get_create_user');
 
     Route::get('/update/user', function () {
@@ -127,6 +128,8 @@ Route::group(['middleware' => ['AuthCheck']],function(){
     Route::post('/update/role/save/{id?}', [RoleController::class, 'update'])->name('save_update_department');
 
     Route::post('/delete/role/{id?}', [RoleController::class, 'destroy'])->name('delete_department');
+
+    Route::get("/show/role/{id?}", [RoleController::class, "show"])->name('show_role');
 
     //MANAGE PERMISSION
 

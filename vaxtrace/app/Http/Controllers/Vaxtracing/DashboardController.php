@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Vaxtracing;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Vaxtracing\Role;
+use App\Models\Vaxtracing\User;
+use App\Models\Vaxtracing\Permission;
+use App\Models\Vaxtracing\SubSystem;
 
 class DashboardController extends Controller
 {
@@ -14,7 +19,17 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        dd("Dashboard");
+       
+
+        DB::statement("SET SQL_MODE=''"); // set the strict to false
+    
+        $total_user = User::count();
+        $total_department = Role::count();
+        $total_permission = Permission::count();
+        $total_subSystem = SubSystem::count();
+
+        return view('Vaxtracing.admin.index', compact('total_user', 'total_department', 'total_permission', 'total_subSystem'));
+       
     }
 
     /**

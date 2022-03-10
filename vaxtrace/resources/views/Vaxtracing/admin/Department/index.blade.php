@@ -102,6 +102,19 @@
 
         $(".dataTables_filter").hide(); 
     });
+    
+
+    // View Account Details
+    function show_role(id) {
+    $.get("/show/role" +'/' + id, function (data) {
+        $('#role_title').text(data.title);
+        $('#role_code').text(data.short_code);
+        $('#role_created_at').text(formatDate(data.created_at, "full"));
+    })
+
+    $("#view_role").modal("show");
+    }
+
     function delete_role(id){
         Swal.fire({
             title: 'Do you want to delete this role?',

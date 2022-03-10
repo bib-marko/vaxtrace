@@ -11,11 +11,7 @@ use DataTables;
 use Illuminate\Support\Facades\DB;
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index(Request $request)
     {
         abort_if(! session('LoggedUser')->hasPermission('ROLE_ACCESS'), 403);
@@ -40,31 +36,16 @@ class RoleController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
         abort_if(! session('LoggedUser')->hasPermission('ROLE_CREATE'), 403);
-<<<<<<< HEAD
-        $permissions = Permission::orderBy('name')->get();
-
-        return view('Vaxtracing.admin.CreateDepartment.index', compact('permissions'));
-=======
         $subsystems = SubSystem::orderBy('title')->get();
         $permissions = Permission::orderBy('name')->get();
         return view('Vaxtracing.admin.CreateDepartment.index', compact('permissions','subsystems'));
->>>>>>> b3e9f9e63581d5bb35119deca5810ace8bf06fc5
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function store(Request $request)
     {
         abort_if(! session('LoggedUser')->hasPermission('ROLE_CREATE'), 403);
@@ -75,23 +56,15 @@ class RoleController extends Controller
         $role->permissions()->sync($request->permissions);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function show($id)
     {
-        //
+        $role = Role::find($id);
+
+        return response()->json($role);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function edit($id)
     {
         abort_if(! session('LoggedUser')->hasPermission('ROLE_UPDATE'), 403);
@@ -102,13 +75,7 @@ class RoleController extends Controller
         return view('Vaxtracing.admin.UpdateDepartment.index', compact('permissions','role'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function update(Request $request, $id)
     {
         abort_if(! session('LoggedUser')->hasPermission('ROLE_UPDATE'), 403);
@@ -123,15 +90,11 @@ class RoleController extends Controller
             ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
         abort_if(! session('LoggedUser')->hasPermission('ROLE_DELETE'), 403);
         $role = Role::find($id)->delete();
     }
+
 }

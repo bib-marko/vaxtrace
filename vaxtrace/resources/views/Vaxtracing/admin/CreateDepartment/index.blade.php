@@ -62,6 +62,7 @@
                                 $counter=0;
                             @endphp
                             @foreach ($subsystems as $subsystem)
+                            <br>
                                 <div class="col">
                                     <div class="form-material form-material-success floating">
                                         <select class="js-select2 form-control" id="example-select2-multiple{{ $counter++ }}" name="permissions[]" style="width: 100%;" data-placeholder="Choose many.." multiple>
@@ -77,6 +78,9 @@
                                         
                                     </div>
                                 </div>
+
+
+                                
                             @endforeach
                         </form>
                     </div>

@@ -62,9 +62,16 @@
         padding-left: 10px;
         padding-top: 5px;
       }
-      .select2-selection__choice{
+      /* .select2-selection__choice{
+        border: none;
         background-color: #575757 !important; 
       }
+
+      .select2-selection__choice__remove{
+        color: white !important;
+      } */
+
+
     </style>
   </head>
   <body>
@@ -261,21 +268,18 @@
                   <li class="list-inline-item">
                     <a class="link-effect text-dual-primary-dark font-size-sm font-w600 text-uppercase" href="{{ route('edit_profile') }}">{{ strtoupper(substr(session()->get('LoggedUser')->person->first_name, 0, 1).". ".session()->get('LoggedUser')->person->last_name) }}</a>
                   </li>
-                  <li class="list-inline-item">
-                    <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-                    <a class="link-effect text-dual-primary-dark" data-toggle="layout" data-action="sidebar_style_inverse_toggle" href="javascript:void(0)">
-                      <i class="fa fa-sun-o"></i>
-                    </a>
-                  </li>
-                  <li class="list-inline-item">
-                    <a class="link-effect text-dual-primary-dark" href="{{ route('logout') }}">
-                      <i class="si si-logout"></i>
-                    </a>
-                  </li>
                   <br>
-                  <a class="btn btn-sm btn-info rounded-pill ">
-                    <i class="si si-user pr-1"></i>{{ session()->get('LoggedUser')->role->short_code }}
-                  </a>
+                  <li class="list-inline-item">
+                    @if (session()->get('LoggedUser')->role->short_code == 'ADMIN')
+                        <a class="badge badge-secondary font-w700 p-2 text-uppercase">
+                          <i class="fa fa-shield"></i> ADMINISTRATOR
+                        </a>
+                    @else
+                        <a class="badge badge-success font-w700 p-2 text-uppercase">
+                          <i class="si si-users "></i> {{ session()->get('LoggedUser')->role->short_code }} STAFF
+                        </a>
+                    @endif
+                  </li>
                 </ul>
               </div>
               <!-- END Visible only in normal mode -->
@@ -393,7 +397,17 @@
                 <i class="fa fa-angle-down ml-5"></i>
               </button>
               <div class="dropdown-menu dropdown-menu-right min-width-200" aria-labelledby="page-header-user-dropdown">
-                <h5 class="h6 text-center py-10 mb-5 border-b text-uppercase">User</h5>
+                <h5 class="h6 text-center py-10 mb-5 border-b text-uppercase">
+                  @if (session()->get('LoggedUser')->role->short_code == 'ADMIN')
+                        <a class="badge badge-secondary font-w700 p-2 text-uppercase">
+                          <i class="fa fa-shield"></i> ADMINISTRATOR
+                        </a>
+                    @else
+                        <a class="badge badge-success font-w700 p-2 text-uppercase">
+                          <i class="si si-users "></i> {{ session()->get('LoggedUser')->role->short_code }} STAFF
+                        </a>
+                    @endif
+                </h5>
                 <a class="dropdown-item" href="{{ route('edit_profile') }}" data-toggle="layout" data-action="side_overlay_toggle">
                   <i class="si si-wrench mr-5"></i> Edit Profile
                 </a>
@@ -510,6 +524,9 @@
     <!-- Page JS Helpers (Flatpickr + BS Datepicker + BS Colorpicker + BS Maxlength + Select2 + Masked Input + Range Sliders + Tags Inputs plugins) -->
     <script>jQuery(function(){Codebase.helpers(['flatpickr', 'datepicker', 'colorpicker', 'maxlength', 'select2', 'masked-inputs', 'rangeslider', 'tags-inputs']);});</script>
     
+
+    
+
     @yield('scripts')
     <script type="text/javascript">
       var validatorPassword = $('#formChangePassword').jbvalidator({
