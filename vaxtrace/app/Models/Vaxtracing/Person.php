@@ -25,6 +25,7 @@ class Person extends Model
         'city',
         'barangay',
         'home_address',
+        'modified_by',
     ];
 
     public function user()

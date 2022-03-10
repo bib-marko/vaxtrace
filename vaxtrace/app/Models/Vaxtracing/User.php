@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'reason',
+        'modified_by',
     ];
 
     /**
@@ -48,10 +49,17 @@ class User extends Authenticatable
         return $this->hasOne(Person::class);
     }
 
+    public function role(){
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+
     public function getFullnameAttribute()
     {
         return "{$this->people->first_name} {$this->people->last_name}";
     }
 
+    public function hasPermission($name){
+        return in_array($name, $this->role->permissions); //$userPermission;
+    }
 
 }

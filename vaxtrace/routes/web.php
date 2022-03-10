@@ -6,7 +6,11 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Vaxtracing\PeopleController;
 use App\Http\Controllers\Vaxtracing\DashboardController;
+use App\Http\Controllers\Vaxtracing\PermissionController;
+use App\Http\Controllers\Vaxtracing\RoleController;
+use App\Http\Controllers\Vaxtracing\SubSystemController;
 use App\Http\Middleware\AuthCheck;
+use App\Models\Vaxtracing\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,16 +44,28 @@ Route::group(['middleware' => ['AuthCheck']],function(){
     Route::get('/dashboard', [PeopleController::class, 'getDashboardData'])->name('get_admin_dashboard');
 
     //MANAGER USER
-    Route::view('/manage/user', 'Vaxtracing.admin.ManageUser.index')->name('get_manage_user');
-
+    Route::get('/manage/user',function () {
+        abort_if(! session('LoggedUser')->hasPermission('USER_ACCESS'), 403);
+        return view('Vaxtracing.admin.ManageUser.index');
+    })->name('get_manage_user');
+  
+    
     Route::resource('people', PeopleController::class);
 
-    Route::view('/create/user', 'Vaxtracing.admin.CreatePerson.index')->name('get_create_user');
+    Route::get('/create/user', function () {
+        abort_if(! session('LoggedUser')->hasPermission('USER_CREATE'), 403);
+        return view('Vaxtracing.admin.CreatePerson.index');
+    })->name('get_create_user');
 
-    Route::view('/update/user', 'Vaxtracing.admin.UpdatePerson.index')->name('get_update_user');
+    Route::get('/update/user', function () {
+        abort_if(! session('LoggedUser')->hasPermission('USER_UPDATE'), 403);
+        return view('Vaxtracing.admin.UpdatePerson.index');
+    })->name('get_update_user');
 
     //Generate address
     Route::get("/create/get_address", [AddressController::class, "index"])->name('get_address');
+
+    Route::get("/get-activity-logs", [AddressController::class, "getActivity"])->name('get_activity');
 
     //Change Password
     Route::post('/change/password/', [PeopleController::class, 'changePassword'])->name('change_password');
@@ -74,8 +90,62 @@ Route::group(['middleware' => ['AuthCheck']],function(){
     Route::post('/restore/people/{user_id?}', [PeopleController::class, 'restore'])->name('restore_people');
 
 
-
     Route::view('/edit/profile', 'Vaxtracing.admin.EditProfile.index')->name('edit_profile');
 
+    Route::post('/edit/profile/save/{user_id?}', [PeopleController::class, 'editProfile'])->name('save_edit_profile');
+
+    Route::get('/view/activity_log',  function () {
+        abort_if(! session('LoggedUser')->hasPermission('ACTIVITY_ACCESS'), 403);
+        return view('Vaxtracing.admin.ActivityLog.index');
+    })->name('view_activity_log');
+
+    Route::get('/view/department', function () {
+        abort_if(! session('LoggedUser')->hasPermission('ROLE_ACCESS'), 403);
+        return view('Vaxtracing.admin.Department.index');
+    })->name('view_department');
+    
+    Route::get('/view/permission', function () {
+        abort_if(! session('LoggedUser')->hasPermission('PERMISSION_ACCESS'), 403);
+        return view('Vaxtracing.admin.Permission.index');
+    })->name('view_permission');
+
+    Route::get('/view/subsystem', function () {
+        abort_if(! session('LoggedUser')->hasPermission('SUBSYSTEM_ACCESS'), 403);
+        return view('Vaxtracing.admin.Subsystem.index');
+    })->name('view_subsystem');
+
+    // Route::view('/create/department', 'Vaxtracing.admin.CreateDepartment.index')->name('get_create_department');
+
+    //Route::view('/create/permission', 'Vaxtracing.admin.CreatePermission.index')->name('get_create_permission');
+
+    //MANAGE PERMISSION
+
+    Route::resource('role', RoleController::class);
+
+    Route::get('/update/role/{id?}', [RoleController::class, 'edit'])->name('update_department');
+
+    Route::post('/update/role/save/{id?}', [RoleController::class, 'update'])->name('save_update_department');
+
+    Route::post('/delete/role/{id?}', [RoleController::class, 'destroy'])->name('delete_department');
+
+    //MANAGE PERMISSION
+
+    Route::resource('permission', PermissionController::class);
+
+    Route::get('/update/permission/{id?}', [PermissionController::class, 'edit'])->name('update_permission');
+
+    Route::post('/update/permission/save/{id?}', [PermissionController::class, 'update'])->name('save_update_permission');
+
+    Route::post('/delete/permission/{id?}', [PermissionController::class, 'destroy'])->name('delete_permission');
+
+    //MANAGE SUBSYSTEM
+
+    Route::resource('subsystem', SubSystemController::class);
+
+    Route::get('/update/subsystem/{id?}', [SubSystemController::class, 'edit'])->name('update_subsystem');
+
+    Route::post('/update/subsystem/save/{id?}', [SubSystemController::class, 'update'])->name('save_update_subsystem');
+
+    Route::post('/delete/subsystem/{id?}', [SubSystemController::class, 'destroy'])->name('delete_subsystem');
 });
 

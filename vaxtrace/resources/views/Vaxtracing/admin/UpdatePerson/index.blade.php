@@ -30,7 +30,7 @@
                   <div class="row g-2">
                     <div class="col-4">
                       <div class="form-material form-material-success floating">
-                        <input class="form-control" id="material-color-success2 first_name" type="text" name="first_name" value="{{ $users->person->first_name }}" pattern="[a-zA-Z]+" title="Input letters only" required/>
+                        <input class="form-control" id="material-color-success2 first_name" type="text" name="first_name" value="{{ $users->person->first_name }}"  pattern="[a-zA-Z\s]+" title="Input letters only" required/>
                         <label for="material-color-success2" style="font-size: 13px;">First Name</label>
                         <span class="text-danger errorMessage fs--2" id="error_first_name"></span>
                       </div>
@@ -44,7 +44,7 @@
                     </div>
                     <div class="col-3">
                       <div class="form-material form-material-success floating">
-                        <input class="form-control" id="material-color-success2 " type="text" name="last_name" value="{{ $users->person->last_name }}" pattern="[a-zA-Z]+" title="Input letters only" required/>
+                        <input class="form-control" id="material-color-success2 " type="text" name="last_name" value="{{ $users->person->last_name }}"  pattern="[a-zA-Z\s]+" title="Input letters only" required/>
                         <label for="material-color-success2" style="font-size: 13px;">Last Name</label>
                         <span class="text-danger errorMessage fs--2" id="error_last_name"></span>
                       </div>
