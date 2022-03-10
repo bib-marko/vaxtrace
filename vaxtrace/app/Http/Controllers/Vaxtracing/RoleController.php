@@ -47,7 +47,7 @@ class RoleController extends Controller
     public function create()
     {
         abort_if(! session('LoggedUser')->hasPermission('ROLE_CREATE'), 403);
-        $permissions = Permission::get();
+        $permissions = Permission::orderBy('name')->get();
 
         return view('Vaxtracing.admin.CreateDepartment.index', compact('permissions'));
     }
@@ -90,7 +90,7 @@ class RoleController extends Controller
         abort_if(! session('LoggedUser')->hasPermission('ROLE_UPDATE'), 403);
         $role = Role::with('permissions')->find($id);
     
-        $permissions = Permission::get();
+        $permissions = Permission::orderBy('name')->get();
 
         return view('Vaxtracing.admin.UpdateDepartment.index', compact('permissions','role'));
     }
