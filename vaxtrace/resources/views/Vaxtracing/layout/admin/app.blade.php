@@ -62,6 +62,9 @@
         padding-left: 10px;
         padding-top: 5px;
       }
+      .select2-selection__choice{
+        background-color: #575757 !important; 
+      }
     </style>
   </head>
   <body>
@@ -253,6 +256,7 @@
                     <div class="avatar-name rounded-circle pt-10 pr-10"><span>{{ strtoupper(substr(session()->get('LoggedUser')->person->first_name, 0, 1) ."". substr(session()->get('LoggedUser')->person->last_name, 0, 1)) }}</span></div>
                   </div>
                 </a>
+                
                 <ul class="list-inline mt-10">
                   <li class="list-inline-item">
                     <a class="link-effect text-dual-primary-dark font-size-sm font-w600 text-uppercase" href="{{ route('edit_profile') }}">{{ strtoupper(substr(session()->get('LoggedUser')->person->first_name, 0, 1).". ".session()->get('LoggedUser')->person->last_name) }}</a>
@@ -268,6 +272,10 @@
                       <i class="si si-logout"></i>
                     </a>
                   </li>
+                  <br>
+                  <a class="btn btn-sm btn-info rounded-pill ">
+                    <i class="si si-user pr-1"></i>{{ session()->get('LoggedUser')->role->short_code }}
+                  </a>
                 </ul>
               </div>
               <!-- END Visible only in normal mode -->
@@ -277,29 +285,43 @@
             <!-- Side Navigation -->
             <div class="content-side content-side-full">
               <ul class="nav-main">
+                
                 <li>
                   <a href="{{ route('get_admin_dashboard') }}"><i class="si si-cup"></i><span class="sidebar-mini-hide">Dashboard</span></a>
                 </li>
                 <li>
-                  <li>
+                <li>
                   <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-users"></i><span class="sidebar-mini-hide">User Management</span></a>
-                  <ul>
+                <ul>
+                  @if (session('LoggedUser')->hasPermission('USER_ACCESS'))
                     <li>
                       <a href="{{ route('get_manage_user') }}"><i class="si si-user"></i><span class="sidebar-mini-hide"> User</a>
                     </li>
+                  @endif
+                  @if (session('LoggedUser')->hasPermission('ROLE_ACCESS'))
                     <li>
-                      <a href="{{ route('view_department') }}"><i class="si si-puzzle"></i><span class="sidebar-mini-hide">  Department</a>
+                      <a href="{{ route('view_department') }}"><i class="si si-puzzle"></i><span class="sidebar-mini-hide">  Role/Department</a>
                     </li>
+                  @endif
+                  @if (session('LoggedUser')->hasPermission('PERMISSION_ACCESS'))
                     <li>
                       <a href="{{ route('view_permission') }}"><i class="si si-key"></i><span class="sidebar-mini-hide">  Permission</a>
                     </li>
-                  </ul>
+                  @endif
+                  @if (session('LoggedUser')->hasPermission('SUBSYSTEM_ACCESS'))
+                    <li>
+                      <a href="{{ route('view_subsystem') }}"><i class="si si-screen-desktop"></i><span class="sidebar-mini-hide">  Subsystem</a>
+                    </li>
+                  @endif
+                </ul>
                 </li>
                 
                 </li>
-                <li>
-                  <a href="{{ route('view_activity_log') }}"><i class="fa fa-history"></i><span class="sidebar-mini-hide">Activity Log</span></a>
-                </li>
+                @if (session('LoggedUser')->hasPermission('ACTIVITY_ACCESS'))
+                  <li>
+                    <a href="{{ route('view_activity_log') }}"><i class="fa fa-history"></i><span class="sidebar-mini-hide">Activity Log</span></a>
+                  </li>
+                @endif
               </ul>
             </div>
             <!-- END Side Navigation -->

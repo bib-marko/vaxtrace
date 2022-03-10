@@ -57,7 +57,7 @@
                     </div>
                     <div class="col-3">
                       <div class="form-material form-material-success floating">
-                        <input class="form-control" id="material-color-success2 middle_name" type="text" value="{{ session()->get('LoggedUser')->person->middle_name }}" name="middle_name"/>
+                        <input class="form-control" id="material-color-success2 middle_name" type="text" name="middle_name" value="{{ session()->get('LoggedUser')->person->middle_name }}"/>
                         <label for="material-color-success2" style="font-size: 13px;">Middle Name</label>
                         <span class="text-danger errorMessage fs--2" id="error_middle_name"></span>
                       </div>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Vaxtracing\Person;
+use App\Models\Vaxtracing\Role;
 use App\Models\Vaxtracing\User;
 use DataTables;
 use Illuminate\Support\Facades\DB;
@@ -30,19 +31,16 @@ class PeopleController extends Controller
                     $actionBtn = "";
                
                     if($row->user_status == null){
-                         $actionBtn = "     
-                                    <a class='view btn btn-alt-primary mr-5 mb-5' onclick='show_people($row->user_id)'><i class='si si-eye mr-5'></i>View</button></a>
-                                    <a href='".route('update_people', $row->user_id)."' class='update btn btn-alt-success mr-5 mb-5'><i class='si si-pencil mr-5'></i>Update</a>
-                                    <a class='delete delete btn btn-alt-danger mr-5 mb-5' onclick='delete_people($row->user_id)'><i class='si si-trash mr-5'></i>Delete</a>
-                        ";
-                    }else {
-                        $actionBtn = "
-                                     <a class='view btn btn-alt-primary mr-5 mb-5' onclick='show_people($row->user_id)'><i class='si si-eye mr-5'></i>View</button></a>
-                                    <a href='".route('update_people', $row->user_id)."' class='update btn btn-alt-success mr-5 mb-5'><i class='si si-pencil mr-5'></i>Update</a>
-                                    <a class='delete btn btn-alt-warning mr-5 mb-5' onclick='restore_people($row->user_id)'><i class='si si-settings mr-5'></i>Restore</a>
-                        ";
+                        if(session('LoggedUser')->hasPermission('USER_VIEW')){
+                            $actionBtn .= "<a class='view btn btn-alt-primary mr-5 mb-5' onclick='show_people($row->user_id)'><i class='si si-eye mr-5'></i>View</button></a>";
+                        }
+                        if(session('LoggedUser')->hasPermission('USER_UPDATE')){
+                            $actionBtn .= "<a href='".route('update_people', $row->user_id)."' class='update btn btn-alt-success mr-5 mb-5'><i class='si si-pencil mr-5'></i>Update</a>";
+                        }
+                        if(session('LoggedUser')->hasPermission('USER_DELETE')){
+                            $actionBtn .= "<a class='delete btn btn-alt-danger mr-5 mb-5' onclick='delete_people($row->user_id)'><i class='si si-trash mr-5'></i>Delete</a>";
+                        }
                     }
-                   
                     
                     return $actionBtn;
                 })
@@ -60,8 +58,10 @@ class PeopleController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-
-                    $actionBtn = "<a class='delete btn btn-alt-warning mr-5 mb-5' onclick='restore_people($row->user_id)'><i class='si si-settings mr-5'></i>Restore</a>";
+                    $actionBtn = "";
+                    if(session('LoggedUser')->hasPermission('USER_RESTORE')){
+                        $actionBtn = "<a class='delete btn btn-alt-warning mr-5 mb-5' onclick='restore_people($row->user_id)'><i class='si si-settings mr-5'></i>Restore</a>";
+                    }
                     
                     return $actionBtn;
                 })
@@ -81,9 +81,9 @@ class PeopleController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $actionBtn = "";
-
+                    if(session('LoggedUser')->hasPermission('USER_DELETE')){
                         $actionBtn = "<a class='delete btn btn-alt-danger mr-5 mb-5' onclick='delete_people($row->user_id)'><i class='si si-trash mr-5'></i>Delete</a>";
-                    
+                    }  
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -96,7 +96,7 @@ class PeopleController extends Controller
         DB::statement("SET SQL_MODE=''"); // set the strict to false
 
         $total_user = User::count();
-
+        
         return view('Vaxtracing.admin.index', compact('total_user'));
     }
 
@@ -109,6 +109,7 @@ class PeopleController extends Controller
    
     public function store(Request $request)
     {
+        abort_if(! session('LoggedUser')->hasPermission('USER_CREATE'), 403);
         $request -> validate([
             'first_name' => 'required|regex:/^[a-zA-Z\s]*$/',
             'last_name' => 'required|regex:/^[a-zA-Z\s]*$/',
@@ -150,14 +151,28 @@ class PeopleController extends Controller
  
     public function show($id)
     {
-        $users = User::with('person')->where('id', $id)->first();
-        saveActivityLog(generateFullName(session('LoggedUser')), "View user with ID#: ".$id);
+        abort_if(! session('LoggedUser')->hasPermission('USER_VIEW'), 403);
+        $users = User::with('person','role')->where('users.id', $id)->first();
+        $role = Role::find($users->role->id);
+        
+       
+        $permission1 = [];
+        
+        foreach ($role->permissions as $permission) {
+            array_push($permission1, $permission->name);
+        }
+
+        $users->role->permissions = $permission1;
+        //saveActivityLog(generateFullName(session('LoggedUser')), "View user with ID#: ".$id);
+
+        //dd($users->role->permissions->contains("USER_CREATE"));
         return response()->json($users);
     }
 
    
     public function edit($id)
     {
+        abort_if(! session('LoggedUser')->hasPermission('USER_UPDATE'), 403);
         $users = User::with('person')->where('id', $id)->first();
         
         return view('Vaxtracing.admin.UpdatePerson.index',compact('users'));
@@ -196,12 +211,17 @@ class PeopleController extends Controller
                 'home_address'=> formatString($request->home_address),
                 'modified_by' => generateFullName(session('LoggedUser'))
             ]);
+        
+        $user = User::with('person')->where('id', '=', session('LoggedUser')->id)->first();
+        session()->pull('LoggedUser');
+        $request->session()->put('LoggedUser', $user);
         saveActivityLog(generateFullName(session('LoggedUser')), "Update own profile ");
     }
 
    
     public function update(Request $request, $id)
     {
+        abort_if(! session('LoggedUser')->hasPermission('USER_UPDATE'), 403);
         // $request -> validate([
         //     'first_name' => 'required|regex:/^[a-zA-Z\s]*$/',
         //     'last_name' => 'required|regex:/^[a-zA-Z\s]*$/',
@@ -262,6 +282,7 @@ class PeopleController extends Controller
     
     public function destroy(Request $request, $id)
     {
+        abort_if(! session('LoggedUser')->hasPermission('USER_DELETE'), 403);
         $request -> validate([
             'reason1' => 'required',
         ]);
@@ -277,6 +298,7 @@ class PeopleController extends Controller
 
     public function restore(Request $request, $id)
     {
+        abort_if(! session('LoggedUser')->hasPermission('USER_RESTORE'), 403);
         $request -> validate([
             'restore_reason' => 'required',
         ]);

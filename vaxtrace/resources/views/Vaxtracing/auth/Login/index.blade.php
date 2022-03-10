@@ -55,7 +55,7 @@
           <div class="form-group row">
             <div class="col-12">
               <div class="form-material floating">
-                <input type="text" class="form-control" id="login-email" name="email" required autocomplete="email" autofocus>
+                <input type="text" class="form-control" id="login-email" name="email" required autofocus>
                 <label for="login-email">Email</label>
               </div>
             </div>
@@ -69,7 +69,7 @@
           <div class="form-group row">
             <div class="col-12">
               <div class="form-material floating">
-                <input type="password" class="form-control" id="login-password" name="password" required autocomplete="current-password">
+                <input type="password" class="form-control" id="login-password" name="password" required>
                 <label for="login-password">Password</label>
               </div>
               <small id="password" class="form-text text-success"> Keep your password away from other user</small>

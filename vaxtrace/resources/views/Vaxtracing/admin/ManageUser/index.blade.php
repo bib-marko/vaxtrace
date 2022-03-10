@@ -36,8 +36,10 @@
               <div class="block-content">
                 <form class="row align-items-center g-3">
                   <div class="col-md-auto position-relative">
-                    <a class="btn btn-hero btn-alt-primary mr-5 mb-5 btn-block" type="button" href="{{ route('get_create_user') }}"><i class="fa fa-plus mr-5"></i>Create User</a> 
-                    <!-- Slide Up Modal -->
+                    @if (session('LoggedUser')->hasPermission('USER_CREATE'))
+                      <a class="btn btn-hero btn-alt-primary mr-5 mb-5 btn-block" type="button" href="{{ route('get_create_user') }}"><i class="fa fa-plus mr-5"></i>Create User</a> 
+                    @endif
+                   <!-- Slide Up Modal -->
                     {{-- <button type="button" class="btn btn-hero btn-alt-default mr-5 mb-5 btn-block" data-toggle="modal" data-target="#create"><i class="fa fa-plus mr-5"></i>Create User</button>
                     <!-- END Slide Up Modal --> --}}
                   </div>
@@ -339,6 +341,7 @@
               $('#barangay').text(data.person.barangay);
               $('#status').html(isApproved(data.person.deleted_at));
               $('#full_name').text(generateFullname(data));
+              $('#role').text(data.role.short_code);
           })
 
           $("#m_user").modal("show");

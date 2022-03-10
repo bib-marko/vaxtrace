@@ -60,7 +60,9 @@
               </tr>
               <tr>
                 <td class="font-w600">Home Address</td>
-                <td colspan="3" id="home_address"></td>
+                <td  id="home_address"></td>
+                <td class="font-w600">Role/Department</td>
+                <td id="role"></td>
               </tr>
             </tbody>
           </table>
