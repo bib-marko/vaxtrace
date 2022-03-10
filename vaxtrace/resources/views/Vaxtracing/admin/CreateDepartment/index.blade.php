@@ -58,19 +58,26 @@
                             </div>
 
                             <br>
-                            <div class="col">
-                                <div class="form-material form-material-success floating">
-                                    <select class="js-select2 form-control" id="example-select2-multiple" name="permissions[]" style="width: 100%;" data-placeholder="Choose many.." multiple>
-                                        <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
-                                        @foreach ($permissions as $permission)
-                                            <option value="{{ $permission->id }}">{{ $permission->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <label for="material-color-select2" style="font-size: 13px;">Permission</label>
-                                    <span class="text-danger errorMessage fs--2" id="error_region"></span>
-                                    
+                            @php
+                                $counter=0;
+                            @endphp
+                            @foreach ($subsystems as $subsystem)
+                                <div class="col">
+                                    <div class="form-material form-material-success floating">
+                                        <select class="js-select2 form-control" id="example-select2-multiple{{ $counter++ }}" name="permissions[]" style="width: 100%;" data-placeholder="Choose many.." multiple>
+                                            <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
+                                            @foreach ($permissions as $permission)
+                                                @if($permission->sub_systems_id == $subsystem->id)
+                                                    <option value="{{ $permission->id }}">{{ $permission->name }}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                        <label for="material-color-select2" style="font-size: 13px;">{{ $subsystem->title }}</label>
+                                        <span class="text-danger errorMessage fs--2" id="error_region"></span>
+                                        
+                                    </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </form>
                     </div>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Vaxtracing;
 use App\Http\Controllers\Controller;
 use App\Models\Vaxtracing\Permission;
 use App\Models\Vaxtracing\Role;
+use App\Models\Vaxtracing\SubSystem;
 use Illuminate\Http\Request;
 use DataTables;
 use Illuminate\Support\Facades\DB;
@@ -47,9 +48,15 @@ class RoleController extends Controller
     public function create()
     {
         abort_if(! session('LoggedUser')->hasPermission('ROLE_CREATE'), 403);
+<<<<<<< HEAD
         $permissions = Permission::orderBy('name')->get();
 
         return view('Vaxtracing.admin.CreateDepartment.index', compact('permissions'));
+=======
+        $subsystems = SubSystem::orderBy('title')->get();
+        $permissions = Permission::orderBy('name')->get();
+        return view('Vaxtracing.admin.CreateDepartment.index', compact('permissions','subsystems'));
+>>>>>>> b3e9f9e63581d5bb35119deca5810ace8bf06fc5
     }
 
     /**
