@@ -81,7 +81,9 @@ $(function () {
             {data: 'action'},
         ]  
     });
-
+    $('#search_btn').on('click', function(){
+            table.search($('#search_bar').val().toUpperCase()).draw();
+        })
     $(".dataTables_filter").hide(); 
 });
 function delete_subsystem(id){

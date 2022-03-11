@@ -55,7 +55,6 @@
                     const url = 'https://api.apify.com/v2/key-value-stores/lFItbkoNDXKeSWBBA/records/LATEST?disableRedirect=true&fbclid=IwAR3xDqSgPDj8CsokK2OwMtTMzp7_NYLMl4902L9wcVrdsWADhqor7tlark8'
             
                     let response = await fetch(url);
-
                 
                     let dataJson = await response.text();
                     let data = JSON.parse(dataJson);

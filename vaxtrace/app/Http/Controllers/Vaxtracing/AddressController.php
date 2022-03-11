@@ -17,7 +17,7 @@ class AddressController extends Controller
     }
     public function getActivity()
     {
-        $activity = json_decode(Storage::get('activitylogs.json'), true);
+        $activity = json_decode(Storage::get('activitylogs-'.date('Y-m-d').'.json'), true);
 
         return Datatables::of($activity)->make(true);
     }
