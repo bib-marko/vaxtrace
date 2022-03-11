@@ -153,12 +153,25 @@ Route::group(['middleware' => ['AuthCheck']],function(){
 
     Route::post('/delete/subsystem/{id?}', [SubSystemController::class, 'destroy'])->name('delete_subsystem');
 
-    Route::get('/view/vaccinees/non-verified', function () {
+
+    //TRACKER MAIN SYSTEM
+
+    Route::get('/view/Tracker-Main-System/vaccinees/non-verified', function () {
         return view('Vaxtracing.admin.TrackingSystem.ListForNonVerified.index');
     })->name('view_vaccinees_ListForNonVerified');
 
-    Route::get('/view/vaccinees/verified', function () {
+    Route::get('/view/Tracker-Main-System/vaccinees/verified', function () {
         return view('Vaxtracing.admin.TrackingSystem.ListForVerified.index');
     })->name('view_vaccinees_ListForVerified');
+
+    Route::get('/view/Tracker-Main-System/vaccinees/status/category', function () {
+        return view('Vaxtracing.admin.TrackingSystem.Category.index');
+    })->name('view_vaccinees_status_category');
+
+    Route::get('/view/Tracker-Main-System/vaccinees/status/sub-category', function () {
+        return view('Vaxtracing.admin.TrackingSystem.SubCategory.index');
+    })->name('view_vaccinees_status_sub-category');
+
+    //END OF TRACKER MAIN SYSTEM
 });
 
