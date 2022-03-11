@@ -150,5 +150,10 @@ Route::group(['middleware' => ['AuthCheck']],function(){
     Route::post('/update/subsystem/save/{id?}', [SubSystemController::class, 'update'])->name('save_update_subsystem');
 
     Route::post('/delete/subsystem/{id?}', [SubSystemController::class, 'destroy'])->name('delete_subsystem');
+
+    Route::get('/view/api', function () {
+       
+        return view('Vaxtracing.admin.TrackingSystem.index');
+    })->name('view_api');
 });
 
