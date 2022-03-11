@@ -20,8 +20,8 @@
                   <form class="row align-items-center g-3">
                     <div class="col-md-auto position-relative">
                       @if (session('LoggedUser')->hasPermission('USER_CREATE'))
-                        <a class="btn btn-hero btn-alt-primary mr-5 mb-5 btn-block" type="button" href="{{ route('get_create_user') }}"><i class="fa fa-plus mr-5"></i>New Record</a> 
-                      @endif
+                        <a class="btn btn-hero btn-alt-primary mr-5 mb-5 btn-block" type="button" data-toggle="modal" data-target="#modal-new-record-category"><i class="fa fa-plus mr-5"></i>New Record</a> 
+                      @endif  
                      <!-- Slide Up Modal -->
                       {{-- <button type="button" class="btn btn-hero btn-alt-default mr-5 mb-5 btn-block" data-toggle="modal" data-target="#create"><i class="fa fa-plus mr-5"></i>Create User</button>
                       <!-- END Slide Up Modal --> --}}
