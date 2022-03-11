@@ -68,6 +68,8 @@ Route::group(['middleware' => ['AuthCheck']],function(){
 
     Route::get("/get-activity-logs", [AddressController::class, "getActivity"])->name('get_activity');
 
+    Route::get("/get-vaccinees", [AddressController::class, "getVaccinees"])->name('get_vaccinees');
+
     //Change Password
     Route::post('/change/password/', [PeopleController::class, 'changePassword'])->name('change_password');
 

@@ -131,44 +131,73 @@
                 var form = document.getElementById("formCreateRole");
                 var formData = new FormData(form);
                 if(validatorCreateRole.checkAll() == 0){
-                    $.ajax({
-                        url: "{{ route('role.store') }}",
-                        data: formData,
-                        cache: false,
-                        processData: false,
-                        contentType: false,
-                        type: 'POST',
-                        beforeSend: function () {
-                            showLoader();
-                        },
-                        complete: function () {
-                            hideLoader();
-                        },
-                        success: function (response) {
-                            Swal.fire({
-                                title: 'Success!',
-                                icon: 'success',
-                                text: "A new record has been created",
-                                confirmButtonText: 'Ok',
-                            }).then((result) => {
-                                /* Read more about isConfirmed, isDenied below */
-                                if (result.isConfirmed) {
-                                window.location.href = "{{ route('view_department') }}";
-                                }
-                            })
-                        },
-                        error: function(response){
-                            $('.errorMessage').text("");
-                            $.each(response.responseJSON.errors,function(field_name,error){            
-                                $(document).find('[id=error_'+field_name+']').text("*"+error)
-                            })
+                    Swal.fire({
+                        title: 'Please input your password to submit page',
+                        html: `<input type="password" id="password" class="swal2-input" placeholder="Password">`,
+                        confirmButtonText: 'Submit',
+                        showCloseButton: true,
+                        showCancelButton: true,
+                        preConfirm: () => {
+                            const password = Swal.getPopup().querySelector('#password').value
+                            if (!password) {
+                                Swal.showValidationMessage(`password is incorrect`)
+                            }
+                            return { password: password }
                         }
-                    });
+                    }).then((result) => {
+                        var password = result.value.password;
+                        
+                        formData.append( 'password', password );
+                        $.ajax({
+                            url: "{{ route('role.store') }}",
+                            data: formData,
+                            cache: false,
+                            processData: false,
+                            contentType: false,
+                            type: 'POST',
+                            beforeSend: function () {
+                                showLoader();
+                            },
+                            complete: function () {
+                                hideLoader();
+                            },
+                            success: function (response) {
+                                Swal.fire({
+                                    title: 'Success!',
+                                    icon: 'success',
+                                    text: "A new record has been created",
+                                    confirmButtonText: 'Ok',
+                                }).then((result) => {
+                                    /* Read more about isConfirmed, isDenied below */
+                                    if (result.isConfirmed) {
+                                    window.location.href = "{{ route('view_department') }}";
+                                    }
+                                })
+                            },
+                            error: function(response){
+                                console.log(response.responseJSON.fail);
+                                Swal.fire({
+                                    title: 'Error!',
+                                    icon: 'warning',
+                                    text: response.responseJSON.fail,
+                                    confirmButtonText: 'Ok',
+                                }).then((result) => {
+                                    /* Read more about isConfirmed, isDenied below */
+                                    if (result.isConfirmed) {
+                                        window.location.href = "";
+                                    }
+                                })
+                            }
+                        });
+
+                    })
                 }
             });
             
 
             $(".dataTables_filter").hide(); 
+
+
         });
     </script>
 @endsection

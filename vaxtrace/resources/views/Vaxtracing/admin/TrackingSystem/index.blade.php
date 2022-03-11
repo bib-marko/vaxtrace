@@ -3,67 +3,89 @@
 @section('title', 'Activity Logs')
   
 @section('content')
-    <div class="col-md-6 col-xl-3">
-        <a class="block block-rounded block-transparent bg-gd-sun" href="javascript:void(0)">
-            <div class="block-content block-content-full block-sticky-options">
-                <div class="block-options">
-                    <div class="block-options-item">
-                        <i class="si si-users text-white-op"></i>
-                    </div>
-                </div>
-                <div class="py-20 text-center" id="">
-                    <div class="font-size-h2 font-w700 mb-0 text-white" id="">
-                        <p id="infected"></p>
-                    </div>
-                    <div class="font-size-sm font-w600 text-uppercase text-white-op">Infected</div>
-                </div>
+     <!-- table for activity log -->
+    <div class="block">
+        <div class="block-header block-header-default">
+        <h3 class="block-title"><i class="fa fa-history"></i> LIST OF VACCINEES</h3>
+        <div class="block-options">
+            <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
+        </div>
+        </div>
+        <div class="block-content block-content-full">
+            <div class="table-responsive scrollbar">
+                <table class="table table-striped table-center js-dataTable-full-pagination" id="vaccinees_dt" width="100%">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Middle Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Suffix</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                </table>
             </div>
-        </a>
+        </div>
     </div>
-
-    
-    
-    <div class="col-md-6 col-xl-3">
-        <a class="block block-rounded block-transparent bg-gd-sun" href="javascript:void(0)">
-            <div class="block-content block-content-full block-sticky-options">
-                <div class="block-options">
-                    <div class="block-options-item">
-                        <i class="si si-users text-white-op"></i>
-                    </div>
-                </div>
-                <div class="py-20 text-center" id="">
-                    <div class="font-size-h2 font-w700 mb-0 text-white" id="">
-                        <p id="recovered"></p>
-                    </div>
-                    <div class="font-size-sm font-w600 text-uppercase text-white-op">Recovered</div>
-                </div>
-            </div>
-        </a>
-    </div>
+    <!-- end table for activity log -->
     @section('scripts')
-        <script type="text/javascript">
-            
-
-            
-            $(function () {
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                async function fetchText() {
-                    const url = 'https://api.apify.com/v2/key-value-stores/lFItbkoNDXKeSWBBA/records/LATEST?disableRedirect=true&fbclid=IwAR3xDqSgPDj8CsokK2OwMtTMzp7_NYLMl4902L9wcVrdsWADhqor7tlark8'
-            
-                    let response = await fetch(url);
-                
-                    let dataJson = await response.text();
-                    let data = JSON.parse(dataJson);
-                    console.log(data);
-                    $('#infected').text(data.infected);
-                    $('#recovered').text(data.recovered);
+    <script type="text/javascript">   
+        $(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-                fetchText();
             });
-        </script>
+            // async function fetchText() {
+            //     const url = 'https://api.apify.com/v2/key-value-stores/lFItbkoNDXKeSWBBA/records/LATEST?disableRedirect=true&fbclid=IwAR3xDqSgPDj8CsokK2OwMtTMzp7_NYLMl4902L9wcVrdsWADhqor7tlark8'
+        
+            //     let response = await fetch(url);
+            
+            //     let dataJson = await response.text();
+            //     let data = JSON.parse(dataJson);
+                
+            //     return data;
+            // }
+            //MASTER LIST
+            var table = $('#vaccinees_dt').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('get_vaccinees') }}",
+                columns: [
+                    //UNIQ_ID
+                    {data: 'uniq_id'},
+                    //FULLNAME
+                    {data: 'first_name'},
+                    //ACTIVITY
+                    {
+                        data: 'middle_name',
+                            render(data) {
+                            return formatName(data);
+                        },
+                    },
+                    //DATE & TIME
+                    {data: 'last_name'},
+                    //SUFFIX
+                    {
+                        data: 'suffix',
+                            render(data) {
+                            return formatName(data);
+                        },
+                    },
+                    {data: 'action'},
+                ]  
+            });
+            function formatName(data){
+                if(data == null || data == ""){
+                    return "-";
+                }
+                else{
+                    return data;
+                }
+            }
+        });
+       
+    </script>
     @endsection
 @endsection

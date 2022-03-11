@@ -58,19 +58,28 @@
                             </div>
 
                             <br>
-                            <div class="col">
-                                <div class="form-material form-material-success floating">
-                                    <select class="js-select2 form-control" id="example-select2-multiple" name="permissions[]" style="width: 100%;" data-placeholder="Choose many.." multiple>
-                                        <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
-                                        @foreach ($permissions as $permission)
-                                            <option value="{{ $permission->id }}" {{ (in_array($permission, old('permissions', [])) || $role->permissions->contains($permission)) ? 'selected' : '' }}>{{ $permission->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <label for="material-color-select2" style="font-size: 13px;">Permission</label>
-                                    <span class="text-danger errorMessage fs--2" id="error_region"></span>
-                                    
+                            
+                            @php
+                                $counter=0;
+                            @endphp
+                            @foreach ($subsystems as $subsystem)
+                            <br>
+                                <div class="col">
+                                    <div class="form-material form-material-success floating">
+                                        <select class="js-select2 form-control" id="example-select2-multiple{{ $counter++ }}" name="permissions[]" style="width: 100%;" data-placeholder="Choose many.." multiple>
+                                            <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
+                                            @foreach ($permissions as $permission)
+                                                @if($permission->sub_systems_id == $subsystem->id)   
+                                                    <option value="{{ $permission->id }}" {{ (in_array($permission, old('permissions', [])) || $role->permissions->contains($permission)) ? 'selected' : '' }}>{{ $permission->name }}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                        <label for="material-color-select2" style="font-size: 13px;">{{ $subsystem->title }}</label>
+                                        <span class="text-danger errorMessage fs--2" id="error_region"></span>
+                                        
+                                    </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </form>
                     </div>
 
@@ -107,43 +116,69 @@
                 var form = document.getElementById("formUpdateRole");
                 var formData = new FormData(form);
                 if(validatorUpdateRole.checkAll() == 0){
-                    $.ajax({
-                    url: '{{ route("save_update_department") }}/' + data.id,
-                    data: formData,
-                    cache: false,
-                    processData: false,
-                    contentType: false,
-                    type: 'POST',
-                    beforeSend: function () {
-                        showLoader();
-                    },
-                    complete: function () {
-                        hideLoader();
-                    },
-                    success: function (response) {
-                        Swal.fire({
-                            title: 'Success!',
-                            icon: 'success',
-                            text: "The record has been updated",
-                            confirmButtonText: 'Ok',
-                        }).then((result) => {
-                            /* Read more about isConfirmed, isDenied below */
-                            if (result.isConfirmed) {
-                            window.location.href = "{{ route('view_department') }}";
+                    Swal.fire({
+                        title: 'Please input your password to submit page',
+                        html: `<input type="password" id="password" class="swal2-input" placeholder="Password">`,
+                        confirmButtonText: 'Submit',
+                        showCloseButton: true,
+                        showCancelButton: true,
+                        preConfirm: () => {
+                            const password = Swal.getPopup().querySelector('#password').value
+                            if (!password) {
+                                Swal.showValidationMessage(`password is incorrect`)
                             }
-                        })
-                    },
-                    error: function(response){
-                        $('.errorMessage').text("");
-                        $.each(response.responseJSON.errors,function(field_name,error){            
-                            $(document).find('[id=error_'+field_name+']').text("*"+error)
-                        })
-                    }
-                    });
+                            return { password: password }
+                        }
+                    }).then((result) => {
+                        var password = result.value.password;
+                        
+                        formData.append( 'password', password );
+                        $.ajax({
+                            url: '{{ route("save_update_department") }}/' + data.id,
+                            data: formData,
+                            cache: false,
+                            processData: false,
+                            contentType: false,
+                            type: 'POST',
+                            beforeSend: function () {
+                                showLoader();
+                            },
+                            complete: function () {
+                                hideLoader();
+                            },
+                            success: function (response) {
+                                Swal.fire({
+                                    title: 'Success!',
+                                    icon: 'success',
+                                    text: "The record has been updated",
+                                    confirmButtonText: 'Ok',
+                                }).then((result) => {
+                                    /* Read more about isConfirmed, isDenied below */
+                                    if (result.isConfirmed) {
+                                    window.location.href = "{{ route('view_department') }}";
+                                    }
+                                })
+                            },
+                            error: function(response){
+                                console.log(response.responseJSON.fail);
+                                Swal.fire({
+                                    title: 'Error!',
+                                    icon: 'warning',
+                                    text: response.responseJSON.fail,
+                                    confirmButtonText: 'Ok',
+                                }).then((result) => {
+                                    /* Read more about isConfirmed, isDenied below */
+                                    if (result.isConfirmed) {
+                                        window.location.href = "";
+                                    }
+                                })
+                            }
+                        });
+                    })
                 }
             });
             
-
+            
             $(".dataTables_filter").hide(); 
         });
     </script>
