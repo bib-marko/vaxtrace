@@ -318,6 +318,18 @@
                   @endif
                 </ul>
                 </li>
+
+                <li>
+                  <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-users"></i><span class="sidebar-mini-hide">Patient Verification</span></a>
+                <ul>
+                  <li>
+                    <a href="{{ route('view_vaccinees_ListForVerified') }}"><i class="si si-user-following"></i><span class="sidebar-mini-hide"> List of Verified</a>
+                  </li>
+                  <li>
+                    <a href="{{ route('view_vaccinees_ListForNonVerified') }}"><i class="si si-user-unfollow"></i><span class="sidebar-mini-hide"> List of Non-Verified</a>
+                  </li>
+                </ul>
+                </li>
                 
                 </li>
                 @if (session('LoggedUser')->hasPermission('ACTIVITY_ACCESS'))

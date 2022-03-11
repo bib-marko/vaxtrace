@@ -153,9 +153,12 @@ Route::group(['middleware' => ['AuthCheck']],function(){
 
     Route::post('/delete/subsystem/{id?}', [SubSystemController::class, 'destroy'])->name('delete_subsystem');
 
-    Route::get('/view/api', function () {
-       
-        return view('Vaxtracing.admin.TrackingSystem.index');
-    })->name('view_api');
+    Route::get('/view/vaccinees/non-verified', function () {
+        return view('Vaxtracing.admin.TrackingSystem.ListForNonVerified.index');
+    })->name('view_vaccinees_ListForNonVerified');
+
+    Route::get('/view/vaccinees/verified', function () {
+        return view('Vaxtracing.admin.TrackingSystem.ListForVerified.index');
+    })->name('view_vaccinees_ListForVerified');
 });
 

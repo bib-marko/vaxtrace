@@ -3,10 +3,12 @@
 @section('title', 'Activity Logs')
   
 @section('content')
+
+
      <!-- table for activity log -->
     <div class="block">
         <div class="block-header block-header-default">
-        <h3 class="block-title"><i class="fa fa-history"></i> LIST OF VACCINEES</h3>
+        <h3 class="block-title"><i class="si si-user-unfollow"></i> VERIFY VACCINEES</h3>
         <div class="block-options">
             <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
         </div>
