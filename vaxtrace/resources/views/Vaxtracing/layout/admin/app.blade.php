@@ -82,7 +82,7 @@
   <body>
     <!-- Page Container -->
 
-    <div id="page-container" class="sidebar-o sidebar-inverse enable-page-overlay side-scroll page-header-fixed page-header-modern main-content-boxed">
+    <div id="page-container" class="sidebar-o sidebar-inverse enable-page-overlay side-scroll page-header-modern ">
       <!-- Side Overlay-->
       <aside id="side-overlay">
         <!-- Side Header -->
@@ -319,8 +319,15 @@
                 </ul>
                 </li>
 
+                @if (session('LoggedUser')->hasPermission('ACTIVITY_ACCESS'))
+                  <li>
+                    <a href="{{ route('view_activity_log') }}"><i class="fa fa-history"></i><span class="sidebar-mini-hide">Activity Log</span></a>
+                  </li>
+                @endif
+                
+                <li class="nav-main-heading"><span class="sidebar-mini-visible">TMS</span><span class="sidebar-mini-hidden"></span>Tracker Main System</li>
                 <li>
-                  <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-users"></i><span class="sidebar-mini-hide">Patient Verification</span></a>
+                  <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-users"></i><span class="sidebar-mini-hide">Vaccinee Master List</span></a>
                 <ul>
                   <li>
                     <a href="{{ route('view_vaccinees_ListForVerified') }}"><i class="si si-user-following"></i><span class="sidebar-mini-hide"> List of Verified</a>
@@ -328,16 +335,24 @@
                   <li>
                     <a href="{{ route('view_vaccinees_ListForNonVerified') }}"><i class="si si-user-unfollow"></i><span class="sidebar-mini-hide"> List of Non-Verified</a>
                   </li>
+                  <li>
                 </ul>
                 </li>
-                
+                <li>
+                  <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-book-open"></i><span class="sidebar-mini-hide">Vaccinee Status Report</span></a>
+                  <ul>
+                    <li>
+                      <a href="{{ route('view_vaccinees_status_category') }}"><i class="si si-list"></i> Category</a>
+                    </li>
+                    <li>
+                      <a href="{{ route('view_vaccinees_status_sub-category') }}"><i class="si si-vector"></i> Sub-Category</a>
+                    </li>
+                  </ul>
                 </li>
-                @if (session('LoggedUser')->hasPermission('ACTIVITY_ACCESS'))
-                  <li>
-                    <a href="{{ route('view_activity_log') }}"><i class="fa fa-history"></i><span class="sidebar-mini-hide">Activity Log</span></a>
-                  </li>
-                @endif
+                </li>
+               
               </ul>
+              
             </div>
             <!-- END Side Navigation -->
           </div>
@@ -614,3 +629,8 @@
   </script>
   </body>
 </html>
+
+
+
+
+

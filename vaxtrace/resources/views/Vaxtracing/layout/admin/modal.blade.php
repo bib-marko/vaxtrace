@@ -2,6 +2,183 @@
 
 {{--Show Role Modal--}}
 
+
+
+
+   <!-- Slide Up Modal -->
+   <div class="modal fade" id="modal-new-record-vaccinee" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-slideup" role="document">
+      <div class="modal-content">
+        <div class="block block-themed block-transparent mb-0">
+          <div class="block-header bg-primary-dark">
+            <h3 class="block-title">NEW RECORD</h3>
+            <div class="block-options">
+              <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                <i class="si si-close"></i>
+              </button>
+            </div>
+          </div>
+          <div class="block-content">
+            <form role="form" id="formAddUser">
+              @csrf
+
+              <div class="mb-3">
+                <div class="form-material form-material-success floating">
+                  <input class="form-control" id="material-select2" type="email" name="email"  pattern="^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$" required="required" data-wizard-validate-email="true" />
+                  <label for="material-color-success2" style="font-size: 13px;">VACCINEE CODE</label>
+                  <span class="text-danger errorMessage fs--2" id="error_email"></span>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="form-material form-material-success floating">
+                  <input class="form-control" id="material-select2" type="email" name="email"  pattern="^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$" required="required" data-wizard-validate-email="true" />
+                  <label for="material-color-success2" style="font-size: 13px;">FIRST NAME</label>
+                  <span class="text-danger errorMessage fs--2" id="error_email"></span>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="form-material form-material-success floating">
+                  <input class="form-control" id="material-select2" type="email" name="email"  pattern="^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$" required="required" data-wizard-validate-email="true" />
+                  <label for="material-color-success2" style="font-size: 13px;">MIDDLE NAME</label>
+                  <span class="text-danger errorMessage fs--2" id="error_email"></span>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="form-material form-material-success floating">
+                  <input class="form-control" id="material-select2" type="email" name="email"  pattern="^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$" required="required" data-wizard-validate-email="true" />
+                  <label for="material-color-success2" style="font-size: 13px;">LAST NAME</label>
+                  <span class="text-danger errorMessage fs--2" id="error_email"></span>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <div class="form-material form-material-success floating">
+                  <select class="form-control" id="material-select2" name="suffix" aria-label="Floating label select example">
+                    <option value="" selected></option>
+                    <option value="JR"><center>JR</center></option>
+                    <option value="SR"><center>SR</center></option>
+                    <option value="II"><center>II</center></option>
+                    <option value="III"><center>III</center></option>
+                    <option value="III"><center>IV</center></option>
+                    <option value="III"><center>V</center></option>
+                  </select>
+                  <label for="material-color-select2" style="font-size: 13px;">SUFFIX</label>
+                  <span class="text-danger errorMessage" id="error_suffix"></span>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-alt-success" data-dismiss="modal">
+            <i class="fa fa-check"></i> Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END Slide Up Modal -->
+
+
+
+     <!-- Slide Up Modal -->
+     <div class="modal fade" id="modal-new-record-category" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-slideup" role="document">
+        <div class="modal-content">
+          <div class="block block-themed block-transparent mb-0">
+            <div class="block-header bg-primary-dark">
+              <h3 class="block-title">NEW CATEGORY</h3>
+              <div class="block-options">
+                <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                  <i class="si si-close"></i>
+                </button>
+              </div>
+            </div>
+            <div class="block-content">
+              <form role="form" id="formAddUser">
+                @csrf
+
+                <div class="mb-3">
+                  <div class="form-material form-material-success floating">
+                    <input class="form-control" id="material-select2" type="email" name="email"  pattern="^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$" required="required" data-wizard-validate-email="true" />
+                    <label for="material-color-success2" style="font-size: 13px;">CATEGORY NAME</label>
+                    <span class="text-danger errorMessage fs--2" id="error_email"></span>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="form-material form-material-success floating">
+                    <input class="form-control" id="material-select2" type="email" name="email"  pattern="^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$" required="required" data-wizard-validate-email="true" />
+                    <label for="material-color-success2" style="font-size: 13px;">CATEGORY DESCRIPTION</label>
+                    <span class="text-danger errorMessage fs--2" id="error_email"></span>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-alt-success" data-dismiss="modal">
+              <i class="fa fa-check"></i> Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END Slide Up Modal -->
+
+
+
+      <!-- Slide Up Modal -->
+      <div class="modal fade" id="modal-new-record-sub-category" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-slideup" role="document">
+          <div class="modal-content">
+            <div class="block block-themed block-transparent mb-0">
+              <div class="block-header bg-primary-dark">
+                <h3 class="block-title">NEW SUB-CATEGORY</h3>
+                <div class="block-options">
+                  <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                    <i class="si si-close"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="block-content">
+                <form role="form" id="formAddUser">
+                  @csrf
+  
+                  <div class="mb-3">
+                    <div class="form-material form-material-success floating">
+                      <input class="form-control" id="material-select2" type="email" name="email"  pattern="^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$" required="required" data-wizard-validate-email="true" />
+                      <label for="material-color-success2" style="font-size: 13px;">SUB-CATEGORY NAME</label>
+                      <span class="text-danger errorMessage fs--2" id="error_email"></span>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <div class="form-material form-material-success floating">
+                      <input class="form-control" id="material-select2" type="email" name="email"  pattern="^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$" required="required" data-wizard-validate-email="true" />
+                      <label for="material-color-success2" style="font-size: 13px;">SUB-CATEGORY DESCRIPTION</label>
+                      <span class="text-danger errorMessage fs--2" id="error_email"></span>
+                    </div>
+                  </div>
+  
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-alt-success" data-dismiss="modal">
+                <i class="fa fa-check"></i> Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END Slide Up Modal -->
+
+
+
 <!-- Pop Out Modal -->
 <div class="modal fade" id="view_role" tabindex="-1" role="dialog" aria-labelledby="modal-popout" aria-hidden="true">
   <div class="modal-dialog modal-md" role="document">
@@ -44,6 +221,7 @@
   </div>
 </div>
 <!-- END Pop Out Modal -->
+
 
 
  <!-- Pop Out Modal -->
