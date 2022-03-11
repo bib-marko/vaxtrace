@@ -36,7 +36,6 @@ class RoleController extends Controller
         }
     }
 
-    
     public function create()
     {
         abort_if(! session('LoggedUser')->hasPermission('ROLE_CREATE'), 403);

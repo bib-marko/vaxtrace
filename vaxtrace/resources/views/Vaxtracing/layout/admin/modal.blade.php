@@ -4,7 +4,7 @@
 
 <!-- Pop Out Modal -->
 <div class="modal fade" id="view_role" tabindex="-1" role="dialog" aria-labelledby="modal-popout" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-md" role="document">
     <div class="modal-content">
       <div class="block block-themed block-transparent mb-0">
         <div class="block-header bg-primary-dark">
@@ -19,21 +19,17 @@
           <!-- Project Info -->
           <table class="table table-striped table-borderless mt-20">
             <tbody>
-           
               <tr>
                 <td class="font-w600">ROLE NAME</td>
                 <td id="role_title"></td>
-               
               </tr>
               <tr>
                 <td class="font-w600">CODE</td>
                 <td id="role_code"></td>
-               
               </tr>
               <tr>
                 <td class="font-w600">Created</td>
                 <td id="role_created_at"></td>
-                
               </tr>
             </tbody>
           </table>
@@ -89,7 +85,6 @@
                 <td class="font-w600">Sex</td>
                 <td id="sex"></td>
               </tr>
-              
               <tr>
                 <td class="font-w600">Region</td>
                 <td id="region"></td>
@@ -123,14 +118,6 @@
 <!-- END Pop Out Modal -->
 
 
-
-
-
-
-
-
-
-
  <!-- PRE LOADER Modal -->
  <div class="modal" id="pre_loader" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" role="dialog" aria-hidden="true" >
   <div class="modal-dialog modal-dialog-popout" role="document">
@@ -144,10 +131,6 @@
   </div>
 </div>
 <!-- END PRE LOADER Modal -->
-
-
-
-
 
 
     <!-- Slide Up Modal -->

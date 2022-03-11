@@ -51,6 +51,11 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.1/css/dataTables.bootstrap4.min.css">
 
     <style>
+
+      /* body{
+        font-family: Inter, sans-serif !important;
+      } */
+      
       .avatar {
         vertical-align: middle;
         width: 40px;
@@ -155,31 +160,25 @@
                   </div>
                 </div>
 
-                {{-- <div class="mb-3">
-                  <div class="form-material form-material-success floating">
-                    <input type="password" class="form-control" id="material-select2 password" type="email" name="new_password" data-v-min-length="8" data-v-max-length="16" title="password" required/>
+                
+                  <div class="mb-3">
                     <label for="material-color-success2" style="font-size: 13px;">New Password</label>
-                    <span class="text-danger errorMessage fs--2" id="error_new_password"></span>
+                      <div class="js-pw-strength1-container form-material form-material-success floating" style="margin-top: -2em !important;">
+                        <input type="password" class="js-pw-strength1 form-control" id="password"  name="new_password" data-v-min-length="8" data-v-max-length="20" title="password" required>
+                        <div class="js-pw-strength1-progress pw-strength-progress mt-5"></div>
+                      </div>
+                      <p class="js-pw-strength2-feedback form-text" id="error_new_password"></p>
                   </div>
-                </div> --}}
-               
-                <div class="mb-3">
-                  <div class="form-material form-material-success floating">
-                    <input type="password" class="form-control" id="password" name="new_password" data-v-min-length="8" data-v-max-length="16" title="password" required>
-                    <label for="material-color-success2" style="font-size: 13px;">New Password</label>
-                    <span class="text-danger errorMessage fs--2" id="error_new_password"></span>
-                  </div>
-                </div>
 
-                <div class="mb-3">
-                  <div class="form-material form-material-success floating">
-                    <input  name="confirm_new_password" type="password" class="form-control" data-v-equal="#password" required>
+                  <div class="mb-3">
                     <label for="material-color-success2" style="font-size: 13px;">Confirm New Password</label>
-                    <span class="text-danger errorMessage fs--2" id="error_confirm_new_password"></span>
+                      <div class="js-pw-strength1-container form-material form-material-success floating" style="margin-top: -2em !important;">
+                        <input type="password" class="js-pw-strength2 form-control" id="password"  name="confirm_new_password" data-v-equal="#password" required>
+                        <div class="js-pw-strength2-progress pw-strength-progress mt-5"></div>
+                      </div>
+                      <p class="js-pw-strength2-feedback form-text" id="error_confirm_new_password"></p>
                   </div>
-                </div>
 
-               
 
                 <div class="form-group row">
                   <div class="col-6">
@@ -511,14 +510,24 @@
     
 
     <!-- Page JS Helpers (Select2 plugin) -->
-    <script src="{{ asset('assets/vaxtrace_assets/assets/js/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
-    <script src="{{ asset('assets/vaxtrace_assets/assets/js/plugins/masked-inputs/jquery.maskedinput.min.js') }}"></script>
-    <script src="{{ asset('assets/vaxtrace_assets/assets/js/plugins/select2/js/select2.full.min.js') }}"></script>
-    <script>jQuery(function(){Codebase.helpers('select2');});</script>
 
+    <script src="{{ asset('assets/vaxtrace_assets/assets/js/plugins/pwstrength-bootstrap/pwstrength-bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/vaxtrace_assets/assets/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('assets/vaxtrace_assets/assets/js/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
+    <script src="{{ asset('assets/vaxtrace_assets/assets/js/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
+    <script src="{{ asset('assets/vaxtrace_assets/assets/js/plugins/select2/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('assets/vaxtrace_assets/assets/js/plugins/jquery-tags-input/jquery.tagsinput.min.js') }}"></script>
+    <script src="{{ asset('assets/vaxtrace_assets/assets/js/plugins/jquery-auto-complete/jquery.auto-complete.min.js') }}"></script>
+    <script src="{{ asset('assets/vaxtrace_assets/assets/js/plugins/masked-inputs/jquery.maskedinput.min.js') }}"></script>
+    <script src="{{ asset('assets/vaxtrace_assets/assets/js/plugins/ion-rangeslider/js/ion.rangeSlider.min.js') }}"></script>
+    <script src="{{ asset('assets/vaxtrace_assets/assets/js/plugins/dropzone/min/dropzone.min.js') }}"></script>
+    <script src="{{ asset('assets/vaxtrace_assets/assets/js/plugins/flatpickr/flatpickr.min.js') }}"></script>
+
+    
     <!-- Page JS Code -->
     <script src="{{ asset('assets/vaxtrace_assets/assets/js/pages/be_forms_plugins.min.js') }}"></script>
 
+    <script>jQuery(function(){Codebase.helpers('select2');});</script>
     <script>jQuery(function(){Codebase.helpers('table-tools');});</script>
     
     <!-- Page JS Helpers (Flatpickr + BS Datepicker + BS Colorpicker + BS Maxlength + Select2 + Masked Input + Range Sliders + Tags Inputs plugins) -->
