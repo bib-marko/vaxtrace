@@ -18,7 +18,7 @@
                 <table class="table table-striped table-center js-dataTable-full-pagination" id="vaccinees_dt" width="100%">
                     <thead>
                     <tr>
-                        <th scope="col">ID</th>
+                        <th scope="col">UNIQ_ID</th>
                         <th scope="col">First Name</th>
                         <th scope="col">Middle Name</th>
                         <th scope="col">Last Name</th>
@@ -33,6 +33,7 @@
     <!-- end table for activity log -->
     @section('scripts')
     <script type="text/javascript">   
+        var table;
         $(function () {
             $.ajaxSetup({
                 headers: {
@@ -50,7 +51,7 @@
             //     return data;
             // }
             //MASTER LIST
-            var table = $('#vaccinees_dt').DataTable({
+            table = $('#vaccinees_dt').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('get_vaccinees') }}",
@@ -86,8 +87,13 @@
                     return data;
                 }
             }
+            
         });
-       
+        function verifyVaccinee(id){
+            console.log( table.row(id).data() );
+            //console.log( table.search( 1 ).data() );
+            
+        }
     </script>
     @endsection
 @endsection
