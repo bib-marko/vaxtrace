@@ -34,7 +34,7 @@ class AddressController extends Controller
         ->addColumn('action', function($row){
             $actionBtn = "";
             $id = $row['uniq_id'];
-            $actionBtn .= "<a class='view btn btn-alt-success mr-5 mb-5' onclick='verifyVaccinee($id)'><i class='si si-check mr-5'></i>Verify</button></a>";
+            $actionBtn .= "<a class='view btn btn-alt-successgit mr-5 mb-5' onclick='verifyVaccinee($id)'><i class='si si-check mr-5'></i>Verify</button></a>";
             
             return $actionBtn;
         })
