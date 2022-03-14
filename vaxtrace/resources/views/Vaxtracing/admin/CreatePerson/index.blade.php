@@ -13,41 +13,37 @@
     <div class="col-lg-6 col-xl-12 col-xxl-6 h-100">
       <div class="card theme-wizard mb-5 mb-lg-0 mb-xl-5 mb-xxl-0 h-100">
         <div class="block">
-          <div class="block-header bg-earth-lighter">
-            <h3 class="block-title">
-              <i class="si si-user-follow"></i> Create <small>Account</small>
+          <div class="block-header bg-gd-emerald">
+            <h3 class="block-title text-white">
+              <i class="si si-user-follow"></i> Create <small class="text-white">Account</small>
             </h3>
             <div class="block-options">
-              <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
+              <button type="button" class="btn-block-option text-white" id="reset" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
                 <i class="si si-refresh"></i>
               </button>
             </div>
           </div>
           
           <div class="block-content bg-white">
-             
-                
                   <form role="form" id="formAddUser">
                     @csrf
                     <div class="row g-2">
                       <div class="col-12">
                         <div class="form-material form-material-success floating">
-                          <select class="js-select2 form-control" id="material-select2" name="role" aria-label="Floating label select example" required>
+                          <select class="form-control" id="material-select2" name="role" aria-label="Floating label select example" required>
                                 @if(session()->get('LoggedUser')->role->short_code != 'ADMIN')
                                   <option value="{{ session()->get('LoggedUser')->role->id }}">{{ session()->get('LoggedUser')->role->title }}</option>
                                 @else
                                   @foreach ($total_role as $role)
                                     <option value="{{ $role->id }}">{{ $role->short_code .' - '. $role->title }}</option>
-                             
                                   @endforeach
                                 @endif
-                              
-                               
                           </select>
                           <label for="material-color-select2" style="font-size: 13px;">Role / Department</label>
                           <span class="text-danger errorMessage fs--2" id="error_region"></span>
                         </div>
                       </div>
+                      <br>
 
                       <div class="col-4">
                         <div class="form-material form-material-success floating">
@@ -131,7 +127,7 @@
 
                       <div class="col">
                         <div class="form-material form-material-success floating">
-                          <select class="js-select2 form-control region" id="material-select2 region" name="region" aria-label="Floating label select example" required>
+                          <select class="form-control region" id="material-select2 region" name="region" aria-label="Floating label select example" required>
                           
                           </select>
                           <label for="material-color-select2" style="font-size: 13px;">Region</label>
@@ -141,7 +137,7 @@
 
                       <div class="col">
                         <div class="form-material form-material-success floating">
-                          <select class="js-select2 form-control province" id="material-select2 province" name="province" aria-label="Floating label select example" required>
+                          <select class="form-control province" id="material-select2 province" name="province" aria-label="Floating label select example" required>
                           
                           </select>
                           <label for="material-color-select2" style="font-size: 13px;">Province</label>
@@ -156,7 +152,7 @@
 
                       <div class="col">
                         <div class="form-material form-material-success floating">
-                          <select class="js-select2 form-control city" id="material-select2 city" name="city" aria-label="Floating label select example" required>
+                          <select class="form-control city" id="material-select2 city" name="city" aria-label="Floating label select example" required>
                           
                           </select>
                           <label for="material-color-select2" style="font-size: 13px;">City</label>
@@ -168,7 +164,7 @@
 
                       <div class="col">
                         <div class="form-material form-material-success floating">
-                          <select class="js-select2 form-control barangay" id="material-select2 barangay" name="barangay" aria-label="Floating label select example" required>
+                          <select class="form-control barangay" id="material-select2 barangay" name="barangay" aria-label="Floating label select example" required>
                           
                           </select>
                           <label for="material-color-select2" style="font-size: 13px;">Barangay</label>
@@ -195,7 +191,7 @@
           <div class="px-sm-3 px-md-5">
             <ul class="list-inline mb-0">
               <li class="next" style="text-align: right">
-                <button class="btn btn-square btn-alt-success min-width-125" id="create_user" type="submit">Submit <span class="si si-arrow-right ms-2"> </span></button>
+                <button class="btn btn-square btn-alt-primary min-width-125" id="create_user" type="submit">Submit <span class="si si-arrow-right ms-2"> </span></button>
               </li>
             </ul>
           </div>
@@ -253,6 +249,10 @@
               });
             }
             
+          });
+
+          $('#reset').on('click', function(){
+              $('#formAddUser').trigger("reset");
           });
             
         });

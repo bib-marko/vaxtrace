@@ -243,7 +243,9 @@
             <tbody>
               <tr>
                 <td class="font-w600">Account Status</td>
-                <td colspan="3" id="status"></td>
+                <td id="status"></td>
+                <td class="font-w600">Role/Department</td>
+                <td id="role"></td>
               </tr>
               <tr>
                 <td class="font-w600">Account ID</td>
@@ -277,9 +279,8 @@
               </tr>
               <tr>
                 <td class="font-w600">Home Address</td>
-                <td  id="home_address"></td>
-                <td class="font-w600">Role/Department</td>
-                <td id="role"></td>
+                <td colspan="3" id="home_address"></td>
+               
               </tr>
             </tbody>
           </table>

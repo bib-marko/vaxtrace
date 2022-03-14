@@ -68,6 +68,7 @@
               <thead>
                 <tr>
                   <th scope="col">Fullname</th>
+                  <th scope="col">Role/Department</th>
                   <th scope="col">Status</th>
                   <th scope="col">Action</th>
                 </tr>
@@ -189,6 +190,13 @@
                 { data: 'full_name', 
             
                 },
+
+                //ROLE/DEPARTMENT
+                { data: 'short_code', 
+                // data.role.short_code
+                },
+
+               
 
                 //ACCOUNT STATUS
                 {
@@ -341,10 +349,14 @@
               $('#barangay').text(data.person.barangay);
               $('#status').html(isApproved(data.person.deleted_at));
               $('#full_name').text(generateFullname(data));
-              $('#role').text(data.role.short_code);
+              $('#role').html(toBadge(data.role.short_code));
           })
 
           $("#m_user").modal("show");
+        }
+
+        function toBadge(data){
+          return `<span class="btn btn-alt-primary">`+data+`</span>`;
         }
       
         function delete_people(id){

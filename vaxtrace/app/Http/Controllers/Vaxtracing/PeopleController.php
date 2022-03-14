@@ -22,9 +22,11 @@ class PeopleController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = User::join('people', 'users.id', '=', 'people.user_id')->where('users.deleted_at', NULL)->where('users.id','!=', session('LoggedUser')->id)
-            ->select('*','users.id as user_id','users.deleted_at as user_status',DB::raw("CONCAT(first_name , ' ' , middle_name , ' ' , last_name, ' ' , suffix) as full_name"))->withTrashed()->get();
-            
+            $data = User::join('people', 'users.id', '=', 'people.user_id')->where('users.deleted_at', NULL)
+                        ->join('roles', 'roles.id', '=', 'users.role_id')
+                        ->where('users.id','!=', session('LoggedUser')->id)
+                        ->select('*','users.id as user_id','users.deleted_at as user_status',DB::raw("CONCAT(first_name , ' ' , middle_name , ' ' , last_name, ' ' , suffix) as full_name"))->withTrashed()->get();
+
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){

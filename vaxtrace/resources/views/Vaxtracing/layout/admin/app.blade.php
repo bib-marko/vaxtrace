@@ -21,6 +21,7 @@
     <!-- Page JS Plugins CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vaxtrace_assets/assets/js/plugins/select2/css/select2.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vaxtrace_assets/assets/js/plugins/jquery-tags-input/jquery.tagsinput.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vaxtrace_assets/assets/js/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
 
     <!-- Icons -->
     <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
