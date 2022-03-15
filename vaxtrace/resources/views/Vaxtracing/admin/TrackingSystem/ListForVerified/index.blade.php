@@ -146,50 +146,50 @@
         });
 
         $('#btnUpdateVaccinee').click(function (e) {
-          e.preventDefault();
-          let validatorUpdateVaccinee = $('#formUpdateVaccinee').jbvalidator({
+            e.preventDefault();
+            let validatorUpdateVaccinee = $('#formUpdateVaccinee').jbvalidator({
                     errorMessage: true,
                     successClass: false,
                 });
-          var id = $('#vaccinee_id').val();
-          var form = document.getElementById("formUpdateVaccinee");
-          var formData = new FormData(form);
-          if(validatorUpdateVaccinee.checkAll() == 0){
+            var id = $('#vaccinee_id').val();
+            var form = document.getElementById("formUpdateVaccinee");
+            var formData = new FormData(form);
+            if(validatorUpdateVaccinee.checkAll() == 0){
             $.ajax({
-              url: '{{ route("save_update_vaccinee") }}/' + id,
-              data: formData,
-              cache: false,
-              processData: false,
-              contentType: false,
-              type: 'POST',
-              beforeSend: function () {
+                url: '{{ route("save_update_vaccinee") }}/' + id,
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false,
+                type: 'POST',
+                beforeSend: function () {
                 showLoader();
-              },
-              complete: function () {
+                },
+                complete: function () {
                 hideLoader();
-              },
-              success: function (response) {
-                  Swal.fire({
-                      title: 'Success!',
-                      icon: 'success',
-                      text: "The record has been updated",
-                      confirmButtonText: 'Ok',
-                  }).then((result) => {
-                      /* Read more about isConfirmed, isDenied below */
-                      if (result.isConfirmed) {
-                      window.location.href = "{{ route('view_vaccinees_ListForVerified') }}";
-                      }
-                  })
-              },
-              error: function(response){
-                  $('.errorMessage').text("");
-                  $.each(response.responseJSON.errors,function(field_name,error){            
-                      $(document).find('[id=error_'+field_name+']').text("*"+error)
-                  })
-              }
+                },
+                success: function (response) {
+                    Swal.fire({
+                        title: 'Success!',
+                        icon: 'success',
+                        text: "The record has been updated",
+                        confirmButtonText: 'Ok',
+                    }).then((result) => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {
+                        window.location.href = "{{ route('view_vaccinees_ListForVerified') }}";
+                        }
+                    })
+                },
+                error: function(response){
+                    $('.errorMessage').text("");
+                    $.each(response.responseJSON.errors,function(field_name,error){            
+                        $(document).find('[id=error_'+field_name+']').text("*"+error)
+                    })
+                }
             });
-          }
-          
+            }
+            
         });
 
         function formatName(data){

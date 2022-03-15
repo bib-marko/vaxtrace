@@ -14,4 +14,8 @@ class Category extends Model
         'cat_description',
         'status',
     ];
+
+    public function sub_categories(){
+        return $this->belongsToMany('App\Models\Vaxtracing\Sub_Category', 'category_has_sub_category',  'categories_id', 'sub_categories_id');
+    }
 }

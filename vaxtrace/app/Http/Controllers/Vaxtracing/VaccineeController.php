@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Vaxtracing;
 
 use App\Http\Controllers\Controller;
+use App\Models\Vaxtracing\Category;
+use App\Models\Vaxtracing\Category_has_Sub_Category;
+use App\Models\Vaxtracing\Transactions;
 use App\Models\Vaxtracing\Vaccinee;
 use Illuminate\Http\Request;
 use DataTables;
@@ -17,6 +20,9 @@ class VaccineeController extends Controller
      */
     public function index(Request $request)
     {
+        //$data = Transactions::with('vaccinees', 'status_report')->get()->toArray();
+        // $data = Vaccinee::with('transactions')->get()->toArray();
+        // dd($data);
         if ($request->ajax()) {
             $data = Vaccinee::where('status','!=', 0)->get();
 

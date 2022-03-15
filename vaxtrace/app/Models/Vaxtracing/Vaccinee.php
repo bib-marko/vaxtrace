@@ -17,4 +17,8 @@ class Vaccinee extends Model
         'suffix',
         'birth_date',
     ];
+
+    public function transactions(){
+        return $this->belongsToMany(Category_has_Sub_Category::class,'vaccinees_has_transactions', 'vaccinees_id', 'category_has_sub_category_id');
+    }
 }
