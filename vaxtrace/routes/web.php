@@ -2,13 +2,16 @@
 
 use App\Http\Controllers\Vaxtracing\Auth\AuthController;
 use App\Http\Controllers\Vaxtracing\AddressController;
+use App\Http\Controllers\Vaxtracing\CategoryController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Vaxtracing\PeopleController;
 use App\Http\Controllers\Vaxtracing\DashboardController;
 use App\Http\Controllers\Vaxtracing\PermissionController;
 use App\Http\Controllers\Vaxtracing\RoleController;
+use App\Http\Controllers\Vaxtracing\SubCategoryController;
 use App\Http\Controllers\Vaxtracing\SubSystemController;
+use App\Http\Controllers\Vaxtracing\VaccineeController;
 use App\Http\Middleware\AuthCheck;
 use App\Models\Vaxtracing\Role;
 
@@ -159,18 +162,44 @@ Route::group(['middleware' => ['AuthCheck']],function(){
     Route::get('/view/Tracker-Main-System/vaccinees/non-verified', function () {
         return view('Vaxtracing.admin.TrackingSystem.ListForNonVerified.index');
     })->name('view_vaccinees_ListForNonVerified');
+    
+   
 
     Route::get('/view/Tracker-Main-System/vaccinees/verified', function () {
         return view('Vaxtracing.admin.TrackingSystem.ListForVerified.index');
     })->name('view_vaccinees_ListForVerified');
 
+    Route::resource('vaccinee', VaccineeController::class);
+
+    Route::post('/update/vaccinee/save/{id?}', [VaccineeController::class, 'update'])->name('save_update_vaccinee');
+
+    Route::post('/delete/vaccinee/{id?}', [VaccineeController::class, 'destroy'])->name('delete_vaccinee');
+
+    Route::get('/show/vaccinee/{id?}', [VaccineeController::class, 'show'])->name('show_vaccinee');
+
     Route::get('/view/Tracker-Main-System/vaccinees/status/category', function () {
         return view('Vaxtracing.admin.TrackingSystem.Category.index');
     })->name('view_vaccinees_status_category');
 
+    Route::resource('category', CategoryController::class);
+
+    Route::post('/update/category/save/{id?}', [CategoryController::class, 'update'])->name('save_update_category');
+
+    Route::post('/delete/category/{id?}', [CategoryController::class, 'destroy'])->name('delete_category');
+
+    Route::get('/show/category/{id?}', [CategoryController::class, 'show'])->name('show_category');
+
     Route::get('/view/Tracker-Main-System/vaccinees/status/sub-category', function () {
         return view('Vaxtracing.admin.TrackingSystem.SubCategory.index');
     })->name('view_vaccinees_status_sub-category');
+
+    Route::resource('sub_category', SubCategoryController::class);
+
+    Route::post('/update/sub_category/save/{id?}', [SubCategoryController::class, 'update'])->name('save_update_sub_category');
+
+    Route::post('/delete/sub_category/{id?}', [SubCategoryController::class, 'destroy'])->name('delete_sub_category');
+
+    Route::get('/show/sub_category/{id?}', [SubCategoryController::class, 'show'])->name('show_sub_category');
 
     //END OF TRACKER MAIN SYSTEM
 });

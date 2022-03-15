@@ -5,16 +5,15 @@ namespace App\Models\Vaxtracing;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Vaccinee extends Model
+class Sub_Category extends Model
 {
     use HasFactory;
 
+    protected $table = 'Sub_Categories';
+
     protected $fillable = [
-        'vaccinee_code',
-        'first_name',
-        'middle_name',
-        'last_name',
-        'suffix',
-        'birth_date',
+        'sub_cat_name',
+        'sub_cat_description',
+        'status',
     ];
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Vaxtracing;
 use Illuminate\Http\Request;
 use DataTables;
 use App\Http\Controllers\Controller;
+use App\Models\Vaxtracing\Vaccinee;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Storage;
 
 class AddressController extends Controller
@@ -33,8 +35,22 @@ class AddressController extends Controller
         ->addIndexColumn()
         ->addColumn('action', function($row){
             $actionBtn = "";
-            $id = $row['uniq_id'];
-            $actionBtn .= "<a class='view btn btn-alt-successgit mr-5 mb-5' onclick='verifyVaccinee($id)'><i class='si si-check mr-5'></i>Verify</button></a>";
+            $verifiedVaccinee = Vaccinee::where('status','!=', 0)
+                                ->where('vaccinee_code', '=', $row['uniq_id'])
+                                ->where('first_name', '=', $row['first_name'])
+                                ->where('last_name', '=', $row['last_name'])
+                                ->where('middle_name', '=', $row['middle_name'])
+                                ->where('suffix', '=', $row['suffix'])
+                                ->where('birth_date', '=', $row['birth_date'])
+                                ->first();
+           
+            if( $verifiedVaccinee == null)
+            {
+                $actionBtn .= "<a class='view btn btn-alt-danger mr-5 mb-5' id='btnVerify'><i class='si si-check mr-5'></i>Verify</button></a>";
+            }
+            else{
+                $actionBtn .= "<a class='view btn btn-alt-primary mr-5 mb-5'disabled><i class='si si-check mr-5'></i>Verified</button></a>";
+            }
             
             return $actionBtn;
         })
