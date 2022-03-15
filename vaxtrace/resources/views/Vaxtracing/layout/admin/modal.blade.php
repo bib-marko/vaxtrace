@@ -237,56 +237,59 @@
             </button>
           </div>
         </div>
-        <div class="block-content">
+        
           <!-- Project Info -->
-          <table class="table table-striped table-borderless mt-20">
-            <tbody>
-              <tr>
-                <td class="font-w600">Account Status</td>
-                <td id="status"></td>
-                <td class="font-w600">Role/Department</td>
-                <td id="role"></td>
-              </tr>
-              <tr>
-                <td class="font-w600">Account ID</td>
-                <td id="user_id"></td>
-                <td class="font-w600">Created At</td>
-                <td id="created_at"></td>
-              </tr>
-              <tr>
-                <td class="font-w600">Email</td>
-                <td id="email"></td>
-                <td class="font-w600">Phone number</td>
-                <td id="contact_number"></td>
-              </tr>
-              <tr>
-                <td class="font-w600">Birth Date</td>
-                <td id="birth_date"></td>
-                <td class="font-w600">Sex</td>
-                <td id="sex"></td>
-              </tr>
-              <tr>
-                <td class="font-w600">Region</td>
-                <td id="region"></td>
-                <td class="font-w600">Province</td>
-                <td id="province"></td>
-              </tr>
-              <tr>
-                <td class="font-w600">City</td>
-                <td id="city"></td>
-                <td class="font-w600">Barangay</td>
-                <td id="barangay"></td>
-              </tr>
-              <tr>
-                <td class="font-w600">Home Address</td>
-                <td colspan="3" id="home_address"></td>
-               
-              </tr>
-            </tbody>
-          </table>
+          
+          <div class="table-responsive p-2  ">
+            <table class="table table-striped table-borderless mt-20">
+              <tbody>
+                <tr>
+                  <td class="font-w600 ">Account Status</td>
+                  <td id="status"></td>
+                  <td class="font-w600">Role/Department</td>
+                  <td id="role"></td>
+                </tr>
+                <tr>
+                  <td class="font-w600">Account ID</td>
+                  <td id="user_id"></td>
+                  <td class="font-w600">Created At</td>
+                  <td id="created_at"></td>
+                </tr>
+                <tr>
+                  <td class="font-w600">Email</td>
+                  <td id="email"></td>
+                  <td class="font-w600">Phone number</td>
+                  <td id="contact_number"></td>
+                </tr>
+                <tr>
+                  <td class="font-w600">Birth Date</td>
+                  <td id="birth_date"></td>
+                  <td class="font-w600">Sex</td>
+                  <td id="sex"></td>
+                </tr>
+                <tr>
+                  <td class="font-w600">Region</td>
+                  <td id="region"></td>
+                  <td class="font-w600">Province</td>
+                  <td id="province"></td>
+                </tr>
+                <tr>
+                  <td class="font-w600">City</td>
+                  <td id="city"></td>
+                  <td class="font-w600">Barangay</td>
+                  <td id="barangay"></td>
+                </tr>
+                <tr>
+                  <td class="font-w600">Home Address</td>
+                  <td colspan="3" id="home_address"></td>
+                 
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <!-- END Project Info -->
          
-        </div>
+      
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">Close</button>

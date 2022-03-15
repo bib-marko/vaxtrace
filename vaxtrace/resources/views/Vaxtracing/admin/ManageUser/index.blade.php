@@ -240,14 +240,10 @@
                   data: 'reason',
                     render(data) {
                           return `
-                          <!-- reason Alert -->
-                          <div class="alert alert-info d-flex align-items-center" role="alert">
+                          <span class="badge btn-alt-info font-w700 p-2 text-uppercase"
                             <i class="fa fa-fw fa-info mr-10"></i>
-                            <p class="mb-0">
                               `+data+`!
-                            </p>
-                          </div>
-                          <!-- END reason Alert -->
+                          </span>
                           `;
                     },
                   },
@@ -279,14 +275,10 @@
                   data: 'reason',
                     render(data) {
                           return `
-                          <!-- reason Alert -->
-                          <div class="alert alert-info d-flex align-items-center" role="alert">
+                          <span class="badge btn-alt-info font-w700 p-2 text-uppercase"
                             <i class="fa fa-fw fa-info mr-10"></i>
-                            <p class="mb-0">
                               `+data+`!
-                            </p>
-                          </div>
-                          <!-- END reason Alert -->
+                          </span>
                           `;
                     },
                   },
@@ -356,7 +348,7 @@
         }
 
         function toBadge(data){
-          return `<span class="btn btn-alt-primary">`+data+`</span>`;
+          return `<span class="badge btn-alt-success font-w700 p-2 text-uppercase">`+data+`</span>`;
         }
       
         function delete_people(id){

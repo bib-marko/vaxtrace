@@ -100,9 +100,9 @@ $(function(){
   // STATUS OF ACOUNT
     function isApproved(data) {
         if(data == null){
-            return `<span class="badge badge-success">active</span>`;
+            return `<span class="badge btn-alt-success font-w700 p-2 text-uppercase">active</span>`;
         }else {
-            return `<span class="badge badge-danger">inactive</span>`;
+            return `<span class="badge btn-alt-danger font-w700 p-2 text-uppercase">inactive</span>`;
         }
         
     }

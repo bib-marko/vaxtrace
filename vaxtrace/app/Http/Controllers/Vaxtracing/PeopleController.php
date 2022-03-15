@@ -34,13 +34,13 @@ class PeopleController extends Controller
                
                     if($row->user_status == null){
                         if(session('LoggedUser')->hasPermission('USER_VIEW')){
-                            $actionBtn .= "<a class='view btn btn-alt-primary mr-5 mb-5' onclick='show_people($row->user_id)'><i class='si si-eye mr-5'></i>View</button></a>";
+                            $actionBtn .= "<a class='view btn btn-alt-primary btn-rounded btn-outline-primary mr-5 mb-5' data-toggle='click-ripple' onclick='show_people($row->user_id)'><i class='si si-eye mr-5'></i>View</button></a>";
                         }
                         if(session('LoggedUser')->hasPermission('USER_UPDATE')){
-                            $actionBtn .= "<a href='".route('update_people', $row->user_id)."' class='update btn btn-alt-success mr-5 mb-5'><i class='si si-pencil mr-5'></i>Update</a>";
+                            $actionBtn .= "<a href='".route('update_people', $row->user_id)."' class='update btn btn-alt-success btn-rounded btn-outline-success mr-5 mb-5'  data-toggle='click-ripple'><i class='si si-pencil mr-5'></i>Update</a>";
                         }
                         if(session('LoggedUser')->hasPermission('USER_DELETE')){
-                            $actionBtn .= "<a class='delete btn btn-alt-danger mr-5 mb-5' onclick='delete_people($row->user_id)'><i class='si si-trash mr-5'></i>Delete</a>";
+                            $actionBtn .= "<a class='delete btn btn-alt-danger btn-outline-danger btn-rounded mr-5 mb-5'  data-toggle='click-ripple' onclick='delete_people($row->user_id)'><i class='si si-trash mr-5'></i>Delete</a>";
                         }
                     }
                     
@@ -62,7 +62,7 @@ class PeopleController extends Controller
                 ->addColumn('action', function($row){
                     $actionBtn = "";
                     if(session('LoggedUser')->hasPermission('USER_RESTORE')){
-                        $actionBtn = "<a class='delete btn btn-alt-warning mr-5 mb-5' onclick='restore_people($row->user_id)'><i class='si si-settings mr-5'></i>Restore</a>";
+                        $actionBtn = "<a class='delete btn btn-alt-warning btn-rounded btn-outline-warning mr-5 mb-5' onclick='restore_people($row->user_id)'><i class='si si-settings mr-5'></i>Restore</a>";
                     }
                     
                     return $actionBtn;
@@ -84,7 +84,7 @@ class PeopleController extends Controller
                 ->addColumn('action', function($row){
                     $actionBtn = "";
                     if(session('LoggedUser')->hasPermission('USER_DELETE')){
-                        $actionBtn = "<a class='delete btn btn-alt-danger mr-5 mb-5' onclick='delete_people($row->user_id)'><i class='si si-trash mr-5'></i>Delete</a>";
+                        $actionBtn = "<a class='delete btn btn-alt-danger btn-rounded btn-outline-danger mr-5 mb-5' onclick='delete_people($row->user_id)'><i class='si si-trash mr-5'></i>Delete</a>";
                     }  
                     return $actionBtn;
                 })
