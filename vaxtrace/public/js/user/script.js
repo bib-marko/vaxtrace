@@ -82,17 +82,17 @@ $(function(){
   //CONCATINANTE FULLNAME
   function generateFullname(data){
     var fullname ="";
-        if(data.person.middle_name != null && data.person.suffix != null ){
-            fullname = data.person.first_name + ' ' + data.person.middle_name + ' ' + data.person.last_name + ' ' + data.person.suffix;
+        if(data.middle_name != "NA" && data.suffix != "NA"){
+            fullname = data.first_name + ' ' + data.middle_name + ' ' + data.last_name + ' ' + data.suffix;
         }
-        else if(data.person.middle_name == null && data.person.suffix != null ){
-            fullname = data.person.first_name + ' ' + data.person.last_name + ' ' + data.person.suffix;
+        else if(data.middle_name == "NA" && data.suffix != "NA"){
+            fullname = data.first_name + ' ' + data.last_name + ' ' + data.suffix;
         }
-        else if(data.person.middle_name != null && data.person.suffix == null ){
-            fullname = data.person.first_name + ' ' + data.person.middle_name + ' ' + data.person.last_name;
+        else if(data.middle_name != "NA" && data.suffix == "NA"){
+            fullname = data.first_name + ' ' + data.middle_name + ' ' + data.last_name;
         }
         else{
-            fullname = data.person.first_name + ' ' + data.person.last_name;
+            fullname = data.first_name + ' ' + data.last_name;
         }
         return fullname;
   }
@@ -118,3 +118,21 @@ $(function(){
         $("#pre_loader").hide();
     
     }
+
+//CONCATINANTE FULLNAME
+function generateVaccineeFullName(data){
+    var fullname ="";
+        if(data.person.middle_name != null && data.person.suffix != null ){
+            fullname = data.person.first_name + ' ' + data.person.middle_name + ' ' + data.person.last_name + ' ' + data.person.suffix;
+        }
+        else if(data.person.middle_name == null && data.person.suffix != null ){
+            fullname = data.person.first_name + ' ' + data.person.last_name + ' ' + data.person.suffix;
+        }
+        else if(data.person.middle_name != null && data.person.suffix == null ){
+            fullname = data.person.first_name + ' ' + data.person.middle_name + ' ' + data.person.last_name;
+        }
+        else{
+            fullname = data.person.first_name + ' ' + data.person.last_name;
+        }
+        return fullname;
+  }

@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Vaxtracing\Auth\AuthController;
-use App\Http\Controllers\Vaxtracing\AddressController;
+use App\Http\Controllers\Vaxtracing\JsonDataController;
 use App\Http\Controllers\Vaxtracing\CategoryController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -67,11 +67,11 @@ Route::group(['middleware' => ['AuthCheck']],function(){
     })->name('get_update_user');
 
     //Generate address
-    Route::get("/create/get_address", [AddressController::class, "index"])->name('get_address');
+    Route::get("/create/get_address", [JsonDataController::class, "index"])->name('get_address');
 
-    Route::get("/get-activity-logs", [AddressController::class, "getActivity"])->name('get_activity');
+    Route::get("/get-activity-logs", [JsonDataController::class, "getActivity"])->name('get_activity');
 
-    Route::get("/get-vaccinees", [AddressController::class, "getVaccinees"])->name('get_vaccinees');
+    Route::get("/get-vaccinees", [JsonDataController::class, "getVaccinees"])->name('get_vaccinees');
 
     //Change Password
     Route::post('/change/password/', [PeopleController::class, 'changePassword'])->name('change_password');

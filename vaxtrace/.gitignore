@@ -1,6 +1,7 @@
 /node_modules
 /public/hot
 /vendor
+/storage/app/.json
 .env.backup
 .phpunit.result.cache
 docker-compose.override.yml
