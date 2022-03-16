@@ -200,6 +200,7 @@
                 return data;
             }
         }  
+        $(".dataTables_filter").hide(); 
     });
 
     function update_vaccinee(id){

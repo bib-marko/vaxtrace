@@ -24,13 +24,13 @@ if (! function_exists('generateFullName')) {
     {
         $fullname = $user->person->first_name.' '.$user->person->middle_name.' '.$user->person->suffix;
         
-        if($user->person->middle_name != null && $user->person->first_name != null ){
+        if(($user->person->middle_name != null || $user->person->middle_name != "NA") && ($user->person->suffix != null || $user->person->suffix != "NA")){
             $fullname = $user->person->first_name. ' '. $user->person->middle_name. ' '. $user->person->last_name. ' '. $user->person->suffix;
         }
-        else if($user->person->middle_name == null && $user->person->suffix != null ){
+        else if(($user->person->middle_name == null || $user->person->middle_name == "NA") && ($user->person->suffix != null || $user->person->suffix != "NA") ){
             $fullname = $user->person->first_name. ' '. $user->person->last_name. ' '. $user->person->suffix;
         }
-        else if($user->person->middle_name != null && $user->person->suffix == null ){
+        else if(($user->person->middle_name != null || $user->person->middle_name != "NA") && ($user->person->suffix == null || $user->person->suffix == "NA") ){
             $fullname = $user->person->first_name. ' '. $user->person->middle_name. ' '. $user->person->last_name;
         }
         else{
@@ -57,6 +57,16 @@ if(! function_exists('saveActivityLog')){
         } catch(Exception $e) {
             return ['error' => true, 'message' => $e->getMessage()];
         }
+    }
+}
+
+if (! function_exists('formatDate')) {
+    function formatDate($string)
+    {
+        $date = str_replace('/', '-', $string);
+        $string = date('Y-m-d', strtotime($date));       
+        
+        return($string);
     }
 }
 

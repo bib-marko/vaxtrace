@@ -9,7 +9,7 @@ use App\Models\Vaxtracing\Vaccinee;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Storage;
 
-class AddressController extends Controller
+class JsonDataController extends Controller
 {
     public function index()
     {
@@ -27,21 +27,21 @@ class AddressController extends Controller
     }
     public function getVaccinees()
     {
-        $vaccinee = json_decode(Storage::get('vaccinees.json'), true);
+        $vaccinee = json_decode(Storage::get('vaccinees_updated.json'), true);
 
-        $vaccinee = collect($vaccinee)->sortBy('uniq_id', SORT_REGULAR, true);
-
+        $vaccinee = collect($vaccinee["data"]["data"]);
+        
         return Datatables::of($vaccinee)
         ->addIndexColumn()
         ->addColumn('action', function($row){
             $actionBtn = "";
             $verifiedVaccinee = Vaccinee::where('status','!=', 0)
-                                ->where('vaccinee_code', '=', $row['uniq_id'])
-                                ->where('first_name', '=', $row['first_name'])
-                                ->where('last_name', '=', $row['last_name'])
-                                ->where('middle_name', '=', $row['middle_name'])
-                                ->where('suffix', '=', $row['suffix'])
-                                ->where('birth_date', '=', $row['birth_date'])
+                                ->where('vaccinee_code', '=', $row['qrcode'])
+                                ->where('first_name', '=', $row['vaxcert_pre_registration']['first_name'])
+                                ->where('last_name', '=', $row['vaxcert_pre_registration']['last_name'])
+                                ->where('middle_name', '=', $row['vaxcert_pre_registration']['middle_name'])
+                                ->where('suffix', '=', $row['vaxcert_pre_registration']['suffix'])
+                                ->where('birth_date', '=', $row['vaxcert_pre_registration']['date_of_birth'])
                                 ->first();
            
             if( $verifiedVaccinee == null)
@@ -49,7 +49,7 @@ class AddressController extends Controller
                 $actionBtn .= "<a class='view btn btn-alt-danger mr-5 mb-5' id='btnVerify'><i class='si si-check mr-5'></i>Verify</button></a>";
             }
             else{
-                $actionBtn .= "<a class='view btn btn-alt-primary mr-5 mb-5'disabled><i class='si si-check mr-5'></i>Verified</button></a>";
+                $actionBtn = "<a class='view btn btn-alt-primary mr-5 mb-5' disabled><i class='si si-check mr-5'></i>Verified</button></a>";
             }
             
             return $actionBtn;
