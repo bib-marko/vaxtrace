@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Storage;
 if (! function_exists('formatString')) {
     function formatString($string)
     {
-        if($string != null){
+        if($string != null && $string != "NA"){
             $string = trim($string);
             $string = strtoupper($string);
             $string = strip_tags($string); 
@@ -63,10 +63,13 @@ if(! function_exists('saveActivityLog')){
 if (! function_exists('formatDate')) {
     function formatDate($string)
     {
-        $date = str_replace('/', '-', $string);
-        $string = date('Y-m-d', strtotime($date));       
+        // Creating timestamp from given date
+        $timestamp = strtotime($string);
         
-        return($string);
+        // Creating new date format from that timestamp
+        $new_date = date("Y-m-d", $timestamp);   
+        
+        return($new_date);
     }
 }
 

@@ -66,7 +66,7 @@ class VaccineeController extends Controller
         $role->middle_name = formatString($request->middle_name);
         $role->last_name = formatString($request->last_name);
         $role->suffix = formatString($request->suffix);
-        $role->birth_Date = formatDate($request->birth_date);
+        $role->birth_date = formatDate($request->birth_date);
         $role->save();
     }
 
