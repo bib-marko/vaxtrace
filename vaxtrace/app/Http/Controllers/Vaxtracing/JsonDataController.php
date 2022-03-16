@@ -46,10 +46,10 @@ class JsonDataController extends Controller
            
             if( $verifiedVaccinee == null)
             {
-                $actionBtn .= "<a class='view btn btn-alt-danger mr-5 mb-5' id='btnVerify'><i class='si si-check mr-5'></i>Verify</button></a>";
+                $actionBtn .= "<a class='view btn btn-alt-danger btn-rounded mr-5 mb-5' id='btnVerify'><i class='si si-check mr-5'></i>Verify</button></a>";
             }
             else{
-                $actionBtn = "<a class='view btn btn-alt-primary mr-5 mb-5' disabled><i class='si si-check mr-5'></i>Verified</button></a>";
+                $actionBtn = "<a class='view btn btn-alt-primary btn-rounded mr-5 mb-5' disabled><i class='si si-check mr-5'></i>Verified</button></a>";
             }
             
             return $actionBtn;

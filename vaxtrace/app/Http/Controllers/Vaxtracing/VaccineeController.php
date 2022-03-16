@@ -30,10 +30,11 @@ class VaccineeController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $actionBtn = "";
-                    $actionBtn .= " <a class='view btn btn-alt-primary mr-5 mb-5' onclick='show_vaccinee($row->id)'><i class='si si-eye mr-5'></i>View</button></a>";
-                    $actionBtn .= "<a class='update btn btn-alt-success mr-5 mb-5' onclick='update_vaccinee($row->id)'><i class='si si-pencil mr-5'></i>Update</a>";
-                    $actionBtn .= "<a class='delete delete btn btn-alt-danger mr-5 mb-5' onclick='delete_vaccinee($row->id)'><i class='si si-trash mr-5'></i>Delete</a>";
-                    $actionBtn .= "<a class='view_summary warning btn btn-alt-warning mr-5 mb-5' onclick='view($row->id)'><i class='si si-trash mr-5'></i>View Transactions</a>";
+                    $actionBtn .= " <a class='view btn btn-alt-primary btn-rounded mr-5 mb-5' onclick='show_vaccinee($row->id)'><i class='si si-eye mr-6'></i></button></a>";
+                    $actionBtn .= "<a class='update btn btn-alt-success btn-rounded mr-5 mb-5' onclick='update_vaccinee($row->id)'><i class='si si-pencil mr-6'></i></a>";
+                    $actionBtn .= "<a class='delete delete btn btn-alt-danger btn-rounded mr-5 mb-5' onclick='delete_vaccinee($row->id)'><i class='si si-trash mr-6'></i></a>";
+                    // $actionBtn .= "<a class='warning btn-rounded btn btn-alt-warning mr-5 mb-5' href='".route('view_transaction_summary', $row->id)."'><i class='si si-trash mr-5'></i>View Transactions</a>";
+                    $actionBtn .= "<a class='warning btn-rounded btn btn-alt-warning mr-5 mb-5' onclick='show_monitor_vaccinee($row->id)'><i class='si si-eyeglasses mr-5'></i>Monitor Vaccinee</a>";
             
                     return $actionBtn;
                 })
@@ -79,7 +80,8 @@ class VaccineeController extends Controller
     public function show($id)
     {
         $vaccinee = Vaccinee::where('id', $id)->first();
-        
+       
+        //dd($vaccinee);
         return response()->json($vaccinee);
     }
 
@@ -124,5 +126,12 @@ class VaccineeController extends Controller
     {
         Vaccinee::where('id', $id)
         ->update(['status' => 0]);
+    }
+
+    public function viewTransact($id){
+
+        $vaccinee = Vaccinee::where('id', $id)->first();
+
+        return view('Vaxtracing.admin.TrackingSystem.VaccineeMasterList.ViewTransaction.index', compact('vaccinee'));
     }
 }

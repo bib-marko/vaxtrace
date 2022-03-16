@@ -331,10 +331,7 @@
                   <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-users"></i><span class="sidebar-mini-hide">Vaccinee Master List</span></a>
                 <ul>
                   <li>
-                    <a href="{{ route('view_vaccinees_ListForVerified') }}"><i class="si si-user-following"></i><span class="sidebar-mini-hide"> List of Verified</a>
-                  </li>
-                  <li>
-                    <a href="{{ route('view_vaccinees_ListForNonVerified') }}"><i class="si si-user-unfollow"></i><span class="sidebar-mini-hide"> List of Non-Verified</a>
+                    <a href="{{ route('view_vaccinees_VaccineeMasterList') }}"><i class="si si-user-unfollow"></i><span class="sidebar-mini-hide"> Vaccinee Monitoring</a>
                   </li>
                   <li>
                 </ul>
@@ -351,7 +348,6 @@
                   </ul>
                 </li>
                 </li>
-               
               </ul>
               
             </div>
