@@ -8,10 +8,10 @@
 <div class="block">
     <ul class="nav nav-tabs nav-tabs-block" data-toggle="tabs" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" href="#btabs-animated-slideleft-verified-vaccinee">Verified Vaccinee</a>
+        <a class="nav-link active" href="#btabs-animated-slideleft-verified-vaccinee">VERIFIED VACCINEE</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#btabs-animated-slideleft-non-verified-vaccinee">Non Verified Vacinnee</a>
+        <a class="nav-link" href="#btabs-animated-slideleft-non-verified-vaccinee">NON VERIFIED VACCINEE</a>
       </li>
       
       <li class="nav-item ml-auto">
@@ -27,11 +27,12 @@
         {{-- VERIFIEED VACCINEE TABLE --}}
       <div class="tab-pane fade fade-left show active" id="btabs-animated-slideleft-verified-vaccinee" role="tabpanel">
         <div class="block">
-            <div class="block-header block-header-default">
-            <h3 class="block-title"><i class="si si-user-following"></i> VERIFIED VACCINEES</h3>
-            <div class="block-options">
-                <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
-            </div>
+            <div class="block-header block-header-default bg-success-light ">
+                <h3 class="block-title text-secondary">
+                    <button type="button" class="btn btn-sm btn-circle btn-outline-success mr-5 mb-5">
+                    <i class="si si-user-follow"></i>
+                  </button> VERIFIED VACCINEES
+                </h3>
             </div>
             <div class="row text-center">
                 <div class="col-md-3">
@@ -85,11 +86,12 @@
     {{-- END VERIFIEED VACCINEE TABLE --}}
     <div class="tab-pane fade fade-left" id="btabs-animated-slideleft-non-verified-vaccinee" role="tabpanel">
         <div class="block">
-            <div class="block-header block-header-default">
-            <h3 class="block-title"><i class="si si-user-unfollow"></i> NON-VERIFIED VACCINEES</h3>
-            <div class="block-options">
-                <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
-            </div>
+            <div class="block-header block-header-default bg-success-light">
+            <h3 class="block-title text-secondary">
+                <button type="button" class="btn btn-sm btn-circle btn-outline-danger mr-5 mb-5">
+                <i class="si si-user-unfollow"></i>
+              </button> NON-VERIFIED VACCINEES
+            </h3>
             </div>
             <div class="row text-center">
                 <div class="col-md-3">
@@ -301,9 +303,9 @@
                             confirmButtonText: 'Ok',
                         }).then((result) => {
                             /* Read more about isConfirmed, isDenied below */
-                            if (result.isConfirmed) {
-                                table.draw();
-                            }
+                            // if (result.isConfirmed) {
+                            // window.location.href = "{{ route('view_vaccinees_ListForVerified') }}";
+                            // }
                         })
                     },
                     error: function(response){
@@ -347,9 +349,9 @@
                         confirmButtonText: 'Ok',
                     }).then((result) => {
                         /* Read more about isConfirmed, isDenied below */
-                        if (result.isConfirmed) {
-                            table.draw();
-                        }
+                        // if (result.isConfirmed) {
+                        // window.location.href = "{{ route('view_vaccinees_ListForVerified') }}";
+                        // }
                     })
                 },
                 error: function(response){
@@ -363,40 +365,65 @@
             
         });
 
-        function formatName(data){
-            if(data == null || data == ""){
+       
+        $(".dataTables_filter").hide(); 
+
+        
+        
+    });
+    
+    function formatName(data){
+            if(data == null || data == "" || data == 'NA'){
                 return "-";
             }
             else{
                 return data;
             }
         }  
-        $('#search_btn').on('click', function(){
-            table.search($('#search_bar').val().toUpperCase()).draw();
-        })
-        $(".dataTables_filter").hide(); 
 
-        
-        
-    });
+
+    function show_monitor_vaccinee(id){
+        // $.get("/show/vaccinee" +'/' + id, function (data) {
+        //       $('#view_vaccinee_code').text(data.vaccinee_code);
+        //       $('#view_first_name').text(data.first_name);
+        //       $('#view_middle_name').text(data.middle_name);
+        //       $('#view_last_name').text(data.last_name);
+        //       $('#view_suffix').text(formatName(data.suffix)).change();
+        //       $('#view_birth_date').text(data.birth_date);
+        //   })
+        $('#view_monitor_vaccinee').modal("show");
+    }
+
+
+    function show_vaccinee(id){
+        $.get("/show/vaccinee" +'/' + id, function (data) {
+              $('#view_vaccinee_code').text(data.vaccinee_code);
+              $('#view_first_name').text(data.first_name);
+              $('#view_middle_name').text(data.middle_name);
+              $('#view_last_name').text(data.last_name);
+              $('#view_suffix').text(formatName(data.suffix)).change();
+              $('#view_birth_date').text(data.birth_date);
+          })
+        $('#vaccinee_view').modal("show");
+    }
 
         
 
     function update_vaccinee(id){
-        $.get("/show/vaccinee" +'/' + id, function (data) {
-                $('#vaccinee_id').val(data.id);
-                $('#vaccinee_code').val(data.vaccinee_code);
-                $('#first_name').val(data.first_name);
-                $('#middle_name').val(data.middle_name);
-                $('#last_name').val(data.last_name);
-                $('#suffix').val(data.suffix).change();
-                $('#birth_date').val(data.birth_date);
-            })
+      $.get("/show/vaccinee" +'/' + id, function (data) {
+              $('#vaccinee_id').val(data.id);
+              $('#vaccinee_code').val(data.vaccinee_code);
+              $('#first_name').val(data.first_name);
+              $('#middle_name').val(data.middle_name);
+              $('#last_name').val(data.last_name);
+              $('#suffix').val(formatNamedata.suffix).change();
+              $('#birth_date').val(data.birth_date);
+          })
 
-        $("#modal-update-record-vaccinee").modal("show");
+      $("#modal-update-record-vaccinee").modal("show");
     }
-
-    function delete_vaccinee(id){
+    
+        function delete_vaccinee(id){
             Swal.fire({
                 title: 'Do you want to delete this vaccinee?',
                 icon: 'warning',
@@ -425,7 +452,7 @@
                             }).then((result) => {
                                 /* Read more about isConfirmed, isDenied below */
                                 if (result.isConfirmed) {
-                                    table.draw();
+                                    location.reload();
                                 }
                             })
                         },
@@ -443,4 +470,4 @@
 @endsection
 
 
-@endsectionb
+@endsection

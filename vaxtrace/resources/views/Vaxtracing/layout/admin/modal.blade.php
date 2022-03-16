@@ -4,6 +4,177 @@
 
 
 
+<!-- Slide Up Modal -->
+<div class="modal fade" id="view_monitor_vaccinee" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-slideup modal-xl" role="document">
+    <div class="modal-content">
+      <div class="block block-themed block-transparent mb-0">
+        <div class="block-header bg-primary-dark">
+          <h3 class="block-title">Terms &amp; Conditions</h3>
+          <div class="block-options">
+            <button type="button" class="btn-block-option" data-bs-dismiss="modal">
+              <i class="si si-close"></i>
+            </button>
+          </div>
+        </div>
+        <div class="block-content p-0">
+          <!-- Block Tabs Animated Slide Left -->
+            <ul class="nav nav-tabs nav-tabs-block bg-earth-light" data-toggle="tabs" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" href="#btabs-animated-slideleft-home">Transaction Summary</a>
+              </li>
+              <li class="nav-item bg-success-light">
+                <a class="nav-link" href="#btabs-animated-slideleft-profile"><i class="si si-plus"></i>  New Transaction</a>
+              </li>
+              {{-- <li class="nav-item ml-auto">
+                <a class="nav-link" href="#btabs-animated-slideleft-settings"><i class="si si-settings"></i></a>
+              </li> --}}
+            </ul>
+            <div class="block-content tab-content overflow-hidden">
+              <div class="tab-pane fade fade-left show active" id="btabs-animated-slideleft-home" role="tabpanel">
+                <h4 class="font-w400">Home Content</h4>
+                <p>Content slides in to the left..</p>
+              </div>
+              <div class="tab-pane fade fade-left" id="btabs-animated-slideleft-profile" role="tabpanel">
+                <h4 class="font-w400">Add New Transaction</h4>
+
+                <div class="col-md-12">
+                  <a class="block block-link-shadow block-transparent border-left border-5x border-warning bg-image" style="background-image: url('assets/media/photos/photo25.jpg');" href="javascript:void(0)">
+                    <div class="block-content block-content-full bg-white-op-90">
+                      <div class="pt-20">
+                        <h3 class="h4 font-w700 mb-10">An adventure of a lifetime to remember</h3>
+                        <h4 class="text-muted font-size-default mb-0">
+                          <span class="mr-10">
+                            <i class="fa fa-clock-o"></i> 17 min
+                          </span>
+                          <span>
+                            <i class="fa fa-comments-o"></i> 87
+                          </span>
+                        </h4>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                
+                <form role="form" id="formCreateRole" novalidate>
+                  <div class="col-lg-12">
+                      <div class="row g-2">
+                          <div class="col-12">
+                              <br>
+                              <div class="form-material form-material-success floating">
+                                  <input class="js-maxlength form-control" id="example-material-maxlength7 home_address" type="text" name="title"   rows="3" maxlength="100" data-always-show="true" required/>
+                                  <label for="example-material-maxlength7" style="font-size: 13px;">CATEGORY</label>
+                                  <span class="text-danger errorMessage" id="error_home_address"></span>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="col-lg-12">
+                    <div class="row g-2">
+                        <div class="col-12">
+                            <br>
+                            <div class="form-material form-material-success floating">
+                                <input class="js-maxlength form-control" id="example-material-maxlength7 home_address" type="text" name="title"   rows="3" maxlength="100" data-always-show="true" required/>
+                                <label for="example-material-maxlength7" style="font-size: 13px;">SUB-CATEGORY</label>
+                                <span class="text-danger errorMessage" id="error_home_address"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                  <div class="row g-2">
+                    <div class="col-12">
+                        <div class="form-material form-material-success floating">
+                          <textarea class="form-control" id="material-textarea-large2" name="material-textarea-large2" rows="8"></textarea>
+                          <label for="material-textarea-large2">TRANSACTION DETAIL</label>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                
+
+                <br>
+               
+                  <button type="button" class="btn btn-hero btn-alt-success" data-bs-dismiss="modal">
+                    <i class="fa fa-check"></i> SUBMIT
+                  </button>
+               
+                <br>
+                <br>
+
+                </form>
+              </div>
+            
+            </div>
+          <!-- END Block Tabs Animated Slide Left -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">
+          <i class="fa fa-times"></i> CLOSE
+        </button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<!-- END Slide Up Modal -->
+
+{{-- 
+          <!-- Alternative Tabs in Modal -->
+          <div class="modal" id="view_monitor_vaccinee" tabindex="-1" role="dialog" aria-labelledby="modal-block-tabs-alternative" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-slideup modal-xl" role="document">
+              <div class="modal-content">
+                <!-- Block Tabs Alternative Style -->
+                <div class="block block-transparent bg-white mb-0">
+                  <ul class="nav nav-tabs nav-tabs-alt" role="tablist">
+                    <li class="nav-item">
+                      <button class="nav-link active" id="btabs-alt-static-home-tab" data-bs-toggle="tab" data-bs-target="#btabs-alt-static-home" role="tab" aria-controls="btabs-alt-static-home" aria-selected="true">
+                        Home
+                      </button>
+                    </li>
+                    <li class="nav-item">
+                      <button class="nav-link" id="btabs-alt-static-profile-tab" data-bs-toggle="tab" data-bs-target="#btabs-alt-static-profile" role="tab" aria-controls="btabs-alt-static-profile" aria-selected="false">
+                        Profile
+                      </button>
+                    </li>
+                    <li class="nav-item ms-auto">
+                      <button class="nav-link" id="btabs-alt-static-settings-tab" data-bs-toggle="tab" data-bs-target="#btabs-alt-static-settings" role="tab" aria-controls="btabs-alt-static-settings" aria-selected="false">
+                        <i class="si si-settings"></i>
+                      </button>
+                    </li>
+
+                  </ul>
+                  <div class="block-content tab-content">
+                    <div class="tab-pane active" id="btabs-alt-static-home" role="tabpanel" aria-labelledby="btabs-static-home-tab">
+                      <h4 class="fw-normal">Home Content</h4>
+                      <p>...</p>
+                    </div>
+                    <div class="tab-pane" id="btabs-alt-static-profile" role="tabpanel" aria-labelledby="btabs-static-profile-tab">
+                      <h4 class="fw-normal">Profile Content</h4>
+                      <p>...</p>
+                    </div>
+                    <div class="tab-pane" id="btabs-alt-static-settings" role="tabpanel" aria-labelledby="btabs-static-settings-tab">
+                      <h4 class="fw-normal">Settings Content</h4>
+                      <p>...</p>
+                    </div>
+                  </div>
+                  <div class="block-content block-content-full text-end bg-body">
+                    <button type="button" class="btn btn-sm btn-alt-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal">Done</button>
+                  </div>
+                </div>
+                <!-- END Block Tabs Alternative Style -->
+              </div>
+            </div>
+          </div>
+          <!-- END Alternative Tabs in Modal --> --}}
+
+
+
+
 
    <!-- Slide Up Modal -->
    <div class="modal fade" id="modal-new-record-vaccinee" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" aria-hidden="true">
@@ -108,29 +279,33 @@
                 <input class="form-control" id="vaccinee_id" type="text" name="vaccinee_id" required hidden/>
                 <div class="mb-3">
                   <div class="form-material form-material-success floating">
+                    <label for="floatingDate" style="margin-top: -1.5em; font-size: 13px; color: #9CCC65;" class="fs--2">VACCINEE CODE</label>
                     <input class="form-control" id="vaccinee_code" type="text" name="vaccinee_code" required/>
-                    <label for="material-color-success2" style="font-size: 13px;">VACCINEE CODE</label>
+                    {{-- <label for="material-color-success2" style="font-size: 13px;">VACCINEE CODE</label> --}}
                     <span class="text-danger errorMessage fs--2" id="error_email"></span>
                   </div>
                 </div>
                 <div class="mb-3">
                   <div class="form-material form-material-success floating">
+                    <label for="floatingDate" style="margin-top: -1.5em; font-size: 13px; color: #9CCC65;" class="fs--2">FIRST NAME</label>
                     <input class="form-control" id="first_name" type="text" name="first_name" pattern="[a-zA-Z\s]+" title="Input letters only" required/>
-                    <label for="material-color-success2" style="font-size: 13px;">FIRST NAME</label>
+                    {{-- <label for="material-color-success2" style="font-size: 13px;">FIRST NAME</label> --}}
                     <span class="text-danger errorMessage fs--2" id="error_email"></span>
                   </div>
                 </div>
                 <div class="mb-3">
                   <div class="form-material form-material-success floating">
+                    <label for="floatingDate" style="margin-top: -1.5em; font-size: 13px; color: #9CCC65;" class="fs--2">MIDDLE NAME</label>
                     <input class="form-control" id="middle_name" type="text" name="middle_name" pattern="[a-zA-Z\s]+" title="Input letters only"/>
-                    <label for="material-color-success2" style="font-size: 13px;">MIDDLE NAME</label>
+                    {{-- <label for="material-color-success2" style="font-size: 13px;">MIDDLE NAME</label> --}}
                     <span class="text-danger errorMessage fs--2" id="error_email"></span>
                   </div>
                 </div>
                 <div class="mb-3">
                   <div class="form-material form-material-success floating">
+                    <label for="floatingDate" style="margin-top: -1.5em; font-size: 13px; color: #9CCC65;" class="fs--2">LAST NAME</label>
                     <input class="form-control" id="last_name" type="text" name="last_name" pattern="[a-zA-Z\s]+" title="Input letters only" required/>
-                    <label for="material-color-success2" style="font-size: 13px;">LAST NAME</label>
+                    {{-- <label for="material-color-success2" style="font-size: 13px;">LAST NAME</label> --}}
                     <span class="text-danger errorMessage fs--2" id="error_email"></span>
                   </div>
                 </div>
@@ -152,7 +327,7 @@
                 </div>
                 <div class="mb-3">
                   <div class="form-material form-material-success floating">
-                    <label for="floatingDate" style="margin-top: -1.5em; font-size: 13px;" class="fs--2">Birth Date</label>
+                    <label for="floatingDate" style="margin-top: -1.5em; font-size: 13px; color: #9CCC65;" class="fs--2">Birth Date</label>
                     <input class="form-control datetimepicker" id="birth_date" name="birth_date" type="date" placeholder="dd/mm/yyyy" data-options='{"dateFormat":"d/m/y","disableMobile":true}' id="form-wizard-progress-wizard-datepicker" min="1900-10-20" max="2030-10-20" required/>
                     <span class="text-danger errorMessage fs--2" id="error_birth_date"></span>
                   </div>
@@ -418,55 +593,59 @@
             </button>
           </div>
         </div>
-        <div class="block-content">
+        
           <!-- Project Info -->
-          <table class="table table-striped table-borderless mt-20">
-            <tbody>
-              <tr>
-                <td class="font-w600">Account Status</td>
-                <td colspan="3" id="status"></td>
-              </tr>
-              <tr>
-                <td class="font-w600">Account ID</td>
-                <td id="user_id"></td>
-                <td class="font-w600">Created At</td>
-                <td id="created_at"></td>
-              </tr>
-              <tr>
-                <td class="font-w600">Email</td>
-                <td id="email"></td>
-                <td class="font-w600">Phone number</td>
-                <td id="contact_number"></td>
-              </tr>
-              <tr>
-                <td class="font-w600">Birth Date</td>
-                <td id="birth_date"></td>
-                <td class="font-w600">Sex</td>
-                <td id="sex"></td>
-              </tr>
-              <tr>
-                <td class="font-w600">Region</td>
-                <td id="region"></td>
-                <td class="font-w600">Province</td>
-                <td id="province"></td>
-              </tr>
-              <tr>
-                <td class="font-w600">City</td>
-                <td id="city"></td>
-                <td class="font-w600">Barangay</td>
-                <td id="barangay"></td>
-              </tr>
-              <tr>
-                <td class="font-w600">Home Address</td>
-                <td  id="home_address"></td>
-                <td class="font-w600">Role/Department</td>
-                <td id="role"></td>
-              </tr>
-            </tbody>
-          </table>
+          
+          <div class="table-responsive p-2  ">
+            <table class="table table-striped table-borderless mt-20">
+              <tbody>
+                <tr>
+                  <td class="font-w600 ">Account Status</td>
+                  <td id="status"></td>
+                  <td class="font-w600">Role/Department</td>
+                  <td id="role"></td>
+                </tr>
+                <tr>
+                  <td class="font-w600">Account ID</td>
+                  <td id="user_id"></td>
+                  <td class="font-w600">Created At</td>
+                  <td id="created_at"></td>
+                </tr>
+                <tr>
+                  <td class="font-w600">Email</td>
+                  <td id="email"></td>
+                  <td class="font-w600">Phone number</td>
+                  <td id="contact_number"></td>
+                </tr>
+                <tr>
+                  <td class="font-w600">Birth Date</td>
+                  <td id="birth_date"></td>
+                  <td class="font-w600">Sex</td>
+                  <td id="sex"></td>
+                </tr>
+                <tr>
+                  <td class="font-w600">Region</td>
+                  <td id="region"></td>
+                  <td class="font-w600">Province</td>
+                  <td id="province"></td>
+                </tr>
+                <tr>
+                  <td class="font-w600">City</td>
+                  <td id="city"></td>
+                  <td class="font-w600">Barangay</td>
+                  <td id="barangay"></td>
+                </tr>
+                <tr>
+                  <td class="font-w600">Home Address</td>
+                  <td colspan="3" id="home_address"></td>
+                 
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <!-- END Project Info -->
          
-        </div>
+      
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">Close</button>
@@ -475,6 +654,67 @@
   </div>
 </div>
 <!-- END Pop Out Modal -->
+
+
+ <!-- VACCINEE VIEW Modal -->
+ <div class="modal fade" id="vaccinee_view" tabindex="-1" role="dialog" aria-labelledby="modal-popout" aria-hidden="true">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+      <div class="block block-themed block-transparent mb-0">
+        <div class="block-header bg-primary-dark">
+          <h3 class="block-title">Vaccinee Information</h3>
+          <div class="block-options">
+            <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+              <i class="si si-close"></i>
+            </button>
+          </div>
+        </div>
+        
+          <!-- Project Info -->
+          
+          <div class="table-responsive p-2  ">
+            <table class="table table-striped table-borderless mt-20">
+              <tbody>
+                <tr>
+                  <td class="font-w600 ">VACCINEE CODE</td>
+                  <td id="view_vaccinee_code"></td>
+                </tr>
+                <tr>
+                  <td class="font-w600">FIRST NAME</td>
+                  <td id="view_first_name"></td>
+                </tr>
+                  <tr>
+                  <td class="font-w600">MIDDLE NAME</td>
+                  <td id="view_middle_name"></td>
+                </tr>
+                  <tr>
+                  <td class="font-w600">LAST NAME</td>
+                  <td id="view_last_name"></td>
+                </tr>
+                  <tr>
+                   <td class="font-w600">SUFFIX</td>
+                  <td id="view_suffix"></td>
+                </tr>
+           
+                  <td class="font-w600">BIRTH DATE</td>
+                  <td id="view_birth_date"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- END Project Info -->
+         
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Pop Out Modal -->
+
+
 
 
  <!-- PRE LOADER Modal -->

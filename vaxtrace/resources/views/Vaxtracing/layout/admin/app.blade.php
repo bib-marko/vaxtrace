@@ -21,6 +21,7 @@
     <!-- Page JS Plugins CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vaxtrace_assets/assets/js/plugins/select2/css/select2.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vaxtrace_assets/assets/js/plugins/jquery-tags-input/jquery.tagsinput.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vaxtrace_assets/assets/js/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
 
     <!-- Icons -->
     <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
@@ -330,10 +331,7 @@
                   <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-users"></i><span class="sidebar-mini-hide">Vaccinee Master List</span></a>
                 <ul>
                   <li>
-                    <a href="{{ route('view_vaccinees_ListForVerified') }}"><i class="si si-user-following"></i><span class="sidebar-mini-hide"> List of Verified</a>
-                  </li>
-                  <li>
-                    <a href="{{ route('view_vaccinees_ListForNonVerified') }}"><i class="si si-user-unfollow"></i><span class="sidebar-mini-hide"> List of Non-Verified</a>
+                    <a href="{{ route('view_vaccinees_VaccineeMasterList') }}"><i class="si si-user-unfollow"></i><span class="sidebar-mini-hide"> Vaccinee Monitoring</a>
                   </li>
                   <li>
                 </ul>
@@ -350,7 +348,6 @@
                   </ul>
                 </li>
                 </li>
-               
               </ul>
               
             </div>

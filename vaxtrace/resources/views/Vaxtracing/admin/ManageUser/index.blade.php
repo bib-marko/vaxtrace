@@ -68,6 +68,7 @@
               <thead>
                 <tr>
                   <th scope="col">Fullname</th>
+                  <th scope="col">Role/Department</th>
                   <th scope="col">Status</th>
                   <th scope="col">Action</th>
                 </tr>
@@ -190,6 +191,13 @@
             
                 },
 
+                //ROLE/DEPARTMENT
+                { data: 'short_code', 
+                // data.role.short_code
+                },
+
+               
+
                 //ACCOUNT STATUS
                 {
                     data: 'user_status',
@@ -232,14 +240,10 @@
                   data: 'reason',
                     render(data) {
                           return `
-                          <!-- reason Alert -->
-                          <div class="alert alert-info d-flex align-items-center" role="alert">
+                          <span class="badge btn-alt-info font-w700 p-2 text-uppercase"
                             <i class="fa fa-fw fa-info mr-10"></i>
-                            <p class="mb-0">
                               `+data+`!
-                            </p>
-                          </div>
-                          <!-- END reason Alert -->
+                          </span>
                           `;
                     },
                   },
@@ -271,14 +275,10 @@
                   data: 'reason',
                     render(data) {
                           return `
-                          <!-- reason Alert -->
-                          <div class="alert alert-info d-flex align-items-center" role="alert">
+                          <span class="badge btn-alt-info font-w700 p-2 text-uppercase"
                             <i class="fa fa-fw fa-info mr-10"></i>
-                            <p class="mb-0">
                               `+data+`!
-                            </p>
-                          </div>
-                          <!-- END reason Alert -->
+                          </span>
                           `;
                     },
                   },
@@ -341,10 +341,14 @@
               $('#barangay').text(data.person.barangay);
               $('#status').html(isApproved(data.person.deleted_at));
               $('#full_name').text(generateFullname(data));
-              $('#role').text(data.role.short_code);
+              $('#role').html(toBadge(data.role.short_code));
           })
 
           $("#m_user").modal("show");
+        }
+
+        function toBadge(data){
+          return `<span class="badge btn-alt-success font-w700 p-2 text-uppercase">`+data+`</span>`;
         }
       
         function delete_people(id){
