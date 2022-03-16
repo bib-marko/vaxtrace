@@ -41,7 +41,7 @@ class JsonDataController extends Controller
                                 ->where('last_name', '=', $row['vaxcert_pre_registration']['last_name'])
                                 ->where('middle_name', '=', $row['vaxcert_pre_registration']['middle_name'])
                                 ->where('suffix', '=', $row['vaxcert_pre_registration']['suffix'])
-                                ->where('birth_date', '=', $row['vaxcert_pre_registration']['date_of_birth'])
+                                ->where('birth_date', '=', formatDate($row['vaxcert_pre_registration']['date_of_birth']))
                                 ->first();
            
             if( $verifiedVaccinee == null)
