@@ -40,7 +40,7 @@ class JsonDataController extends Controller
                                 ->where('first_name', '=', $row['vaxcert_pre_registration']['first_name'])
                                 ->where('last_name', '=', $row['vaxcert_pre_registration']['last_name'])
                                 ->where('middle_name', '=', $row['vaxcert_pre_registration']['middle_name'])
-                                ->where('suffix', '=', $row['vaxcert_pre_registration']['suffix'])
+                                ->where('suffix', '=', formatString($row['vaxcert_pre_registration']['suffix']))
                                 ->where('birth_date', '=', formatDate($row['vaxcert_pre_registration']['date_of_birth']))
                                 ->first();
            
