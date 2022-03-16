@@ -19,33 +19,33 @@
             </div>
           </div>
           <div class="block-content">
-            <form role="form" id="formAddUser">
+            <form role="form" id="formAddVaccinee" novalidate>
               @csrf
 
               <div class="mb-3">
                 <div class="form-material form-material-success floating">
-                  <input class="form-control" id="material-select2" type="email" name="email"  pattern="^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$" required="required" data-wizard-validate-email="true" />
+                  <input class="form-control" id="material-select2" type="text" name="vaccinee_code" required/>
                   <label for="material-color-success2" style="font-size: 13px;">VACCINEE CODE</label>
                   <span class="text-danger errorMessage fs--2" id="error_email"></span>
                 </div>
               </div>
               <div class="mb-3">
                 <div class="form-material form-material-success floating">
-                  <input class="form-control" id="material-select2" type="email" name="email"  pattern="^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$" required="required" data-wizard-validate-email="true" />
+                  <input class="form-control" id="material-select2" type="text" name="first_name" pattern="[a-zA-Z\s]+" title="Input letters only" required/>
                   <label for="material-color-success2" style="font-size: 13px;">FIRST NAME</label>
                   <span class="text-danger errorMessage fs--2" id="error_email"></span>
                 </div>
               </div>
               <div class="mb-3">
                 <div class="form-material form-material-success floating">
-                  <input class="form-control" id="material-select2" type="email" name="email"  pattern="^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$" required="required" data-wizard-validate-email="true" />
+                  <input class="form-control" id="material-select2" type="text" name="middle_name" pattern="[a-zA-Z\s]+" title="Input letters only"/>
                   <label for="material-color-success2" style="font-size: 13px;">MIDDLE NAME</label>
                   <span class="text-danger errorMessage fs--2" id="error_email"></span>
                 </div>
               </div>
               <div class="mb-3">
                 <div class="form-material form-material-success floating">
-                  <input class="form-control" id="material-select2" type="email" name="email"  pattern="^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$" required="required" data-wizard-validate-email="true" />
+                  <input class="form-control" id="material-select2" type="text" name="last_name" pattern="[a-zA-Z\s]+" title="Input letters only" required/>
                   <label for="material-color-success2" style="font-size: 13px;">LAST NAME</label>
                   <span class="text-danger errorMessage fs--2" id="error_email"></span>
                 </div>
@@ -66,13 +66,20 @@
                   <span class="text-danger errorMessage" id="error_suffix"></span>
                 </div>
               </div>
-
+              <div class="mb-3">
+                <div class="form-material form-material-success floating">
+                  <label for="floatingDate" style="margin-top: -1.5em; font-size: 13px;" class="fs--2">Birth Date</label>
+                  <input class="form-control datetimepicker" id="floatingDate" name="birth_date" type="date" placeholder="dd/mm/yyyy" data-options='{"dateFormat":"d/m/y","disableMobile":true}' id="form-wizard-progress-wizard-datepicker" min="1900-10-20" max="2030-10-20" required/>
+                  <span class="text-danger errorMessage fs--2" id="error_birth_date"></span>
+                </div>
+              </div>
+             
             </form>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-alt-success" data-dismiss="modal">
+          <button type="button" class="btn btn-alt-success" id="btnAddNewVaccinee">
             <i class="fa fa-check"></i> Submit
           </button>
         </div>
@@ -81,6 +88,89 @@
   </div>
   <!-- END Slide Up Modal -->
 
+
+     <!-- Slide Up Modal -->
+     <div class="modal fade" id="modal-update-record-vaccinee" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-slideup" role="document">
+        <div class="modal-content">
+          <div class="block block-themed block-transparent mb-0">
+            <div class="block-header bg-primary-dark">
+              <h3 class="block-title">UPDATE RECORD</h3>
+              <div class="block-options">
+                <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                  <i class="si si-close"></i>
+                </button>
+              </div>
+            </div>
+            <div class="block-content">
+              <form role="form" id="formUpdateVaccinee" novalidate>
+                @csrf
+                <input class="form-control" id="vaccinee_id" type="text" name="vaccinee_id" required hidden/>
+                <div class="mb-3">
+                  <div class="form-material form-material-success floating">
+                    <input class="form-control" id="vaccinee_code" type="text" name="vaccinee_code" required/>
+                    <label for="material-color-success2" style="font-size: 13px;">VACCINEE CODE</label>
+                    <span class="text-danger errorMessage fs--2" id="error_email"></span>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="form-material form-material-success floating">
+                    <input class="form-control" id="first_name" type="text" name="first_name" pattern="[a-zA-Z\s]+" title="Input letters only" required/>
+                    <label for="material-color-success2" style="font-size: 13px;">FIRST NAME</label>
+                    <span class="text-danger errorMessage fs--2" id="error_email"></span>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="form-material form-material-success floating">
+                    <input class="form-control" id="middle_name" type="text" name="middle_name" pattern="[a-zA-Z\s]+" title="Input letters only"/>
+                    <label for="material-color-success2" style="font-size: 13px;">MIDDLE NAME</label>
+                    <span class="text-danger errorMessage fs--2" id="error_email"></span>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="form-material form-material-success floating">
+                    <input class="form-control" id="last_name" type="text" name="last_name" pattern="[a-zA-Z\s]+" title="Input letters only" required/>
+                    <label for="material-color-success2" style="font-size: 13px;">LAST NAME</label>
+                    <span class="text-danger errorMessage fs--2" id="error_email"></span>
+                  </div>
+                </div>
+  
+                <div class="mb-3">
+                  <div class="form-material form-material-success floating">
+                    <select class="form-control" id="suffix" name="suffix" aria-label="Floating label select example">
+                      <option value="" selected></option>
+                      <option value="JR"><center>JR</center></option>
+                      <option value="SR"><center>SR</center></option>
+                      <option value="II"><center>II</center></option>
+                      <option value="III"><center>III</center></option>
+                      <option value="III"><center>IV</center></option>
+                      <option value="III"><center>V</center></option>
+                    </select>
+                    <label for="material-color-select2" style="font-size: 13px;">SUFFIX</label>
+                    <span class="text-danger errorMessage" id="error_suffix"></span>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="form-material form-material-success floating">
+                    <label for="floatingDate" style="margin-top: -1.5em; font-size: 13px;" class="fs--2">Birth Date</label>
+                    <input class="form-control datetimepicker" id="birth_date" name="birth_date" type="date" placeholder="dd/mm/yyyy" data-options='{"dateFormat":"d/m/y","disableMobile":true}' id="form-wizard-progress-wizard-datepicker" min="1900-10-20" max="2030-10-20" required/>
+                    <span class="text-danger errorMessage fs--2" id="error_birth_date"></span>
+                  </div>
+                </div>
+               
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-alt-success" id="btnUpdateVaccinee">
+              <i class="fa fa-check"></i> Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END Slide Up Modal
 
 
      <!-- Slide Up Modal -->
@@ -97,19 +187,19 @@
               </div>
             </div>
             <div class="block-content">
-              <form role="form" id="formAddUser">
+              <form role="form" id="formCreateCat">
                 @csrf
 
                 <div class="mb-3">
                   <div class="form-material form-material-success floating">
-                    <input class="form-control" id="material-select2" type="email" name="email"  pattern="^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$" required="required" data-wizard-validate-email="true" />
+                    <input class="form-control" id="material-select2" type="text" name="cat_name" required/>
                     <label for="material-color-success2" style="font-size: 13px;">CATEGORY NAME</label>
                     <span class="text-danger errorMessage fs--2" id="error_email"></span>
                   </div>
                 </div>
                 <div class="mb-3">
                   <div class="form-material form-material-success floating">
-                    <input class="form-control" id="material-select2" type="email" name="email"  pattern="^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$" required="required" data-wizard-validate-email="true" />
+                    <input class="form-control" id="material-select2" type="text" name="cat_desc" required/>
                     <label for="material-color-success2" style="font-size: 13px;">CATEGORY DESCRIPTION</label>
                     <span class="text-danger errorMessage fs--2" id="error_email"></span>
                   </div>
@@ -120,7 +210,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-alt-success" data-dismiss="modal">
+            <button type="button" class="btn btn-alt-success" id="btnNewCategory">
               <i class="fa fa-check"></i> Submit
             </button>
           </div>
@@ -129,6 +219,52 @@
     </div>
     <!-- END Slide Up Modal -->
 
+     <!-- Slide Up Modal -->
+     <div class="modal fade" id="modal-update-record-category" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-slideup" role="document">
+        <div class="modal-content">
+          <div class="block block-themed block-transparent mb-0">
+            <div class="block-header bg-primary-dark">
+              <h3 class="block-title">UPDATE CATEGORY</h3>
+              <div class="block-options">
+                <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                  <i class="si si-close"></i>
+                </button>
+              </div>
+            </div>
+            <div class="block-content">
+              <form role="form" id="formUpdateCat">
+                @csrf
+                <input class="form-control" id="cat_id" type="text" name="cat_id" required hidden/>
+                <div class="mb-3">
+                  <div class="form-material form-material-success floating">
+                    
+                    <input class="form-control material-select2" id="cat_name" type="text" name="cat_name" required/>
+                    <label for="material-color-success2" style="font-size: 13px;">CATEGORY NAME</label>
+                    <span class="text-danger errorMessage fs--2" id="error_email"></span>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="form-material form-material-success floating">
+                    <input class="form-control material-select2" id="cat_desc" type="text" name="cat_desc" required/>
+                    <label for="material-color-success2" style="font-size: 13px;">CATEGORY DESCRIPTION</label>
+                    <span class="text-danger errorMessage fs--2" id="error_email"></span>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-alt-success" id="btnUpdateCategory">
+              <i class="fa fa-check"></i> Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END Slide Up Modal -->
 
 
       <!-- Slide Up Modal -->
@@ -145,19 +281,19 @@
                 </div>
               </div>
               <div class="block-content">
-                <form role="form" id="formAddUser">
+                <form role="form" id="formCreateSubCat">
                   @csrf
   
                   <div class="mb-3">
                     <div class="form-material form-material-success floating">
-                      <input class="form-control" id="material-select2" type="email" name="email"  pattern="^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$" required="required" data-wizard-validate-email="true" />
+                      <input class="form-control" id="material-select2" type="text" name="sub_cat_name" required/>
                       <label for="material-color-success2" style="font-size: 13px;">SUB-CATEGORY NAME</label>
                       <span class="text-danger errorMessage fs--2" id="error_email"></span>
                     </div>
                   </div>
                   <div class="mb-3">
                     <div class="form-material form-material-success floating">
-                      <input class="form-control" id="material-select2" type="email" name="email"  pattern="^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$" required="required" data-wizard-validate-email="true" />
+                      <input class="form-control" id="material-select2" type="text" name="sub_cat_desc" required/>
                       <label for="material-color-success2" style="font-size: 13px;">SUB-CATEGORY DESCRIPTION</label>
                       <span class="text-danger errorMessage fs--2" id="error_email"></span>
                     </div>
@@ -168,7 +304,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-alt-success" data-dismiss="modal">
+              <button type="button" class="btn btn-alt-success" id="btnCreateSubCat">
                 <i class="fa fa-check"></i> Submit
               </button>
             </div>
@@ -177,7 +313,52 @@
       </div>
       <!-- END Slide Up Modal -->
 
-
+       <!-- Slide Up Modal -->
+       <div class="modal fade" id="modal-update-record-sub-category" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-slideup" role="document">
+          <div class="modal-content">
+            <div class="block block-themed block-transparent mb-0">
+              <div class="block-header bg-primary-dark">
+                <h3 class="block-title">UPDATE SUB-CATEGORY</h3>
+                <div class="block-options">
+                  <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="si si-close"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="block-content">
+                <form role="form" id="formUpdateSubCat">
+                  @csrf
+  
+                  <div class="mb-3">
+                    <input class="form-control" id="sub_cat_id" type="text" name="sub_cat_id" required hidden/>
+                    <div class="form-material form-material-success floating">
+                      <input class="form-control" id="sub_cat_name" type="text" name="sub_cat_name" required/>
+                      <label for="material-color-success2" style="font-size: 13px;">SUB-CATEGORY NAME</label>
+                      <span class="text-danger errorMessage fs--2" id="error_email"></span>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <div class="form-material form-material-success floating">
+                      <input class="form-control" id="sub_cat_desc" type="text" name="sub_cat_desc" required/>
+                      <label for="material-color-success2" style="font-size: 13px;">SUB-CATEGORY DESCRIPTION</label>
+                      <span class="text-danger errorMessage fs--2" id="error_email"></span>
+                    </div>
+                  </div>
+  
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-alt-success" id="btnUpdateSubCat">
+                <i class="fa fa-check"></i> Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END Slide Up Modal -->
 
 <!-- Pop Out Modal -->
 <div class="modal fade" id="view_role" tabindex="-1" role="dialog" aria-labelledby="modal-popout" aria-hidden="true">

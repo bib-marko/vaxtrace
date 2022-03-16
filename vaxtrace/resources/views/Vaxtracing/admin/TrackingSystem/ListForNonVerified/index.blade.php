@@ -8,7 +8,7 @@
      <!-- table for activity log -->
     <div class="block">
         <div class="block-header block-header-default">
-        <h3 class="block-title"><i class="si si-user-unfollow"></i> VERIFY VACCINEES</h3>
+        <h3 class="block-title"><i class="si si-user-unfollow"></i> NON-VERIFIED VACCINEES</h3>
         <div class="block-options">
             <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
         </div>
@@ -17,16 +17,7 @@
             <div class="col-md-3">
               <div class="block">
                 <div class="block-content">
-                  <form class="row align-items-center g-3">
-                    <div class="col-md-auto position-relative">
-                      @if (session('LoggedUser')->hasPermission('USER_CREATE'))
-                        <a class="btn btn-hero btn-alt-primary mr-5 mb-5 btn-block" type="button" href="{{ route('get_create_user') }}"><i class="fa fa-plus mr-5"></i>New Record</a> 
-                      @endif
-                     <!-- Slide Up Modal -->
-                      {{-- <button type="button" class="btn btn-hero btn-alt-default mr-5 mb-5 btn-block" data-toggle="modal" data-target="#create"><i class="fa fa-plus mr-5"></i>Create User</button>
-                      <!-- END Slide Up Modal --> --}}
-                    </div>
-                  </form>
+                 
                 </div>
               </div>
             </div>
@@ -54,6 +45,7 @@
                         <th scope="col">Middle Name</th>
                         <th scope="col">Last Name</th>
                         <th scope="col">Suffix</th>
+                        <th scope="col">Birth Date</th>
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
@@ -82,10 +74,12 @@
             //     return data;
             // }
             //MASTER LIST
+            var vaccinee_data = "{{ route('get_vaccinees') }}";
+            console.log(vaccinee_data);
             table = $('#vaccinees_dt').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('get_vaccinees') }}",
+                ajax: vaccinee_data,
                 columns: [
                     //UNIQ_ID
                     {data: 'uniq_id'},
@@ -107,6 +101,7 @@
                             return formatName(data);
                         },
                     },
+                    {data: 'birth_date'},
                     {data: 'action'},
                 ]  
             });
@@ -118,13 +113,67 @@
                     return data;
                 }
             }
+            $('#vaccinees_dt tbody').on('click', '[id*=btnVerify]', function (e) {
+              
+              Swal.fire({
+                  title: 'Are you sure you want to verify this vaccinee?',
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonText: 'Yes',
+              }).then((result) => {
+                  /* Read more about isConfirmed, isDenied below */
+                  if (result.isConfirmed) {
+                    e.preventDefault();
+
+                    var data = table.row($(this).parents('tr')[0]).data();
+                    console.log(data);
+                    var formData = new FormData();
+                    formData.append("vaccinee_code",data['uniq_id'] );
+                    formData.append("first_name",data['first_name'] );
+                    formData.append("middle_name",data['middle_name'] );
+                    formData.append("last_name",data['last_name'] );
+                    formData.append("suffix",data['suffix'] );
+                    formData.append("birth_date",data['birth_date'] );
+                    $.ajax({
+                        url: "{{ route('vaccinee.store') }}",
+                        data: formData,
+                        cache: false,
+                        processData: false,
+                        contentType: false,
+                        type: 'POST',
+                        beforeSend: function () {
+                            showLoader();
+                        },
+                        complete: function () {
+                            hideLoader();
+                        },
+                        success: function (response) {
+                            Swal.fire({
+                                title: 'Success!',
+                                icon: 'success',
+                                text: "A new record has been created",
+                                confirmButtonText: 'Ok',
+                            }).then((result) => {
+                                /* Read more about isConfirmed, isDenied below */
+                                if (result.isConfirmed) {
+                                window.location.href = "{{ route('view_vaccinees_ListForNonVerified') }}";
+                                }
+                            })
+                        },
+                        error: function(response){
+                            $('.errorMessage').text("");
+                            $.each(response.responseJSON.errors,function(field_name,error){            
+                                $(document).find('[id=error_'+field_name+']').text("*"+error)
+                            })
+                        }
+                    });
+                   
+                  } 
+              })
+            });
             
         });
-        function verifyVaccinee(id){
-            console.log( table.row(id).data() );
-            //console.log( table.search( 1 ).data() );
-            
-        }
+        
     </script>
     @endsection
 @endsection
