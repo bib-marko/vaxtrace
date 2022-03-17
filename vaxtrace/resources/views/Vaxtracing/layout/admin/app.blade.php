@@ -56,7 +56,9 @@
       /* body{
         font-family: Inter, sans-serif !important;
       } */
-      
+      body {
+        overflow: scroll !important; /* Show scrollbars */
+      }
       .avatar {
         vertical-align: middle;
         width: 40px;

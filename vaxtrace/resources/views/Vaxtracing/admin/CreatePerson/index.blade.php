@@ -203,6 +203,7 @@
 
         var getAddressUrl = '{{ route("get_address") }}';
         $(function () {
+          //set validator to forms
           let validator = $('#formAddUser').jbvalidator({
                     errorMessage: true,
                     successClass: false,
@@ -213,6 +214,7 @@
 
             var form = document.getElementById("formAddUser");
             var formData = new FormData(form);
+            //check form errors
             if(validator.checkAll() == 0){
               $.ajax({
                 url: "/create/people",

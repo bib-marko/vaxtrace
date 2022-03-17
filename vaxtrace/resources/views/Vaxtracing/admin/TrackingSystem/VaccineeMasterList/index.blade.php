@@ -51,10 +51,10 @@
                 <div class="col-md-6 justify-content-center ml-auto">
                 <div class="block mr-15 ml-15">
                     <div class="form-material floating input-group form-material-primary">
-                    <input type="text" class="form-control" id="search_bar" name="material-color-success2">
+                    <input type="text" class="form-control" id="search_bar_verified" name="material-color-success2">
                     <label for="material-color-success2">Search here...</label>
                     <div class="input-group-append">
-                        <button type="button" class="view" id="search_btn" style="background: none; border:none">
+                        <button type="button" class="view" id="search_btn_verified" style="background: none; border:none">
                         <i class="si si-magnifier"></i>     
                         </button>
                     </div>
@@ -104,10 +104,10 @@
                 <div class="col-md-6 justify-content-center ml-auto">
                 <div class="block mr-15 ml-15">
                     <div class="form-material floating input-group form-material-primary">
-                    <input type="text" class="form-control" id="search_bar" name="material-color-success2">
+                    <input type="text" class="form-control" id="search_bar_non_verified" name="material-color-success2">
                     <label for="material-color-success2">Search here...</label>
                     <div class="input-group-append">
-                        <button type="button" class="view" id="search_btn" style="background: none; border:none">
+                        <button type="button" class="view" id="search_btn_non_verified" style="background: none; border:none">
                         <i class="si si-magnifier"></i>     
                         </button>
                     </div>
@@ -141,6 +141,7 @@
 <script type="text/javascript">   
     var tableForVerified;
     var tableForNonVerified;
+    var verifiedQr = [];
     $(function () {
         $.ajaxSetup({
             headers: {
@@ -151,10 +152,18 @@
         tableForVerified = $('#verified_dt').DataTable({
             processing: true,
             serverSide: true,
+            scrollX: true,
             ajax: "{{ route('vaccinee.index') }}",
             columns: [
                 //UNIQ_ID
-                {data: 'vaccinee_code'},
+                {
+                    data: 'vaccinee_code',
+                        render(data) {
+                            verifiedQr.push(data);
+                        return data;
+                    },
+            
+                },
                 //FULLNAME
                 {data: 'first_name'},
                 //ACTIVITY
@@ -177,100 +186,112 @@
                 {data: 'action'},
             ]  
         });
-        
-        
-        //MASTER LIST
+        var currentQr;
         var vaccinee_data = "{{ route('get_vaccinees') }}";
-            console.log(vaccinee_data);
-            tableForNonVerified = $('#non_verified_dt').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: vaccinee_data,
-                columns: [
-                    //UNIQ_ID
-                    {
-                        data: 'qrcode'
-                    },
-                    //FULLNAME
-                    {
-                        data: 'vaxcert_pre_registration',
-                            render(data) {
-                                return generateFullname(data);
-                            },
-                    },
-                    //DATE OF BIRTH
-                    { data: 'vaxcert_pre_registration.date_of_birth' },
-                    {data: 'action'},
-                ]  
-            });
-
-
-            function formatName(data){
-                if(data == null || data == ""){
-                    return "-";
-                }
-                else{
-                    return data;
-                }
-            }
-            $('#non_verified_dt tbody').on('click', '[id*=btnVerify]', function (e) {
-              
-              Swal.fire({
-                  title: 'Are you sure you want to verify this vaccinee?',
-                  icon: 'warning',
-                  showCancelButton: true,
-                  confirmButtonText: 'Yes',
-              }).then((result) => {
-                  /* Read more about isConfirmed, isDenied below */
-                    if (result.isConfirmed) {
-                        e.preventDefault();
-
-                        var data = table.row($(this).parents('tr')[0]).data();
-                        console.log(data['qrcode']);
-                        var formData = new FormData();
-                        formData.append("vaccinee_code",data['qrcode'] );
-                        formData.append("first_name",data['vaxcert_pre_registration']['first_name'] );
-                        formData.append("middle_name",data['vaxcert_pre_registration']['middle_name'] );
-                        formData.append("last_name",data['vaxcert_pre_registration']['last_name'] );
-                        formData.append("suffix",data['vaxcert_pre_registration']['suffix'] );
-                        formData.append("birth_date",data['vaxcert_pre_registration']['date_of_birth'] );
-                        
-                        $.ajax({
-                            url: "{{ route('vaccinee.store') }}",
-                            data: formData,
-                            cache: false,
-                            processData: false,
-                            contentType: false,
-                            type: 'POST',
-                            beforeSend: function () {
-                                showLoader();
-                            },
-                            complete: function () {
-                                hideLoader();
-                            },
-                            success: function (response) {
-                                Swal.fire({
-                                    title: 'Success!',
-                                    icon: 'success',
-                                    text: "A new record has been created",
-                                    confirmButtonText: 'Ok',
-                                }).then((result) => {
-                                    /* Read more about isConfirmed, isDenied below */
-                                    // if (result.isConfirmed) {
-                                    // window.location.href = "{{ route('view_vaccinees_ListForNonVerified') }}";
-                                    // }
-                                })
-                            },
-                            error: function(response){
-                                $('.errorMessage').text("");
-                                $.each(response.responseJSON.errors,function(field_name,error){            
-                                    $(document).find('[id=error_'+field_name+']').text("*"+error)
-                                })
+        //MASTER LIST    
+        tableForNonVerified = $('#non_verified_dt').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: vaccinee_data,
+            columns: [
+                //UNIQ_ID
+                {
+                    data: 'qrcode',
+                        render(data) {
+                            currentQr = data;
+                            return data;
+                        },
+                },
+                //FULLNAME
+                {
+                    data: 'vaxcert_pre_registration',
+                        render(data) {
+                            return generateFullname(data);
+                        },
+                },
+                //DATE OF BIRTH
+                { data: 'vaxcert_pre_registration.date_of_birth' },
+                {
+                    data: null,
+                        render(data) {
+                            if(verifiedQr.includes(currentQr)){
+                                return "<a class='view btn btn-alt-primary btn-rounded mr-5 mb-5' disabled><i class='si si-check mr-5'></i>Verified</button></a>";
                             }
-                        });
-                    } 
-                })
-            });
+                            else{
+                                return "<a class='view btn btn-alt-danger btn-rounded mr-5 mb-5' id='btnVerify'><i class='si si-check mr-5'></i>Verify</button></a>";
+                            }
+                        },
+                },
+            ]  
+        });
+
+
+        function formatName(data){
+            if(data == null || data == ""){
+                return "-";
+            }
+            else{
+                return data;
+            }
+        }
+        $('#non_verified_dt tbody').on('click', '[id*=btnVerify]', function (e) {
+            Swal.fire({
+                title: 'Are you sure you want to verify this vaccinee?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    e.preventDefault();
+
+                    var data = tableForNonVerified.row($(this).parents('tr')[0]).data();
+                    console.log(data['qrcode']);
+                    var formData = new FormData();
+                    formData.append("vaccinee_code",data['qrcode'] );
+                    formData.append("first_name",data['vaxcert_pre_registration']['first_name'] );
+                    formData.append("middle_name",data['vaxcert_pre_registration']['middle_name'] );
+                    formData.append("last_name",data['vaxcert_pre_registration']['last_name'] );
+                    formData.append("suffix",data['vaxcert_pre_registration']['suffix'] );
+                    formData.append("birth_date",data['vaxcert_pre_registration']['date_of_birth'] );
+                    
+                    $.ajax({
+                        url: "{{ route('vaccinee.store') }}",
+                        data: formData,
+                        cache: false,
+                        processData: false,
+                        contentType: false,
+                        type: 'POST',
+                        beforeSend: function () {
+                            showLoader();
+                        },
+                        complete: function () {
+                            hideLoader();
+                        },
+                        success: function (response) {
+                            Swal.fire({
+                                title: 'Success!',
+                                icon: 'success',
+                                text: "A new record has been created",
+                                confirmButtonText: 'Ok',
+                            }).then((result) => {
+                                /* Read more about isConfirmed, isDenied below */
+                                if (result.isConfirmed) {
+                                    //tableForNonVerified.draw();
+                                    location.reload();
+                                }
+                            })
+                        },
+                        error: function(response){
+                            $('.errorMessage').text("");
+                            $.each(response.responseJSON.errors,function(field_name,error){            
+                                $(document).find('[id=error_'+field_name+']').text("*"+error)
+                            })
+                        }
+                    });
+                } 
+            })
+        });
 
 
         $('#btnAddNewVaccinee').click(function (e) {
@@ -303,9 +324,9 @@
                             confirmButtonText: 'Ok',
                         }).then((result) => {
                             /* Read more about isConfirmed, isDenied below */
-                            // if (result.isConfirmed) {
-                            // window.location.href = "{{ route('view_vaccinees_ListForVerified') }}";
-                            // }
+                            if (result.isConfirmed) {
+                                tableForVerified.draw();
+                            }
                         })
                     },
                     error: function(response){
@@ -349,9 +370,10 @@
                         confirmButtonText: 'Ok',
                     }).then((result) => {
                         /* Read more about isConfirmed, isDenied below */
-                        // if (result.isConfirmed) {
-                        // window.location.href = "{{ route('view_vaccinees_ListForVerified') }}";
-                        // }
+                        if (result.isConfirmed) {
+                            tableForVerified.draw();
+                            $('#modal-update-record-vaccinee').modal("hide");
+                        }
                     })
                 },
                 error: function(response){
@@ -368,8 +390,13 @@
        
         $(".dataTables_filter").hide(); 
 
-        
-        
+        $('#search_btn_verified').on('click', function(){
+            tableForVerified.search($('#search_bar_verified').val().toUpperCase()).draw();
+        })
+
+        $('#search_btn_non_verified').on('click', function(){
+            tableForNonVerified.search($('#search_bar_non_verified').val().toUpperCase()).draw();
+        })
     });
     
     function formatName(data){
@@ -423,48 +450,48 @@
       $("#modal-update-record-vaccinee").modal("show");
     }
     
-        function delete_vaccinee(id){
-            Swal.fire({
-                title: 'Do you want to delete this vaccinee?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes',
-            }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ route('delete_vaccinee') }}"+'/'+id,
-                        processData: false,
-                        contentType: false,
-                        beforeSend: function () {
-                            showLoader();
-                        },
-                        complete: function () {
-                            hideLoader();
-                        },
-                        success: function (response) {
-                            Swal.fire({
-                                title: 'Success!',
-                                icon: 'success',
-                                text: "The vaccinee has been deleted",
-                                confirmButtonText: 'Ok',
-                            }).then((result) => {
-                                /* Read more about isConfirmed, isDenied below */
-                                if (result.isConfirmed) {
-                                    location.reload();
-                                }
-                            })
-                        },
-                        error: function (response) {
-                            hideLoader();
-                        }
-                    }); 
-                } else{
-                
-                }
-            })
-        }
+    function delete_vaccinee(id){
+        Swal.fire({
+            title: 'Do you want to delete this vaccinee?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('delete_vaccinee') }}"+'/'+id,
+                    processData: false,
+                    contentType: false,
+                    beforeSend: function () {
+                        showLoader();
+                    },
+                    complete: function () {
+                        hideLoader();
+                    },
+                    success: function (response) {
+                        Swal.fire({
+                            title: 'Success!',
+                            icon: 'success',
+                            text: "The vaccinee has been deleted",
+                            confirmButtonText: 'Ok',
+                        }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                tableForVerified.ajax.reload();
+                            }
+                        })
+                    },
+                    error: function (response) {
+                        hideLoader();
+                    }
+                }); 
+            } else{
+            
+            }
+        })
+    }
     
 </script>
 @endsection

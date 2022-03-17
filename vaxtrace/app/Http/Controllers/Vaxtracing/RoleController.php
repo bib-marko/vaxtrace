@@ -26,13 +26,13 @@ class RoleController extends Controller
                 ->addColumn('action', function($row){
                     $actionBtn = "";
                     if(session('LoggedUser')->hasPermission('ROLE_VIEW')){
-                        $actionBtn .= "<a class='view btn btn-alt-primary btn-rounded mr-5 mb-5' onclick='show_role($row->id)'><i class='si si-eye mr-5'></i>View</button></a>";
+                        $actionBtn .= "<a class='view btn btn-alt-primary mr-5 mb-5' onclick='show_role($row->id)'><i class='si si-eye mr-5'></i>View</button></a>";
                     }
                     if(session('LoggedUser')->hasPermission('ROLE_UPDATE')){
-                        $actionBtn .= "<a href='".route('update_department', $row->id)."' class='update btn btn-alt-success btn-rounded mr-5 mb-5'><i class='si si-pencil mr-5'></i>Update</a>";
+                        $actionBtn .= "<a href='".route('update_department', $row->id)."' class='update btn btn-alt-success mr-5 mb-5'><i class='si si-pencil mr-5'></i>Update</a>";
                     }
                     if(session('LoggedUser')->hasPermission('ROLE_DELETE')){
-                        $actionBtn .= "<a class='delete delete btn btn-alt-danger btn-rounded mr-5 mb-5' onclick='delete_role($row->id)'><i class='si si-trash mr-5'></i>Delete</a>";
+                        $actionBtn .= "<a class='delete delete btn btn-alt-danger mr-5 mb-5' onclick='delete_role($row->id)'><i class='si si-trash mr-5'></i>Delete</a>";
                     }
             
                     return $actionBtn;
