@@ -2,6 +2,12 @@
 
 {{--Show Role Modal--}}
 
+<style>
+  .modal-body {
+    max-height:600px; 
+    overflow-y: auto;
+}
+</style>
 
 
 <!-- Slide Up Modal -->
@@ -10,14 +16,14 @@
     <div class="modal-content">
       <div class="block block-themed block-transparent mb-0">
         <div class="block-header bg-primary-dark">
-          <h3 class="block-title">Terms &amp; Conditions</h3>
+          <h3 class="block-title">Monitor Vaccinee</h3>
           <div class="block-options">
             <button type="button" class="btn-block-option" data-bs-dismiss="modal">
               <i class="si si-close"></i>
             </button>
           </div>
         </div>
-        <div class="block-content p-0">
+        <div class="block-content modal-body p-0">
           <!-- Block Tabs Animated Slide Left -->
             <ul class="nav nav-tabs nav-tabs-block bg-earth-light" data-toggle="tabs" role="tablist">
               <li class="nav-item">
@@ -32,14 +38,69 @@
             </ul>
             <div class="block-content tab-content overflow-hidden">
               <div class="tab-pane fade fade-left show active" id="btabs-animated-slideleft-home" role="tabpanel">
-                <h4 class="font-w400">Home Content</h4>
-                <p>Content slides in to the left..</p>
+                <!-- Partial Table -->
+                <div class="block">
+               
+                  <div class="block-content">
+
+
+                    <div class="col-md-12">
+                      <a class="block block-link-shadow block-transparent border-left border-5x border-warning">
+                        <div class="block-content block-content-full bg-white-op-90">
+                          <div class="pt-20">
+                            <h3 class="h4 font-w700 mb-10">An adventure of a lifetime to remember</h3>
+                            <h4 class="text-muted font-size-default mb-0">
+                              The second way is to use 
+                            </h4>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+
+                    <table class="table table-striped table-responsive table-vcenter">
+                      <thead>
+                        <tr>
+                          <th>CATEGORY</th>
+                          <th class="d-none d-sm-table-cell" style="width: 20%;">SUB-CATEGORY</th>
+                          <th class="d-none d-sm-table-cell" style="width: 30%;">TRANSACTION DETAILS</th>
+                          <th class="d-none d-sm-table-cell" style="width: 20%;">ASSIST BY</th>
+                          <th class="d-none d-sm-table-cell" style="width: 20%;">DATE OF TRANSACT</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          
+                          <td class="font-w600">Mana</td>
+                          <td class="d-none d-sm-table-cell">client1@example.com</td>
+                          <td class="d-none d-sm-table-cell">
+                            <span class="badge badge-primary">Personal</span>
+                          </td>
+                          <td class="d-none d-sm-table-cell">client1@example.com</td>
+                          <td class="d-none d-sm-table-cell">2022/01/13</td>
+                        </tr>
+                        <tr>
+                          
+                          <td class="font-w600">Ryan Flores</td>
+                          <td class="d-none d-sm-table-cell">client2@example.com</td>
+                          <td class="d-none d-sm-table-cell">
+                            <span class="badge badge-info">Business</span>
+                          </td>
+                          <td class="d-none d-sm-table-cell">client1@example.com</td>
+                          <td class="d-none d-sm-table-cell">2022/01/13</td>
+                        <tr>
+                          
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <!-- END Partial Table -->
+
               </div>
               <div class="tab-pane fade fade-left" id="btabs-animated-slideleft-profile" role="tabpanel">
-                <h4 class="font-w400">Add New Transaction</h4>
+                {{-- <h4 class="font-w400">Add New Transaction</h4> --}}
 
                 <div class="col-md-12">
-                  <a class="block block-link-shadow block-transparent border-left border-5x border-warning bg-image" style="background-image: url('assets/media/photos/photo25.jpg');" href="javascript:void(0)">
+                  <a class="block block-link-shadow block-transparent border-left border-5x border-warning">
                     <div class="block-content block-content-full bg-white-op-90">
                       <div class="pt-20">
                         <h3 class="h4 font-w700 mb-10">An adventure of a lifetime to remember</h3>
@@ -96,11 +157,11 @@
                 
 
                 <br>
-               
+                <div class="col-md-3">
                   <button type="button" class="btn btn-hero btn-alt-success" data-bs-dismiss="modal">
                     <i class="fa fa-check"></i> SUBMIT
                   </button>
-               
+                </div>
                 <br>
                 <br>
 

@@ -9,9 +9,10 @@
     <div class="row gutters-tiny">
 
       @if (session('LoggedUser')->hasPermission('USER_ACCESS'))
+
         <!-- Total Accounts -->
         <div class="col-md-6 col-xl-3">
-          <a class="block block-rounded block-transparent bg-gd-sun" href="javascript:void(0)">
+          <a class="block block-rounded block-transparent bg-gd-sun block-link-pop" href="javascript:void(0)">
             <div class="block-content block-content-full block-sticky-options">
               <div class="block-options">
                 <div class="block-options-item">
@@ -31,7 +32,7 @@
       @if (session('LoggedUser')->hasPermission('ROLE_ACCESS'))
           <!-- Role / Department -->
           <div class="col-md-6 col-xl-3">
-            <a class="block block-rounded block-transparent bg-gd-cherry" href="javascript:void(0)">
+            <a class="block block-rounded block-transparent bg-gd-sea block-link-pop" href="javascript:void(0)">
               <div class="block-content block-content-full block-sticky-options">
                 <div class="block-options">
                   <div class="block-options-item">
@@ -51,7 +52,7 @@
       @if (session('LoggedUser')->hasPermission('PERMISSION_ACCESS'))
         <!-- Permission -->
         <div class="col-md-6 col-xl-3">
-          <a class="block block-rounded block-transparent bg-gd-lake" href="javascript:void(0)">
+          <a class="block block-rounded block-transparent bg-gd-lake block-link-pop" href="javascript:void(0)">
             <div class="block-content block-content-full block-sticky-options">
               <div class="block-options">
                 <div class="block-options-item">
@@ -71,7 +72,7 @@
       @if (session('LoggedUser')->hasPermission('SUBSYSTEM_ACCESS'))
         <!-- Sub-system -->
         <div class="col-md-6 col-xl-3">
-          <a class="block block-rounded block-transparent bg-gd-dusk" href="javascript:void(0)">
+          <a class="block block-rounded block-transparent bg-gd-dusk  block-link-pop" href="javascript:void(0)">
             <div class="block-content block-content-full block-sticky-options">
               <div class="block-options">
                 <div class="block-options-item">

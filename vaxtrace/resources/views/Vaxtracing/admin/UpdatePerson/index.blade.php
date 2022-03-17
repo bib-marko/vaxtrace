@@ -11,12 +11,12 @@
   <div class="col-lg-6 col-xl-12 col-xxl-6 h-100">
     <div class="card theme-wizard mb-5 mb-lg-0 mb-xl-5 mb-xxl-0 h-100">
       <div class="block">
-        <div class="block-header bg-earth-lighter">
-          <h3 class="block-title">
-            <i class="si si-user-follow"></i> Update <small>Account</small>
+        <div class="block-header bg-gd-emerald text-white">
+          <h3 class="block-title text-white">
+            <i class="si si-user-follow"></i> Update <small class="text-white">Account</small>
           </h3>
           <div class="block-options">
-            <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
+            <button type="button" class="btn-block-option text-white" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
               <i class="si si-refresh"></i>
             </button>
           </div>
@@ -28,6 +28,23 @@
                 <form role="form" id="formUpdateUser" novalidate>
                   @csrf
                   <div class="row g-2">
+
+                    <div class="col-12">
+                      <div class="form-material form-material-success floating">
+                        <select class="form-control" id="material-select2" name="role" value="{{ $users->person->short_code .' - '. $users->person->title }}" aria-label="Floating label select example" required>
+                              {{-- @if(session()->get('LoggedUser')->role->short_code != 'ADMIN')
+                                <option value="{{ session()->get('LoggedUser')->role->id }}">{{ session()->get('LoggedUser')->role->title }}</option>
+                              @else
+                                @foreach ($total_role as $role)
+                                  <option value="{{ $role->id }}">{{ $role->short_code .' - '. $role->title }}</option>
+                                @endforeach
+                              @endif --}}
+                        </select>
+                        <label for="material-color-select2" style="font-size: 13px;">Role / Department</label>
+                        <span class="text-danger errorMessage fs--2" id="error_region"></span>
+                      </div>
+                    </div>
+
                     <div class="col-4">
                       <div class="form-material form-material-success floating">
                         <input class="form-control" id="material-color-success2 first_name" type="text" name="first_name" value="{{ $users->person->first_name }}"  pattern="[a-zA-Z\s]+" title="Input letters only" required/>
@@ -108,7 +125,7 @@
 
                     <div class="col">
                       <div class="form-material form-material-success floating">
-                        <select class="js-select2 form-control region" id="material-select2 region" name="region" aria-label="Floating label select example" required>
+                        <select class=" form-control region" id="material-select2 region" name="region" aria-label="Floating label select example" required>
                         
                         </select>
                         <label for="material-color-select2" style="font-size: 13px;">Region</label>
@@ -118,7 +135,7 @@
 
                     <div class="col">
                       <div class="form-material form-material-success floating">
-                        <select class="js-select2 form-control province" id="material-select2 province" name="province" aria-label="Floating label select example" required>
+                        <select class=" form-control province" id="material-select2 province" name="province" aria-label="Floating label select example" required>
                         
                         </select>
                         <label for="material-color-select2" style="font-size: 13px;">Province</label>
@@ -133,7 +150,7 @@
 
                     <div class="col">
                       <div class="form-material form-material-success floating">
-                        <select class="js-select2 form-control city" id="material-select2 city" name="city" aria-label="Floating label select example" required>
+                        <select class=" form-control city" id="material-select2 city" name="city" aria-label="Floating label select example" required>
                         
                         </select>
                         <label for="material-color-select2" style="font-size: 13px;">City</label>
@@ -145,7 +162,7 @@
 
                     <div class="col">
                       <div class="form-material form-material-success floating">
-                        <select class="js-select2 form-control barangay" id="material-select2 barangay" name="barangay" aria-label="Floating label select example" required>
+                        <select class=" form-control barangay" id="material-select2 barangay" name="barangay" aria-label="Floating label select example" required>
                         
                         </select>
                         <label for="material-color-select2" style="font-size: 13px;">Barangay</label>
