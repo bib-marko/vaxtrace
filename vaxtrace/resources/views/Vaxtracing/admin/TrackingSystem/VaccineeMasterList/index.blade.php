@@ -181,25 +181,61 @@
 
         });
         var currentQr;
-        var vaccinee_data = "http://cvimsmicro.com/api/vaxcert-qualifiedpatients";
+        var vaccinee_data_first = "http://cvimsmicro.com/api/vaxcert-qualifiedpatients";
+        var vaccinee_data = vaccinee_data_first;
     
         //MASTER LIST    
         tableForNonVerified = $('#non_verified_dt').DataTable({
             processing: true,
-            ajax: {
-                url: vaccinee_data,
-                data: function ( d ) {
-                    d.items_per_page = $('#non_verified_dt_length > label >select').val();
-                    d.search_key= $('#search_bar_non_verified').val().toUpperCase();
-                },
-                type: 'POST'
+            ajax: function(data, callback, settings) {
+                    $.post(vaccinee_data, {
+                            items_per_page: $('#non_verified_dt_length > label >select').val(),
+                            search_key: $('#search_bar_non_verified').val().toUpperCase()
+                        }, function(result) {
+                            callback({
+                                recordsTotal: result.meta.total,
+                                recordsFiltered: result.meta.total,
+                                data: result.data
+                            });
+                            $('#non_verified_dt_info').html("Showing "+result.meta.from+" to "+result.meta.to+" of "+result.meta.total+" entries");
+                            $('#non_verified_dt_paginate').html(`<ul class="pagination">
+                                                                    <li class="paginate_button page-item previous" id="non_verified_dt_previous">
+                                                                        <a aria-controls="non_verified_dt" class="page-link">Previous</a>
+                                                                    </li>
+                                                                    <li class="paginate_button page-item active">
+                                                                        <a aria-controls="non_verified_dt" class="btn page-link">`+result.meta.current_page+`</a>
+                                                                    </li>
+                                                                    <li class="paginate_button page-item next" id="non_verified_dt_next">
+                                                                        <a aria-controls="non_verified_dt" class="btn page-link">Next</a>
+                                                                    </li>
+                                                                </ul>`);
+                            $('#non_verified_dt_previous').click(function (e) {
+                                if(result.links.prev != null){
+                                    vaccinee_data = result.links.prev;
+                                    tableForNonVerified.ajax.reload();
+                                }
+                            });
+                            $('#non_verified_dt_next').click(function (e) {
+                                if(result.links.next != null){
+                                    vaccinee_data = result.links.next;
+                                    tableForNonVerified.ajax.reload();
+                                } 
+                            });
+                            $('#search_bar_non_verified').prop( "disabled", false );
+                        });
+
             },
             columnDefs: [
                 { "searchable": true, "targets": 1 }
             ],
             columns: [
                 //UNIQ_ID
-                {   data: 'home_address', },
+                {   data: 'home_address', 
+                    render(data) {
+                            currentQr = data;
+                            return data;
+                        },
+                },
                 //FULLNAME
                 {
                     data: null,
@@ -212,6 +248,7 @@
                 {
                     data: null,
                         render(data) {
+                           
                             if(verifiedQr.includes(currentQr)){
                                 return "<a class='view btn btn-alt-primary btn-rounded mr-5 mb-5' disabled><i class='si si-check mr-5'></i>Verified</button></a>";
                             }
@@ -225,14 +262,6 @@
         });
 
         
-        function formatName(data){
-            if(data == null || data == ""){
-                return "-";
-            }
-            else{
-                return data;
-            }
-        }
         $('#non_verified_dt tbody').on('click', '[id*=btnVerify]', function (e) {
             Swal.fire({
                 title: 'Are you sure you want to verify this vaccinee?',
@@ -393,16 +422,16 @@
             tableForVerified.search($('#search_bar_verified').val().toUpperCase()).draw();
         })
         var ctr = 1;
-        $('#search_btn_non_verified').on('click', function(){
-            tableForNonVerified.ajax.reload();
-        })
         $('#non_verified_dt_length > label >select').on('change', function(){
+            vaccinee_data = vaccinee_data_first;
             tableForNonVerified.ajax.reload();
         })
         $('#search_bar_non_verified').on('keypress', function(e){
             //e.preventDefault();
             if(e.which == 13){
+                vaccinee_data = vaccinee_data_first;
                 tableForNonVerified.ajax.reload();
+                $(this).prop( "disabled", true );
             }
         }); 
     });
