@@ -391,6 +391,7 @@
         //       $('#view_suffix').text(formatName(data.suffix)).change();
         //       $('#view_birth_date').text(data.birth_date);
         //   })
+        $('#view_monitor_vaccinee').modal({backdrop:'static', keyboard:false});
         $('#view_monitor_vaccinee').modal("show");
     }
 
@@ -404,7 +405,9 @@
               $('#view_suffix').text(formatName(data.suffix)).change();
               $('#view_birth_date').text(data.birth_date);
           })
+        $('#vaccinee_view').modal({backdrop:'static', keyboard:false});
         $('#vaccinee_view').modal("show");
+      
     }
 
         
@@ -419,8 +422,9 @@
               $('#suffix').val(formatNamedata.suffix).change();
               $('#birth_date').val(data.birth_date);
           })
-
-      $("#modal-update-record-vaccinee").modal("show");
+        $('#modal-update-record-vaccinee').modal({backdrop:'static', keyboard:false});
+        $("#modal-update-record-vaccinee").modal("show");
+      
     }
     
         function delete_vaccinee(id){

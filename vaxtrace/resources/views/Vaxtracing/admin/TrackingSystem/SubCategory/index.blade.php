@@ -80,7 +80,12 @@
               //ACTION
               {data: 'sub_cat_description'},
 
-              {data: 'status'},
+              {data: 'status',
+                    render(data) {
+                        return generateBadge(data);
+                    },
+
+              },
 
               {data: 'action'},
           ]  
@@ -183,18 +188,21 @@
         }
       })
       $(".dataTables_filter").hide(); 
+
   });
 
-  function update_subcategory(id){
-    $.get("/show/sub_category" +'/' + id, function (data) {
-            $('#sub_cat_id').val(data.id);
-            $('#sub_cat_name').val(data.sub_cat_name);
-            $('#sub_cat_desc').val(data.sub_cat_description);
-        })
+   
 
-    $("#modal-update-record-sub-category").modal("show");
-  }
+    function update_subcategory(id){
+        $.get("/show/sub_category" +'/' + id, function (data) {
+                $('#sub_cat_id').val(data.id);
+                $('#sub_cat_name').val(data.sub_cat_name);
+                $('#sub_cat_desc').val(data.sub_cat_description);
+            })
 
+        $('#modal-update-record-sub-category').modal({backdrop:'static', keyboard:false});
+        $("#modal-update-record-sub-category").modal("show");
+    }
 
     function delete_subcategory(id){
         Swal.fire({

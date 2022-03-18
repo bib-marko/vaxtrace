@@ -79,7 +79,11 @@
               //ACTION
               {data: 'cat_description'},
 
-              {data: 'status'},
+              {data: 'status',
+                render(data){
+                    return generateBadge(data);
+                },
+              },
 
               {data: 'action'},
           ]  
@@ -192,6 +196,7 @@
             $('#cat_desc').val(data.cat_description);
         })
 
+    $('#modal-update-record-category').modal({backdrop:'static', keyboard:false});
     $("#modal-update-record-category").modal("show");
   }
   function delete_category(id){

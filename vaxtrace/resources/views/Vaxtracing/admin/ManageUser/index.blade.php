@@ -202,7 +202,7 @@
                 {
                     data: 'user_status',
                     render(data) {
-                        return isApproved(data);
+                        return generateBadge(data);
                     },
                 },
 
@@ -230,7 +230,7 @@
                     data: 'user_status',
                     render(data) {
                       if(data != null){
-                          return isApproved(data);
+                          return generateBadge(data);
                       }
                     },
                 },
@@ -339,11 +339,12 @@
               $('#region').text(data.person.region);
               $('#contact_number').text(data.person.contact_number);
               $('#barangay').text(data.person.barangay);
-              $('#status').html(isApproved(data.person.deleted_at));
+              $('#status').html(generateBadge(data.person.deleted_at));
               $('#full_name').text(generateFullname(data));
               $('#role').html(toBadge(data.role.short_code));
           })
 
+          $('#m_user').modal({backdrop:'static', keyboard:false});
           $("#m_user").modal("show");
         }
 
@@ -357,6 +358,8 @@
               icon: 'warning',
               showCancelButton: true,
               confirmButtonText: 'Yes',
+              allowOutsideClick: false,
+              allowEscapeKey: false,
             }).then((result) => {
               /* Read more about isConfirmed, isDenied below */
               if (result.isConfirmed) {
@@ -423,16 +426,20 @@
               icon: 'info',
               showCancelButton: true,
               confirmButtonText: 'Yes',
+              allowOutsideClick: false,
+              allowEscapeKey: false,
             }).then((result) => {
               /* Read more about isConfirmed, isDenied below */
               if (result.isConfirmed) {
                   Swal.fire({
                       title: 'Please indicate your reason',
                       icon: 'info',
-                      html: ' <form role="form" id="formRestoreUser" novalidate><input type="text" id="restore_reason" name="restore_reason" class="swal2-input fs--2" placeholder="reason" required></form>',
+                      html: getHTML(),
                       inputPlaceholder: "Write something",
                       showCancelButton: true,
                       confirmButtonText: 'Submit',
+                      allowOutsideClick: false,
+                      allowEscapeKey: false,
                   }).then((result) => {
                       var form = document.getElementById("formRestoreUser");
                       var formData = new FormData(form);
@@ -480,6 +487,11 @@
               
               }
           })
+        }
+        
+
+        function getHTML(){
+            return `<form role="form" id="formRestoreUser" novalidate><input type="text" id="restore_reason" name="restore_reason" class="material-color-success2" placeholder="reason" required></form>`;
         }
         
       </script>
