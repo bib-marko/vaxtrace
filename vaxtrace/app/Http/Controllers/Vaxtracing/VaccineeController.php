@@ -24,7 +24,8 @@ class VaccineeController extends Controller
         // $data = Vaccinee::with('transactions')->get()->toArray();
         // dd($data);
         if ($request->ajax()) {
-            $data = Vaccinee::where('status','!=', 0)->get();
+            $data = Vaccinee::select('*',DB::raw("CONCAT(first_name , ' ' , middle_name , ' ' , last_name, ' ' , suffix) as full_name"))
+                                ->where('status','!=', 0)->get();
 
             return Datatables::of($data)
                 ->addIndexColumn()
@@ -111,7 +112,7 @@ class VaccineeController extends Controller
             'first_name'=> formatString($request->first_name),
             'middle_name'=> formatString($request->middle_name),
             'last_name'=> formatString($request->last_name),
-            'suffix'=> $request->suffix,
+            'suffix'=> formatString($request->suffix),
             'birth_date'=> $request->birth_date,
         ]);
     }

@@ -68,10 +68,7 @@
                         <thead>
                         <tr>
                             <th scope="col">Vaccinee Code</th>
-                            <th scope="col">First Name</th>
-                            <th scope="col">Middle Name</th>
-                            <th scope="col">Last Name</th>
-                            <th scope="col">Suffix</th>
+                            <th scope="col">Full Name</th>
                             <th scope="col">Birth Date</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -120,7 +117,7 @@
                     <table class="table table-striped table-center js-dataTable-full-pagination" id="non_verified_dt" width="100%">
                         <thead>
                         <tr>
-                            <th scope="col">CODE</th>
+                            <th scope="col">Vaccinee Code</th>
                             <th scope="col">Full Name</th>
                             <th scope="col">Birth Date</th>
                             <th scope="col">Action</th>
@@ -148,6 +145,18 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        // async function fetchText() {
+        //     const url = 'http://cvimsmicro.com/api/vaxcert-qualifiedpatients';
+    
+        //     let response = await fetch(url);
+        
+        //     let dataJson = await response.text();
+        //     let data = JSON.parse(dataJson);
+            
+        //     return data;
+        // }
+
+        // console.log(fetchText());
         //MASTER LIST
         tableForVerified = $('#verified_dt').DataTable({
             processing: true,
@@ -165,52 +174,41 @@
             
                 },
                 //FULLNAME
-                {data: 'first_name'},
-                //ACTIVITY
-                {
-                    data: 'middle_name',
-                        render(data) {
-                        return formatName(data);
-                    },
-                },
-                //DATE & TIME
-                {data: 'last_name'},
-                //SUFFIX
-                {
-                    data: 'suffix',
-                        render(data) {
-                        return formatName(data);
-                    },
-                },
+                {data: 'full_name'},
                 {data: 'birth_date'},
                 {data: 'action'},
             ]  
+
         });
         var currentQr;
-        var vaccinee_data = "{{ route('get_vaccinees') }}";
+        var vaccinee_data = "http://cvimsmicro.com/api/vaxcert-qualifiedpatients";
+    
         //MASTER LIST    
         tableForNonVerified = $('#non_verified_dt').DataTable({
             processing: true,
-            serverSide: true,
-            ajax: vaccinee_data,
+            ajax: {
+                url: vaccinee_data,
+                data: function ( d ) {
+                    d.items_per_page = $('#non_verified_dt_length > label >select').val();
+                    d.search_key= $('#search_bar_non_verified').val().toUpperCase();
+                },
+                type: 'POST'
+            },
+            columnDefs: [
+                { "searchable": true, "targets": 1 }
+            ],
             columns: [
                 //UNIQ_ID
-                {
-                    data: 'qrcode',
-                        render(data) {
-                            currentQr = data;
-                            return data;
-                        },
-                },
+                {   data: 'home_address', },
                 //FULLNAME
                 {
-                    data: 'vaxcert_pre_registration',
+                    data: null,
                         render(data) {
                             return generateFullname(data);
                         },
                 },
                 //DATE OF BIRTH
-                { data: 'vaxcert_pre_registration.date_of_birth' },
+                { data: 'date_of_birth' },
                 {
                     data: null,
                         render(data) {
@@ -222,10 +220,11 @@
                             }
                         },
                 },
-            ]  
+            ],
+              
         });
 
-
+        
         function formatName(data){
             if(data == null || data == ""){
                 return "-";
@@ -248,12 +247,12 @@
                     var data = tableForNonVerified.row($(this).parents('tr')[0]).data();
                     console.log(data['qrcode']);
                     var formData = new FormData();
-                    formData.append("vaccinee_code",data['qrcode'] );
-                    formData.append("first_name",data['vaxcert_pre_registration']['first_name'] );
-                    formData.append("middle_name",data['vaxcert_pre_registration']['middle_name'] );
-                    formData.append("last_name",data['vaxcert_pre_registration']['last_name'] );
-                    formData.append("suffix",data['vaxcert_pre_registration']['suffix'] );
-                    formData.append("birth_date",data['vaxcert_pre_registration']['date_of_birth'] );
+                    formData.append("vaccinee_code",data['home_address'] );
+                    formData.append("first_name",data['first_name'] );
+                    formData.append("middle_name",data['middle_name'] );
+                    formData.append("last_name",data['last_name'] );
+                    formData.append("suffix",data['suffix'] );
+                    formData.append("birth_date",data['date_of_birth'] );
                     
                     $.ajax({
                         url: "{{ route('vaccinee.store') }}",
@@ -393,10 +392,19 @@
         $('#search_btn_verified').on('click', function(){
             tableForVerified.search($('#search_bar_verified').val().toUpperCase()).draw();
         })
-
+        var ctr = 1;
         $('#search_btn_non_verified').on('click', function(){
-            tableForNonVerified.search($('#search_bar_non_verified').val().toUpperCase()).draw();
+            tableForNonVerified.ajax.reload();
         })
+        $('#non_verified_dt_length > label >select').on('change', function(){
+            tableForNonVerified.ajax.reload();
+        })
+        $('#search_bar_non_verified').on('keypress', function(e){
+            //e.preventDefault();
+            if(e.which == 13){
+                tableForNonVerified.ajax.reload();
+            }
+        }); 
     });
     
     function formatName(data){
@@ -410,19 +418,6 @@
 
 
     function show_monitor_vaccinee(id){
-        // $.get("/show/vaccinee" +'/' + id, function (data) {
-        //       $('#view_vaccinee_code').text(data.vaccinee_code);
-        //       $('#view_first_name').text(data.first_name);
-        //       $('#view_middle_name').text(data.middle_name);
-        //       $('#view_last_name').text(data.last_name);
-        //       $('#view_suffix').text(formatName(data.suffix)).change();
-        //       $('#view_birth_date').text(data.birth_date);
-        //   })
-        $('#view_monitor_vaccinee').modal("show");
-    }
-
-
-    function show_vaccinee(id){
         $.get("/show/vaccinee" +'/' + id, function (data) {
               $('#view_vaccinee_code').text(data.vaccinee_code);
               $('#view_first_name').text(data.first_name);
@@ -431,23 +426,36 @@
               $('#view_suffix').text(formatName(data.suffix)).change();
               $('#view_birth_date').text(data.birth_date);
           })
+        $('#view_monitor_vaccinee').modal("show");
+    }
+
+
+    function show_vaccinee(id){
+        $.get("/show/vaccinee" +'/' + id, function (data) {
+                $('#view_vaccinee_code').text(data.vaccinee_code);
+                $('#view_first_name').text(data.first_name);
+                $('#view_middle_name').text(data.middle_name);
+                $('#view_last_name').text(data.last_name);
+                $('#view_suffix').text(formatName(data.suffix)).change();
+                $('#view_birth_date').text(data.birth_date);
+            })
         $('#vaccinee_view').modal("show");
     }
 
         
 
     function update_vaccinee(id){
-      $.get("/show/vaccinee" +'/' + id, function (data) {
-              $('#vaccinee_id').val(data.id);
-              $('#vaccinee_code').val(data.vaccinee_code);
-              $('#first_name').val(data.first_name);
-              $('#middle_name').val(data.middle_name);
-              $('#last_name').val(data.last_name);
-              $('#suffix').val(formatNamedata.suffix).change();
-              $('#birth_date').val(data.birth_date);
-          })
+        $.get("/show/vaccinee" +'/' + id, function (data) {
+                $('#vaccinee_id').val(data.id);
+                $('#vaccinee_code').val(data.vaccinee_code);
+                $('#first_name').val(data.first_name);
+                $('#middle_name').val(data.middle_name);
+                $('#last_name').val(data.last_name);
+                $('#suffix').val(data.suffix).change();
+                $('#update_birth_date').val(data.birth_date);
+            })
 
-      $("#modal-update-record-vaccinee").modal("show");
+        $("#modal-update-record-vaccinee").modal("show");
     }
     
     function delete_vaccinee(id){

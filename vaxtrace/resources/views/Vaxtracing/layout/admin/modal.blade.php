@@ -389,7 +389,7 @@
                 <div class="mb-3">
                   <div class="form-material form-material-success floating">
                     <label for="floatingDate" style="margin-top: -1.5em; font-size: 13px; color: #9CCC65;" class="fs--2">Birth Date</label>
-                    <input class="form-control datetimepicker" id="birth_date" name="birth_date" type="date" placeholder="dd/mm/yyyy" data-options='{"dateFormat":"d/m/y","disableMobile":true}' id="form-wizard-progress-wizard-datepicker" min="1900-10-20" max="2030-10-20" required/>
+                    <input class="form-control datetimepicker" id="update_birth_date" name="birth_date" type="date" placeholder="dd/mm/yyyy" data-options='{"dateFormat":"d/m/y","disableMobile":true}' id="form-wizard-progress-wizard-datepicker" min="1900-10-20" max="2030-10-20" required/>
                     <span class="text-danger errorMessage fs--2" id="error_birth_date"></span>
                   </div>
                 </div>

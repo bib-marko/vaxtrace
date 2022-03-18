@@ -129,6 +129,7 @@ class PeopleController extends Controller
         $user = new User();
         $user->email = $request->email;
         $user->password = Hash::make("secret123");
+        $user->role_id = $request->role;
         $user->save();
 
         $person = new Person();
@@ -176,8 +177,8 @@ class PeopleController extends Controller
     {
         abort_if(! session('LoggedUser')->hasPermission('USER_UPDATE'), 403);
         $users = User::with('person')->where('id', $id)->first();
-        
-        return view('Vaxtracing.admin.UpdatePerson.index',compact('users'));
+        $total_role = Role::get();
+        return view('Vaxtracing.admin.UpdatePerson.index',compact('users', 'total_role'));
     }
 
     public function editProfile(Request $request,$id)
@@ -259,6 +260,7 @@ class PeopleController extends Controller
         $user = User::where('id', $id)
             ->update([
                 'email'=> $request->email,
+                'role_id'=> $request->role,
             ]);
         saveActivityLog(generateFullName(session('LoggedUser')), "Update user with ID#: ".$id);
     }

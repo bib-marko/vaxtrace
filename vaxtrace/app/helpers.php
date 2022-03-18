@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Storage;
 if (! function_exists('formatString')) {
     function formatString($string)
     {
-        if($string != null && $string != "NA"){
+        if($string != null && $string != "NA" && $string != ""){
             $string = trim($string);
             $string = strtoupper($string);
             $string = strip_tags($string); 

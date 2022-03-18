@@ -29,32 +29,8 @@ class JsonDataController extends Controller
     {
         $vaccinee = json_decode(Storage::get('vaccinees_updated.json'), true);
 
-        $vaccinee = collect($vaccinee["data"]["data"]);
+        $vaccinee = collect($vaccinee["data"]);
         
-        return Datatables::of($vaccinee)
-        ->addIndexColumn()
-        ->addColumn('action', function($row){
-            $actionBtn = "";
-            $verifiedVaccinee = Vaccinee::where('status','!=', 0)
-                                ->where('vaccinee_code', '=', $row['qrcode'])
-                                ->where('first_name', '=', $row['vaxcert_pre_registration']['first_name'])
-                                ->where('last_name', '=', $row['vaxcert_pre_registration']['last_name'])
-                                ->where('middle_name', '=', $row['vaxcert_pre_registration']['middle_name'])
-                                ->where('suffix', '=', formatString($row['vaxcert_pre_registration']['suffix']))
-                                ->where('birth_date', '=', formatDate($row['vaxcert_pre_registration']['date_of_birth']))
-                                ->first();
-           
-            if( $verifiedVaccinee == null)
-            {
-                $actionBtn .= "<a class='view btn btn-alt-danger btn-rounded mr-5 mb-5' id='btnVerify'><i class='si si-check mr-5'></i>Verify</button></a>";
-            }
-            else{
-                $actionBtn = "<a class='view btn btn-alt-primary btn-rounded mr-5 mb-5' disabled><i class='si si-check mr-5'></i>Verified</button></a>";
-            }
-            
-            return $actionBtn;
-        })
-        ->rawColumns(['action'])
-        ->make(true);
+        return response()->json($vaccinee);
     }
 }

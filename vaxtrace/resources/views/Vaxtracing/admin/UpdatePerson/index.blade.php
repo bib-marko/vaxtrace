@@ -31,14 +31,14 @@
 
                     <div class="col-12">
                       <div class="form-material form-material-success floating">
-                        <select class="form-control" id="material-select2" name="role" value="{{ $users->person->short_code .' - '. $users->person->title }}" aria-label="Floating label select example" required>
-                              {{-- @if(session()->get('LoggedUser')->role->short_code != 'ADMIN')
-                                <option value="{{ session()->get('LoggedUser')->role->id }}">{{ session()->get('LoggedUser')->role->title }}</option>
-                              @else
-                                @foreach ($total_role as $role)
-                                  <option value="{{ $role->id }}">{{ $role->short_code .' - '. $role->title }}</option>
-                                @endforeach
-                              @endif --}}
+                        <select class="form-control" id="role_select" name="role" aria-label="Floating label select example" required>
+                            @if(session()->get('LoggedUser')->role->short_code != 'ADMIN')
+                              <option value="{{ session()->get('LoggedUser')->role->id }}">{{ session()->get('LoggedUser')->role->title }}</option>
+                            @else
+                              @foreach ($total_role as $role)
+                                <option value="{{ $role->id }}">{{ $role->short_code .' - '. $role->title }}</option>
+                              @endforeach
+                            @endif
                         </select>
                         <label for="material-color-select2" style="font-size: 13px;">Role / Department</label>
                         <span class="text-danger errorMessage fs--2" id="error_region"></span>
@@ -200,6 +200,7 @@
         <script type="text/javascript">
 
             var data = {!! json_encode($users) !!};
+           
             var getAddressUrl = '{{ route("get_address") }}'
             var saveUpdateUrl = '{{ route("save_update_people") }}/' + data.id;
             let validator = $('#formUpdateUser').jbvalidator({
@@ -215,7 +216,7 @@
               hideLoader();
               $('.sex').val(data.person.sex).change();
               $('.suffix').val(data.person.suffix).change();
-
+              $('#role_select').val(data.role_id).change();
               $('#update_user').click(function (e) {
                 e.preventDefault();
 

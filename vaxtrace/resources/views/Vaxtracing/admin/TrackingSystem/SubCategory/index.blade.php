@@ -62,7 +62,7 @@
 
 @section('scripts')
   <script type="text/javascript">
-
+    var table;
   $(function () {
       $.ajaxSetup({
           headers: {
@@ -70,7 +70,7 @@
           }
       });
       //MASTER LIST
-      var table = $('#sub_category_dt').DataTable({
+        table = $('#sub_category_dt').DataTable({
           processing: true,
           serverSide: true,
           ajax: "{{ route('sub_category.index') }}",
@@ -122,7 +122,9 @@
                     }).then((result) => {
                         /* Read more about isConfirmed, isDenied below */
                         if (result.isConfirmed) {
-                        window.location.href = "{{ route('view_vaccinees_status_sub-category') }}";
+                            table.draw();
+                            $('#modal-new-record-sub-category').hide();
+                            form.reset();
                         }
                     })
                 },
@@ -169,7 +171,8 @@
                     }).then((result) => {
                         /* Read more about isConfirmed, isDenied below */
                         if (result.isConfirmed) {
-                        window.location.href = "{{ route('view_vaccinees_status_sub-category') }}";
+                            table.draw();
+                            $('#modal-update-record-sub-category').modal("hide");
                         }
                     })
                 },
@@ -225,7 +228,7 @@
                         }).then((result) => {
                             /* Read more about isConfirmed, isDenied below */
                             if (result.isConfirmed) {
-                                location.reload();
+                                table.draw();
                             }
                         })
                     },

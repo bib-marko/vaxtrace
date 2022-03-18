@@ -63,7 +63,8 @@ Route::group(['middleware' => ['AuthCheck']],function(){
 
     Route::get('/update/user', function () {
         abort_if(! session('LoggedUser')->hasPermission('USER_UPDATE'), 403);
-        return view('Vaxtracing.admin.UpdatePerson.index');
+        $total_role = Role::get();
+        return view('Vaxtracing.admin.UpdatePerson.index', compact('total_role'));
     })->name('get_update_user');
 
     //Generate address
@@ -180,6 +181,8 @@ Route::group(['middleware' => ['AuthCheck']],function(){
     Route::post('/delete/vaccinee/{id?}', [VaccineeController::class, 'destroy'])->name('delete_vaccinee');
 
     Route::get('/show/vaccinee/{id?}', [VaccineeController::class, 'show'])->name('show_vaccinee');
+
+    Route::get('/monitor/vaccinee/{id?}', [VaccineeController::class, 'monitor'])->name('monitor_vaccinee');
 
     Route::get('/view/Tracker-Main-System/vaccinees/status/category', function () {
         return view('Vaxtracing.admin.TrackingSystem.Category.index');

@@ -61,15 +61,15 @@
     </div>
 @section('scripts')
   <script type="text/javascript">
-
-  $(function () {
+    var table;
+    $(function () {
       $.ajaxSetup({
           headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
       });
       //MASTER LIST
-      var table = $('#category_dt').DataTable({
+       table = $('#category_dt').DataTable({
           processing: true,
           serverSide: true,
           ajax: "{{ route('category.index') }}",
@@ -121,7 +121,8 @@
                     }).then((result) => {
                         /* Read more about isConfirmed, isDenied below */
                         if (result.isConfirmed) {
-                        window.location.href = "{{ route('view_vaccinees_status_category') }}";
+                            table.draw();
+                            $('#modal-new-record-category').hide();
                         }
                     })
                 },
@@ -169,7 +170,8 @@
                     }).then((result) => {
                         /* Read more about isConfirmed, isDenied below */
                         if (result.isConfirmed) {
-                        window.location.href = "{{ route('view_vaccinees_status_category') }}";
+                            table.draw();
+                            $('#modal-update-record-category').hide();
                         }
                     })
                 },
@@ -185,57 +187,57 @@
       $(".dataTables_filter").hide(); 
   });
 
-  function update_category(id){
-    $.get("/show/category" +'/' + id, function (data) {
+    function update_category(id){
+        $.get("/show/category" +'/' + id, function (data) {
             $('#cat_id').val(data.id);
             $('#cat_name').val(data.cat_name);
             $('#cat_desc').val(data.cat_description);
         })
 
-    $("#modal-update-record-category").modal("show");
-  }
-  function delete_category(id){
-      Swal.fire({
-          title: 'Do you want to delete this category?',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Yes',
-      }).then((result) => {
-          /* Read more about isConfirmed, isDenied below */
-          if (result.isConfirmed) {
-              $.ajax({
-                  type: "POST",
-                  url: "{{ route('delete_category') }}"+'/'+id,
-                  processData: false,
-                  contentType: false,
-                  beforeSend: function () {
-                      showLoader();
-                  },
-                  complete: function () {
-                      hideLoader();
-                  },
-                  success: function (response) {
-                      Swal.fire({
-                          title: 'Success!',
-                          icon: 'success',
-                          text: "The category has been deleted",
-                          confirmButtonText: 'Ok',
-                      }).then((result) => {
-                          /* Read more about isConfirmed, isDenied below */
-                          if (result.isConfirmed) {
-                              location.reload();
-                          }
-                      })
-                  },
-                  error: function (response) {
-                      hideLoader();
-                  }
-              }); 
-          } else{
-          
-          }
-      })
-  }
-  </script>
+        $("#modal-update-record-category").modal("show");
+    }
+    function delete_category(id){
+        Swal.fire({
+            title: 'Do you want to delete this category?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('delete_category') }}"+'/'+id,
+                    processData: false,
+                    contentType: false,
+                    beforeSend: function () {
+                        showLoader();
+                    },
+                    complete: function () {
+                        hideLoader();
+                    },
+                    success: function (response) {
+                        Swal.fire({
+                            title: 'Success!',
+                            icon: 'success',
+                            text: "The category has been deleted",
+                            confirmButtonText: 'Ok',
+                        }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                table.draw();
+                            }
+                        })
+                    },
+                    error: function (response) {
+                        hideLoader();
+                    }
+                }); 
+            } else{
+            
+            }
+        })
+    }
+    </script>
 @endsection
 @endsection
