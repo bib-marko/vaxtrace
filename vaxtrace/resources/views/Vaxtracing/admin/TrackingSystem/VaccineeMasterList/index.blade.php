@@ -418,6 +418,20 @@
 
 
     function show_monitor_vaccinee(id){
+        // $.get("/show/vaccinee" +'/' + id, function (data) {
+        //       $('#view_vaccinee_code').text(data.vaccinee_code);
+        //       $('#view_first_name').text(data.first_name);
+        //       $('#view_middle_name').text(data.middle_name);
+        //       $('#view_last_name').text(data.last_name);
+        //       $('#view_suffix').text(formatName(data.suffix)).change();
+        //       $('#view_birth_date').text(data.birth_date);
+        //   })
+        $('#view_monitor_vaccinee').modal({backdrop:'static', keyboard:false});
+        $('#view_monitor_vaccinee').modal("show");
+    }
+
+
+    function show_vaccinee(id){
         $.get("/show/vaccinee" +'/' + id, function (data) {
               $('#view_vaccinee_code').text(data.vaccinee_code);
               $('#view_first_name').text(data.first_name);
@@ -426,36 +440,26 @@
               $('#view_suffix').text(formatName(data.suffix)).change();
               $('#view_birth_date').text(data.birth_date);
           })
-        $('#view_monitor_vaccinee').modal("show");
-    }
-
-
-    function show_vaccinee(id){
-        $.get("/show/vaccinee" +'/' + id, function (data) {
-                $('#view_vaccinee_code').text(data.vaccinee_code);
-                $('#view_first_name').text(data.first_name);
-                $('#view_middle_name').text(data.middle_name);
-                $('#view_last_name').text(data.last_name);
-                $('#view_suffix').text(formatName(data.suffix)).change();
-                $('#view_birth_date').text(data.birth_date);
-            })
+        $('#vaccinee_view').modal({backdrop:'static', keyboard:false});
         $('#vaccinee_view').modal("show");
+      
     }
 
         
 
     function update_vaccinee(id){
-        $.get("/show/vaccinee" +'/' + id, function (data) {
-                $('#vaccinee_id').val(data.id);
-                $('#vaccinee_code').val(data.vaccinee_code);
-                $('#first_name').val(data.first_name);
-                $('#middle_name').val(data.middle_name);
-                $('#last_name').val(data.last_name);
-                $('#suffix').val(data.suffix).change();
-                $('#update_birth_date').val(data.birth_date);
-            })
-
+      $.get("/show/vaccinee" +'/' + id, function (data) {
+              $('#vaccinee_id').val(data.id);
+              $('#vaccinee_code').val(data.vaccinee_code);
+              $('#first_name').val(data.first_name);
+              $('#middle_name').val(data.middle_name);
+              $('#last_name').val(data.last_name);
+              $('#suffix').val(formatNamedata.suffix).change();
+              $('#birth_date').val(data.birth_date);
+          })
+        $('#modal-update-record-vaccinee').modal({backdrop:'static', keyboard:false});
         $("#modal-update-record-vaccinee").modal("show");
+      
     }
     
     function delete_vaccinee(id){

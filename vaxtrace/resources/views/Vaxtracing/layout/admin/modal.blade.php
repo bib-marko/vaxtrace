@@ -11,7 +11,7 @@
 
 
 <!-- Slide Up Modal -->
-<div class="modal fade" id="view_monitor_vaccinee" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" aria-hidden="true">
+<div class="modal fade" id="view_monitor_vaccinee" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" aria-hidden="true" >
   <div class="modal-dialog modal-dialog-slideup modal-xl" role="document">
     <div class="modal-content">
       <div class="block block-themed block-transparent mb-0">
@@ -410,7 +410,7 @@
 
 
      <!-- Slide Up Modal -->
-     <div class="modal fade" id="modal-new-record-category" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" aria-hidden="true">
+     <div class="modal fade" id="modal-new-record-category" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" aria-hidden="true">
       <div class="modal-dialog modal-dialog-slideup" role="document">
         <div class="modal-content">
           <div class="block block-themed block-transparent mb-0">
@@ -474,16 +474,15 @@
                 <input class="form-control" id="cat_id" type="text" name="cat_id" required hidden/>
                 <div class="mb-3">
                   <div class="form-material form-material-success floating">
-                    
+                    <label for="floatingDate" style="margin-top: -1.5em; font-size: 13px; color: #9CCC65;" class="fs--2">CATEGORY NAME</label>
                     <input class="form-control material-select2" id="cat_name" type="text" name="cat_name" required/>
-                    <label for="material-color-success2" style="font-size: 13px;">CATEGORY NAME</label>
                     <span class="text-danger errorMessage fs--2" id="error_email"></span>
                   </div>
                 </div>
                 <div class="mb-3">
                   <div class="form-material form-material-success floating">
+                    <label for="floatingDate" style="margin-top: -1.5em; font-size: 13px; color: #9CCC65;" class="fs--2">CATEGORY DESCRIPTION</label>
                     <input class="form-control material-select2" id="cat_desc" type="text" name="cat_desc" required/>
-                    <label for="material-color-success2" style="font-size: 13px;">CATEGORY DESCRIPTION</label>
                     <span class="text-danger errorMessage fs--2" id="error_email"></span>
                   </div>
                 </div>
@@ -504,7 +503,7 @@
 
 
       <!-- Slide Up Modal -->
-      <div class="modal fade" id="modal-new-record-sub-category" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" aria-hidden="true">
+      <div class="modal fade" id="modal-new-record-sub-category" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" aria-hidden="true">
         <div class="modal-dialog modal-dialog-slideup" role="document">
           <div class="modal-content">
             <div class="block block-themed block-transparent mb-0">
@@ -524,6 +523,7 @@
                     <div class="form-material form-material-success floating">
                       <input class="form-control" id="material-select2" type="text" name="sub_cat_name" required/>
                       <label for="material-color-success2" style="font-size: 13px;">SUB-CATEGORY NAME</label>
+                      
                       <span class="text-danger errorMessage fs--2" id="error_email"></span>
                     </div>
                   </div>
@@ -569,15 +569,15 @@
                   <div class="mb-3">
                     <input class="form-control" id="sub_cat_id" type="text" name="sub_cat_id" required hidden/>
                     <div class="form-material form-material-success floating">
+                      <label for="floatingDate" style="margin-top: -1.5em; font-size: 13px; color: #9CCC65;" class="fs--2">SUB-CATEGORY NAME</label>
                       <input class="form-control" id="sub_cat_name" type="text" name="sub_cat_name" required/>
-                      <label for="material-color-success2" style="font-size: 13px;">SUB-CATEGORY NAME</label>
                       <span class="text-danger errorMessage fs--2" id="error_email"></span>
                     </div>
                   </div>
                   <div class="mb-3">
                     <div class="form-material form-material-success floating">
+                      <label for="floatingDate" style="margin-top: -1.5em; font-size: 13px; color: #9CCC65;" class="fs--2">SUB-CATEGORY DESCRIPTION</label>
                       <input class="form-control" id="sub_cat_desc" type="text" name="sub_cat_desc" required/>
-                      <label for="material-color-success2" style="font-size: 13px;">SUB-CATEGORY DESCRIPTION</label>
                       <span class="text-danger errorMessage fs--2" id="error_email"></span>
                     </div>
                   </div>

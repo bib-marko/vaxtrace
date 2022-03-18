@@ -79,7 +79,11 @@
               //ACTION
               {data: 'cat_description'},
 
-              {data: 'status'},
+              {data: 'status',
+                render(data){
+                    return generateBadge(data);
+                },
+              },
 
               {data: 'action'},
           ]  
@@ -194,50 +198,51 @@
             $('#cat_desc').val(data.cat_description);
         })
 
-        $("#modal-update-record-category").modal("show");
-    }
-    function delete_category(id){
-        Swal.fire({
-            title: 'Do you want to delete this category?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes',
-        }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
-            if (result.isConfirmed) {
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('delete_category') }}"+'/'+id,
-                    processData: false,
-                    contentType: false,
-                    beforeSend: function () {
-                        showLoader();
-                    },
-                    complete: function () {
-                        hideLoader();
-                    },
-                    success: function (response) {
-                        Swal.fire({
-                            title: 'Success!',
-                            icon: 'success',
-                            text: "The category has been deleted",
-                            confirmButtonText: 'Ok',
-                        }).then((result) => {
-                            /* Read more about isConfirmed, isDenied below */
-                            if (result.isConfirmed) {
-                                table.draw();
-                            }
-                        })
-                    },
-                    error: function (response) {
-                        hideLoader();
-                    }
-                }); 
-            } else{
-            
-            }
-        })
-    }
-    </script>
+    $('#modal-update-record-category').modal({backdrop:'static', keyboard:false});
+    $("#modal-update-record-category").modal("show");
+  }
+  function delete_category(id){
+      Swal.fire({
+          title: 'Do you want to delete this category?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes',
+      }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+              $.ajax({
+                  type: "POST",
+                  url: "{{ route('delete_category') }}"+'/'+id,
+                  processData: false,
+                  contentType: false,
+                  beforeSend: function () {
+                      showLoader();
+                  },
+                  complete: function () {
+                      hideLoader();
+                  },
+                  success: function (response) {
+                      Swal.fire({
+                          title: 'Success!',
+                          icon: 'success',
+                          text: "The category has been deleted",
+                          confirmButtonText: 'Ok',
+                      }).then((result) => {
+                          /* Read more about isConfirmed, isDenied below */
+                          if (result.isConfirmed) {
+                              location.reload();
+                          }
+                      })
+                  },
+                  error: function (response) {
+                      hideLoader();
+                  }
+              }); 
+          } else{
+          
+          }
+      })
+  }
+  </script>
 @endsection
 @endsection

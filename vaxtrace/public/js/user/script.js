@@ -98,11 +98,11 @@ $(function(){
   }
 
   // STATUS OF ACOUNT
-    function isApproved(data) {
-        if(data == null){
-            return `<span class="badge btn-alt-success font-w700 p-2 text-uppercase">active</span>`;
+    function generateBadge(data) {
+        if(data == null || data == 1){
+            return `<span class="badge btn-alt-success font-w700 p-2 text-uppercase">ACTIVE</span>`;
         }else {
-            return `<span class="badge btn-alt-danger font-w700 p-2 text-uppercase">inactive</span>`;
+            return `<span class="badge btn-alt-danger font-w700 p-2 text-uppercase">INACTIVE</span>`;
         }
         
     }
