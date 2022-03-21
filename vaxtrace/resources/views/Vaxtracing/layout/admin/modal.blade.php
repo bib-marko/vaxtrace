@@ -118,52 +118,59 @@
                 </div>
                 
                 <form role="form" id="formCreateRole" novalidate>
-                  <div class="col-lg-12">
-                      <div class="row g-2">
-                          <div class="col-12">
-                              <br>
-                              <div class="form-material form-material-success floating">
-                                  <input class="js-maxlength form-control" id="example-material-maxlength7 home_address" type="text" name="title"   rows="3" maxlength="100" data-always-show="true" required/>
-                                  <label for="example-material-maxlength7" style="font-size: 13px;">CATEGORY</label>
-                                  <span class="text-danger errorMessage" id="error_home_address"></span>
-                              </div>
+                  <div class="col">
+                    <div class="form-material">
+                      <select class="js-select2 form-control" id="categry" name="categry" style="width: 100%;" data-placeholder="Choose many.." multiple>
+                        <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
+                        <option value="1">HTML</option>
+                        <option value="2">CSS</option>
+                        <option value="3">JavaScript</option>
+                        <option value="4">PHP</option>
+                        <option value="5">MySQL</option>
+                        <option value="6">Ruby</option>
+                        <option value="7">AngularJS</option>
+                      </select>
+                      <label for="example2-select2-multiple">CATEGORY</label>
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-material">
+                      <select class="js-select2 form-control" id="sub_categry" name="sub_categry" style="width: 100%;" data-placeholder="Choose many.." multiple>
+                        <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
+                        <option value="1">HTML</option>
+                        <option value="2">CSS</option>
+                        <option value="3">JavaScript</option>
+                        <option value="4">PHP</option>
+                        <option value="5">MySQL</option>
+                        <option value="6">Ruby</option>
+                        <option value="7">AngularJS</option>
+                      </select>
+                      <label for="example2-select2-multiple">SUB CATEGORY</label>
+                    </div>
+                  </div>
+                  
+
+                  <div class="col">
+                    <div class="row g-2">
+                      <div class="col-12">
+                          <div class="form-material form-material-success floating">
+                            <textarea class="form-control" id="material-textarea-large2" name="material-textarea-large2" rows="8"></textarea>
+                            <label for="material-textarea-large2">TRANSACTION DETAIL</label>
                           </div>
                       </div>
-                  </div>
-
-                  <div class="col-lg-12">
-                    <div class="row g-2">
-                        <div class="col-12">
-                            <br>
-                            <div class="form-material form-material-success floating">
-                                <input class="js-maxlength form-control" id="example-material-maxlength7 home_address" type="text" name="title"   rows="3" maxlength="100" data-always-show="true" required/>
-                                <label for="example-material-maxlength7" style="font-size: 13px;">SUB-CATEGORY</label>
-                                <span class="text-danger errorMessage" id="error_home_address"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-12">
-                  <div class="row g-2">
-                    <div class="col-12">
-                        <div class="form-material form-material-success floating">
-                          <textarea class="form-control" id="material-textarea-large2" name="material-textarea-large2" rows="8"></textarea>
-                          <label for="material-textarea-large2">TRANSACTION DETAIL</label>
-                        </div>
                     </div>
                   </div>
-                </div>
-                
+                  
 
-                <br>
-                <div class="col-md-3">
-                  <button type="button" class="btn btn-hero btn-alt-success" data-bs-dismiss="modal">
-                    <i class="fa fa-check"></i> SUBMIT
-                  </button>
-                </div>
-                <br>
-                <br>
+                  <br>
+                  <div class="col-md-3">
+                    <button type="button" class="btn btn-hero btn-alt-success" data-bs-dismiss="modal">
+                      <i class="fa fa-check"></i> SUBMIT
+                    </button>
+                  </div>
+                  <br>
+                  <br>
 
                 </form>
               </div>
