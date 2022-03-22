@@ -14,6 +14,7 @@
 <div class="modal fade" id="view_monitor_vaccinee" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" aria-hidden="true" >
   <div class="modal-dialog modal-dialog-slideup modal-xl" role="document">
     <div class="modal-content">
+      
       <div class="block block-themed block-transparent mb-0">
         <div class="block-header bg-primary-dark">
           <h3 class="block-title">Monitor Vaccinee</h3>
@@ -147,13 +148,14 @@
           <!-- END Block Tabs Animated Slide Left -->
         </div>
       </div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">
           <i class="fa fa-times"></i> CLOSE
         </button>
       </div>
+
     </div>
-    
   </div>
 </div>
 <!-- END Slide Up Modal -->
