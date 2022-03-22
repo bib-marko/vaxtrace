@@ -27,17 +27,17 @@
           <!-- Block Tabs Animated Slide Left -->
             <ul class="nav nav-tabs nav-tabs-block bg-earth-light" data-toggle="tabs" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active" href="#btabs-animated-slideleft-home">Transaction Summary</a>
+                <a class="nav-link active" id="transaction_summary" href="#btabs_transaction_summary">Transaction Summary</a>
               </li>
               <li class="nav-item bg-success-light">
-                <a class="nav-link" href="#btabs-animated-slideleft-profile"><i class="si si-plus"></i>  New Transaction</a>
+                <a class="nav-link" id="new_transaction" href="#btabs_new_transaction"><i class="si si-plus"></i>  New Transaction</a>
               </li>
               {{-- <li class="nav-item ml-auto">
                 <a class="nav-link" href="#btabs-animated-slideleft-settings"><i class="si si-settings"></i></a>
               </li> --}}
             </ul>
             <div class="block-content tab-content overflow-hidden">
-              <div class="tab-pane fade fade-left show active" id="btabs-animated-slideleft-home" role="tabpanel">
+              <div class="tab-pane fade fade-left show active" id="btabs_transaction_summary" role="tabpanel">
                 <!-- Partial Table -->
                 <div class="block">
                
@@ -57,7 +57,7 @@
                       </a>
                     </div>
 
-                    <table class="table table-striped table-responsive table-vcenter">
+                    <table class="table table-striped table-responsive" id="summary_dt">
                       <thead>
                         <tr>
                           <th>CATEGORY</th>
@@ -68,27 +68,6 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          
-                          <td class="font-w600">Mana</td>
-                          <td class="d-none d-sm-table-cell">client1@example.com</td>
-                          <td class="d-none d-sm-table-cell">
-                            <span class="badge badge-primary">Personal</span>
-                          </td>
-                          <td class="d-none d-sm-table-cell">client1@example.com</td>
-                          <td class="d-none d-sm-table-cell">2022/01/13</td>
-                        </tr>
-                        <tr>
-                          
-                          <td class="font-w600">Ryan Flores</td>
-                          <td class="d-none d-sm-table-cell">client2@example.com</td>
-                          <td class="d-none d-sm-table-cell">
-                            <span class="badge badge-info">Business</span>
-                          </td>
-                          <td class="d-none d-sm-table-cell">client1@example.com</td>
-                          <td class="d-none d-sm-table-cell">2022/01/13</td>
-                        <tr>
-                          
                       </tbody>
                     </table>
                   </div>
@@ -96,7 +75,7 @@
                 <!-- END Partial Table -->
 
               </div>
-              <div class="tab-pane fade fade-left" id="btabs-animated-slideleft-profile" role="tabpanel">
+              <div class="tab-pane fade fade-left" id="btabs_new_transaction" role="tabpanel">
                 {{-- <h4 class="font-w400">Add New Transaction</h4> --}}
 
                 <div class="col-md-12">
@@ -117,18 +96,14 @@
                   </a>
                 </div>
                 
-                <form role="form" id="formCreateRole" novalidate>
+                <form role="form" id="formAddTransaction" novalidate>
                   <div class="col">
                     <div class="form-material">
-                      <select class="js-select2 form-control" id="categry" name="categry" style="width: 100%;" data-placeholder="Choose many.." multiple>
-                        <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
-                        <option value="1">HTML</option>
-                        <option value="2">CSS</option>
-                        <option value="3">JavaScript</option>
-                        <option value="4">PHP</option>
-                        <option value="5">MySQL</option>
-                        <option value="6">Ruby</option>
-                        <option value="7">AngularJS</option>
+                      <input class="form-control" id="vaccinee_id" type="text" name="vaccinee_id" hidden required/>
+                      <input class="form-control" id="material-select2" type="text" name="assist_by" value="{{ session('LoggedUser')->id }}" hidden required/>
+                      <select class="js-select2 form-control" id="category_sel" name="category" style="width: 100%;" data-placeholder="Choose one.." required>
+                        <!-- Required for data-placeholder attribute to work with Select2 plugin -->
+                        
                       </select>
                       <label for="example2-select2-multiple">CATEGORY</label>
                     </div>
@@ -136,17 +111,10 @@
 
                   <div class="col">
                     <div class="form-material">
-                      <select class="js-select2 form-control" id="sub_categry" name="sub_categry" style="width: 100%;" data-placeholder="Choose many.." multiple>
-                        <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
-                        <option value="1">HTML</option>
-                        <option value="2">CSS</option>
-                        <option value="3">JavaScript</option>
-                        <option value="4">PHP</option>
-                        <option value="5">MySQL</option>
-                        <option value="6">Ruby</option>
-                        <option value="7">AngularJS</option>
+                      <select class="js-select2 form-control" id="sub_category_sel" name="sub_category[]" style="width: 100%;" data-placeholder="Choose many.." multiple required>
+                       
                       </select>
-                      <label for="example2-select2-multiple">SUB CATEGORY</label>
+                      <label for="sub_categry">SUB CATEGORY</label>
                     </div>
                   </div>
                   
@@ -155,7 +123,7 @@
                     <div class="row g-2">
                       <div class="col-12">
                           <div class="form-material form-material-success floating">
-                            <textarea class="form-control" id="material-textarea-large2" name="material-textarea-large2" rows="8"></textarea>
+                            <textarea class="form-control" id="material-textarea-large2" name="t_details" rows="8" required></textarea>
                             <label for="material-textarea-large2">TRANSACTION DETAIL</label>
                           </div>
                       </div>
@@ -165,7 +133,7 @@
 
                   <br>
                   <div class="col-md-3">
-                    <button type="button" class="btn btn-hero btn-alt-success" data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-hero btn-alt-success" id="saveTransaction">
                       <i class="fa fa-check"></i> SUBMIT
                     </button>
                   </div>

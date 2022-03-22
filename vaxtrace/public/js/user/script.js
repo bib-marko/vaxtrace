@@ -72,7 +72,7 @@ $(function(){
             }
             if (opt == "date_time") {
                 const formatted_date = new Date(date);
-                return formatted_date.toLocaleDateString();
+                return formatted_date.toLocaleString();
             }
         } else {
             return ``;
