@@ -119,6 +119,16 @@
                     </div>
                   </div>
                   
+                  <div class="col">
+                    <div class="form-material">
+                      <select class="js-select2 form-control" id="sub_category_sel" name="sub_category[]" style="width: 100%;" data-placeholder="Choose many.." multiple required>
+                        <option value="DONE">DONE</option>
+                        <option value="PENDING">PENDING</option>
+                        <option value="FOR CHECKING">FOR CHECKING</option>
+                      </select>
+                      <label for="sub_categry">SUB CATEGORY</label>
+                    </div>
+                  </div>
 
                   <div class="col">
                     <div class="row g-2">

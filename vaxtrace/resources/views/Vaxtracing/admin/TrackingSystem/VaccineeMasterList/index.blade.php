@@ -231,7 +231,7 @@
             ],
             columns: [
                 //UNIQ_ID
-                {   data: 'home_address', 
+                {   data: 'patient_code', 
                     render(data) {
                             currentQr = data;
                             return data;
@@ -277,7 +277,7 @@
                     var data = tableForNonVerified.row($(this).parents('tr')[0]).data();
                     console.log(data['qrcode']);
                     var formData = new FormData();
-                    formData.append("vaccinee_code",data['home_address'] );
+                    formData.append("vaccinee_code",data['patient_code'] );
                     formData.append("first_name",data['first_name'] );
                     formData.append("middle_name",data['middle_name'] );
                     formData.append("last_name",data['last_name'] );

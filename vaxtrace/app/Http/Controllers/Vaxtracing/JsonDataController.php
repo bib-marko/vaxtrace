@@ -19,7 +19,7 @@ class JsonDataController extends Controller
     }
     public function getActivity()
     {
-        $activity = json_decode(Storage::get('activitylogs-'.date('Y-m-d').'.json'), true);
+        $activity = json_decode(Storage::get('ActivityLogs/activitylogs-'.date('Y-m-d').'.json'), true);
 
         $activity = collect($activity)->sortBy('datetime', SORT_REGULAR, true);
 
