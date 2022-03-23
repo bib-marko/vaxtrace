@@ -437,6 +437,7 @@
                 },
                 complete: function () {
                 hideLoader();
+                $('#view_monitor_vaccinee').modal('hide');
                 },
                 success: function (response) {
                     Swal.fire({
@@ -446,12 +447,15 @@
                         confirmButtonText: 'Ok',
                     }).then((result) => {
                         /* Read more about isConfirmed, isDenied below */
+                        // $('.view_monitor_vaccinee').modal('hide');
+                        // $('.view_monitor_vaccinee').modal('show');
                         if (result.isConfirmed) {
                             $('#transaction_summary').addClass("active");
                             $('#new_transaction').removeClass("active");
                             $('#btabs_transaction_summary').addClass("active show");
-                            $('#btabs_new_transaction').removeClass("active show");
-                            
+                            $('#btabs_new_transaction').removeClass("active show")
+                            tableForSummary.draw();
+                            $('#view_monitor_vaccinee').modal('show');
                         }
                     })
                 },
@@ -517,6 +521,7 @@
                     }},
                 ]  
             });
+
             $('#vaccinee_id').val(id);
             $.each(data.categories, function(key, value) {
                 $('#category_sel').append(`<option value="${value.id}">${value.cat_name}</option>`);
@@ -526,7 +531,6 @@
             });
             
         })
-        $('#view_monitor_vaccinee').modal({backdrop:'static', keyboard:false});
         $('#view_monitor_vaccinee').modal("show");
     }
 
