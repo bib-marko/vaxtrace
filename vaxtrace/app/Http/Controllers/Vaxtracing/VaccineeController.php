@@ -134,7 +134,9 @@ class VaccineeController extends Controller
     public function monitor($id){
 
         $vaccinee = Vaccinee::with('transactions')->where('id', $id)->first();
-        $categories = Category::where('status',1)->get();
+        $categories = Category::whereHas('sub_categories', function($q){
+            $q->where('sub_categories.status', '=', '1');
+        })->where('status',1)->get();
         $sub_categories = Sub_Category::where('status',1)->get();
         $transactions = Transactions::where('vaccinees_id', $id)->where('status', 1)->get();
         return response()->json(array(
@@ -151,13 +153,14 @@ class VaccineeController extends Controller
                                     ->join('category_has_sub_category', 'category_has_sub_category.id', '=', 'vaccinees_has_transactions.category_has_sub_category_id')
                                     ->join('categories', 'category_has_sub_category.categories_id', '=', 'categories.id')                            
                                     ->join('sub_categories', 'category_has_sub_category.sub_categories_id', '=', 'sub_categories.id') 
-                                    ->where('vaccinees_id', $id)->where('vaccinees_has_transactions.status', 1)->get();
+                                    ->where('vaccinees_id', $id)->where('vaccinees_has_transactions.status', 1)
+                                    ->orderByDesc('created_at')->get();
         
         return Datatables::of($transactions)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $actionBtn = "";
-                    $actionBtn .= " <a class='view btn btn-alt-primary btn-rounded mr-5 mb-5' onclick='show_vaccinee($row->id)'><i class='si si-eye mr-6'></i></button></a>";
+                    $actionBtn .= " <a class='view btn btn-alt-primary btn-rounded mr-5 mb-5' onclick='update_vaccinee_transaction($row->id)'><i class='si si-pencil mr-6'></i>Update</button></a>";
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -165,6 +168,7 @@ class VaccineeController extends Controller
     }
 
     public function saveTransaction(Request $request){
+        
         // $category = Category::find($request->category);
         // $category->sub_categories()->sync($request->sub_category);
         foreach($request->sub_category as $sub_category){
@@ -180,6 +184,7 @@ class VaccineeController extends Controller
             $transaction->trans_details  = $request->t_details;
             $transaction->assisted_by_id  = session()->get('LoggedUser')->id;
             $transaction->assisted_by = generateFullName(session()->get('LoggedUser'));
+            $transaction->transaction_status  = $request->transaction_status;
             $transaction->save();
         }
     }

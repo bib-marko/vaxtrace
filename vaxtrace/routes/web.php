@@ -186,6 +186,8 @@ Route::group(['middleware' => ['AuthCheck']],function(){
 
     Route::get('/show/summary/{id?}', [VaccineeController::class, 'showSummary'])->name('show_summary');
 
+    Route::get('/show/transaction/{id?}', [VaccineeController::class, 'showTransaction'])->name('show_transaction');
+
     Route::post('/save/vaccinee/transaction/{id?}', [VaccineeController::class, 'saveTransaction'])->name('save_vaccinee_transaction');
 
     Route::get('/view/Tracker-Main-System/vaccinees/status/category', function () {

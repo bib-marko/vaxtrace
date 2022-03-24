@@ -12,7 +12,7 @@
 
 
    <!-- Slide Up Modal -->
-   <div class="modal fade" id="view_monitor_vaccinee" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" aria-hidden="true">
+   <div class="modal fade" id="view_monitor_vaccinee" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="modal-slideup" aria-hidden="true">
     <div class="modal-dialog modal-dialog-slideup modal-xl" role="document">
       <div class="block-header bg-primary-dark">
         <h3 class="block-title text-white">Monitor Vaccinee</h3>
@@ -64,11 +64,13 @@
                                   <table class="table table-striped table-center js-dataTable-full-pagination" id="summary_dt" width="100%">
                                       <thead>
                                         <tr>
+                                          <th>ACTION</th>
+                                          <th>STATUS</th>
                                           <th>CATEGORY</th>
-                                          <th >SUB-CATEGORY</th>
-                                          <th >TRANSACTION DETAILS</th>
-                                          <th >ASSIST BY</th>
-                                          <th >DATE OF TRANSACT</th>
+                                          <th>SUB-CATEGORY</th>
+                                          <th>TRANSACTION DETAILS</th>
+                                          <th>ASSIST BY</th>
+                                          <th>DATE OF TRANSACT</th>
                                         </tr>
                                       </thead>
                                   </table>
@@ -121,10 +123,12 @@
   
                     <div class="col">
                       <div class="form-material ">
-                        <select class="js-select2 form-control" id="sub_category_sel" name="transaction_status" style="width: 100%;" data-placeholder="Choose many.." multiple required>
-                         
+                        <select class="js-select2 form-control" id="transaction_status_sel" name="transaction_status" style="width: 100%;" data-placeholder="Choose one.." required>
+                          <option value="DONE">DONE</option>
+                          <option value="PENDING">PENDING</option>
+                          <option value="FOR CHECKING">FOR CHECKING</option>
                         </select>
-                        <label for="material-textarea-large2" style="color: #9CCC65;"><strong>SUB CATEGORY</strong></label>
+                        <label for="material-textarea-large2" style="color: #9CCC65;"><strong>STATUS</strong></label>
                       </div>
                     </div>
 
@@ -159,7 +163,94 @@
   </div>
   <!-- END Slide Up Modal -->
 
+<!-- Slide Up Modal -->
+<div class="modal" id="update_transaction" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-slideup modal-xl" role="document">
+    <div class="block-header bg-primary-dark">
+      <h3 class="block-title text-white">Monitor Vaccinee</h3>
+      <div class="block-options">
+        <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+          <i class="si si-close  text-white"></i>
+        </button>
+      </div>
+    </div>
+    <div class="modal-content">
+      <div class="col-md-12">
+        <a class="block block-link-shadow block-transparent border-left border-5x border-warning">
+          <div class="block-content block-content-full bg-white-op-90">
+            <div class="pt-20">
+              <h3 class="h4 font-w700 mb-10">Update Transaction</h3>
+              <h4 class="text-muted font-size-default mb-0">
+                <span class="mr-10">
+                  <i class="si si-info"></i> You may update a transaction record in this section to keep track of the patient's progress.
+                </span>
+              </h4>
+            </div>
+          </div>
+        </a>
+      </div>
+      
+      <form role="form" id="formUpdateTransaction" novalidate>
+        <div class="col">
+          <div class="form-material">
+            <input class="form-control" id="vaccinee_id" type="text" name="vaccinee_id" hidden required/>
+            <input class="form-control" id="material-select2" type="text" name="assist_by" value="{{ session('LoggedUser')->id }}" hidden required/>
+            <select class="js-select2 form-control" id="update_category" name="category" style="width: 100%;" data-placeholder="Choose one.." required>
+              <!-- Required for data-placeholder attribute to work with Select2 plugin -->
+              
+            </select>
+            <label for="material-textarea-large2" style="color: #9CCC65;"><strong>CATEGORY</strong></label>
+          </div>
+        </div>
 
+        <div class="col">
+          <div class="form-material ">
+            <select class="js-select2 form-control" id="update_sub_category" name="sub_category[]" style="width: 100%;" data-placeholder="Choose many.." multiple required>
+             
+            </select>
+            <label for="material-textarea-large2" style="color: #9CCC65;"><strong>SUB CATEGORY</strong></label>
+          </div>
+        </div>
+        
+
+        <div class="col">
+          <div class="form-material ">
+            <select class="js-select2 form-control" id="update_transaction_status" name="transaction_status" style="width: 100%;" data-placeholder="Choose one.." required>
+              <option value="DONE">DONE</option>
+              <option value="PENDING">PENDING</option>
+              <option value="FOR CHECKING">FOR CHECKING</option>
+            </select>
+            <label for="material-textarea-large2" style="color: #9CCC65;"><strong>STATUS</strong></label>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="row g-2">
+            <div class="col-12">
+              <div class="form-material form-material-success floating">
+                <textarea class="form-control" id="update_transaction_details" name="t_details" rows="8" required></textarea>
+                <label for="material-textarea-large2">TRANSACTION DETAIL</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+          <br>
+          <div class="col-md-2 ml-auto">
+            <button type="button" class="btn btn-hero btn-alt-success" id="saveTransaction">
+              <i class="fa fa-check"></i> SUBMIT
+            </button>
+          </div>
+
+        <br>
+      </form>
+           
+          <!-- END Block Tabs Animated Slide Left -->
+      
+    </div>
+  </div>
+</div>
+<!-- END Slide Up Modal -->
 {{-- <!-- Slide Up Modal -->
 <div class="modal" id="view_monitor_vaccinee" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" aria-hidden="true" >
   <div class="modal-dialog modal-dialog-slideup modal-xl" role="document">

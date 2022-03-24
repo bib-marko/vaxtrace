@@ -511,15 +511,18 @@
                 ajax: "/show/summary/"+id,
                 columns: [
                     //UNIQ_ID
+                    {data: 'action'},
+                    {data: 'transaction_status'},
                     {data: 'cat_name'},
-                    //FULLNAME
                     {data: 'sub_cat_name'},
                     {data: 'trans_details'},
                     {data: 'assisted_by'},
                     {data: 'created_at',render (data){
                         return formatDate(data, "date_time");
                     }},
-                ]  
+                    
+                ],
+                order: [[ 6, "desc" ]]
             });
 
             $('#vaccinee_id').val(id);
@@ -545,8 +548,21 @@
                 $('#view_birth_date').text(data.birth_date);
             })
         $('#vaccinee_view').modal({backdrop:'static', keyboard:false});
-        $('#vaccinee_view').modal("show");
-        
+        $('#vaccinee_view').modal("show"); 
+    }
+
+    function update_vaccinee_transaction(id){
+        $('#view_monitor_vaccinee').modal("hide");
+        $('#update_transaction').modal("show");
+        $.get("/show/vaccinee" +'/' + id, function (data) {
+                $('#vaccinee_id').val(data.id);
+                $('#vaccinee_code').val(data.vaccinee_code);
+                $('#first_name').val(data.first_name);
+                $('#middle_name').val(data.middle_name);
+                $('#last_name').val(data.last_name);
+                $('#suffix').val(formatNamedata.suffix).change();
+                $('#birth_date').val(data.birth_date);
+            })
     }
 
     function update_vaccinee(id){
