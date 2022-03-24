@@ -8,7 +8,7 @@
       <div class="block-header bg-primary-dark">
         <h3 class="block-title text-white">Monitor Vaccinee Transaction</h3>
         <div class="block-options">
-          <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+          <button type="button" class="btn-block-option" databs-dismiss="modal" aria-label="Close">
             <i class="si si-close text-white"></i>
           </button>
         </div>
@@ -195,9 +195,9 @@
                 <form role="form" id="formUpdateTransaction" novalidate>
                   <div class="col">
                     <div class="form-material">
-                      <input class="form-control" id="vaccinee_id" type="text" name="vaccinee_id" hidden required/>
+                      <input class="form-control" id="transaction_id" type="text" name="transaction_id" hidden required/>
                       <input class="form-control" id="material-select2" type="text" name="assist_by" value="{{ session('LoggedUser')->id }}" hidden required/>
-                      <select class="js-select2 form-control" id="update_category" name="category" style="width: 100%;" data-placeholder="Choose one.." required>
+                      <select class="js-select2 form-control" id="update_category" name="category" style="width: 100%;" data-placeholder="Choose one.." disabled required>
                         <!-- Required for data-placeholder attribute to work with Select2 plugin -->
                         
                       </select>
@@ -208,8 +208,9 @@
           
                   <div class="col">
                     <div class="form-material ">
-                      <select class="js-select2 form-control" id="update_sub_category" name="sub_category[]" style="width: 100%;" data-placeholder="Choose many.." multiple required>
-                       
+                      <select class="js-select2 form-control" id="update_sub_category" name="sub_category" style="width: 100%;" data-placeholder="Choose one.." disabled required>
+                        <!-- Required for data-placeholder attribute to work with Select2 plugin -->
+                        
                       </select>
                       <label for="material-textarea-large2" style="margin-top: -1em;"><strong>SUB CATEGORY</strong></label>
                     </div>
@@ -246,7 +247,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">CLOSE</button>
-              <button type="button" class="btn btn-alt-success" data-dismiss="modal" id="saveTransaction">
+              <button type="button" class="btn btn-alt-success" data-dismiss="modal" id="saveUpdateTransaction">
                 <i class="fa fa-check"></i> SUBMIT
               </button>
             </div>
@@ -539,7 +540,7 @@
               <div class="block-content">
                 <form role="form" id="formCreateSubCat">
                   @csrf
-  
+                  <input class="form-control" id="material-select2" type="text" name="category_id" value="{{ $category_id ?? '' }}" hidden required/>
                   <div class="mb-3">
                     <div class="form-material form-material-success floating">
                       <input class="form-control" id="material-select2" type="text" name="sub_cat_name" required/>

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Vaxtracing;
 
 use App\Http\Controllers\Controller;
+use App\Models\Vaxtracing\Category;
 use App\Models\Vaxtracing\Sub_Category;
 use Illuminate\Http\Request;
 use DataTables;
+use Illuminate\Support\Facades\DB;
 
 class SubCategoryController extends Controller
 {
@@ -17,9 +19,12 @@ class SubCategoryController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Sub_Category::where('status','!=', 0)->get();
-
-            return Datatables::of($data)
+            $data = Category::with(["sub_categories" => function($q){
+                $q->where('sub_categories.status', '=', 1);
+            }])->where('status','!=', 0)->where('id','=', session()->get('current_category'))->first();
+            
+           
+            return Datatables::of($data->sub_categories)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $actionBtn = "";
@@ -58,6 +63,8 @@ class SubCategoryController extends Controller
         $sub_category->sub_cat_description = formatString($request->sub_cat_desc);
         $sub_category->status = 1;
         $sub_category->save();
+        $sub_category->categories()->sync($request->category_id);
+
     }
 
     /**

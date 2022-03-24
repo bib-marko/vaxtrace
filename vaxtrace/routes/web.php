@@ -188,7 +188,9 @@ Route::group(['middleware' => ['AuthCheck']],function(){
 
     Route::get('/show/transaction/{id?}', [VaccineeController::class, 'showTransaction'])->name('show_transaction');
 
-    Route::post('/save/vaccinee/transaction/{id?}', [VaccineeController::class, 'saveTransaction'])->name('save_vaccinee_transaction');
+    Route::post('/save/vaccinee/transaction', [VaccineeController::class, 'saveTransaction'])->name('save_vaccinee_transaction');
+
+    Route::post('/save/update/vaccinee/transaction', [VaccineeController::class, 'saveUpdateTransaction'])->name('save_update_transaction');
 
     Route::get('/view/Tracker-Main-System/vaccinees/status/category', function () {
         return view('Vaxtracing.admin.TrackingSystem.Category.index');
@@ -202,8 +204,9 @@ Route::group(['middleware' => ['AuthCheck']],function(){
 
     Route::get('/show/category/{id?}', [CategoryController::class, 'show'])->name('show_category');
 
-    Route::get('/view/Tracker-Main-System/vaccinees/status/sub-category', function () {
-        return view('Vaxtracing.admin.TrackingSystem.SubCategory.index');
+    Route::get('/view/Tracker-Main-System/vaccinees/status/sub-category/{category_id?}', function ($category_id) {
+        session()->put('current_category', $category_id);
+        return view('Vaxtracing.admin.TrackingSystem.SubCategory.index',compact('category_id'));
     })->name('view_vaccinees_status_sub-category');
 
     Route::resource('sub_category', SubCategoryController::class);
