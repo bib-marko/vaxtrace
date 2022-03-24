@@ -2,161 +2,163 @@
 
 {{--Show Role Modal--}}
 
-   <!-- Slide Up Modal -->
-   <div class="modal fade" id="view_monitor_vaccinee" data-backdrop="static"  tabindex="-1" role="dialog"  aria-labelledby="modal-slideup" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-slideup modal-xl" role="document">
+
+
+ <!-- Slide Up Modal -->
+ <div class="modal fade" id="view_monitor_vaccinee" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-slideup modal-xl" role="document">
+    <div class="modal-content">
       <div class="block-header bg-primary-dark">
         <h3 class="block-title text-white">Monitor Vaccinee Transaction</h3>
         <div class="block-options">
-          <button type="button" class="btn-block-option" databs-dismiss="modal" aria-label="Close">
+          <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
             <i class="si si-close text-white"></i>
           </button>
         </div>
       </div>
-      <div class="modal-content">
-        <div class="block block-themed block-transparent mb-0">
-          <div class="block-content modal-body p-0">
-            <!-- Block Tabs Animated Slide Left -->
-              <ul class="nav nav-tabs nav-tabs-block bg-gd-lake" data-toggle="tabs" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link active" id="transaction_summary" href="#btabs_transaction_summary">Transaction Summary</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="new_transaction" href="#btabs_new_transaction"><i class="si si-plus"></i>  New Transaction</a>
-                </li>
-                {{-- <li class="nav-item ml-auto">
-                  <a class="nav-link" href="#bta  bs-animated-slideleft-settings"><i class="si si-settings"></i></a>
-                </li> --}}
-              </ul>
-              <div class="block-content tab-content overflow-hidden"  data-toggle="slimscroll" data-height="600px" data-color="#9ccc65" data-opacity="1" data-always-visible="true">
-                <div class="tab-pane fade fade-left show active" id="btabs_transaction_summary" role="tabpanel">
-                  <div class="block-content tab-content overflow-hidden">
-  
-                    {{-- VERIFIEED VACCINEE TABLE --}}
-  
-                      <div class="block">
-                        <div class="col-md-12">
-                          <a class="block block-link-shadow block-transparent border-left border-5x border-warning">
-                            <div class="block-content block-content-full bg-white-op-90">
-                              <div class="pt-20">
-                                <h3 class="h4 font-w700 mb-10">Transaction Summary</h3>
-                                <h4 class="text-muted font-size-default mb-0">
-                                  <span class="mr-10">
-                                    <i class="si si-info"></i> See the table below for a complete list of patient transactions.
-                                  </span>
-                                </h4>
-                              </div>
+
+      <div class="block block-themed block-transparent mb-0">
+        <div class="block-content modal-body p-0">
+          <!-- Block Tabs Animated Slide Left -->
+            <ul class="nav nav-tabs nav-tabs-block bg-gd-lake" data-toggle="tabs" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="transaction_summary" href="#btabs_transaction_summary">Transaction Summary</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="new_transaction" href="#btabs_new_transaction"><i class="si si-plus"></i>  New Transaction</a>
+              </li>
+              {{-- <li class="nav-item ml-auto">
+                <a class="nav-link" href="#bta  bs-animated-slideleft-settings"><i class="si si-settings"></i></a>
+              </li> --}}
+            </ul>
+            <div class="block-content tab-content overflow-hidden"  data-toggle="slimscroll" data-height="600px" data-color="#9ccc65" data-opacity="1" data-always-visible="true">
+              <div class="tab-pane fade fade-left show active" id="btabs_transaction_summary" role="tabpanel">
+                <div class="block-content tab-content overflow-hidden">
+
+                  {{-- VERIFIEED VACCINEE TABLE --}}
+
+                    <div class="block">
+                      <div class="col-md-12">
+                        <a class="block block-link-shadow block-transparent border-left border-5x border-warning">
+                          <div class="block-content block-content-full bg-white-op-90">
+                            <div class="pt-20">
+                              <h3 class="h4 font-w700 mb-10">Transaction Summary</h3>
+                              <h4 class="text-muted font-size-default mb-0">
+                                <span class="mr-10">
+                                  <i class="si si-info"></i> See the table below for a complete list of patient transactions.
+                                </span>
+                              </h4>
                             </div>
-                          </a>
-                        </div>
-    
-                          <div class="block-content block-content-full" data-toggle="slimscroll" data-height="350px" data-color="#9ccc65" data-opacity="1" data-always-visible="true">
-                              <div class="table-responsive">
-                                  <table class="table table-striped table-center js-dataTable-full-pagination" id="summary_dt" width="100%">
-                                      <thead>
-                                        <tr>
-                                         
-                                          <th>STATUS</th>
-                                          <th>CATEGORY</th>
-                                          <th>SUB-CATEGORY</th>
-                                          <th>TRANSACTION DETAILS</th>
-                                          <th>ASSIST BY</th>
-                                          <th>DATE OF TRANSACT</th>
-                                          <th>ACTION</th>
-                                        </tr>
-                                      </thead>
-                                  </table>
-                              </div>
                           </div>
+                        </a>
                       </div>
+  
+                        <div class="block-content block-content-full" data-toggle="slimscroll" data-height="350px" data-color="#9ccc65" data-opacity="1" data-always-visible="true">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-center js-dataTable-full-pagination" id="summary_dt" width="100%">
+                                    <thead>
+                                      <tr>
+                                       
+                                        <th>STATUS</th>
+                                        <th>CATEGORY</th>
+                                        <th>SUB-CATEGORY</th>
+                                        <th>TRANSACTION DETAILS</th>
+                                        <th>ASSIST BY</th>
+                                        <th>DATE OF TRANSACT</th>
+                                        <th>ACTION</th>
+                                      </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+              </div>
+              <div class="tab-pane fade fade-left" id="btabs_new_transaction" role="tabpanel">
+                {{-- <h4 class="font-w400">Add New Transaction</h4> --}}
+
+                <div class="col-md-12">
+                  <a class="block block-link-shadow block-transparent border-left border-5x border-warning">
+                    <div class="block-content block-content-full bg-white-op-90">
+                      <div class="pt-20">
+                        <h3 class="h4 font-w700 mb-10">Add New Transaction</h3>
+                        <h4 class="text-muted font-size-default mb-0">
+                          <span class="mr-10">
+                            <i class="si si-info"></i> You may create a transaction record in this section to keep track of the patient's progress.
+                          </span>
+                        </h4>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                
+                <form role="form" id="formAddTransaction" novalidate>
+                  <div class="col">
+                    <div class="form-material">
+                      <input class="form-control" id="vaccinee_id" type="text" name="vaccinee_id" hidden required/>
+                      <input class="form-control" id="material-select2" type="text" name="assist_by" value="{{ session('LoggedUser')->id }}" hidden required/>
+                      <select class="js-select2 form-control" id="category_sel" name="category" style="width: 100%;" data-placeholder="Choose one.." required>
+                        <!-- Required for data-placeholder attribute to work with Select2 plugin -->
+                        
+                      </select>
+                      <label for="material-textarea-large2" style="margin-top -.5em;"><strong>CATEGORY</strong></label>
+                    </div>
                   </div>
 
-                </div>
-                <div class="tab-pane fade fade-left" id="btabs_new_transaction" role="tabpanel">
-                  {{-- <h4 class="font-w400">Add New Transaction</h4> --}}
-  
-                  <div class="col-md-12">
-                    <a class="block block-link-shadow block-transparent border-left border-5x border-warning">
-                      <div class="block-content block-content-full bg-white-op-90">
-                        <div class="pt-20">
-                          <h3 class="h4 font-w700 mb-10">Add New Transaction</h3>
-                          <h4 class="text-muted font-size-default mb-0">
-                            <span class="mr-10">
-                              <i class="si si-info"></i> You may create a transaction record in this section to keep track of the patient's progress.
-                            </span>
-                          </h4>
-                        </div>
-                      </div>
-                    </a>
+                  <br>
+                  <div class="col">
+                    <div class="form-material ">
+                      <select class="js-select2 form-control" id="sub_category_sel" name="sub_category[]" style="width: 100%;" data-placeholder="Choose many.." multiple required>
+                       
+                      </select>
+                      <label for="material-textarea-large2" style="margin-top -.5em;"><strong>SUB CATEGORY</strong></label>
+                    </div>
                   </div>
                   
-                  <form role="form" id="formAddTransaction" novalidate>
-                    <div class="col">
-                      <div class="form-material">
-                        <input class="form-control" id="vaccinee_id" type="text" name="vaccinee_id" hidden required/>
-                        <input class="form-control" id="material-select2" type="text" name="assist_by" value="{{ session('LoggedUser')->id }}" hidden required/>
-                        <select class="js-select2 form-control" id="category_sel" name="category" style="width: 100%;" data-placeholder="Choose one.." required>
-                          <!-- Required for data-placeholder attribute to work with Select2 plugin -->
-                          
-                        </select>
-                        <label for="material-textarea-large2" style="margin-top -.5em;"><strong>CATEGORY</strong></label>
-                      </div>
+                  <br>
+                  <div class="col">
+                    <div class="form-material ">
+                      <select class="js-select2 form-control" id="transaction_status_sel" name="transaction_status" style="width: 100%;" data-placeholder="Choose one.." required>
+                        <option value="DONE">DONE</option>
+                        <option value="PENDING">PENDING</option>
+                        <option value="FOR CHECKING">FOR CHECKING</option>
+                      </select>
+                      <label for="material-textarea-large2" style="margin-top -.5em;"><strong>STATUS</strong></label>
                     </div>
-  
-                    <br>
-                    <div class="col">
-                      <div class="form-material ">
-                        <select class="js-select2 form-control" id="sub_category_sel" name="sub_category[]" style="width: 100%;" data-placeholder="Choose many.." multiple required>
-                         
-                        </select>
-                        <label for="material-textarea-large2" style="margin-top -.5em;"><strong>SUB CATEGORY</strong></label>
-                      </div>
-                    </div>
-                    
-                    <br>
-                    <div class="col">
-                      <div class="form-material ">
-                        <select class="js-select2 form-control" id="transaction_status_sel" name="transaction_status" style="width: 100%;" data-placeholder="Choose one.." required>
-                          <option value="DONE">DONE</option>
-                          <option value="PENDING">PENDING</option>
-                          <option value="FOR CHECKING">FOR CHECKING</option>
-                        </select>
-                        <label for="material-textarea-large2" style="margin-top -.5em;"><strong>STATUS</strong></label>
-                      </div>
-                    </div>
+                  </div>
 
-                    <br>
-                    <div class="col">
-                      <div class="row g-2">
-                        <div class="col-12">
-                          <div class="form-material form-material-success floating">
-                            <textarea class="form-control" id="material-textarea-large2" name="t_details" rows="8" required></textarea>
-                            <label for="material-textarea-large2"  style="margin-top -.5em;">TRANSACTION DETAIL</label>
-                          </div>
+                  <br>
+                  <div class="col">
+                    <div class="row g-2">
+                      <div class="col-12">
+                        <div class="form-material form-material-success floating">
+                          <textarea class="form-control" id="material-textarea-large2" name="t_details" rows="8" required></textarea>
+                          <label for="material-textarea-large2"  style="margin-top -.5em;">TRANSACTION DETAIL</label>
                         </div>
                       </div>
                     </div>
-                    
-                      <br>
-                      <div class="col-md-2 ml-auto">
-                        <button type="button" class="btn btn-hero btn-alt-success" id="saveTransaction">
-                          <i class="fa fa-check"></i> SUBMIT
-                        </button>
-                      </div>
-  
+                  </div>
+                  
                     <br>
-                  </form>
-                </div>
-              
+                    <div class="col-md-2 ml-auto">
+                      <button type="button" class="btn btn-hero btn-alt-success" id="saveTransaction">
+                        <i class="fa fa-check"></i> SUBMIT
+                      </button>
+                    </div>
+
+                  <br>
+                </form>
               </div>
-            <!-- END Block Tabs Animated Slide Left -->
-          </div>
+            
+            </div>
+          <!-- END Block Tabs Animated Slide Left -->
         </div>
       </div>
     </div>
   </div>
-  <!-- END Slide Up Modal -->
-  
+</div>
+<!-- END Slide Up Modal -->
 
 
 
@@ -233,8 +235,8 @@
                     <div class="row g-2">
                       <div class="col-12">
                         <div class="form-material form-material-success floating">
+                          <label for="floatingDate" style="margin-top: -1.5em; color: #9CCC65;" class="fs--2">TRANSACTION DETAILS</label>
                           <textarea class="form-control" id="update_transaction_details" name="t_details" rows="8" required></textarea>
-                          <label for="material-textarea-large2" style="margin-top: -1em;" >TRANSACTION DETAIL</label>
                         </div>
                       </div>
                     </div>

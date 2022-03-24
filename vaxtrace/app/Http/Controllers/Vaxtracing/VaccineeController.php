@@ -159,7 +159,7 @@ class VaccineeController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $actionBtn = "";
-                    $actionBtn .= " <a class='view btn btn-alt-primary btn-rounded mr-5 mb-5' onclick='update_vaccinee_transaction($row->id)'><i class='si si-pencil mr-6'></i>Update</button></a>";
+                    $actionBtn .= " <a class='view btn btn-alt-primary btn-rounded mr-5 mb-5' onclick='update_vaccinee_transaction($row->id)'>Update</button></a>";
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])

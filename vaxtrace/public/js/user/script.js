@@ -97,7 +97,7 @@ $(function(){
         return fullname;
   }
 
-  // STATUS OF ACOUNT
+    // STATUS OF ACOUNT
     function generateBadge(data) {
         if(data == null || data == 1){
             return `<span class="badge btn-alt-success font-w700 p-2 text-uppercase">ACTIVE</span>`;
@@ -105,6 +105,17 @@ $(function(){
             return `<span class="badge btn-alt-danger font-w700 p-2 text-uppercase">INACTIVE</span>`;
         }
         
+    }
+
+    // STATUS OF TRANSACTION 
+    function statusBadge(data){
+        if(data == "DONE"){
+            return `<span class="badge btn-alt-success font-w700 p-2 text-uppercase">`+data+`</span>`;
+        }else if(data == "FOR CHECKING"){
+            return `<span class="badge btn-alt-warning font-w700 p-2 text-uppercase">`+data+`</span>`;
+        }else if(data == "PENDING"){
+            return `<span class="badge btn-alt-danger font-w700 p-2 text-uppercase">`+data+`</span>`;
+        }
     }
 
     function showLoader(){

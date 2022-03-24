@@ -493,12 +493,13 @@
                 complete: function () {
                 hideLoader();
                 $('#view_monitor_vaccinee').modal('hide');
+                $('#update_transaction').modal('hide');
                 },
                 success: function (response) {
                     Swal.fire({
                         title: 'Success!',
                         icon: 'success',
-                        text: "The transaction has been added",
+                        text: "The transaction has been updated",
                         confirmButtonText: 'Ok',
                     }).then((result) => {
                         /* Read more about isConfirmed, isDenied below */
@@ -577,7 +578,10 @@
                 ajax: "/show/summary/"+id,
                 columns: [
                     //UNIQ_ID
-                    {data: 'transaction_status'},
+                    {data: 'transaction_status',
+                        render (data){
+                            return statusBadge(data);
+                    }},
                     {data: 'cat_name'},
                     {data: 'sub_cat_name'},
                     {data: 'trans_details'},
@@ -603,10 +607,9 @@
             });
             
         })
-        // $('#view_monitor_vaccinee').modal({backdrop:'static', keyboard:false});
+         $('#view_monitor_vaccinee').modal({backdrop:'static', keyboard:false});
         $('#view_monitor_vaccinee').modal("show");
     }
-
 
     function show_vaccinee(id){
         $.get("/show/vaccinee" +'/' + id, function (data) {
