@@ -3,7 +3,7 @@
 {{--Show Role Modal--}}
 
    <!-- Slide Up Modal -->
-   <div class="modal fade" id="view_monitor_vaccinee" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="modal-slideup" aria-hidden="true">
+   <div class="modal fade" id="view_monitor_vaccinee" data-backdrop="static"  tabindex="-1" role="dialog"  aria-labelledby="modal-slideup" aria-hidden="true">
     <div class="modal-dialog modal-dialog-slideup modal-xl" role="document">
       <div class="block-header bg-primary-dark">
         <h3 class="block-title text-white">Monitor Vaccinee Transaction</h3>

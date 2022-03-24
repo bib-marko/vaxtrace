@@ -534,7 +534,7 @@
             });
             
         })
-        $('#view_monitor_vaccinee').modal({backdrop:'static', keyboard:false});
+        // $('#view_monitor_vaccinee').modal({backdrop:'static', keyboard:false});
         $('#view_monitor_vaccinee').modal("show");
     }
 
