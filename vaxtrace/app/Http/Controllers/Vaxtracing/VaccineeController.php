@@ -134,11 +134,10 @@ class VaccineeController extends Controller
     public function monitor($id){
 
         $vaccinee = Vaccinee::with('transactions')->where('id', $id)->first();
-        $categories = Category::whereHas('sub_categories', function($q){
-            $q->where('sub_categories.status', '=', '1');
-        })->where('status',1)->get();
-        $sub_categories = Sub_Category::where('status',1)->get();
+        $categories = Category::where('status',1)->get();
+        $sub_categories = Sub_Category::with('categories')->where('status',1)->get();
         $transactions = Transactions::where('vaccinees_id', $id)->where('status', 1)->get();
+        
         return response()->json(array(
             'vaccinee' => $vaccinee,
             'categories' => $categories,
@@ -169,19 +168,12 @@ class VaccineeController extends Controller
 
     public function saveTransaction(Request $request){
         
-        // $category = Category::find($request->category);
-        // $category->sub_categories()->sync($request->sub_category);
         foreach($request->sub_category as $sub_category){
-            $id = DB::table('category_has_sub_category')->insertGetId(
-                [
-                    'categories_id' => $request->category, 'sub_categories_id' => $sub_category,
-                    'created_at' => Carbon::now(), 'updated_at' => Carbon::now(),
-                ]
-            );
+            $pivot = Category_has_Sub_Category::where('categories_id', $request->category)->where('sub_categories_id', $sub_category)->first();
             $transaction = new Transactions();
             $transaction->vaccinees_id  = $request->vaccinee_id;
-            $transaction->category_has_sub_category_id = $id;
-            $transaction->trans_details  = $request->t_details;
+            $transaction->category_has_sub_category_id = $pivot->id;
+            $transaction->trans_details  = formatString($request->t_details);
             $transaction->assisted_by_id  = session()->get('LoggedUser')->id;
             $transaction->assisted_by = generateFullName(session()->get('LoggedUser'));
             $transaction->transaction_status  = $request->transaction_status;
@@ -189,5 +181,25 @@ class VaccineeController extends Controller
         }
     }
 
+    public function showTransaction($id){
+        $transaction = Transactions::select('vaccinees_has_transactions.*','categories.cat_name','sub_categories.sub_cat_name')
+                                ->join('category_has_sub_category', 'category_has_sub_category.id', '=', 'vaccinees_has_transactions.category_has_sub_category_id')
+                                ->join('categories', 'category_has_sub_category.categories_id', '=', 'categories.id')                            
+                                ->join('sub_categories', 'category_has_sub_category.sub_categories_id', '=', 'sub_categories.id')
+                                ->where('vaccinees_has_transactions.id', $id)->first();
+
+        return response()->json($transaction);
+    }
     
+    public function saveUpdateTransaction(Request $request)
+    {
+        Transactions::where('id', $request->transaction_id)
+        ->update([
+            'trans_details'=> formatString($request->t_details),
+            'assisted_by_id'=> session()->get('LoggedUser')->id,
+            'assisted_by'=> generateFullName(session()->get('LoggedUser')),
+            'transaction_status'=> $request->transaction_status,
+            
+        ]);
+    }
 }

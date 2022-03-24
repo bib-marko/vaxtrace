@@ -63,43 +63,43 @@
 @section('scripts')
   <script type="text/javascript">
     var table;
-  $(function () {
-      $.ajaxSetup({
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-      });
-      //MASTER LIST
+    $(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        //MASTER LIST
         table = $('#sub_category_dt').DataTable({
-          processing: true,
-          serverSide: true,
-          ajax: "{{ route('sub_category.index') }}",
-          columns: [
-              //TITLE
-              {data: 'sub_cat_name'},
-              //ACTION
-              {data: 'sub_cat_description'},
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('sub_category.index') }}",
+            columns: [
+                //TITLE
+                {data: 'sub_cat_name'},
+                //ACTION
+                {data: 'sub_cat_description'},
 
-              {data: 'status',
+                {data: 'status',
                     render(data) {
                         return generateBadge(data);
                     },
 
-              },
+                },
 
-              {data: 'action'},
-          ]  
-      });
-      $('#search_btn').on('click', function(){
-              table.search($('#search_bar').val().toUpperCase()).draw();
-      })
+                {data: 'action'},
+            ]  
+        });
+        $('#search_btn').on('click', function(){
+                table.search($('#search_bar').val().toUpperCase()).draw();
+        })
 
-      let validatorCreateSubCat = $('#formCreateSubCat').jbvalidator({
+        let validatorCreateSubCat = $('#formCreateSubCat').jbvalidator({
                     errorMessage: true,
                     successClass: false,
                 });
 
-      $('#btnCreateSubCat').on('click', function (e){
+        $('#btnCreateSubCat').on('click', function (e){
         e.preventDefault();
 
         var form = document.getElementById("formCreateSubCat");

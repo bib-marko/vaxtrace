@@ -469,6 +469,62 @@
             }
             
         });
+
+        $('#saveUpdateTransaction').click(function (e) {
+            e.preventDefault();
+            let validatorSaveTransaction = $('#formUpdateTransaction').jbvalidator({
+                    errorMessage: true,
+                    successClass: false,
+                });
+            var id = $('#vaccinee_id').val();
+            var form = document.getElementById("formUpdateTransaction");
+            var formData = new FormData(form);
+            if(validatorSaveTransaction.checkAll() == 0){
+            $.ajax({
+                url: '{{ route("save_update_transaction") }}',
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false,
+                type: 'POST',
+                beforeSend: function () {
+                showLoader();
+                },
+                complete: function () {
+                hideLoader();
+                $('#view_monitor_vaccinee').modal('hide');
+                },
+                success: function (response) {
+                    Swal.fire({
+                        title: 'Success!',
+                        icon: 'success',
+                        text: "The transaction has been added",
+                        confirmButtonText: 'Ok',
+                    }).then((result) => {
+                        /* Read more about isConfirmed, isDenied below */
+                        // $('.view_monitor_vaccinee').modal('hide');
+                        // $('.view_monitor_vaccinee').modal('show');
+                        if (result.isConfirmed) {
+                            $('#transaction_summary').addClass("active");
+                            $('#new_transaction').removeClass("active");
+                            $('#btabs_transaction_summary').addClass("active show");
+                            $('#btabs_new_transaction').removeClass("active show")
+                            tableForSummary.draw();
+                            $('#view_monitor_vaccinee').modal('show');
+                        }
+                    })
+                },
+                error: function(response){
+                    $('.errorMessage').text("");
+                    $.each(response.responseJSON.errors,function(field_name,error){            
+                        $(document).find('[id=error_'+field_name+']').text("*"+error)
+                    })
+                }
+            });
+            }
+            
+        });
+
         $(".dataTables_filter").hide(); 
 
         $('#search_btn_verified').on('click', function(){
@@ -487,6 +543,16 @@
                 $(this).prop( "disabled", true );
             }
         }); 
+
+        $('#category_sel').on('change', function(e){
+            $('#sub_category_sel').html("");
+            $.each(sub_categories, function(key, value) {
+                if(value.categories[0].id == $('#category_sel').val()){
+                    $('#sub_category_sel').append(`<option value="${value.id}">${value.sub_cat_name}</option>`);
+                }  
+            });
+        }); 
+        
     });
     
     function formatName(data){
@@ -498,7 +564,7 @@
             }
         }  
 
-
+    var categories, sub_categories;
     function show_monitor_vaccinee(id){
         if(tableForSummary != ""){
             tableForSummary.destroy();
@@ -524,13 +590,16 @@
                 ],
                 order: [[ 6, "desc" ]],
             });
-
+            categories = data.categories;
+            sub_categories = data.sub_categories;
             $('#vaccinee_id').val(id);
-            $.each(data.categories, function(key, value) {
+            $.each(categories, function(key, value) {
                 $('#category_sel').append(`<option value="${value.id}">${value.cat_name}</option>`);
             });
-            $.each(data.sub_categories, function(key, value) {
-                $('#sub_category_sel').append(`<option value="${value.id}">${value.sub_cat_name}</option>`);
+            $.each(sub_categories, function(key, value) {
+                if(value.categories[0].cat_name == data.categories[0].cat_name){
+                    $('#sub_category_sel').append(`<option value="${value.id}">${value.sub_cat_name}</option>`);
+                }  
             });
             
         })
@@ -556,15 +625,13 @@
         $('#view_monitor_vaccinee').modal("hide");
         $('#update_transaction').modal({backdrop:'static', keyboard:false});
         $('#update_transaction').modal("show");
-        $.get("/show/vaccinee" +'/' + id, function (data) {
-                $('#vaccinee_id').val(data.id);
-                $('#vaccinee_code').val(data.vaccinee_code);
-                $('#first_name').val(data.first_name);
-                $('#middle_name').val(data.middle_name);
-                $('#last_name').val(data.last_name);
-                $('#suffix').val(formatNamedata.suffix).change();
-                $('#birth_date').val(data.birth_date);
-            })
+        $.get("/show/transaction" +'/' + id, function (data) {
+            $('#transaction_id').val(id);
+            $('#update_category').append(`<option>${data.cat_name}</option>`);
+            $('#update_sub_category').append(`<option>${data.sub_cat_name}</option>`);
+            $('#update_transaction_status').val(data.transaction_status).change();
+            $('#update_transaction_details').val(data.trans_details);
+        })
     }
 
     function update_vaccinee(id){
