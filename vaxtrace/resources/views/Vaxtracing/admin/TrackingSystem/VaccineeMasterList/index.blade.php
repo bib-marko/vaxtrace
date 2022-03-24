@@ -511,7 +511,6 @@
                 ajax: "/show/summary/"+id,
                 columns: [
                     //UNIQ_ID
-                    {data: 'action'},
                     {data: 'transaction_status'},
                     {data: 'cat_name'},
                     {data: 'sub_cat_name'},
@@ -520,9 +519,10 @@
                     {data: 'created_at',render (data){
                         return formatDate(data, "date_time");
                     }},
+                    {data: 'action'},
                     
                 ],
-                order: [[ 6, "desc" ]]
+                order: [[ 6, "desc" ]],
             });
 
             $('#vaccinee_id').val(id);
@@ -534,6 +534,7 @@
             });
             
         })
+        $('#view_monitor_vaccinee').modal({backdrop:'static', keyboard:false});
         $('#view_monitor_vaccinee').modal("show");
     }
 
@@ -553,6 +554,7 @@
 
     function update_vaccinee_transaction(id){
         $('#view_monitor_vaccinee').modal("hide");
+        $('#update_transaction').modal({backdrop:'static', keyboard:false});
         $('#update_transaction').modal("show");
         $.get("/show/vaccinee" +'/' + id, function (data) {
                 $('#vaccinee_id').val(data.id);

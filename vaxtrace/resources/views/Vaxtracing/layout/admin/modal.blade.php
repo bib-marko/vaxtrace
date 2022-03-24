@@ -2,23 +2,14 @@
 
 {{--Show Role Modal--}}
 
-<style>
-  .modal-body {
-    max-height:600px; 
-    overflow-y: auto;
-}
-</style>
-
-
-
    <!-- Slide Up Modal -->
    <div class="modal fade" id="view_monitor_vaccinee" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="modal-slideup" aria-hidden="true">
     <div class="modal-dialog modal-dialog-slideup modal-xl" role="document">
       <div class="block-header bg-primary-dark">
-        <h3 class="block-title text-white">Monitor Vaccinee</h3>
+        <h3 class="block-title text-white">Monitor Vaccinee Transaction</h3>
         <div class="block-options">
-          <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
-            <i class="si si-close  text-white"></i>
+          <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+            <i class="si si-close text-white"></i>
           </button>
         </div>
       </div>
@@ -37,7 +28,7 @@
                   <a class="nav-link" href="#bta  bs-animated-slideleft-settings"><i class="si si-settings"></i></a>
                 </li> --}}
               </ul>
-              <div class="block-content tab-content overflow-hidden">
+              <div class="block-content tab-content overflow-hidden"  data-toggle="slimscroll" data-height="600px" data-color="#9ccc65" data-opacity="1" data-always-visible="true">
                 <div class="tab-pane fade fade-left show active" id="btabs_transaction_summary" role="tabpanel">
                   <div class="block-content tab-content overflow-hidden">
   
@@ -59,18 +50,19 @@
                           </a>
                         </div>
     
-                          <div class="block-content block-content-full">
-                              <div class="table-responsive scrollbar">
+                          <div class="block-content block-content-full" data-toggle="slimscroll" data-height="350px" data-color="#9ccc65" data-opacity="1" data-always-visible="true">
+                              <div class="table-responsive">
                                   <table class="table table-striped table-center js-dataTable-full-pagination" id="summary_dt" width="100%">
                                       <thead>
                                         <tr>
-                                          <th>ACTION</th>
+                                         
                                           <th>STATUS</th>
                                           <th>CATEGORY</th>
                                           <th>SUB-CATEGORY</th>
                                           <th>TRANSACTION DETAILS</th>
                                           <th>ASSIST BY</th>
                                           <th>DATE OF TRANSACT</th>
+                                          <th>ACTION</th>
                                         </tr>
                                       </thead>
                                   </table>
@@ -107,20 +99,21 @@
                           <!-- Required for data-placeholder attribute to work with Select2 plugin -->
                           
                         </select>
-                        <label for="material-textarea-large2" style="color: #9CCC65;"><strong>CATEGORY</strong></label>
+                        <label for="material-textarea-large2" style="margin-top -.5em;"><strong>CATEGORY</strong></label>
                       </div>
                     </div>
   
+                    <br>
                     <div class="col">
                       <div class="form-material ">
                         <select class="js-select2 form-control" id="sub_category_sel" name="sub_category[]" style="width: 100%;" data-placeholder="Choose many.." multiple required>
                          
                         </select>
-                        <label for="material-textarea-large2" style="color: #9CCC65;"><strong>SUB CATEGORY</strong></label>
+                        <label for="material-textarea-large2" style="margin-top -.5em;"><strong>SUB CATEGORY</strong></label>
                       </div>
                     </div>
                     
-  
+                    <br>
                     <div class="col">
                       <div class="form-material ">
                         <select class="js-select2 form-control" id="transaction_status_sel" name="transaction_status" style="width: 100%;" data-placeholder="Choose one.." required>
@@ -128,16 +121,17 @@
                           <option value="PENDING">PENDING</option>
                           <option value="FOR CHECKING">FOR CHECKING</option>
                         </select>
-                        <label for="material-textarea-large2" style="color: #9CCC65;"><strong>STATUS</strong></label>
+                        <label for="material-textarea-large2" style="margin-top -.5em;"><strong>STATUS</strong></label>
                       </div>
                     </div>
 
+                    <br>
                     <div class="col">
                       <div class="row g-2">
                         <div class="col-12">
                           <div class="form-material form-material-success floating">
                             <textarea class="form-control" id="material-textarea-large2" name="t_details" rows="8" required></textarea>
-                            <label for="material-textarea-large2">TRANSACTION DETAIL</label>
+                            <label for="material-textarea-large2"  style="margin-top -.5em;">TRANSACTION DETAIL</label>
                           </div>
                         </div>
                       </div>
@@ -162,180 +156,109 @@
     </div>
   </div>
   <!-- END Slide Up Modal -->
+  
 
-<!-- Slide Up Modal -->
-<div class="modal" id="update_transaction" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-slideup modal-xl" role="document">
-    <div class="block-header bg-primary-dark">
-      <h3 class="block-title text-white">Monitor Vaccinee</h3>
-      <div class="block-options">
-        <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
-          <i class="si si-close  text-white"></i>
-        </button>
-      </div>
-    </div>
-    <div class="modal-content">
-      <div class="col-md-12">
-        <a class="block block-link-shadow block-transparent border-left border-5x border-warning">
-          <div class="block-content block-content-full bg-white-op-90">
-            <div class="pt-20">
-              <h3 class="h4 font-w700 mb-10">Update Transaction</h3>
-              <h4 class="text-muted font-size-default mb-0">
-                <span class="mr-10">
-                  <i class="si si-info"></i> You may update a transaction record in this section to keep track of the patient's progress.
-                </span>
-              </h4>
-            </div>
-          </div>
-        </a>
-      </div>
-      
-      <form role="form" id="formUpdateTransaction" novalidate>
-        <div class="col">
-          <div class="form-material">
-            <input class="form-control" id="vaccinee_id" type="text" name="vaccinee_id" hidden required/>
-            <input class="form-control" id="material-select2" type="text" name="assist_by" value="{{ session('LoggedUser')->id }}" hidden required/>
-            <select class="js-select2 form-control" id="update_category" name="category" style="width: 100%;" data-placeholder="Choose one.." required>
-              <!-- Required for data-placeholder attribute to work with Select2 plugin -->
-              
-            </select>
-            <label for="material-textarea-large2" style="color: #9CCC65;"><strong>CATEGORY</strong></label>
-          </div>
-        </div>
 
-        <div class="col">
-          <div class="form-material ">
-            <select class="js-select2 form-control" id="update_sub_category" name="sub_category[]" style="width: 100%;" data-placeholder="Choose many.." multiple required>
-             
-            </select>
-            <label for="material-textarea-large2" style="color: #9CCC65;"><strong>SUB CATEGORY</strong></label>
-          </div>
-        </div>
-        
 
-        <div class="col">
-          <div class="form-material ">
-            <select class="js-select2 form-control" id="update_transaction_status" name="transaction_status" style="width: 100%;" data-placeholder="Choose one.." required>
-              <option value="DONE">DONE</option>
-              <option value="PENDING">PENDING</option>
-              <option value="FOR CHECKING">FOR CHECKING</option>
-            </select>
-            <label for="material-textarea-large2" style="color: #9CCC65;"><strong>STATUS</strong></label>
-          </div>
-        </div>
 
-        <div class="col">
-          <div class="row g-2">
-            <div class="col-12">
-              <div class="form-material form-material-success floating">
-                <textarea class="form-control" id="update_transaction_details" name="t_details" rows="8" required></textarea>
-                <label for="material-textarea-large2">TRANSACTION DETAIL</label>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-          <br>
-          <div class="col-md-2 ml-auto">
-            <button type="button" class="btn btn-hero btn-alt-success" id="saveTransaction">
-              <i class="fa fa-check"></i> SUBMIT
-            </button>
-          </div>
-
-        <br>
-      </form>
-           
-          <!-- END Block Tabs Animated Slide Left -->
-      
-    </div>
-  </div>
-</div>
-<!-- END Slide Up Modal -->
-{{-- <!-- Slide Up Modal -->
-<div class="modal" id="view_monitor_vaccinee" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" aria-hidden="true" >
-  <div class="modal-dialog modal-dialog-slideup modal-xl" role="document">
-    <div class="modal-content">
-      
-      <div class="block block-themed block-transparent mb-0">
-        <div class="block-header bg-primary-dark">
-          <h3 class="block-title">Monitor Vaccinee</h3>
-          <div class="block-options">
-            <button type="button" class="btn-block-option" data-bs-dismiss="modal">
-              <i class="si si-close"></i>
-            </button>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">
-          <i class="fa fa-times"></i> CLOSE
-        </button>
-      </div>
-
-    </div>
-  </div>
-</div>
-<!-- END Slide Up Modal --> --}}
-
-{{-- 
-          <!-- Alternative Tabs in Modal -->
-          <div class="modal" id="view_monitor_vaccinee" tabindex="-1" role="dialog" aria-labelledby="modal-block-tabs-alternative" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-slideup modal-xl" role="document">
-              <div class="modal-content">
-                <!-- Block Tabs Alternative Style -->
-                <div class="block block-transparent bg-white mb-0">
-                  <ul class="nav nav-tabs nav-tabs-alt" role="tablist">
-                    <li class="nav-item">
-                      <button class="nav-link active" id="btabs-alt-static-home-tab" data-bs-toggle="tab" data-bs-target="#btabs-alt-static-home" role="tab" aria-controls="btabs-alt-static-home" aria-selected="true">
-                        Home
-                      </button>
-                    </li>
-                    <li class="nav-item">
-                      <button class="nav-link" id="btabs-alt-static-profile-tab" data-bs-toggle="tab" data-bs-target="#btabs-alt-static-profile" role="tab" aria-controls="btabs-alt-static-profile" aria-selected="false">
-                        Profile
-                      </button>
-                    </li>
-                    <li class="nav-item ms-auto">
-                      <button class="nav-link" id="btabs-alt-static-settings-tab" data-bs-toggle="tab" data-bs-target="#btabs-alt-static-settings" role="tab" aria-controls="btabs-alt-static-settings" aria-selected="false">
-                        <i class="si si-settings"></i>
-                      </button>
-                    </li>
-
-                  </ul>
-                  <div class="block-content tab-content">
-                    <div class="tab-pane active" id="btabs-alt-static-home" role="tabpanel" aria-labelledby="btabs-static-home-tab">
-                      <h4 class="fw-normal">Home Content</h4>
-                      <p>...</p>
-                    </div>
-                    <div class="tab-pane" id="btabs-alt-static-profile" role="tabpanel" aria-labelledby="btabs-static-profile-tab">
-                      <h4 class="fw-normal">Profile Content</h4>
-                      <p>...</p>
-                    </div>
-                    <div class="tab-pane" id="btabs-alt-static-settings" role="tabpanel" aria-labelledby="btabs-static-settings-tab">
-                      <h4 class="fw-normal">Settings Content</h4>
-                      <p>...</p>
-                    </div>
-                  </div>
-                  <div class="block-content block-content-full text-end bg-body">
-                    <button type="button" class="btn btn-sm btn-alt-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal">Done</button>
-                  </div>
+      <!-- Slide Up Modal -->
+      <div class="modal fade" id="update_transaction" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-slideup modal-xl" role="document">
+          <div class="modal-content">
+            <div class="block block-themed block-transparent mb-0">
+              <div class="block-header bg-primary-dark">
+                <h3 class="block-title text-white">Update Vaccinee Transaction</h3>
+                <div class="block-options">
+                  <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="si si-close"></i>
+                  </button>
                 </div>
-                <!-- END Block Tabs Alternative Style -->
+              </div>
+              <div class="block-content" data-toggle="slimscroll" data-height="500px" data-color="#9ccc65" data-opacity="1" data-always-visible="true">
+
+                <div class="col-md-12">
+                  <a class="block block-link-shadow block-transparent border-left border-5x border-warning">
+                    <div class="block-content block-content-full bg-white-op-90">
+                      <div class="pt-20">
+                        <h3 class="h4 font-w700 mb-10">Update Vaccinee Transaction</h3>
+                        <h4 class="text-muted font-size-default mb-0">
+                          <span class="mr-10">
+                            <i class="si si-info"></i> You may use this page to update the status of vaccinees for monitoring purposes.
+                          </span>
+                        </h4>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+
+                <form role="form" id="formUpdateTransaction" novalidate>
+                  <div class="col">
+                    <div class="form-material">
+                      <input class="form-control" id="vaccinee_id" type="text" name="vaccinee_id" hidden required/>
+                      <input class="form-control" id="material-select2" type="text" name="assist_by" value="{{ session('LoggedUser')->id }}" hidden required/>
+                      <select class="js-select2 form-control" id="update_category" name="category" style="width: 100%;" data-placeholder="Choose one.." required>
+                        <!-- Required for data-placeholder attribute to work with Select2 plugin -->
+                        
+                      </select>
+                      <label for="material-textarea-large2" style="margin-top: -.5em;"><strong>CATEGORY</strong></label>
+                    </div>
+                  </div>
+                  <br>
+          
+                  <div class="col">
+                    <div class="form-material ">
+                      <select class="js-select2 form-control" id="update_sub_category" name="sub_category[]" style="width: 100%;" data-placeholder="Choose many.." multiple required>
+                       
+                      </select>
+                      <label for="material-textarea-large2" style="margin-top: -1em;"><strong>SUB CATEGORY</strong></label>
+                    </div>
+                  </div>
+                  <br>
+          
+                  <div class="col">
+                    <div class="form-material ">
+                      <select class="js-select2 form-control" id="update_transaction_status" name="transaction_status" style="width: 100%;" data-placeholder="Choose one.." required>
+                        <option value="DONE">DONE</option>
+                        <option value="PENDING">PENDING</option>
+                        <option value="FOR CHECKING">FOR CHECKING</option>
+                      </select>
+                      <label for="material-textarea-large2" style="margin-top: -1em;"><strong>STATUS</strong></label>
+                    </div>
+                  </div>
+                  <br>
+
+                  <div class="col">
+                    <div class="row g-2">
+                      <div class="col-12">
+                        <div class="form-material form-material-success floating">
+                          <textarea class="form-control" id="update_transaction_details" name="t_details" rows="8" required></textarea>
+                          <label for="material-textarea-large2" style="margin-top: -1em;" >TRANSACTION DETAIL</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+          
+                  <br>
+                </form>
+                
               </div>
             </div>
+            <div class="modal-footer">
+              <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">CLOSE</button>
+              <button type="button" class="btn btn-alt-success" data-dismiss="modal" id="saveTransaction">
+                <i class="fa fa-check"></i> SUBMIT
+              </button>
+            </div>
           </div>
-          <!-- END Alternative Tabs in Modal --> --}}
-
-
-
+        </div>
+      </div>
+      <!-- END Slide Up Modal -->
 
 
    <!-- Slide Up Modal -->
    <div class="modal fade" id="modal-new-record-vaccinee" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-slideup" role="document">
+    <div class="modal-dialog modal-dialog-slideup modal-lg" role="document">
       <div class="modal-content">
         <div class="block block-themed block-transparent mb-0">
           <div class="block-header bg-primary-dark">
@@ -353,50 +276,52 @@
               <div class="mb-3">
                 <div class="form-material form-material-success floating">
                   <input class="form-control" id="material-select2" type="text" name="vaccinee_code" required/>
-                  <label for="material-color-success2" style="font-size: 13px;">VACCINEE CODE</label>
+                  <label for="material-color-success2">VACCINEE CODE</label>
                   <span class="text-danger errorMessage fs--2" id="error_email"></span>
                 </div>
               </div>
               <div class="mb-3">
                 <div class="form-material form-material-success floating">
                   <input class="form-control" id="material-select2" type="text" name="first_name" pattern="[a-zA-Z\s]+" title="Input letters only" required/>
-                  <label for="material-color-success2" style="font-size: 13px;">FIRST NAME</label>
+                  <label for="material-color-success2">FIRST NAME</label>
                   <span class="text-danger errorMessage fs--2" id="error_email"></span>
                 </div>
               </div>
               <div class="mb-3">
                 <div class="form-material form-material-success floating">
                   <input class="form-control" id="material-select2" type="text" name="middle_name" pattern="[a-zA-Z\s]+" title="Input letters only"/>
-                  <label for="material-color-success2" style="font-size: 13px;">MIDDLE NAME</label>
+                  <label for="material-color-success2">MIDDLE NAME</label>
                   <span class="text-danger errorMessage fs--2" id="error_email"></span>
                 </div>
               </div>
               <div class="mb-3">
                 <div class="form-material form-material-success floating">
                   <input class="form-control" id="material-select2" type="text" name="last_name" pattern="[a-zA-Z\s]+" title="Input letters only" required/>
-                  <label for="material-color-success2" style="font-size: 13px;">LAST NAME</label>
+                  <label for="material-color-success2">LAST NAME</label>
                   <span class="text-danger errorMessage fs--2" id="error_email"></span>
                 </div>
               </div>
 
               <div class="mb-3">
-                <div class="form-material form-material-success floating">
-                  <select class="form-control" id="material-select2" name="suffix" aria-label="Floating label select example">
+                <div class="form-material">
+                
+                  <select class="js-select2 form-control" id="name"  name="suffix" style="width: 100%;" data-placeholder="Choose one.." required>
                     <option value="" selected></option>
                     <option value="JR"><center>JR</center></option>
                     <option value="SR"><center>SR</center></option>
                     <option value="II"><center>II</center></option>
                     <option value="III"><center>III</center></option>
                     <option value="III"><center>IV</center></option>
-                    <option value="III"><center>V</center></option>
+                    <option value="III"><center>V</center></option> 
                   </select>
-                  <label for="material-color-select2" style="font-size: 13px;">SUFFIX</label>
+                  <label for="material-textarea-large2" style="color: #9CCC65;"><strong>SUFFIX</strong></label>
                   <span class="text-danger errorMessage" id="error_suffix"></span>
                 </div>
               </div>
+
               <div class="mb-3">
                 <div class="form-material form-material-success floating">
-                  <label for="floatingDate" style="margin-top: -1.5em; font-size: 13px;" class="fs--2">Birth Date</label>
+                  <label for="floatingDate" style="margin-top: -1.5em;" class="fs--2">Birth Date</label>
                   <input class="form-control datetimepicker" id="floatingDate" name="birth_date" type="date" placeholder="dd/mm/yyyy" data-options='{"dateFormat":"d/m/y","disableMobile":true}' id="form-wizard-progress-wizard-datepicker" min="1900-10-20" max="2030-10-20" required/>
                   <span class="text-danger errorMessage fs--2" id="error_birth_date"></span>
                 </div>
@@ -406,7 +331,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">Close</button>
           <button type="button" class="btn btn-alt-success" id="btnAddNewVaccinee">
             <i class="fa fa-check"></i> Submit
           </button>
@@ -513,7 +438,7 @@
             <div class="block-header bg-primary-dark">
               <h3 class="block-title">NEW CATEGORY</h3>
               <div class="block-options">
-                <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
                   <i class="si si-close"></i>
                 </button>
               </div>

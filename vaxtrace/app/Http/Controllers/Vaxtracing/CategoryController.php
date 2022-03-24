@@ -23,7 +23,8 @@ class CategoryController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $actionBtn = "";
-                    
+
+                    $actionBtn .= "<a class='update btn btn-alt-warning btn-rounded  mr-5 mb-5 btnShowSubCategory' href='".route('view_vaccinees_status_sub-category', $row->id)."'><i class='si si-list mr-5'></i>Manage Sub-Category</a>";
                     $actionBtn .= "<a class='update btn btn-alt-success btn-rounded  mr-5 mb-5 btnShowUpdate' onclick='update_category($row->id)'><i class='si si-pencil mr-5'></i>Update</a>";
                     $actionBtn .= "<a class='delete delete btn btn-alt-danger btn-rounded  mr-5 mb-5' onclick='delete_category($row->id)'><i class='si si-trash mr-5'></i>Delete</a>";
             

@@ -344,9 +344,9 @@
                     <li>
                       <a href="{{ route('view_vaccinees_status_category') }}"><i class="si si-list"></i> Category</a>
                     </li>
-                    <li>
+                    {{-- <li>
                       <a href="{{ route('view_vaccinees_status_sub-category') }}"><i class="si si-vector"></i> Sub-Category</a>
-                    </li>
+                    </li> --}}
                   </ul>
                 </li>
                 </li>
@@ -533,6 +533,12 @@
     <script src="{{ asset('js/user/script.js') }}"></script>
     <script  src="{{ asset('js/admin/script.js') }}" ></script>
     <script src="https://cdn.jsdelivr.net/npm/@emretulek/jbvalidator"></script>
+
+    <!-- Page JS Plugins -->
+    <script src="{{ asset('assets/vaxtrace_assets/assets/js/plugins/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+
+    <!-- Page JS Helpers (SlimScroll plugin) -->
+    <script>jQuery(function(){Codebase.helpers(['slimscroll']);});</script>
     
 
     <!-- Page JS Helpers (Select2 plugin) -->
