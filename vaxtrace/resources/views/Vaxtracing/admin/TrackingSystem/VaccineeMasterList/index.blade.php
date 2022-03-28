@@ -169,7 +169,9 @@
                 {
                     data: 'vaccinee_code',
                         render(data) {
-                            verifiedQr.push(data);
+                            if(verifiedQr.indexOf(data) === -1){
+                                verifiedQr.push(data);
+                            }
                         return data;
                     },
             
@@ -273,9 +275,7 @@
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                     e.preventDefault();
-
                     var data = tableForNonVerified.row($(this).parents('tr')[0]).data();
-                    console.log(data['qrcode']);
                     var formData = new FormData();
                     formData.append("vaccinee_code",data['patient_code'] );
                     formData.append("first_name",data['first_name'] );
@@ -306,8 +306,9 @@
                             }).then((result) => {
                                 /* Read more about isConfirmed, isDenied below */
                                 if (result.isConfirmed) {
-                                    //tableForNonVerified.draw();
-                                    location.reload();
+                                    tableForNonVerified.ajax.reload();
+                                    tableForVerified.draw();
+                                    verifiedQr.push(data['patient_code']);
                                 }
                             })
                         },
@@ -426,7 +427,7 @@
             var formData = new FormData(form);
             if(validatorSaveTransaction.checkAll() == 0){
             $.ajax({
-                url: '{{ route("save_vaccinee_transaction") }}/' + id,
+                url: '{{ route("save_vaccinee_transaction") }}/',
                 data: formData,
                 cache: false,
                 processData: false,
@@ -456,6 +457,7 @@
                             $('#btabs_new_transaction').removeClass("active show")
                             tableForSummary.draw();
                             $('#view_monitor_vaccinee').modal('show');
+                            form.reset();
                         }
                     })
                 },
@@ -488,12 +490,12 @@
                 contentType: false,
                 type: 'POST',
                 beforeSend: function () {
-                showLoader();
+                    showLoader();
                 },
                 complete: function () {
-                hideLoader();
-                $('#view_monitor_vaccinee').modal('hide');
-                $('#update_transaction').modal('hide');
+                    hideLoader();
+                    $('#view_monitor_vaccinee').modal('hide');
+                    $('#update_transaction').modal('hide');
                 },
                 success: function (response) {
                     Swal.fire({
@@ -578,24 +580,47 @@
                 ajax: "/show/summary/"+id,
                 columns: [
                     //UNIQ_ID
-                    {data: 'transaction_status',
+                    {data: null,
                         render (data){
-                            return statusBadge(data);
+                            return statusBadge(data.summary[0].trans_status);
                     }},
-                    {data: 'cat_name'},
-                    {data: 'sub_cat_name'},
-                    {data: 'trans_details'},
-                    {data: 'assisted_by'},
-                    {data: 'created_at',render (data){
-                        return formatDate(data, "date_time");
+                    {data: null,
+                        render (data){
+                            return data.summary[0].status_report[0].category[0].cat_name;
+                    }},
+                    {data: null,
+                        render (data){
+                            return data.summary[0].status_report[0].sub_category[0].sub_cat_name;
+                    }},
+                    {data: null,
+                        render (data){
+                            return data.summary[0].trans_details;
+                    }},
+                    {data: null,
+                        render (data){
+                            return data.summary[0].assist_by;
+                    }},
+                    {data: null,
+                        render (data){
+                            return formatDate(data.summary[0].created_at, 'date_time');
                     }},
                     {data: 'action'},
+                    // {data: 'vaccinees_id'},
+                    // {data: 'sub_cat_name'},
+                    // {data: 'trans_details'},
+                    // {data: 'assist_by'},
+                    // {data: 'created_at',render (data){
+                    //     return formatDate(data, "date_time");
+                    // }},
+                    // {data: 'action'},
                     
                 ],
-                order: [[ 6, "desc" ]],
+                // order: [[ 6, "desc" ]],
             });
             categories = data.categories;
             sub_categories = data.sub_categories;
+            $('#category_sel').html("");
+            $('#sub_category_sel').html("");
             $('#vaccinee_id').val(id);
             $.each(categories, function(key, value) {
                 $('#category_sel').append(`<option value="${value.id}">${value.cat_name}</option>`);
@@ -628,10 +653,14 @@
         $('#view_monitor_vaccinee').modal("hide");
         $('#update_transaction').modal({backdrop:'static', keyboard:false});
         $('#update_transaction').modal("show");
+        $('#update_category').html("");
+        $('#update_sub_category').html("");
         $.get("/show/transaction" +'/' + id, function (data) {
-            $('#transaction_id').val(id);
-            $('#update_category').append(`<option>${data.cat_name}</option>`);
-            $('#update_sub_category').append(`<option>${data.sub_cat_name}</option>`);
+            console.log(data);
+            $('#update_transaction_id').val(data.vaccinees_transaction_id);
+            $('#update_cat_has_sub_category').val(data.category_has_sub_category_id);
+            $('#update_category').append(`<option value="${data.id}">${data.cat_name}</option>`);
+            $('#update_sub_category').append(`<option value="${data.id}">${data.sub_cat_name}</option>`);
             $('#update_transaction_status').val(data.transaction_status).change();
             $('#update_transaction_details').val(data.trans_details);
         })
@@ -653,6 +682,8 @@
     }
     
     function delete_vaccinee(id){
+        var qr = tableForVerified.row($(this).parents('tr')[0]).data().vaccinee_code;
+        console.log(verifiedQr);
         Swal.fire({
             title: 'Do you want to delete this vaccinee?',
             icon: 'warning',
@@ -681,7 +712,13 @@
                         }).then((result) => {
                             /* Read more about isConfirmed, isDenied below */
                             if (result.isConfirmed) {
-                                tableForVerified.ajax.reload();
+                                tableForVerified.draw();
+                                var index = verifiedQr.indexOf(qr);
+                                if (index !== -1) {
+                                    verifiedQr.splice(index, 2);
+                                }
+                                console.log(verifiedQr);
+                                tableForNonVerified.ajax.reload();
                             }
                         })
                     },

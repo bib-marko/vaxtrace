@@ -10,10 +10,11 @@ class Category_has_Sub_Category extends Pivot
 
     // The Player this Party belongs to.
     public function category() {
-        return $this->hasMany(Category::class, 'id');
+        
+        return $this->belongsToMany(Category::class, 'category_has_sub_category', 'id', 'categories_id');
     }
 
     public function sub_category() {
-        return $this->hasMany(Sub_Category::class, 'id');
+        return $this->belongsToMany(Sub_Category::class, 'category_has_sub_category', 'id', 'sub_categories_id');
     }
 }

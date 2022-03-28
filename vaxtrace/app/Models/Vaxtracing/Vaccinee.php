@@ -19,6 +19,6 @@ class Vaccinee extends Model
     ];
 
     public function transactions(){
-        return $this->belongsToMany(Category_has_Sub_Category::class,'vaccinees_has_transactions', 'vaccinees_id', 'category_has_sub_category_id');
+        return $this->belongsToMany(Transactions::class, 'vaccinees_has_transactions','vaccinee_id', 'id');
     }
 }

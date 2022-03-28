@@ -197,7 +197,8 @@
                 <form role="form" id="formUpdateTransaction" novalidate>
                   <div class="col">
                     <div class="form-material">
-                      <input class="form-control" id="transaction_id" type="text" name="transaction_id" hidden required/>
+                      <input class="form-control" id="update_cat_has_sub_category" type="text" name="cat_has_sub_category" hidden required/>
+                      <input class="form-control" id="update_transaction_id" type="text" name="vaccinees_transaction_id" hidden required/>
                       <input class="form-control" id="material-select2" type="text" name="assist_by" value="{{ session('LoggedUser')->id }}" hidden required/>
                       <select class="js-select2 form-control" id="update_category" name="category" style="width: 100%;" data-placeholder="Choose one.." disabled required>
                         <!-- Required for data-placeholder attribute to work with Select2 plugin -->
