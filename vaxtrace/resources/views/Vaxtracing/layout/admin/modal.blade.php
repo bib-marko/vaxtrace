@@ -58,7 +58,7 @@
                                 <table class="table table-striped table-center js-dataTable-full-pagination" id="summary_dt" width="100%">
                                     <thead>
                                       <tr>
-                                       
+                                        <th></th>
                                         <th>STATUS</th>
                                         <th>CATEGORY</th>
                                         <th>SUB-CATEGORY</th>
@@ -68,6 +68,7 @@
                                         <th>ACTION</th>
                                       </tr>
                                     </thead>
+
                                 </table>
                             </div>
                         </div>

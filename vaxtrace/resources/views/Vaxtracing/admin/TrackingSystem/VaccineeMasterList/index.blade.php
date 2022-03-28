@@ -572,14 +572,47 @@
         if(tableForSummary != ""){
             tableForSummary.destroy();
         }
+        
+        
+        function format(d) {
+            return `<table class="table table-striped table-center" width="100%">
+                        <thead>
+                            <tr>
+                                <th>STATUS</th>
+                                <th>CATEGORY</th>
+                                <th>SUB-CATEGORY</th>
+                                <th>TRANSACTION DETAILS</th>
+                                <th>ASSIST BY</th>
+                                <th>DATE OF TRANSACT</th>
+                            </tr>   
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>PENDING</td>
+                                <td>FOR UPDATE</td>
+                                <td>FIRST NAME</td>
+                                <td>UPDATE FULL NAME</td>
+                                <td>MARK GILSON JORDANS</td>
+                                <td>3/25/2022, 4:04:54 PM</td>
+                            </tr>
+                        </tbody>
+                    </table>`;
+            }
+
         $.get("/monitor/vaccinee" +'/' + id, function (data) {
+
             tableForSummary = $('#summary_dt').DataTable({
                 processing: true,
                 serverSide: true,
                 scrollX: true,
                 ajax: "/show/summary/"+id,
                 columns: [
-                    //UNIQ_ID
+                    {
+                        "className":      'dt-control',
+                        "orderable":      false,
+                        "data":           null,
+                        "defaultContent": ''
+                    },
                     {data: null,
                         render (data){
                             return statusBadge(data.summary[0].trans_status);
@@ -605,18 +638,27 @@
                             return formatDate(data.summary[0].created_at, 'date_time');
                     }},
                     {data: 'action'},
-                    // {data: 'vaccinees_id'},
-                    // {data: 'sub_cat_name'},
-                    // {data: 'trans_details'},
-                    // {data: 'assist_by'},
-                    // {data: 'created_at',render (data){
-                    //     return formatDate(data, "date_time");
-                    // }},
-                    // {data: 'action'},
                     
                 ],
-                // order: [[ 6, "desc" ]],
+                order: [[ 6, "desc" ]],
             });
+
+            $('#summary_dt tbody').on('click', 'td.dt-control', function () {
+                var tr = $(this).closest('tr');
+                var row = tableForSummary.row(tr);
+        
+                if ( row.child.isShown() ) {
+                    // This row is already open - close it
+                    row.child.hide();
+                    tr.removeClass('shown');
+                }
+                else {
+                    // Open this row
+                    row.child(format(row.data())).show();
+                    tr.addClass('shown');
+                }
+            });
+
             categories = data.categories;
             sub_categories = data.sub_categories;
             $('#category_sel').html("");
@@ -632,7 +674,7 @@
             });
             
         })
-         $('#view_monitor_vaccinee').modal({backdrop:'static', keyboard:false});
+        $('#view_monitor_vaccinee').modal({backdrop:'static', keyboard:false});
         $('#view_monitor_vaccinee').modal("show");
     }
 
