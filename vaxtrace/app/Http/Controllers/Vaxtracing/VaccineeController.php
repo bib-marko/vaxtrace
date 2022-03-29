@@ -23,7 +23,7 @@ class VaccineeController extends Controller
      */
     public function index(Request $request)
     {
-        
+        abort_if(! session('LoggedUser')->hasPermission('VACCINEE_ACCESS'), 403);
         // dd($data);
         if ($request->ajax()) {
             $data = Vaccinee::select('*',DB::raw("CONCAT(first_name , ' ' , middle_name , ' ' , last_name, ' ' , suffix) as full_name"))
@@ -33,11 +33,22 @@ class VaccineeController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $actionBtn = "";
-                    $actionBtn .= " <a class='view btn btn-alt-primary btn-rounded mr-5 mb-5' onclick='show_vaccinee($row->id)'><i class='si si-eye mr-6'></i></button></a>";
-                    $actionBtn .= "<a class='update btn btn-alt-success btn-rounded mr-5 mb-5' onclick='update_vaccinee($row->id)'><i class='si si-pencil mr-6'></i></a>";
-                    $actionBtn .= "<a class='delete delete btn btn-alt-danger btn-rounded mr-5 mb-5' onclick='delete_vaccinee($row->id)'><i class='si si-trash mr-6'></i></a>";
+                    if(session('LoggedUser')->hasPermission('VACCINEE_VIEW')){
+                        $actionBtn .= " <a class='view btn btn-alt-primary btn-rounded mr-5 mb-5' onclick='show_vaccinee($row->id)'><i class='si si-eye mr-6'></i></button></a>";
+                    }
+                    if(session('LoggedUser')->hasPermission('VACCINEE_UPDATE')){
+                        $actionBtn .= "<a class='update btn btn-alt-success btn-rounded mr-5 mb-5' onclick='update_vaccinee($row->id)'><i class='si si-pencil mr-6'></i></a>";
+                    }
+                    if(session('LoggedUser')->hasPermission('VACCINEE_DELETE')){
+                        $actionBtn .= "<a class='delete delete btn btn-alt-danger btn-rounded mr-5 mb-5' onclick='delete_vaccinee($row->id)'><i class='si si-trash mr-6'></i></a>";
+                    }
+                    if(session('LoggedUser')->hasPermission('VACCINEE_MONITOR')){
+                        $actionBtn .= "<a class='warning btn-rounded btn btn-alt-warning mr-5 mb-5' onclick='show_monitor_vaccinee($row->id)'><i class='si si-eyeglasses mr-5'></i>Monitor Vaccinee</a>";
+                    }
+       
+                    
                     // $actionBtn .= "<a class='warning btn-rounded btn btn-alt-warning mr-5 mb-5' href='".route('view_transaction_summary', $row->id)."'><i class='si si-trash mr-5'></i>View Transactions</a>";
-                    $actionBtn .= "<a class='warning btn-rounded btn btn-alt-warning mr-5 mb-5' onclick='show_monitor_vaccinee($row->id)'><i class='si si-eyeglasses mr-5'></i>Monitor Vaccinee</a>";
+                    
             
                     return $actionBtn;
                 })
@@ -64,6 +75,7 @@ class VaccineeController extends Controller
      */
     public function store(Request $request)
     {
+        abort_if(! session('LoggedUser')->hasPermission('VACCINEE_CREATE'), 403);
         $role = new Vaccinee();
         $role->vaccinee_code = $request->vaccinee_code;
         $role->first_name = formatString($request->first_name);
@@ -82,6 +94,7 @@ class VaccineeController extends Controller
      */
     public function show($id)
     {
+        abort_if(! session('LoggedUser')->hasPermission('VACCINEE_VIEW'), 403);
         $vaccinee = Vaccinee::where('id', $id)->first();
        
         //dd($vaccinee);
@@ -108,6 +121,7 @@ class VaccineeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        abort_if(! session('LoggedUser')->hasPermission('VACCINEE_UPDATE'), 403);
         Vaccinee::where('id', $id)
         ->update([
             'vaccinee_code'=> $request->vaccinee_code,
@@ -127,12 +141,13 @@ class VaccineeController extends Controller
      */
     public function destroy($id)
     {
+        abort_if(! session('LoggedUser')->hasPermission('VACCINEE_DELETE'), 403);
         Vaccinee::where('id', $id)
         ->update(['status' => 0]);
     }
 
     public function monitor($id){
-
+        abort_if(! session('LoggedUser')->hasPermission('VACCINEE_MONITOR'), 403);
         $vaccinee = Vaccinee::where('id', $id)->first();
         $categories = Category::where('status',1)->get();
         $sub_categories = Sub_Category::with('categories')->where('status',1)->get();
@@ -147,27 +162,17 @@ class VaccineeController extends Controller
     }
 
     public function showSummary($id){
-
-        $transactions = Transactions::with('summary.status_report.category', 'summary.status_report.sub_category')->where('vaccinees_has_transactions.vaccinees_id', 31)->get();
-                                    // ->join('category_has_sub_category as c_has_sub', 'c_has_sub.id', '=', 't_summary.category_has_sub_category_id')
-                                    // ->join('categories', 'c_has_sub.categories_id', '=', 'categories.id')                            
-                                    // ->join('sub_categories', 'c_has_sub.sub_categories_id', '=', 'sub_categories.id')
-                                    // ->where('vaccinees_id', $id)->where('vaccinees_has_transactions.status', 1)
-                                    // ->orderByDesc('created_at')->get();                
-
-        // $transactions = Transactions::select('vaccinees_has_transactions.vaccinees_id','t_summary.*','categories.cat_name','sub_categories.sub_cat_name')
-        //                             ->join('transaction_has_summary as t_summary', 't_summary.vaccinees_transaction_id', '=', 'vaccinees_has_transactions.id')
-        //                             ->join('category_has_sub_category as c_has_sub', 'c_has_sub.id', '=', 't_summary.category_has_sub_category_id')
-        //                             ->join('categories', 'c_has_sub.categories_id', '=', 'categories.id')                            
-        //                             ->join('sub_categories', 'c_has_sub.sub_categories_id', '=', 'sub_categories.id')
-        //                             ->where('vaccinees_id', $id)->where('vaccinees_has_transactions.status', 1)
-        //                             ->orderByDesc('created_at')->get();     
+        abort_if(! session('LoggedUser')->hasPermission('VACCINEE_MONITOR'), 403);
+        $transactions = Transactions::with('summary.status_report.category', 'summary.status_report.sub_category')->where('vaccinees_id', $id)->get();
         
         return Datatables::of($transactions)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $actionBtn = "";
-                    $actionBtn .= " <a class='view btn btn-alt-primary btn-rounded mr-5 mb-5' onclick='update_vaccinee_transaction($row->vaccinees_transaction_id)'>Update</button></a>";
+                    if(session('LoggedUser')->hasPermission('VACCINEE_UPDATE')){
+                        $actionBtn .= " <a class='view btn btn-alt-primary btn-rounded mr-5 mb-5' onclick='update_vaccinee_transaction($row->vaccinees_id)'>Update</button></a>";
+                    }
+                    
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -175,7 +180,7 @@ class VaccineeController extends Controller
     }
 
     public function saveTransaction(Request $request){
-    
+        abort_if(! session('LoggedUser')->hasPermission('VACCINEE_ADD_TRANSACTION'), 403);
         foreach($request->sub_category as $sub_category){
             $pivot = Category_has_Sub_Category::where('categories_id', $request->category)->where('sub_categories_id', $sub_category)->first();
             $trans_id = DB::table('vaccinees_has_transactions')->insertGetId(
@@ -194,19 +199,14 @@ class VaccineeController extends Controller
     }
 
     public function showTransaction($id){
-        $transaction = Transactions::select('vaccinees_has_transactions.vaccinees_id','t_summary.*','categories.cat_name','sub_categories.sub_cat_name')
-                                ->join('transaction_has_summary as t_summary', 't_summary.vaccinees_transaction_id', '=', 'vaccinees_has_transactions.id')
-                                ->join('category_has_sub_category as c_has_sub', 'c_has_sub.id', '=', 't_summary.category_has_sub_category_id')
-                                ->join('categories', 'c_has_sub.categories_id', '=', 'categories.id')                            
-                                ->join('sub_categories', 'c_has_sub.sub_categories_id', '=', 'sub_categories.id')
-                                ->where('vaccinees_has_transactions.id', $id)->first();
+        $transaction = Transactions::with('summary.status_report.category', 'summary.status_report.sub_category')->where('vaccinees_id', $id)->first();
 
         return response()->json($transaction);
     }
     
     public function saveUpdateTransaction(Request $request)
     {
-       
+        abort_if(! session('LoggedUser')->hasPermission('VACCINEE_UPDATE_TRANSACTION'), 403);
         $summary = new Summary();
         $summary->category_has_sub_category_id = $request->cat_has_sub_category;
         $summary->vaccinees_transaction_id = $request->vaccinees_transaction_id;

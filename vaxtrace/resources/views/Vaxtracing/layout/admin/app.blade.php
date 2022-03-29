@@ -327,17 +327,18 @@
                     <a href="{{ route('view_activity_log') }}"><i class="fa fa-history"></i><span class="sidebar-mini-hide">Activity Log</span></a>
                   </li>
                 @endif
-                
-                <li class="nav-main-heading"><span class="sidebar-mini-visible">TMS</span><span class="sidebar-mini-hidden"></span>Tracker Main System</li>
-                <li>
-                  <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-users"></i><span class="sidebar-mini-hide">Vaccinee Master List</span></a>
-                <ul>
+                @if (session('LoggedUser')->hasPermission('VACCINEE_ACCESS'))
+                  <li class="nav-main-heading"><span class="sidebar-mini-visible">TMS</span><span class="sidebar-mini-hidden"></span>Tracker Main System</li>
                   <li>
-                    <a href="{{ route('view_vaccinees_VaccineeMasterList') }}"><i class="si si-user-unfollow"></i><span class="sidebar-mini-hide"> Vaccinee Monitoring</a>
+                      <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-users"></i><span class="sidebar-mini-hide">Vaccinee Master List</span></a>
+                    <ul>
+                      <li>
+                        <a href="{{ route('view_vaccinees_VaccineeMasterList') }}"><i class="si si-user-unfollow"></i><span class="sidebar-mini-hide"> Vaccinee Monitoring</a>
+                      </li>
+                      <li>
+                    </ul>
                   </li>
-                  <li>
-                </ul>
-                </li>
+               
                 <li>
                   <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-book-open"></i><span class="sidebar-mini-hide">Vaccinee Status Report</span></a>
                   <ul>
@@ -349,7 +350,8 @@
                     </li> --}}
                   </ul>
                 </li>
-                </li>
+                @endif
+               
               </ul>
               
             </div>

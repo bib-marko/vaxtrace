@@ -276,6 +276,7 @@
                 if (result.isConfirmed) {
                     e.preventDefault();
                     var data = tableForNonVerified.row($(this).parents('tr')[0]).data();
+                    
                     var formData = new FormData();
                     formData.append("vaccinee_code",data['patient_code'] );
                     formData.append("first_name",data['first_name'] );
@@ -555,6 +556,66 @@
                 }  
             });
         }); 
+
+        tableForSummary = $('#summary_dt').DataTable({
+                processing: true,
+                serverSide: true,
+                scrollX: true,
+                ajax: "/show/summary/"+1,
+                columns: [
+                    {
+                        "className":      'dt-control',
+                        "orderable":      false,
+                        "data":           null,
+                        "defaultContent": ''
+                    },
+                    {data: null,
+                        render (data){
+                            return statusBadge(data.summary[data.summary.length-1].trans_status);
+                    }},
+                    {data: null,
+                        render (data){
+                            return data.summary[data.summary.length-1].status_report[0].category[0].cat_name;
+                    }},
+                    {data: null,
+                        render (data){
+                            return data.summary[data.summary.length-1].status_report[0].sub_category[0].sub_cat_name;
+                    }},
+                    {data: null,
+                        render (data){
+                            return data.summary[data.summary.length-1].trans_details;
+                    }},
+                    {data: null,
+                        render (data){
+                            return data.summary[data.summary.length-1].assist_by;
+                    }},
+                    {data: null,
+                        render (data){
+                            return formatDate(data.summary[data.summary.length-1].created_at, 'date_time');
+                    }},
+                    {data: 'action'},
+                    
+                ],
+                order: [[ 6, "desc" ]],
+            });
+    
+            $('#summary_dt tbody').on('click', 'td.dt-control', function () {
+
+                var row = tableForSummary.row($(this).parents('tr')[0]);
+                
+                console.log(row.data());
+                if ( row.child.isShown() ) {
+                    // This row is already open - close it
+                    row.child.hide();
+                    
+                }
+                else {
+                    // Open this row
+                    row.child(format(row.data())).show();
+                }
+                row = "";
+            });
+
         
     });
     
@@ -566,15 +627,25 @@
                 return data;
             }
         }  
-
-    var categories, sub_categories;
-    function show_monitor_vaccinee(id){
-        if(tableForSummary != ""){
-            tableForSummary.destroy();
-        }
-        
-        
         function format(d) {
+            var row = "";
+            if(d.summary.length != 1){
+                for(var i = 0; i < d.summary.length-1; i++){
+                    row+=`<tr>
+                        <td>`+d.summary[i].trans_status+`</td>
+                        <td>`+d.summary[i].status_report[0].category[0].cat_name+`</td>
+                        <td>`+d.summary[i].status_report[0].sub_category[0].sub_cat_name+`</td>
+                        <td>`+d.summary[i].trans_details+`</td>
+                        <td>`+d.summary[i].assist_by+`</td>
+                        <td>`+formatDate(d.summary[i].created_at, 'date_time')+`</td>
+                    </tr>`;
+                }
+            }
+            else{
+               row = "<tr><td colspan='6' class='text-center'><h5>No previous transaction</h5></td></tr>";
+            }
+            
+
             return `<table class="table table-striped table-center" width="100%">
                         <thead>
                             <tr>
@@ -586,79 +657,17 @@
                                 <th>DATE OF TRANSACT</th>
                             </tr>   
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>PENDING</td>
-                                <td>FOR UPDATE</td>
-                                <td>FIRST NAME</td>
-                                <td>UPDATE FULL NAME</td>
-                                <td>MARK GILSON JORDANS</td>
-                                <td>3/25/2022, 4:04:54 PM</td>
-                            </tr>
-                        </tbody>
+                        <tbody>`
+                            +row+
+                        `</tbody>
                     </table>`;
-            }
+        }
+    var categories, sub_categories;
+    function show_monitor_vaccinee(id){
+        
 
         $.get("/monitor/vaccinee" +'/' + id, function (data) {
-
-            tableForSummary = $('#summary_dt').DataTable({
-                processing: true,
-                serverSide: true,
-                scrollX: true,
-                ajax: "/show/summary/"+id,
-                columns: [
-                    {
-                        "className":      'dt-control',
-                        "orderable":      false,
-                        "data":           null,
-                        "defaultContent": ''
-                    },
-                    {data: null,
-                        render (data){
-                            return statusBadge(data.summary[0].trans_status);
-                    }},
-                    {data: null,
-                        render (data){
-                            return data.summary[0].status_report[0].category[0].cat_name;
-                    }},
-                    {data: null,
-                        render (data){
-                            return data.summary[0].status_report[0].sub_category[0].sub_cat_name;
-                    }},
-                    {data: null,
-                        render (data){
-                            return data.summary[0].trans_details;
-                    }},
-                    {data: null,
-                        render (data){
-                            return data.summary[0].assist_by;
-                    }},
-                    {data: null,
-                        render (data){
-                            return formatDate(data.summary[0].created_at, 'date_time');
-                    }},
-                    {data: 'action'},
-                    
-                ],
-                order: [[ 6, "desc" ]],
-            });
-
-            $('#summary_dt tbody').on('click', 'td.dt-control', function () {
-                var tr = $(this).closest('tr');
-                var row = tableForSummary.row(tr);
-        
-                if ( row.child.isShown() ) {
-                    // This row is already open - close it
-                    row.child.hide();
-                    tr.removeClass('shown');
-                }
-                else {
-                    // Open this row
-                    row.child(format(row.data())).show();
-                    tr.addClass('shown');
-                }
-            });
-
+            tableForSummary.ajax.url( "/show/summary/"+id ).load();
             categories = data.categories;
             sub_categories = data.sub_categories;
             $('#category_sel').html("");
@@ -699,12 +708,13 @@
         $('#update_sub_category').html("");
         $.get("/show/transaction" +'/' + id, function (data) {
             console.log(data);
-            $('#update_transaction_id').val(data.vaccinees_transaction_id);
-            $('#update_cat_has_sub_category').val(data.category_has_sub_category_id);
-            $('#update_category').append(`<option value="${data.id}">${data.cat_name}</option>`);
-            $('#update_sub_category').append(`<option value="${data.id}">${data.sub_cat_name}</option>`);
-            $('#update_transaction_status').val(data.transaction_status).change();
-            $('#update_transaction_details').val(data.trans_details);
+            var latest = data.summary.length-1;
+            $('#update_transaction_id').val(data.id);
+            $('#update_cat_has_sub_category').val(data.summary[latest].category_has_sub_category_id);
+            $('#update_category').append(`<option value="${data.id}">${data.summary[latest].status_report[0].category[0].cat_name}</option>`);
+            $('#update_sub_category').append(`<option value="${data.id}">${data.summary[latest].status_report[0].sub_category[0].sub_cat_name}</option>`);
+            $('#update_transaction_status').val(data.summary[latest].trans_status).change();
+            $('#update_transaction_details').val(data.summary[latest].trans_details);
         })
     }
 

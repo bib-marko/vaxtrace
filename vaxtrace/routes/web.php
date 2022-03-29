@@ -160,16 +160,8 @@ Route::group(['middleware' => ['AuthCheck']],function(){
 
     //TRACKER MAIN SYSTEM
 
-    Route::get('/view/Tracker-Main-System/vaccinees/non-verified', function () {
-        return view('Vaxtracing.admin.TrackingSystem.ListForNonVerified.index');
-    })->name('view_vaccinees_ListForNonVerified');
-    
-
-    Route::get('/view/Tracker-Main-System/vaccinees/verified', function () {
-        return view('Vaxtracing.admin.TrackingSystem.ListForVerified.index');
-    })->name('view_vaccinees_ListForVerified');
-
     Route::get('/view/Tracker-Main-System/vaccinees/VaccineeMasterList', function () {
+        abort_if(! session('LoggedUser')->hasPermission('VACCINEE_ACCESS'), 403);
         return view('Vaxtracing.admin.TrackingSystem.VaccineeMasterList.index');
     })->name('view_vaccinees_VaccineeMasterList');
     
