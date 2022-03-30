@@ -556,7 +556,10 @@
     <script src="{{ asset('assets/vaxtrace_assets/assets/js/plugins/ion-rangeslider/js/ion.rangeSlider.min.js') }}"></script>
     <script src="{{ asset('assets/vaxtrace_assets/assets/js/plugins/dropzone/min/dropzone.min.js') }}"></script>
     <script src="{{ asset('assets/vaxtrace_assets/assets/js/plugins/flatpickr/flatpickr.min.js') }}"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script>
+    
+    
     
     <!-- Page JS Code -->
     <script src="{{ asset('assets/vaxtrace_assets/assets/js/pages/be_forms_plugins.min.js') }}"></script>

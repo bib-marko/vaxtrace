@@ -14,6 +14,9 @@ use App\Http\Controllers\Vaxtracing\SubSystemController;
 use App\Http\Controllers\Vaxtracing\VaccineeController;
 use App\Http\Middleware\AuthCheck;
 use App\Models\Vaxtracing\Role;
+use App\Models\Vaxtracing\Summary;
+use App\Models\Vaxtracing\User;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -163,7 +166,9 @@ Route::group(['middleware' => ['AuthCheck']],function(){
 
     Route::get('/view/Tracker-Main-System/vaccinees/VaccineeMasterList', function () {
         abort_if(! session('LoggedUser')->hasPermission('VACCINEE_ACCESS'), 403);
-        return view('Vaxtracing.admin.TrackingSystem.VaccineeMasterList.index');
+        $summaries = DB::table('transaction_has_summary')->select('assist_by')->distinct()->get();
+       
+        return view('Vaxtracing.admin.TrackingSystem.VaccineeMasterList.index', compact('summaries'));
     })->name('view_vaccinees_VaccineeMasterList');
     
 

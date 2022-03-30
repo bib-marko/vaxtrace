@@ -141,80 +141,24 @@
               </button> TRANSACTION SUMMARY
             </h3>
             </div>
-                {{-- <div class="col-md-6 justify-content-center mr-auto">
-                    <div class="block m-15 p-10">
-                            <div class="form-group">
-                                <div class="input-daterange input-group" data-date-format="mm/dd/yyyy" data-week-start="1" data-autoclose="true" data-today-highlight="true">
-                                <input type="text" class="form-control" id="example-daterange1" name="example-daterange1" placeholder="From" data-week-start="1" data-autoclose="true" data-today-highlight="true">
-                                <div class="input-group-prepend input-group-append">
-                                    <span class="input-group-text font-w600">to</span>
-                                </div>
-                                <input type="text" class="form-control" id="example-daterange2" name="example-daterange2" placeholder="To" data-week-start="1" data-autoclose="true" data-today-highlight="true">
-                                </div>
-                                
-                            </div>
-                            <button type="button" class="btn btn-alt-success mr-5 mb-5 btn-block" id="date_filter_btn">Filter by date</button>
-                    </div>
-                </div>
-                <div class="col-md-6 ml-auto">
-                    <div class="block mr-15 ml-15">
-                        <div class="form-material floating input-group form-material-primary">
-                        <input type="text" class="form-control" id="search_bar_non_verified" name="material-color-success2">
-                        <label for="material-color-success2">Search here...</label>
-                            <div class="input-group-append">
-                                <button type="button" class="view" id="search_btn_non_verified" style="background: none; border:none">
-                                <i class="si si-magnifier"></i>     
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="block mr-15 ml-15">
-                        <div class="form-material floating input-group form-material-primary">
-                            <select class="js-select2 form-control mt-1" id="example2-select2" name="example2-select2" style="width: 95%;">
-                                <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
-                                <option value="1">HTML</option>
-                                <option value="2">CSS</option>
-                                <option value="3">JavaScript</option>
-                                <option value="4">PHP</option>
-                                <option value="5">MySQL</option>
-                                <option value="6">Ruby</option>
-                                <option value="7">AngularJS</option>
-                            </select>
-                            <label for="material-color-success2">Search here...</label>
-                            <div class="input-group-append">
-                                <button type="button" class="view" id="search_btn_non_verified" style="background: none; border:none;">
-                                    <i class="si si-magnifier"></i>     
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}} 
-
             <div class="block-content">
                 <div class="row">
                   <div class="col-6">
-                    <div class="form-material floating input-group form-material-primary mt-2">
-                        <select class="js-select2 form-control" id="example2-select2" name="example2-select2" style="width: 100%;">
-                            <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
-                            <option value="1">HTML</option>
-                            <option value="2">CSS</option>
-                            <option value="3">JavaScript</option>
-                            <option value="4">PHP</option>
-                            <option value="5">MySQL</option>
-                            <option value="6">Ruby</option>
-                            <option value="7">AngularJS</option>
+                    <div class="form-material floating input-group form-material-primary mt-2 select_filter_summary">
+                        <select class="js-select2 form-control" id="select_filter_assist" name="example2-select2" style="width: 100%;">
+                            <option value=""></option>
+                           
                         </select>
                         <label for="material-color-success2" style="margin-bottom: 2em;">Search here...</label>
                     </div>
-                        <button type="button" class="btn btn-alt-primary mr-5 mb-5 btn-block" id="date_filter_btn">Filter by Assisted By</button>
+                        <button type="button" class="btn btn-alt-primary mr-5 mb-5 btn-block" id="assist_filter_btn">Filter by Assisted By</button>
                   </div>
                   <div class="col-6">
                     <div class="form-material floating input-group form-material-primary">
-                        <input type="text" class="form-control" id="search_bar_non_verified" name="material-color-success2">
+                        <input type="text" class="form-control" id="search_bar_summary_log" name="material-color-success2">
                         <label for="material-color-success2">Search here...</label>
                         </div>
-                        <button type="button" class="btn btn-alt-primary mr-5 mb-5 btn-block" id="date_filter_btn">Filter by whole</button>
+                        <button type="button" class="btn btn-alt-primary mr-5 mb-5 btn-block" id="seach_text_btn">Filter by whole</button>
                   </div>
                 </div>
               </div>
@@ -222,11 +166,11 @@
                   <div class="col-10">
                     <div class="form-material floating form-group form-material-primary">
                         <div class="input-daterange input-group" data-date-format="mm/dd/yyyy" data-week-start="1" data-autoclose="true" data-today-highlight="true">
-                        <input type="text" class="form-control" id="example-daterange1" name="example-daterange1" placeholder="From" data-week-start="1" data-autoclose="true" data-today-highlight="true">
+                        <input type="text" class="form-control" id="minDate" name="example-daterange1" placeholder="From" data-week-start="1" data-autoclose="true" data-today-highlight="true">
                         <div class="input-group-prepend input-group-append">
                             <span class="input-group-text font-w600">to</span>
                         </div>
-                        <input type="text" class="form-control" id="example-daterange2" name="example-daterange2" placeholder="To" data-week-start="1" data-autoclose="true" data-today-highlight="true">
+                        <input type="text" class="form-control" id="maxDate" name="example-daterange2" placeholder="To" data-week-start="1" data-autoclose="true" data-today-highlight="true">
                         </div>
                         
                     </div>
@@ -245,8 +189,8 @@
                             <th scope="col">SUB-CATEGORY</th>
                             <th scope="col">TRANSACTION DETAILS</th>
                             <th scope="col">STATUS</th>
-                            <th scope="col">ASSIST BY</th>
-                            <th scope="col">DATE OF TRANSACT</th>
+                            <th scope="col" class="assist_by">ASSIST BY</th>
+                            <th scope="col" class="date_transact">DATE OF TRANSACT</th>
                         </tr>
                         </thead>
                     </table>
@@ -267,24 +211,35 @@
     var tableForSummary = "";
     var summaryLogsTable
     var verifiedQr = [];
+    var minDate, maxDate;
+ 
+    /* Custom filtering function which will search data in column four between two values */
+    $.fn.DataTable.ext.search.push(
+        function( settings, data, dataIndex ) {
+            console.log(settings.nTable.id);
+            if ( settings.nTable.id !== 'example2' ) {
+                return true;
+            }
+        }
+    );
     $(function () {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        // async function fetchText() {
-        //     const url = 'http://cvimsmicro.com/api/vaxcert-qualifiedpatients';
-    
-        //     let response = await fetch(url);
         
-        //     let dataJson = await response.text();
-        //     let data = JSON.parse(dataJson);
-            
-        //     return data;
-        // }
-
-        // console.log(fetchText());
+        minDate = new DateTime($('#minDate'), {
+            format: 'MM/DD/YYYY'
+        });
+        maxDate = new DateTime($('#maxDate'), {
+            format: 'MM/DD/YYYY'
+        });
+    
+        // Refilter the table
+        $('#minDate, #maxDate').on('change', function () {
+            summaryLogsTable.draw();
+        });
         summaryLogsTable = $('#summary_logs_dt').DataTable({
             processing: true,
             serverSide: true,
@@ -300,11 +255,28 @@
                 {data: 'trans_details'},
                 {data: 'trans_status'},
                 {data: 'assist_by'},
-                {data: 'created_at', render(data){
-                    return formatDate(data, 'date_time');
-                }},
+                {data: 'date_transact'},
             ],
             order: [[ 7, "desc" ]],
+            initComplete: function () {
+                this.api().columns('.assist_by').every( function () {
+                    var column = this;
+                    $('#assist_filter_btn').on('click', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $('#select_filter_assist').val()
+                        );
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+                    column.data().unique().sort().each( function ( d, j ) {
+                        $('#select_filter_assist').append( '<option value="'+d+'">'+d+'</option>' )
+                    } );
+                });
+                this.api().columns('.date_transact').every( function () {
+                    
+                });
+            }
         });
         //MASTER LIST
         tableForVerified = $('#verified_dt').DataTable({
@@ -696,6 +668,10 @@
             }
         }); 
 
+        
+        $('#seach_text_btn').on('click', function(){
+            summaryLogsTable.search($('#search_bar_summary_log').val().toUpperCase()).draw();
+        })
         $('#category_sel').on('change', function(e){
             $('#sub_category_sel').html("");
             $.each(sub_categories, function(key, value) {

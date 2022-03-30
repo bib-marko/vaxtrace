@@ -210,7 +210,7 @@ class VaccineeController extends Controller
     }
 
     public function showSummaryLogs(){
-        $summaries = Summary::with('status_report.category', 'status_report.sub_category', 'transaction.vaccinee')->orderBy('created_at', 'desc')->get();
+        $summaries = Summary::select('*',DB::raw('DATE(`created_at`) as date_transact'))->with('status_report.category', 'status_report.sub_category', 'transaction.vaccinee')->orderBy('created_at', 'desc')->get();
         
         return Datatables::of($summaries)->make(true);
     }
