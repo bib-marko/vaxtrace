@@ -11,7 +11,7 @@ class Transactions extends Pivot
     
     // The Player this Party belongs to.
     public function summary() {
-        return $this->hasMany(Summary::class, 'vaccinees_transaction_id');
+        return $this->hasMany(Summary::class, 'vaccinees_transaction_id')->orderBy('created_at', 'desc');
     }
 
     public function vaccinee() {

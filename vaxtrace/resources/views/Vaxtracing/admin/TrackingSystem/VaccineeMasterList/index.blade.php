@@ -697,34 +697,15 @@
                     },
                     {data: null,
                         render (data){
-                            return statusBadge(data.summary[data.summary.length-1].trans_status);
+                            return statusBadge(data.summary[0].trans_status);
                     }},
-                    {data: null,
-                        render (data){
-                            return data.summary[data.summary.length-1].status_report[0].category[0].cat_name;
-                    }},
-                    {data: null,
-                        render (data){
-                            return data.summary[data.summary.length-1].status_report[0].sub_category[0].sub_cat_name;
-                    }},
-                    {data: null,
-                        render (data){
-                            return data.summary[data.summary.length-1].trans_details;
-                    }},
-                    {data: null,
-                        render (data){
-                            return data.summary[data.summary.length-1].assist_by;
-                    }},
-                    {data: null,
-                        render (data , type , row){
-                            console.log(type);
-                            if ( type === "display" )
-                            {
-                            // format data here
-                            return formatDate(data.summary[data.summary.length-1].created_at, 'date_time');
-                            }    
-                            return formatDate(data.summary[data.summary.length-1].created_at, 'date_time');  
-                            
+                    {data: 'summary.0.status_report.0.category.0.cat_name'},
+                    {data: 'summary.0.status_report.0.sub_category.0.sub_cat_name'},
+                    {data: 'summary.0.trans_details'},
+                    {data: 'summary.0.assist_by'},
+                    {data: 'summary.0.created_at',
+                        render (data){ 
+                            return formatDate(data, 'date_time');
                     }},
                     {data: 'action'},
                     
@@ -763,7 +744,7 @@
         function format(d) {
             var row = "";
             if(d.summary.length != 1){
-                for(var i = 0; i < d.summary.length-1; i++){
+                for(var i = 1; i < d.summary.length; i++){
                     row+=`<tr>
                         <td>`+d.summary[i].trans_status+`</td>
                         <td>`+d.summary[i].status_report[0].category[0].cat_name+`</td>
@@ -833,21 +814,20 @@
         $('#vaccinee_view').modal("show"); 
     }
 
-    function update_vaccinee_transaction(id){
+    function update_vaccinee_transaction(vaccinee_id, trans_id){
         $('#view_monitor_vaccinee').modal("hide");
         $('#update_transaction').modal({backdrop:'static', keyboard:false});
         $('#update_transaction').modal("show");
         $('#update_category').html("");
         $('#update_sub_category').html("");
-        $.get("/show/transaction" +'/' + id, function (data) {
+        $.get("/show/transaction" +'/' + vaccinee_id+'/' + trans_id, function (data) {
             console.log(data);
-            var latest = data.summary.length-1;
             $('#update_transaction_id').val(data.id);
-            $('#update_cat_has_sub_category').val(data.summary[latest].category_has_sub_category_id);
-            $('#update_category').append(`<option value="${data.id}">${data.summary[latest].status_report[0].category[0].cat_name}</option>`);
-            $('#update_sub_category').append(`<option value="${data.id}">${data.summary[latest].status_report[0].sub_category[0].sub_cat_name}</option>`);
-            $('#update_transaction_status').val(data.summary[latest].trans_status).change();
-            $('#update_transaction_details').val(data.summary[latest].trans_details);
+            $('#update_cat_has_sub_category').val(data.summary[0].category_has_sub_category_id);
+            $('#update_category').append(`<option value="${data.id}">${data.summary[0].status_report[0].category[0].cat_name}</option>`);
+            $('#update_sub_category').append(`<option value="${data.id}">${data.summary[0].status_report[0].sub_category[0].sub_cat_name}</option>`);
+            $('#update_transaction_status').val(data.summary[0].trans_status).change();
+            $('#update_transaction_details').val(data.summary[0].trans_details);
         })
     }
 

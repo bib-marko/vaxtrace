@@ -164,13 +164,14 @@ class VaccineeController extends Controller
     public function showSummary($id){
         abort_if(! session('LoggedUser')->hasPermission('VACCINEE_MONITOR'), 403);
         $transactions = Transactions::with('summary.status_report.category', 'summary.status_report.sub_category')->where('vaccinees_id', $id)->get();
-        
+       
         return Datatables::of($transactions)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $actionBtn = "";
+                    $summary_id = $row->summary[0]->vaccinees_transaction_id;
                     if(session('LoggedUser')->hasPermission('VACCINEE_UPDATE')){
-                        $actionBtn .= " <a class='view btn btn-alt-primary btn-rounded mr-5 mb-5' onclick='update_vaccinee_transaction($row->vaccinees_id)'>Update</button></a>";
+                        $actionBtn .= " <a class='view btn btn-alt-primary btn-rounded mr-5 mb-5' onclick='update_vaccinee_transaction($row->vaccinees_id,$summary_id)'>Update</button></a>";
                     }
                     
                     return $actionBtn;
@@ -198,9 +199,13 @@ class VaccineeController extends Controller
         }
     }
 
-    public function showTransaction($id){
-        $transaction = Transactions::with('summary.status_report.category', 'summary.status_report.sub_category')->where('vaccinees_id', $id)->first();
-
+    public function showTransaction($vaccinee_id, $transaction_id){
+        $transaction = Transactions::with('summary.status_report.category', 'summary.status_report.sub_category')->where('vaccinees_id', $vaccinee_id)
+        ->whereHas('summary', function($q) use($transaction_id) {
+            // Query the name field in status table
+            $q->where('vaccinees_transaction_id', '=', $transaction_id); // '=' is optional
+        })->first();
+    
         return response()->json($transaction);
     }
 

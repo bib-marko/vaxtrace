@@ -179,7 +179,7 @@ Route::group(['middleware' => ['AuthCheck']],function(){
 
     Route::get('/show/summary/{id?}', [VaccineeController::class, 'showSummary'])->name('show_summary');
 
-    Route::get('/show/transaction/{id?}', [VaccineeController::class, 'showTransaction'])->name('show_transaction');
+    Route::get('/show/transaction/{vaccinee_id?}/{id?}', [VaccineeController::class, 'showTransaction'])->name('show_transaction');
 
     Route::post('/save/vaccinee/transaction', [VaccineeController::class, 'saveTransaction'])->name('save_vaccinee_transaction');
 
