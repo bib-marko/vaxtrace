@@ -41,8 +41,49 @@ if (! function_exists('generateFullName')) {
     }
 }
 
+if (! function_exists('generateVaccineeFullName')) {
+    function generateVaccineeFullName($vaccinee)
+    {
+        $fullname = $vaccinee->first_name.' '.$vaccinee->middle_name.' '.$vaccinee->suffix;
+        
+        if(($vaccinee->middle_name != null || $vaccinee->middle_name != "NA") && ($vaccinee->suffix != null || $vaccinee->suffix != "NA")){
+            $fullname = $vaccinee->first_name. ' '. $vaccinee->middle_name. ' '. $vaccinee->last_name. ' '. $vaccinee->suffix;
+        }
+        else if(($vaccinee->middle_name == null || $vaccinee->middle_name == "NA") && ($vaccinee->suffix != null || $vaccinee->suffix != "NA") ){
+            $fullname = $vaccinee->first_name. ' '. $vaccinee->last_name. ' '. $vaccinee->suffix;
+        }
+        else if(($vaccinee->middle_name != null || $vaccinee->middle_name != "NA") && ($vaccinee->suffix == null || $vaccinee->suffix == "NA") ){
+            $fullname = $vaccinee->first_name. ' '. $vaccinee->middle_name. ' '. $vaccinee->last_name;
+        }
+        else{
+            $fullname = $vaccinee->first_name. ' '. $vaccinee->last_name;
+        }
+        
+        return($fullname);
+    }
+}
+
 if(! function_exists('saveActivityLog')){
     function saveActivityLog($fullname, $activity) {
+        
+        try {
+            // my data storage location is project_root/storage/app/data.json file.
+            $activitylogs = Storage::disk('local')->exists('ActivityLogs/activitylogs-'.date('Y-m-d').'.json') ? json_decode(Storage::disk('local')->get('ActivityLogs/activitylogs-'.date('Y-m-d').'.json')) : [];
+            $inputData['full_name'] = $fullname;
+            $inputData['activity'] = $activity;
+            $inputData['datetime'] = date('Y-m-d H:i:s');
+            array_push($activitylogs,$inputData);
+            Storage::disk('local')->put('ActivityLogs/activitylogs-'.date('Y-m-d').'.json', json_encode($activitylogs));
+
+            return $inputData;
+        } catch(Exception $e) {
+            return ['error' => true, 'message' => $e->getMessage()];
+        }
+    }
+}
+
+if(! function_exists('saveSummaryLog')){
+    function saveSummaryLog($fullname, $activity) {
         
         try {
             // my data storage location is project_root/storage/app/data.json file.

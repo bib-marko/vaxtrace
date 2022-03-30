@@ -22,4 +22,8 @@ class Summary extends Model
     public function status_report() {
         return $this->belongsToMany(Category_has_Sub_Category::class, 'transaction_has_summary','id', 'category_has_sub_category_id');
     }
+
+    public function transaction() {
+        return $this->belongsToMany(Transactions::class, 'transaction_has_summary','id', 'vaccinees_transaction_id');
+    }
 }

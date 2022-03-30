@@ -27,7 +27,7 @@ class VaccineeController extends Controller
         // dd($data);
         if ($request->ajax()) {
             $data = Vaccinee::select('*',DB::raw("CONCAT(first_name , ' ' , middle_name , ' ' , last_name, ' ' , suffix) as full_name"))
-                                ->where('status','!=', 0)->get();
+                                ->with('transactions.summary.status_report.category', 'transactions.summary.status_report.sub_category')->where('status','!=', 0)->get();
 
             return Datatables::of($data)
                 ->addIndexColumn()
@@ -202,6 +202,12 @@ class VaccineeController extends Controller
         $transaction = Transactions::with('summary.status_report.category', 'summary.status_report.sub_category')->where('vaccinees_id', $id)->first();
 
         return response()->json($transaction);
+    }
+
+    public function showSummaryLogs(){
+        $summaries = Summary::with('status_report.category', 'status_report.sub_category', 'transaction.vaccinee')->orderBy('created_at', 'desc')->get();
+        
+        return Datatables::of($summaries)->make(true);
     }
     
     public function saveUpdateTransaction(Request $request)

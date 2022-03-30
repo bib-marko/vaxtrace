@@ -291,11 +291,11 @@
             <!-- Side Navigation -->
             <div class="content-side content-side-full">
               <ul class="nav-main">
-                
+                @if (session('LoggedUser')->hasPermission('USER_ACCESS'))
                 <li>
                   <a href="{{ route('get_admin_dashboard') }}"><i class="si si-cup"></i><span class="sidebar-mini-hide">Dashboard</span></a>
                 </li>
-                <li>
+                
                 <li>
                   <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-users"></i><span class="sidebar-mini-hide">User Management</span></a>
                 <ul>
@@ -321,7 +321,7 @@
                   @endif
                 </ul>
                 </li>
-
+                @endif
                 @if (session('LoggedUser')->hasPermission('ACTIVITY_ACCESS'))
                   <li>
                     <a href="{{ route('view_activity_log') }}"><i class="fa fa-history"></i><span class="sidebar-mini-hide">Activity Log</span></a>

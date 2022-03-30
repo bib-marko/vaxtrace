@@ -72,6 +72,7 @@ Route::group(['middleware' => ['AuthCheck']],function(){
 
     Route::get("/get-activity-logs", [JsonDataController::class, "getActivity"])->name('get_activity');
 
+
     Route::get("/get-vaccinees", [JsonDataController::class, "getVaccinees"])->name('get_vaccinees');
 
     //Change Password
@@ -183,6 +184,8 @@ Route::group(['middleware' => ['AuthCheck']],function(){
     Route::post('/save/vaccinee/transaction', [VaccineeController::class, 'saveTransaction'])->name('save_vaccinee_transaction');
 
     Route::post('/save/update/vaccinee/transaction', [VaccineeController::class, 'saveUpdateTransaction'])->name('save_update_transaction');
+
+    Route::get('/show/all/summary/', [VaccineeController::class, 'showSummaryLogs'])->name('show_summary_logs');
 
     Route::get('/view/Tracker-Main-System/vaccinees/status/category', function () {
         return view('Vaxtracing.admin.TrackingSystem.Category.index');

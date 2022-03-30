@@ -13,6 +13,9 @@
       <li class="nav-item">
         <a class="nav-link" href="#btabs-animated-slideleft-non-verified-vaccinee">NON VERIFIED VACCINEE</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#btabs-animated-slideleft-summary-logs">SUMMARY</a>
+      </li>
       
       <li class="nav-item ml-auto">
         <div class="block-options mr-15 mt-10">
@@ -127,7 +130,59 @@
                 </div>
             </div>
         </div>
-    </dIv>
+    </div>
+
+    <div class="tab-pane fade fade-left" id="btabs-animated-slideleft-summary-logs" role="tabpanel">
+        <div class="block">
+            <div class="block-header block-header-default bg-success-light">
+            <h3 class="block-title text-secondary">
+                <button type="button" class="btn btn-sm btn-circle btn-outline-danger mr-5 mb-5">
+                <i class="si si-user-unfollow"></i>
+              </button> SUMMARY
+            </h3>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-3">
+                <div class="block">
+                    <div class="block-content">
+                    
+                    </div>
+                </div>
+                </div>
+                <div class="col-md-6 justify-content-center ml-auto">
+                <div class="block mr-15 ml-15">
+                    <div class="form-material floating input-group form-material-primary">
+                    <input type="text" class="form-control" id="search_bar_non_verified" name="material-color-success2">
+                    <label for="material-color-success2">Search here...</label>
+                    <div class="input-group-append">
+                        <button type="button" class="view" id="search_btn_non_verified" style="background: none; border:none">
+                        <i class="si si-magnifier"></i>     
+                        </button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="block-content block-content-full">
+                <div class="table-responsive scrollbar">
+                    <table class="table table-striped table-center js-dataTable-full-pagination" id="summary_logs_dt" width="100%">
+                        <thead>
+                        <tr>
+                            <th scope="col">VACCINEE CODE</th>
+                            <th scope="col">FULL NAME</th>
+                            <th scope="col">CATEGORY</th>
+                            <th scope="col">SUB-CATEGORY</th>
+                            <th scope="col">TRANSACTION DETAILS</th>
+                            <th scope="col">STATUS</th>
+                            <th scope="col">ASSIST BY</th>
+                            <th scope="col">DATE OF TRANSACT</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
     
     </div>
 </div>
@@ -139,6 +194,7 @@
     var tableForVerified;
     var tableForNonVerified;
     var tableForSummary = "";
+    var summaryLogsTable
     var verifiedQr = [];
     $(function () {
         $.ajaxSetup({
@@ -158,6 +214,27 @@
         // }
 
         // console.log(fetchText());
+        summaryLogsTable = $('#summary_logs_dt').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('show_summary_logs') }}",
+            columns: [
+                // //FULLNAME
+                {data: 'transaction.0.vaccinee.0.vaccinee_code'},
+                //ACTIVITY
+                {data: 'transaction.0.vaccinee.0.full_name'},
+                //DATE & TIME
+                {data: 'status_report.0.category.0.cat_name'},
+                {data: 'status_report.0.sub_category.0.sub_cat_name'},
+                {data: 'trans_details'},
+                {data: 'trans_status'},
+                {data: 'assist_by'},
+                {data: 'created_at', render(data){
+                    return formatDate(data, 'date_time');
+                }},
+            ],
+            order: [[ 7, "desc" ]],
+        });
         //MASTER LIST
         tableForVerified = $('#verified_dt').DataTable({
             processing: true,
@@ -590,8 +667,15 @@
                             return data.summary[data.summary.length-1].assist_by;
                     }},
                     {data: null,
-                        render (data){
+                        render (data , type , row){
+                            console.log(type);
+                            if ( type === "display" )
+                            {
+                            // format data here
                             return formatDate(data.summary[data.summary.length-1].created_at, 'date_time');
+                            }    
+                            return formatDate(data.summary[data.summary.length-1].created_at, 'date_time');  
+                            
                     }},
                     {data: 'action'},
                     

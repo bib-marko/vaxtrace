@@ -19,6 +19,10 @@ class Vaccinee extends Model
     ];
 
     public function transactions(){
-        return $this->belongsToMany(Transactions::class, 'vaccinees_has_transactions','vaccinee_id', 'id');
+        return $this->hasMany(Transactions::class, 'vaccinees_id');
+    }
+
+    public function full_name(){
+        return "{$this->first_name} {$this->last_name}";
     }
 }

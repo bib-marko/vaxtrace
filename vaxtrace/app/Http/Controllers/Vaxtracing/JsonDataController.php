@@ -25,12 +25,12 @@ class JsonDataController extends Controller
 
         return Datatables::of($activity)->make(true);
     }
-    public function getVaccinees()
+    public function getSummaryLogs()
     {
-        $vaccinee = json_decode(Storage::get('vaccinees_updated.json'), true);
+        $summary = json_decode(Storage::get('Summary/data.json'), true);
 
-        $vaccinee = collect($vaccinee["data"]);
+        $summary = collect($summary["data"]);
         
-        return response()->json($vaccinee);
+        return response()->json($summary);
     }
 }
