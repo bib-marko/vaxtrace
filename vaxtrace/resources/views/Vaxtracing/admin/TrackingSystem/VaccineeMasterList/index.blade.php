@@ -141,8 +141,7 @@
               </button> TRANSACTION SUMMARY
             </h3>
             </div>
-            <div class="row">
-                <div class="col-md-6 justify-content-center mr-auto">
+                {{-- <div class="col-md-6 justify-content-center mr-auto">
                     <div class="block m-15 p-10">
                             <div class="form-group">
                                 <div class="input-daterange input-group" data-date-format="mm/dd/yyyy" data-week-start="1" data-autoclose="true" data-today-highlight="true">
@@ -170,26 +169,6 @@
                         </div>
                     </div>
 
-                    {{-- <div class="block mr-15 ml-15">
-                        <div class="form-material floating input-group form-material-primary">
-                            <select class="js-select2 form-control" id="example2-select2" name="example2-select2" style="width: 100%;" data-placeholder="Choose one..">
-                                <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
-                                <option value="1">HTML</option>
-                                <option value="2">CSS</option>
-                                <option value="3">JavaScript</option>
-                                <option value="4">PHP</option>
-                                <option value="5">MySQL</option>
-                                <option value="6">Ruby</option>
-                                <option value="7">AngularJS</option>
-                            </select> <button type="button" class="view" id="search_btn_non_verified" style="background: none; border:none">
-                                <i class="si si-magnifier"></i>     
-                                </button>
-                        <label for="material-color-success2">Assisted By ...</label>
-                            <div class="input-group-append">
-                               
-                            </div>
-                        </div>
-                    </div> --}}
                     <div class="block mr-15 ml-15">
                         <div class="form-material floating input-group form-material-primary">
                             <select class="js-select2 form-control mt-1" id="example2-select2" name="example2-select2" style="width: 95%;">
@@ -210,8 +189,51 @@
                             </div>
                         </div>
                     </div>
+                </div> --}} 
+
+            <div class="block-content">
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-material floating input-group form-material-primary mt-2">
+                        <select class="js-select2 form-control" id="example2-select2" name="example2-select2" style="width: 100%;">
+                            <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
+                            <option value="1">HTML</option>
+                            <option value="2">CSS</option>
+                            <option value="3">JavaScript</option>
+                            <option value="4">PHP</option>
+                            <option value="5">MySQL</option>
+                            <option value="6">Ruby</option>
+                            <option value="7">AngularJS</option>
+                        </select>
+                        <label for="material-color-success2" style="margin-bottom: 2em;">Search here...</label>
+                    </div>
+                        <button type="button" class="btn btn-alt-primary mr-5 mb-5 btn-block" id="date_filter_btn">Filter by Assisted By</button>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-material floating input-group form-material-primary">
+                        <input type="text" class="form-control" id="search_bar_non_verified" name="material-color-success2">
+                        <label for="material-color-success2">Search here...</label>
+                        </div>
+                        <button type="button" class="btn btn-alt-primary mr-5 mb-5 btn-block" id="date_filter_btn">Filter by whole</button>
+                  </div>
                 </div>
-            </div>
+              </div>
+              <div class="block-conten d-flex justify-content-center">
+                  <div class="col-10">
+                    <div class="form-material floating form-group form-material-primary">
+                        <div class="input-daterange input-group" data-date-format="mm/dd/yyyy" data-week-start="1" data-autoclose="true" data-today-highlight="true">
+                        <input type="text" class="form-control" id="example-daterange1" name="example-daterange1" placeholder="From" data-week-start="1" data-autoclose="true" data-today-highlight="true">
+                        <div class="input-group-prepend input-group-append">
+                            <span class="input-group-text font-w600">to</span>
+                        </div>
+                        <input type="text" class="form-control" id="example-daterange2" name="example-daterange2" placeholder="To" data-week-start="1" data-autoclose="true" data-today-highlight="true">
+                        </div>
+                        
+                    </div>
+                    <button type="button" class="btn btn-alt-success mr-5 mb-5 btn-block" id="date_filter_btn">Filter by date</button>
+                  </div>
+               
+              </div>
             <div class="block-content block-content-full">
                 <div class="table-responsive scrollbar">
                     <table class="table table-striped table-center js-dataTable-full-pagination" id="summary_logs_dt" width="100%">
