@@ -1,7 +1,12 @@
 @extends('Vaxtracing.layout.admin.app')
 
 @section('title', 'Activity Logs')
-  
+
+<style>
+     .summary-child{
+        background-color: #EBEDF0 !important;
+     }
+</style>
 @section('content')
 
 
@@ -766,7 +771,8 @@
                 }
                 else {
                     // Open this row
-                    row.child(format(row.data())).show();
+                    row.child(format(row.data()),'summary-child').show();
+                    
                 }
                 row = "";
             });
@@ -787,7 +793,7 @@
             if(d.summary.length != 1){
                 for(var i = 0; i < d.summary.length-1; i++){
                     row+=`<tr>
-                        <td>`+d.summary[i].trans_status+`</td>
+                        <td>`+statusBadge(d.summary[i].trans_status)+`</td>
                         <td>`+d.summary[i].status_report[0].category[0].cat_name+`</td>
                         <td>`+d.summary[i].status_report[0].sub_category[0].sub_cat_name+`</td>
                         <td>`+d.summary[i].trans_details+`</td>
@@ -795,14 +801,9 @@
                         <td>`+formatDate(d.summary[i].created_at, 'date_time')+`</td>
                     </tr>`;
                 }
-            }
-            else{
-               row = "<tr><td colspan='6' class='text-center'><h5>No previous transaction</h5></td></tr>";
-            }
-            
 
-            return `<table class="table table-striped table-center" width="100%">
-                        <thead>
+                return `<table class="table table-hover table-striped" width="100%" style="font-size: 13px;">
+                        <thead class="thead-light">
                             <tr>
                                 <th>STATUS</th>
                                 <th>CATEGORY</th>
@@ -812,10 +813,14 @@
                                 <th>DATE OF TRANSACT</th>
                             </tr>   
                         </thead>
-                        <tbody>`
-                            +row+
-                        `</tbody>
-                    </table>`;
+                            <tbody>`
+                                +row+
+                            `</tbody>
+                        </table>`;
+            }
+            else{
+                return "<center><tr><td colspan='6' class='text-center'><h5>No previous transaction</h5></td></tr></center>";
+            }
         }
     var categories, sub_categories;
     function show_monitor_vaccinee(id){
