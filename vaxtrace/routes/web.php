@@ -190,7 +190,7 @@ Route::group(['middleware' => ['AuthCheck']],function(){
 
     Route::post('/save/update/vaccinee/transaction', [VaccineeController::class, 'saveUpdateTransaction'])->name('save_update_transaction');
 
-    Route::get('/show/all/summary/', [VaccineeController::class, 'showSummaryLogs'])->name('show_summary_logs');
+    Route::get('/show/all/summary/{date_from?}/{date_to?}', [VaccineeController::class, 'showSummaryLogs'])->name('show_summary_logs');
 
     Route::get('/view/Tracker-Main-System/vaccinees/status/category', function () {
         return view('Vaxtracing.admin.TrackingSystem.Category.index');

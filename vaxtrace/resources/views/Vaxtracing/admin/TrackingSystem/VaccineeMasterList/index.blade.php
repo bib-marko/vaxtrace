@@ -166,11 +166,11 @@
                   <div class="col-10">
                     <div class="form-material floating form-group form-material-primary">
                         <div class="input-daterange input-group" data-date-format="mm/dd/yyyy" data-week-start="1" data-autoclose="true" data-today-highlight="true">
-                        <input type="text" class="form-control" id="minDate" name="example-daterange1" placeholder="From" data-week-start="1" data-autoclose="true" data-today-highlight="true">
+                        <input type="text" class="form-control" id="minDate" name="example-daterange1" value="01/01/1901" placeholder="From" data-week-start="1" data-autoclose="true" data-today-highlight="true">
                         <div class="input-group-prepend input-group-append">
                             <span class="input-group-text font-w600">to</span>
                         </div>
-                        <input type="text" class="form-control" id="maxDate" name="example-daterange2" placeholder="To" data-week-start="1" data-autoclose="true" data-today-highlight="true">
+                        <input type="text" class="form-control" id="maxDate" name="example-daterange2" value="01/01/2030" placeholder="To" data-week-start="1" data-autoclose="true" data-today-highlight="true">
                         </div>
                         
                     </div>
@@ -183,12 +183,12 @@
                     <table class="table table-striped table-center js-dataTable-full-pagination" id="summary_logs_dt" width="100%">
                         <thead>
                         <tr>
+                            <th scope="col">STATUS</th>
                             <th scope="col">VACCINEE CODE</th>
                             <th scope="col">FULL NAME</th>
                             <th scope="col">CATEGORY</th>
                             <th scope="col">SUB-CATEGORY</th>
                             <th scope="col">TRANSACTION DETAILS</th>
-                            <th scope="col">STATUS</th>
                             <th scope="col" class="assist_by">ASSIST BY</th>
                             <th scope="col" class="date_transact">DATE OF TRANSACT</th>
                         </tr>
@@ -211,17 +211,7 @@
     var tableForSummary = "";
     var summaryLogsTable
     var verifiedQr = [];
-    var minDate, maxDate;
  
-    /* Custom filtering function which will search data in column four between two values */
-    $.fn.DataTable.ext.search.push(
-        function( settings, data, dataIndex ) {
-            console.log(settings.nTable.id);
-            if ( settings.nTable.id !== 'example2' ) {
-                return true;
-            }
-        }
-    );
     $(function () {
         $.ajaxSetup({
             headers: {
@@ -229,22 +219,21 @@
             }
         });
         
-        minDate = new DateTime($('#minDate'), {
-            format: 'MM/DD/YYYY'
-        });
-        maxDate = new DateTime($('#maxDate'), {
-            format: 'MM/DD/YYYY'
-        });
-    
-        // Refilter the table
-        $('#minDate, #maxDate').on('change', function () {
-            summaryLogsTable.draw();
-        });
         summaryLogsTable = $('#summary_logs_dt').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('show_summary_logs') }}",
+            ajax: {
+                url: "/show/all/summary/",
+                data: function (d) {
+                    d.date_from = $('#minDate').val();
+                    d.date_to = $('#maxDate').val();
+                }
+            },
             columns: [
+                {data: 'trans_status',
+                        render (data){
+                            return statusBadge(data);
+                    }},
                 // //FULLNAME
                 {data: 'transaction.0.vaccinee.0.vaccinee_code'},
                 //ACTIVITY
@@ -253,7 +242,7 @@
                 {data: 'status_report.0.category.0.cat_name'},
                 {data: 'status_report.0.sub_category.0.sub_cat_name'},
                 {data: 'trans_details'},
-                {data: 'trans_status'},
+               
                 {data: 'assist_by'},
                 {data: 'date_transact'},
             ],
@@ -668,10 +657,13 @@
             }
         }); 
 
-        
         $('#seach_text_btn').on('click', function(){
             summaryLogsTable.search($('#search_bar_summary_log').val().toUpperCase()).draw();
         })
+        $('#date_filter_btn').on('click', function(){
+            summaryLogsTable.ajax.reload();
+        })
+        
         $('#category_sel').on('change', function(e){
             $('#sub_category_sel').html("");
             $.each(sub_categories, function(key, value) {

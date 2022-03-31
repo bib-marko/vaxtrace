@@ -209,8 +209,15 @@ class VaccineeController extends Controller
         return response()->json($transaction);
     }
 
-    public function showSummaryLogs(){
-        $summaries = Summary::select('*',DB::raw('DATE(`created_at`) as date_transact'))->with('status_report.category', 'status_report.sub_category', 'transaction.vaccinee')->orderBy('created_at', 'desc')->get();
+    public function showSummaryLogs(Request $request){
+        abort_if(! session('LoggedUser')->hasPermission('VACCINEE_MONITOR'), 403);
+        
+        $dt = Carbon::parse($request->date_from);
+        $dt->toDateTimeString();
+        $df = Carbon::parse($request->date_to);
+        $df->toDateTimeString();
+        $summaries = Summary::select('*',DB::raw('DATE(`created_at`) as date_transact'))->with('status_report.category', 'status_report.sub_category', 'transaction.vaccinee')
+                    ->whereBetween('created_at', [$dt, $df])->orderBy('created_at', 'desc')->get();
         
         return Datatables::of($summaries)->make(true);
     }
