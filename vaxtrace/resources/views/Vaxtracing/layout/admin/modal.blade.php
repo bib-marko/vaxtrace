@@ -1,7 +1,3 @@
-{{-- @if (url()->current() == route('get_manage_user')) --}}
-
-{{--Show Role Modal--}}
-
 
 
  <!-- Slide Up Modal -->
@@ -443,7 +439,7 @@
             <div class="block-header bg-primary-dark">
               <h3 class="block-title">NEW CATEGORY</h3>
               <div class="block-options">
-                <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
                   <i class="si si-close"></i>
                 </button>
               </div>
@@ -805,7 +801,7 @@
 
 
  <!-- PRE LOADER Modal -->
- <div class="modal" id="pre_loader" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" role="dialog" aria-hidden="true" >
+ {{-- <div class="modal" id="pre_loader" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" role="dialog" aria-hidden="true" >
   <div class="modal-dialog modal-dialog-popout" role="document">
     <div class="modal-content" style="background: transparent">
       <div class="load-wrapp" style="margin-top: 50%">
@@ -815,7 +811,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 <!-- END PRE LOADER Modal -->
 
 

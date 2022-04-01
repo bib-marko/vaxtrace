@@ -70,14 +70,10 @@
         padding-left: 10px;
         padding-top: 5px;
       }
-      /* .select2-selection__choice{
-        border: none;
-        background-color: #575757 !important; 
+      /* rgba(0,0,123,0.4) */
+      .modal-backdrop {
+        background-color: rgba(0,0,123,0.4);
       }
-
-      .select2-selection__choice__remove{
-        color: white !important;
-      } */
 
 
     </style>

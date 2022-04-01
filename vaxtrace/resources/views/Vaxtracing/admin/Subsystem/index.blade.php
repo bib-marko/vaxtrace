@@ -92,6 +92,11 @@ function delete_subsystem(id){
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Yes',
+        backdrop: `
+        rgba(0,0,123,0.4)
+        left top
+        no-repeat
+        `,
     }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
@@ -112,6 +117,11 @@ function delete_subsystem(id){
                         icon: 'success',
                         text: "The subsystem has been deleted",
                         confirmButtonText: 'Ok',
+                        backdrop: `
+                        rgba(0,0,123,0.4)
+                        left top
+                        no-repeat
+                        `,
                     }).then((result) => {
                         /* Read more about isConfirmed, isDenied below */
                         if (result.isConfirmed) {
