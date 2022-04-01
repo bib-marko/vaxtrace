@@ -6,7 +6,7 @@
 
  <!-- Slide Up Modal -->
  <div class="modal fade" id="view_monitor_vaccinee" tabindex="-1" role="dialog" aria-labelledby="modal-slideup" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-slideup modal-xl" role="document">
+  <div class="modal-dialog modal-dialog-slideup modal-xl" role="document" width="150">
     <div class="modal-content">
       <div class="block-header bg-primary-dark">
         <h3 class="block-title text-white">Monitor Vaccinee Transaction</h3>
@@ -55,7 +55,7 @@
   
                         <div class="block-content block-content-full" data-toggle="slimscroll" data-height="350px" data-color="#9ccc65" data-opacity="1" data-always-visible="true">
                             <div class="table-responsive">
-                                <table class="table table-striped table-center js-dataTable-full-pagination" id="summary_dt" width="100%">
+                                <table class="table table-striped table-center js-dataTable-full-pagination" id="summary_dt" width="150%">
                                     <thead>
                                       <tr>
                                         <th></th>
