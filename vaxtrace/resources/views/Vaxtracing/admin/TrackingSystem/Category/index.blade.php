@@ -122,6 +122,11 @@
                         icon: 'success',
                         text: "A new record has been created",
                         confirmButtonText: 'Ok',
+                        backdrop: `
+                        rgba(0,0,123,0.4)
+                        left top
+                        no-repeat
+                        `,
                     }).then((result) => {
                         /* Read more about isConfirmed, isDenied below */
                         if (result.isConfirmed) {
@@ -171,6 +176,11 @@
                         icon: 'success',
                         text: "The record has been updated",
                         confirmButtonText: 'Ok',
+                        backdrop: `
+                        rgba(0,0,123,0.4)
+                        left top
+                        no-repeat
+                        `,
                     }).then((result) => {
                         /* Read more about isConfirmed, isDenied below */
                         if (result.isConfirmed) {
@@ -203,10 +213,15 @@
   }
   function delete_category(id){
       Swal.fire({
-          title: 'Do you want to delete this category?',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Yes',
+        title: 'Do you want to delete this category?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        backdrop: `
+        rgba(0,0,123,0.4)
+        left top
+        no-repeat
+        `,
       }).then((result) => {
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {

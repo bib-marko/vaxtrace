@@ -119,7 +119,23 @@ $(function(){
     }
 
     function showLoader(){
-        $("#pre_loader").modal("show");
+        Swal.fire({
+            showOkButton: false,
+            html:
+                `<div class="load-wrapp">
+                    <center>
+                        <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                    </center>
+                </div>`,
+                backdrop: `
+                rgba(0,0,123,0.4)
+                left top
+                no-repeat
+                `,
+                background: 'transparent',
+                showConfirmButton: false,
+                timer: 1500
+          });
     }
 
     function hideLoader(){

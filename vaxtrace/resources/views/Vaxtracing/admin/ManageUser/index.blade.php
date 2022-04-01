@@ -197,8 +197,6 @@
                 // data.role.short_code
                 },
 
-               
-
                 //ACCOUNT STATUS
                 {
                     data: 'user_status',
@@ -361,6 +359,11 @@
               confirmButtonText: 'Yes',
               allowOutsideClick: false,
               allowEscapeKey: false,
+              backdrop: `
+              rgba(0,0,123,0.4)
+              left top
+              no-repeat
+              `,
             }).then((result) => {
               /* Read more about isConfirmed, isDenied below */
               if (result.isConfirmed) {
@@ -371,6 +374,11 @@
                       inputPlaceholder: "Write something",
                       showCancelButton: true,
                       confirmButtonText: 'Submit',
+                      backdrop: `
+                      rgba(0,0,123,0.4)
+                      left top
+                      no-repeat
+                      `,
                   }).then((result) => {
                     
                       var form = document.getElementById("formAddUser1");
@@ -396,7 +404,12 @@
                                       icon: 'success',
                                       text: "The user has been deactivated",
                                       confirmButtonText: 'Ok',
-                                  }).then((result) => {
+                                      backdrop: `
+                                      rgba(0,0,123,0.4)
+                                      left top
+                                      no-repeat
+                                      `,
+                                      }).then((result) => {
                                       /* Read more about isConfirmed, isDenied below */
                                       if (result.isConfirmed) {
                                           location.reload();
@@ -410,6 +423,11 @@
                                       icon: 'warning',
                                       text: "The reason field is required",
                                       confirmButtonText: 'Ok',
+                                      backdrop: `
+                                      rgba(0,0,123,0.4)
+                                      left top
+                                      no-repeat
+                                      `,
                                   })
                               }
                           });
@@ -429,6 +447,11 @@
               confirmButtonText: 'Yes',
               allowOutsideClick: false,
               allowEscapeKey: false,
+              backdrop: `
+              rgba(0,0,123,0.4)
+              left top
+              no-repeat
+              `,
             }).then((result) => {
               /* Read more about isConfirmed, isDenied below */
               if (result.isConfirmed) {
@@ -441,6 +464,11 @@
                       confirmButtonText: 'Submit',
                       allowOutsideClick: false,
                       allowEscapeKey: false,
+                      backdrop: `
+                      rgba(0,0,123,0.4)
+                      left top
+                      no-repeat
+                      `,
                   }).then((result) => {
                       var form = document.getElementById("formRestoreUser");
                       var formData = new FormData(form);
@@ -464,6 +492,11 @@
                                       icon: 'success',
                                       text: "The user has been restored",
                                       confirmButtonText: 'Ok',
+                                      backdrop: `
+                                      rgba(0,0,123,0.4)
+                                      left top
+                                      no-repeat
+                                      `,
                                   }).then((result) => {
                                       /* Read more about isConfirmed, isDenied below */
                                       if (result.isConfirmed) {
@@ -478,6 +511,11 @@
                                         icon: 'warning',
                                         text: "The reason field is required",
                                         confirmButtonText: 'Ok',
+                                        backdrop: `
+                                        rgba(0,0,123,0.4)
+                                        left top
+                                        no-repeat
+                                        `,
                                     })
                               }
                           });

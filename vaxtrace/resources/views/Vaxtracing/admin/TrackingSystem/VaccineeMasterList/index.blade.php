@@ -376,6 +376,11 @@
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Yes',
+                backdrop: `
+                rgba(0,0,123,0.4)
+                left top
+                no-repeat
+                `,
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
@@ -409,6 +414,11 @@
                                 icon: 'success',
                                 text: "A new record has been created",
                                 confirmButtonText: 'Ok',
+                                backdrop: `
+                                rgba(0,0,123,0.4)
+                                left top
+                                no-repeat
+                                `,
                             }).then((result) => {
                                 /* Read more about isConfirmed, isDenied below */
                                 if (result.isConfirmed) {
@@ -457,6 +467,11 @@
                             icon: 'success',
                             text: "A new record has been created",
                             confirmButtonText: 'Ok',
+                            backdrop: `
+                            rgba(0,0,123,0.4)
+                            left top
+                            no-repeat
+                            `,
                         }).then((result) => {
                             /* Read more about isConfirmed, isDenied below */
                             if (result.isConfirmed) {
@@ -502,6 +517,11 @@
                         title: 'Success!',
                         icon: 'success',
                         text: "The record has been updated",
+                        backdrop: `
+                        rgba(0,0,123,0.4)
+                        left top
+                        no-repeat
+                        `,
                         confirmButtonText: 'Ok',
                     }).then((result) => {
                         /* Read more about isConfirmed, isDenied below */
@@ -552,6 +572,11 @@
                         icon: 'success',
                         text: "The transaction has been added",
                         confirmButtonText: 'Ok',
+                        backdrop: `
+                        rgba(0,0,123,0.4)
+                        left top
+                        no-repeat
+                        `,
                     }).then((result) => {
                         /* Read more about isConfirmed, isDenied below */
                         // $('.view_monitor_vaccinee').modal('hide');
@@ -563,6 +588,7 @@
                             $('#btabs_new_transaction').removeClass("active show")
                             tableForSummary.draw();
                             $('#view_monitor_vaccinee').modal('show');
+                            $('#view_monitor_vaccinee').modal({backdrop: false});
                             form.reset();
                         }
                     })
@@ -609,6 +635,11 @@
                         icon: 'success',
                         text: "The transaction has been updated",
                         confirmButtonText: 'Ok',
+                        backdrop: `
+                        rgba(0,0,123,0.4)
+                        left top
+                        no-repeat
+                        `,
                     }).then((result) => {
                         /* Read more about isConfirmed, isDenied below */
                         // $('.view_monitor_vaccinee').modal('hide');
@@ -755,7 +786,7 @@
                 }
 
                 return `
-                        <table class="table table-hover" width="100%" style="font-size: 13px;" data-toggle="slimscroll" data-always-visible="true" data-rail-visible="true" data-rail-color="#eee" data-rail-opacity="1">
+                        <table class="table table-hover" width="100%" style="font-size: 13px;" >
                             <thead class="thead-light">
                                 <tr>
                                     <th>STATUS</th>
@@ -855,6 +886,11 @@
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Yes',
+            backdrop: `
+            rgba(0,0,123,0.4)
+            left top
+            no-repeat
+            `,
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
@@ -875,6 +911,11 @@
                             icon: 'success',
                             text: "The vaccinee has been deleted",
                             confirmButtonText: 'Ok',
+                            backdrop: `
+                            rgba(0,0,123,0.4)
+                            left top
+                            no-repeat
+                            `,
                         }).then((result) => {
                             /* Read more about isConfirmed, isDenied below */
                             if (result.isConfirmed) {
