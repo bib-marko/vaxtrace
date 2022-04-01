@@ -76,7 +76,7 @@ class RoleController extends Controller
         $subsystems = SubSystem::orderBy('title')->get();
         $permissions = Permission::orderBy('name')->get();
 
-        return response()->json($role,$subsystems,$permissions);
+        return response()->json($role);
     }
 
   
