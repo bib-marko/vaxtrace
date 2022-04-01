@@ -5,6 +5,7 @@
 <style>
      .summary-child{
         background-color: #EBEDF0 !important;
+        max-height:300px;
      }
 </style>
 @section('content')
@@ -146,6 +147,10 @@
               </button> TRANSACTION SUMMARY
             </h3>
             </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4db225a558f178b76a1995ba50459dcff5e0fbbd
             <div class="block-content">
                 <div class="row">
                   <div class="col-6">
@@ -751,21 +756,23 @@
                     </tr>`;
                 }
 
-                return `<table class="table table-hover table-striped" width="100%" style="font-size: 13px;">
-                        <thead class="thead-light">
-                            <tr>
-                                <th>STATUS</th>
-                                <th>CATEGORY</th>
-                                <th>SUB-CATEGORY</th>
-                                <th>TRANSACTION DETAILS</th>
-                                <th>ASSIST BY</th>
-                                <th>DATE OF TRANSACT</th>
-                            </tr>   
-                        </thead>
-                            <tbody>`
-                                +row+
-                            `</tbody>
-                        </table>`;
+                return `
+                        <table class="table table-hover" width="100%" style="font-size: 13px;" data-toggle="slimscroll" data-always-visible="true" data-rail-visible="true" data-rail-color="#eee" data-rail-opacity="1">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>STATUS</th>
+                                    <th>CATEGORY</th>
+                                    <th>SUB-CATEGORY</th>
+                                    <th>TRANSACTION DETAILS</th>
+                                    <th>ASSIST BY</th>
+                                    <th>DATE OF TRANSACT</th>
+                                </tr>   
+                            </thead>
+                                <tbody>`
+                                    +row+
+                                `</tbody>
+                        </table>
+                        `;
             }
             else{
                 return "<center><tr><td colspan='6' class='text-center'><h5>No previous transaction</h5></td></tr></center>";

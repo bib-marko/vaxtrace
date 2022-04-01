@@ -184,6 +184,7 @@
               processing: true,
               serverSide: true,
               ajax: "/show/people",
+              scrollX: true,
               columns: [
 
                 //FULLNAME

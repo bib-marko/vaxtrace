@@ -91,6 +91,69 @@
 
     </div>
     <!-- END Statistics -->
+    
+    <div class="row">
+      <!-- Row #2 -->
+      <div class="col-md-6">
+        <div class="block block-fx-shadow">
+          <div class="block-header block-header-default">
+            <h3 class="block-title">
+              VERIFIED <small>VACCINEE</small>
+            </h3>
+            <div class="block-options">
+              <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
+                <i class="si si-refresh"></i>
+              </button>
+            </div>
+          </div>
+          <div class="block-content block-content-full">
+            <!-- Lines Chart Container functionality is initialized in js/pages/db_pop.min.js which was auto compiled from _js/pages/db_pop.js -->
+            <!-- For more info and examples you can check out http://www.chartjs.org/docs/ -->
+            <canvas class="js-chartjs-pop-lines"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="block block-fx-shadow">
+          <div class="block-header block-header-default">
+            <h3 class="block-title">
+              NON VERIFIED <small>VACCINEE</small>
+            </h3>
+            <div class="block-options">
+              <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
+                <i class="si si-refresh"></i>
+              </button>
+            </div>
+          </div>
+          <div class="block-content block-content-full">
+            <!-- Lines Chart Container functionality is initialized in js/pages/db_pop.min.js which was auto compiled from _js/pages/db_pop.js -->
+            <!-- For more info and examples you can check out http://www.chartjs.org/docs/ -->
+            <canvas class="js-chartjs-pop-lines2"></canvas>
+          </div>
+        </div>
+      </div>
+      <!-- END Row #2 -->
+
+  
+        <div class="col-xl-12">
+          <!-- Lines Chart -->
+          <div class="block">
+            <div class="block-header block-header-default">
+              <h3 class="block-title">Lines</h3>
+              <div class="block-options">
+                <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
+                  <i class="si si-refresh"></i>
+                </button>
+              </div>
+            </div>
+            <div class="block-content block-content-full text-center">
+              <!-- Lines Chart Container -->
+              <canvas class="js-chartjs-lines" height="50"></canvas>
+            </div>
+          </div>
+          <!-- END Lines Chart -->
+        </div>
+   
   </div>
  </div>
 
