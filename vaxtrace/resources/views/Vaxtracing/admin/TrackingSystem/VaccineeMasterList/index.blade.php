@@ -717,7 +717,7 @@
                 processing: true,
                 serverSide: true,
                 scrollX: true,
-                ajax: "/show/summary/"+1,
+                ajax: "/show/summary/"+0,
                 columns: [
                     {
                         "className":      'dt-control',

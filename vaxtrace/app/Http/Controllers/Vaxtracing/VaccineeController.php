@@ -163,8 +163,13 @@ class VaccineeController extends Controller
 
     public function showSummary($id){
         abort_if(! session('LoggedUser')->hasPermission('VACCINEE_MONITOR'), 403);
-        $transactions = Transactions::with('summary.status_report.category', 'summary.status_report.sub_category')->where('vaccinees_id', $id)->get();
-       
+        if($id != 0){
+            $transactions = Transactions::with('summary.status_report.category', 'summary.status_report.sub_category')->where('vaccinees_id', $id)->get();
+        }
+        else{
+            $transactions = Transactions::with('summary.status_report.category', 'summary.status_report.sub_category')->get();
+        }
+        
         return Datatables::of($transactions)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
