@@ -34,13 +34,13 @@ class VaccineeController extends Controller
                 ->addColumn('action', function($row){
                     $actionBtn = "";
                     if(session('LoggedUser')->hasPermission('VACCINEE_VIEW')){
-                        $actionBtn .= " <a class='view btn btn-alt-primary btn-rounded mr-5 mb-5' onclick='show_vaccinee($row->id)'><i class='si si-eye mr-6'></i></button></a>";
-                    }
-                    if(session('LoggedUser')->hasPermission('VACCINEE_UPDATE')){
-                        $actionBtn .= "<a class='update btn btn-alt-success btn-rounded mr-5 mb-5' onclick='update_vaccinee($row->id)'><i class='si si-pencil mr-6'></i></a>";
+                        $actionBtn .= " <a class='view btn btn-alt-primary btn-rounded mr-5 mb-5' onclick='show_vaccinee($row->id)'><i class='si si-eye mr-6'></i></a>";
                     }
                     if(session('LoggedUser')->hasPermission('VACCINEE_DELETE')){
                         $actionBtn .= "<a class='delete delete btn btn-alt-danger btn-rounded mr-5 mb-5' onclick='delete_vaccinee($row->id)'><i class='si si-trash mr-6'></i></a>";
+                    }
+                    if(session('LoggedUser')->hasPermission('VACCINEE_UPDATE')){
+                        $actionBtn .= "<a class='update btn btn-alt-success btn-rounded mr-5 mb-5' onclick='update_vaccinee($row->id)'><i class='si si-pencil mr-5'></i> UPDATE</a>";
                     }
                     if(session('LoggedUser')->hasPermission('VACCINEE_MONITOR')){
                         $actionBtn .= "<a class='warning btn-rounded btn btn-alt-warning mr-5 mb-5' onclick='show_monitor_vaccinee($row->id)'><i class='si si-eyeglasses mr-5'></i>Monitor Vaccinee</a>";
@@ -163,7 +163,8 @@ class VaccineeController extends Controller
 
     public function showSummary($id){
         abort_if(! session('LoggedUser')->hasPermission('VACCINEE_MONITOR'), 403);
-        if($id != 0){
+        
+        if($id > 0){
             $transactions = Transactions::with('summary.status_report.category', 'summary.status_report.sub_category')->where('vaccinees_id', $id)->get();
         }
         else{

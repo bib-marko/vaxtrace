@@ -8,13 +8,13 @@
         
             <div class="col-12">
                 <div class="form-group row">
-                    <div class="col-10">
+                    <div class="col-8">
                         <div class="form-material form-material-success floating">
                             <input class="form-control" id="floatingDate" name="date_filter" type="date" placeholder="dd/mm/yyyy" data-options='{"dateFormat":"m-d-y,"disableMobile":true}' id="form-wizard-progress-wizard-datepicker" min="1900-10-20" max="2030-10-20" required/>
                             <span class="text-danger errorMessage" id="error_birth_date"></span>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-4">
                         <div class="form-material form-material-success floating ">
                             <button type="button" class="btn btn-alt-success mr-5 mb-5 btn-block" id="date_filter_btn">Filter by date</button>
                         </div>
