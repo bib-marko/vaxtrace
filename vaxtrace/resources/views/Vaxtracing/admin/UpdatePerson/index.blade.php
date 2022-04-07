@@ -7,24 +7,20 @@
 
 <!-- Content Header (Page header) -->
 
-<div class="row mt-5 mt-lg-0 mt-xl-5 mt-xxl-0">
-  <div class="col-lg-6 col-xl-12 col-xxl-6 h-100">
-    <div class="card theme-wizard mb-5 mb-lg-0 mb-xl-5 mb-xxl-0 h-100">
-      <div class="block">
-        <div class="block-header bg-gd-emerald text-white">
-          <h3 class="block-title text-white">
-            <i class="si si-user-follow"></i> Update <small class="text-white">Account</small>
-          </h3>
-          <div class="block-options">
-            <button type="button" class="btn-block-option text-white" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
-              <i class="si si-refresh"></i>
-            </button>
-          </div>
-        </div>
+
+            <div class="block">
+              <div class="block-header bg-gd-emerald text-white">
+                <h3 class="block-title text-white">
+                  <i class="si si-user-follow"></i> Update <small class="text-white">Account</small>
+                </h3>
+                <div class="block-options">
+                  <button type="button" class="btn-block-option text-white" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
+                    <i class="si si-refresh"></i>
+                  </button>
+                </div>
+              </div>
         
-        <div class="block-content">
-           
-              
+              <div class="block-content">
                 <form role="form" id="formUpdateUser" novalidate>
                   @csrf
                   <div class="row g-2">
@@ -181,7 +177,6 @@
                       </div>
                   </div>
                 </form>
-              
             </div>
           </div>  
       
@@ -194,8 +189,8 @@
           </ul>
         </div>
       </div>
-    </div>
-  </div>
+
+   
     @section('scripts')
         <script type="text/javascript">
 
