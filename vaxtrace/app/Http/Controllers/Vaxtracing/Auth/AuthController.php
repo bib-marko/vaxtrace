@@ -20,19 +20,18 @@ class AuthController extends Controller
         ]);
 
         $user = User::with('person','role')->where('email', '=', $request->email)->first();
-        $role = Role::find($user->role->id);
-        
-        $permission1 = [];
-        foreach ($role->permissions as $permission) {
-            array_push($permission1, $permission->name);
-        }
-        $user->role->permissions = $permission1;
 
         //dd($user->hasPermission("USER_CREATE"));
         if(!$user){
             return back()->with('error', 'We do not recognize your email');
         }
         else{
+            $role = Role::find($user->role->id);
+            $permission1 = [];
+            foreach ($role->permissions as $permission) {
+                array_push($permission1, $permission->name);
+            }
+            $user->role->permissions = $permission1;
             
             if(Hash::check($request->password, $user ->password)){
                 $request->session()->put('LoggedUser', $user);
