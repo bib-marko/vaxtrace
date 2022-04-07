@@ -148,29 +148,31 @@
             </h3>
             </div>
 
-            <div class="block-content">
-                <div class="row">
-                  <div class="col-6">
-                    <div class="form-material floating input-group form-material-primary mt-2 select_filter_summary">
-                        <select class="js-select2 form-control" id="select_filter_assist" name="example2-select2" style="width: 100%;">
-                            <option value=""></option>
-                           
-                        </select>
-                        <label for="material-color-success2" style="margin-bottom: 2em;">Search here...</label>
-                    </div>
-                        <button type="button" class="btn btn-alt-primary mr-5 mb-5 btn-block" id="assist_filter_btn">Filter by Assisted By</button>
-                  </div>
-                  <div class="col-6">
-                    <div class="form-material floating input-group form-material-primary">
-                        <input type="text" class="form-control" id="search_bar_summary_log" name="material-color-success2">
-                        <label for="material-color-success2">Search here...</label>
+            <div class="block">
+                <div class="block-content">
+                  <div class="row items-push">
+                    <div class="col-md-6">
+                        <div class="form-material floating input-group form-material-primary mt-2 select_filter_summary">
+                            <select class="js-select2 form-control" id="select_filter_assist" name="example2-select2" style="width: 100%;">
+                                <option value=""></option>
+                               
+                            </select>
+                            <label for="material-color-success2" style="margin-bottom: 2em;">Search here...</label>
                         </div>
-                        <button type="button" class="btn btn-alt-primary mr-5 mb-5 btn-block" id="seach_text_btn">Filter by whole</button>
+                            <button type="button" class="btn btn-alt-primary mr-5 mb-5 btn-block" id="assist_filter_btn">Filter by Assisted By</button>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-material floating input-group form-material-primary">
+                            <input type="text" class="form-control" id="search_bar_summary_log" name="material-color-success2">
+                            <label for="material-color-success2">Search here...</label>
+                            </div>
+                            <button type="button" class="btn btn-alt-primary mr-5 mb-5 btn-block" id="seach_text_btn">Filter by whole</button>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="block-conten d-flex justify-content-center">
-                  <div class="col-10">
+            </div>
+              <div class="block-content d-flex justify-content-center" style="margin-top: -3em;">
+                  <div class="col-12">
                     <div class="form-material floating form-group form-material-primary">
                         <div class="input-daterange input-group" data-date-format="mm/dd/yyyy" data-week-start="1" data-autoclose="true" data-today-highlight="true">
                         <input type="text" class="form-control" id="minDate" name="example-daterange1" value="01/01/1901" placeholder="From" data-week-start="1" data-autoclose="true" data-today-highlight="true">
@@ -179,11 +181,9 @@
                         </div>
                         <input type="text" class="form-control" id="maxDate" name="example-daterange2" value="01/01/2030" placeholder="To" data-week-start="1" data-autoclose="true" data-today-highlight="true">
                         </div>
-                        
                     </div>
                     <button type="button" class="btn btn-alt-success mr-5 mb-5 btn-block" id="date_filter_btn">Filter by date</button>
                   </div>
-               
               </div>
             <div class="block-content block-content-full">
                 <div class="table-responsive scrollbar">
