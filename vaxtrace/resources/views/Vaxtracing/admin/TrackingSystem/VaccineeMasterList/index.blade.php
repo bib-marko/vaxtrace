@@ -34,7 +34,7 @@
     </ul>  
     <div class="block-content tab-content overflow-hidden">
         {{-- VERIFIEED VACCINEE TABLE --}}
-      <div class="tab-pane fade fade-left show active" id="btabs-animated-slideleft-verified-vaccinee" role="tabpanel">
+      <div class="tab-pane fade fade-left  show active" id="btabs-animated-slideleft-verified-vaccinee" role="tabpanel">
         <div class="block">
             <div class="block-header block-header-default bg-success-light ">
                 <h3 class="block-title text-secondary">
@@ -147,10 +147,7 @@
               </button> TRANSACTION SUMMARY
             </h3>
             </div>
-<<<<<<< HEAD
-=======
 
->>>>>>> 4db225a558f178b76a1995ba50459dcff5e0fbbd
             <div class="block-content">
                 <div class="row">
                   <div class="col-6">
@@ -577,8 +574,8 @@
                 showLoader();
                 },
                 complete: function () {
-                hideLoader();
-                $('#view_monitor_vaccinee').modal('hide');
+                    hideLoader();
+                    $('#view_monitor_vaccinee').modal('hide');
                 },
                 success: function (response) {
                     Swal.fire({
@@ -601,6 +598,7 @@
                             $('#btabs_transaction_summary').addClass("active show");
                             $('#btabs_new_transaction').removeClass("active show")
                             tableForSummary.draw();
+                            summaryLogsTable.ajax.reload();
                             $('#view_monitor_vaccinee').modal('show');
                             $('#view_monitor_vaccinee').modal({backdrop: false});
                             form.reset();
@@ -664,6 +662,7 @@
                             $('#btabs_transaction_summary').addClass("active show");
                             $('#btabs_new_transaction').removeClass("active show")
                             tableForSummary.draw();
+                            summaryLogsTable.ajax.reload();
                             $('#view_monitor_vaccinee').modal('show');
                         }
                     })
